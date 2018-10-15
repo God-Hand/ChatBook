@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 15, 2018 at 06:14 AM
+-- Generation Time: Oct 15, 2018 at 02:05 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `comment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `commented_by` varchar(60) NOT NULL,
+  `commented_by` varchar(50) NOT NULL,
   `body` tinytext NOT NULL,
   `image` varchar(255) NOT NULL DEFAULT '',
   `commented_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -42,6 +42,13 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `comment_id` (`comment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `commented_by`, `body`, `image`, `commented_time`, `user_closed`, `deleted`, `post_id`) VALUES
+(1, 'jitendra', 'hi', '', '2018-10-12 18:21:11', 0, 0, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -50,11 +57,10 @@ CREATE TABLE IF NOT EXISTS `comments` (
 
 DROP TABLE IF EXISTS `comment_likes`;
 CREATE TABLE IF NOT EXISTS `comment_likes` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` varchar(60) NOT NULL,
-  `liked` tinyint(4) NOT NULL DEFAULT '0',
+  `username` varchar(50) NOT NULL,
+  `liked` tinyint(1) NOT NULL DEFAULT '1',
   `comment_id` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`username`,`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -66,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `comment_likes` (
 DROP TABLE IF EXISTS `friend_requests`;
 CREATE TABLE IF NOT EXISTS `friend_requests` (
   `request_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_from` varchar(60) NOT NULL,
-  `user_to` varchar(60) NOT NULL,
+  `user_from` varchar(50) NOT NULL,
+  `user_to` varchar(50) NOT NULL,
   `request_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `viewed` tinyint(1) NOT NULL DEFAULT '0',
   `accepted` tinyint(1) NOT NULL,
@@ -84,8 +90,8 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
 DROP TABLE IF EXISTS `messages`;
 CREATE TABLE IF NOT EXISTS `messages` (
   `message_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_from` varchar(60) NOT NULL,
-  `user_to` varchar(60) NOT NULL,
+  `user_from` varchar(50) NOT NULL,
+  `user_to` varchar(50) NOT NULL,
   `message_body` text NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `viewed` tinyint(1) NOT NULL DEFAULT '0',
@@ -103,8 +109,8 @@ CREATE TABLE IF NOT EXISTS `messages` (
 DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE IF NOT EXISTS `notifications` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_from` varchar(60) NOT NULL,
-  `user_to` varchar(60) NOT NULL,
+  `user_from` varchar(50) NOT NULL,
+  `user_to` varchar(50) NOT NULL,
   `type` varchar(10) NOT NULL,
   `notification_body` tinytext NOT NULL,
   `link` varchar(255) NOT NULL,
@@ -124,8 +130,8 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
   `post_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_from` varchar(60) NOT NULL,
-  `user_to` varchar(60) NOT NULL,
+  `user_from` varchar(50) NOT NULL,
+  `user_to` varchar(50) NOT NULL,
   `body` text NOT NULL,
   `image` varchar(255) NOT NULL DEFAULT '',
   `posted_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -143,11 +149,10 @@ CREATE TABLE IF NOT EXISTS `posts` (
 
 DROP TABLE IF EXISTS `post_likes`;
 CREATE TABLE IF NOT EXISTS `post_likes` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` varchar(60) NOT NULL,
-  `liked` tinyint(4) NOT NULL DEFAULT '1',
+  `username` varchar(50) NOT NULL,
+  `liked` tinyint(1) NOT NULL DEFAULT '1',
   `post_id` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`username`,`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -158,9 +163,9 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `first_name` varchar(25) NOT NULL,
-  `last_name` varchar(25) NOT NULL,
-  `username` varchar(60) NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `signup_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -180,8 +185,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `bio` text,
   `is_online` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -193,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DROP TABLE IF EXISTS `user_login_durations`;
 CREATE TABLE IF NOT EXISTS `user_login_durations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(60) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `login_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `logout_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

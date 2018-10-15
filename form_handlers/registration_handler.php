@@ -12,47 +12,46 @@
 	
 	if (isset($_POST['reg_button'])){
 
-		$first_name = strip_tags($_POST['signup_first_name']);
+		$first_name = strip_tags($_POST['first_name']);
 		$first_name = str_replace(' ', '', $first_name);
 		$first_name = ucfirst(strtolower($first_name));
-		$_SESSION['signup_first_name'] = $first_name;
+		$_SESSION['first_name'] = $first_name;
 
-		$last_name = strip_tags($_POST['signup_last_name']);
+		$last_name = strip_tags($_POST['last_name']);
 		$last_name = str_replace(' ', '', $last_name);
 		$last_name = ucfirst(strtolower($last_name));
-		$_SESSION['signup_last_name'] = $last_name;
+		$_SESSION['last_name'] = $last_name;
 
-		$email = strip_tags($_POST['signup_email']);
+		$email = strip_tags($_POST['reg_email']);
 		$email = str_replace(' ', '', $email);
 		$email = ucfirst(strtolower($email));
-		$_SESSION['signup_email'] = $email;
+		$_SESSION['reg_email'] = $email;
 
-		$password = strip_tags($_POST['signup_password']);
-		$confirm_password = strip_tags($_POST['signup_confirm_password']);
+		$password = strip_tags($_POST['reg_password']);
+		$confirm_password = strip_tags($_POST['reg_confirm_password']);
 
 		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$email = filter_var($email, FILTER_VALIDATE_EMAIL);
-			$email_check = mysqli_query($conn, "SELECT email FROM users WHERE email='$email'");
-			if (mysqli_num_rows($email_check) > 0) {
+			$email_check = mysqli_query($conn, "SELECT email FROM users WHERE email='$email' and deactivate_account=0");
+			if (mysqli_num_rows($email_check) == 1) {
 				array_push($error_array, "Email already in use");
 			}
 		} else {
 			array_push($error_array, "Invalid email format");
 		}
 
-		if (strlen($first_name) > 25 || strlen($first_name) < 2) {
-			array_push($error_array, "Your first name must be between 2 and 25 characters");
+		if (strlen($first_name) > 20 || strlen($first_name) < 2) {
+			array_push($error_array, "Your first name must be between 2 and 20 characters");
 		}
 
-		if (strlen($last_name) > 25 || strlen($last_name) < 2) {
-			array_push($error_array, "Your last name must be between 2 and 25 characters");
+		if (strlen($last_name) > 20 || strlen($last_name) < 2) {
+			array_push($error_array, "Your last name must be between 2 and 20 characters");
 		}
 
 		if ($password != $confirm_password) {
 			array_push($error_array, "Your passwords do not match");
 		} elseif (preg_match('/[^A-Za-z0-9_@]/', $password)) {
-				array_push($error_array, "Only allow [A-Za-z0-9_@]");
-			}
+			array_push($error_array, "Only allow [A-Za-z0-9_@]");
 		}
 
 		if (strlen($password) > 15 || strlen($password) < 8) {
@@ -70,9 +69,9 @@
 			array_push($error_array, "You're all set! Go ahead and login!");
 
 			//Clear session variables
-			$_SESSION['signup_first_name'] = "";
-			$_SESSION['signup_last_name'] = "";
-			$_SESSION['signup_email'] = "";
+			$_SESSION['first_name'] = "";
+			$_SESSION['last_name'] = "";
+			$_SESSION['reg_email'] = "";
 		}
 	}
 ?>
