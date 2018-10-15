@@ -42,13 +42,6 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `comment_id` (`comment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`comment_id`, `commented_by`, `body`, `image`, `commented_time`, `user_closed`, `deleted`, `post_id`) VALUES
-(1, 'jitendra', 'hi', '', '2018-10-12 18:21:11', 0, 0, 2);
-
 -- --------------------------------------------------------
 
 --
