@@ -143,9 +143,13 @@
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="reg_button" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+												<?php
+													if(in_array("You're all set! Go ahead and login!", $error_array)){
+														echo "<span class='label label-success'>You're all set! Go ahead and login!</span>";
+													}
+												?>
 											</div>
 										</div>
-										<span class="label label-success"></span>
 									</div>
 								</form>
 							</div>
@@ -174,6 +178,5 @@
 		});
 	});
 	</script>
-
 </body>
 </html>
