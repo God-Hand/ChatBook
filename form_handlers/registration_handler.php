@@ -2,11 +2,9 @@
 	// declaring variable to hold data
 	$first_name = "";
 	$last_name = "";
-	$login_email = "";
-	$login_password = "";
-	$reg_email = "";
-	$reg_password = "";
-	$reg_confirm_password = "";
+	$email = "";
+	$password = "";;
+	$confirm_password = "";
 	$remember = "";
 	$error_array = array();
 	
@@ -37,7 +35,7 @@
 				array_push($error_array, "Email already in use");
 			}
 		} else {
-			array_push($error_array, "Invalid email format");
+			array_push($error_array, "Invalid Email format");
 		}
 
 		if (strlen($first_name) > 20 || strlen($first_name) < 2) {
@@ -50,12 +48,12 @@
 
 		if ($password != $confirm_password) {
 			array_push($error_array, "Your passwords do not match");
-		} elseif (preg_match('/[^A-Za-z0-9_@]/', $password)) {
-			array_push($error_array, "Only allow [A-Za-z0-9_@]");
 		}
 
 		if (strlen($password) > 15 || strlen($password) < 8) {
 			array_push($error_array, "Your password must be betwen 8 to 15 characters");
+		} elseif (preg_match('/[^A-Za-z0-9_@]/', $password)) {
+			array_push($error_array, "Only allow [A-Za-z0-9_@]");
 		}
 
 		if (empty($error_array)) {
@@ -63,9 +61,9 @@
 			$username = strtolower($first_name . "_" . $last_name);
 			$check_username_query = mysqli_query($conn, "SELECT username FROM users WHERE username like '$username'");
 			$username = $username . mysqli_num_rows($check_username_query);
-			$profile_pic = "assets/images/profile_pics/defaults/head_deep_blue.png";
+			$profile_pic = "assets/images/profile_pics/defaults/profile_pic.png";
 
-			$query = mysqli_query($conn, "INSERT INTO users (user_id, first_name, last_name, username, email, password, signup_date, deactivate_account, friend_array, is_online) VALUES (DEFAULT, '$first_name', '$last_name', '$username', '$email', '$password', DEFAULT, DEFAULT, ',', DEFAULT)");
+			$query = mysqli_query($conn, "INSERT INTO users (first_name, last_name, username, email, password, signup_date, profile_pic, deactivate_account, friend_array, is_online) VALUES ('$first_name', '$last_name', '$username', '$email', '$password', DEFAULT,'$profile_pic', DEFAULT, ',', DEFAULT)");
 			array_push($error_array, "You're all set! Go ahead and login!");
 
 			//Clear session variables
