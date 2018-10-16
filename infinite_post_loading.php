@@ -5,7 +5,7 @@
         <textarea class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="margin-bottom: 10px;"></textarea>
         <div class="form-row">
           <div class="col">
-            <input type="file" class="form-control-file btn float-left" style="padding-left: 0px;" data-toggle="modal" data-target="#myModal">
+            <input type="file" class="form-control-file btn float-left" style="padding-left: 0px;">
           </div>
           <div class="col">
             <a href="#" class="btn btn-primary float-right"><i class="fa fa-pencil"></i>&nbsp;Post</a>
@@ -17,15 +17,15 @@
 </div>
 
 
-<div class="modal in" role="dialog" id="myModal" aria-hidden="false">
+<div class="modal in" role="dialog" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
         <div class="col-md-9">
-          <img src="" data-original-width="586" data-original-height="389">
+          <img src="" data-original-width="1024" data-original-height="1024">
         </div>
         <div class="col-md-3">
-          <canvas width="150" height="150"></canvas>
+          <canvas width="1024" height="576"></canvas>
         </div>
         <div class="clearfix"></div>
       </div>
