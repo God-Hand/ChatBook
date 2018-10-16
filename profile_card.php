@@ -58,9 +58,9 @@
     </div>
     <div class="profile-card-body pt-5">
       <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="rounded profile border border-default"/>
-      <a href="#" class="text-primary"><center><h6>Username</h6></center></a>
+      <a href="#" class="btn btn-primary"><center><h6>Username</h6></center></a>
       <hr>
-			<p><i class="fa fa-pencil"></i> Friends</p>
+			<p><i class="fa fa-users"></i> Friends</p>
 			<p><i class="fa fa-home"></i> Posts</p>
     </div>
   </div>
