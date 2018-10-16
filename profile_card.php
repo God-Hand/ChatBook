@@ -20,6 +20,13 @@
 	.profile-card .profile-card-img-block{
 	    position:relative;
 	}
+	.profile-card .profile-card-img-block .btn-over-img{
+		position: absolute;
+		bottom: -10px;
+    right: -25px;
+	  transform: translate(-50%, -50%);
+	  -ms-transform: translate(-50%, -50%);
+	}
 	.profile-card .profile-card-img-block > .profile-info-box{
 	    position:absolute;
 	    width:100%;
@@ -47,14 +54,14 @@
       	info about user
       </div>
       <img class="rounded" src="https://images.pexels.com/photos/965157/pexels-photo-965157.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" >
+      <a href="#" class="btn-over-img btn btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
     </div>
     <div class="profile-card-body pt-5">
       <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="rounded profile border border-default"/>
-      <h5>Gail Schmidt</h5>
+      <a href="#" class="text-primary">Username</a>
       <hr>
 			<p><i class="fa fa-pencil"></i> Friends</p>
 			<p><i class="fa fa-home"></i> Posts</p>
-			<p><input type="button" class="" name="" value="Edit"></p>
     </div>
   </div>
 </div>
