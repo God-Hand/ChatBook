@@ -54,11 +54,11 @@
       	info about user
       </div>
       <img class="rounded" src="https://images.pexels.com/photos/965157/pexels-photo-965157.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" >
-      <a href="#" class="btn-over-img btn btn-info"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+      <a href="#" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
     </div>
     <div class="profile-card-body pt-5">
       <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="rounded profile border border-default"/>
-      <a href="#" class="text-primary">Username</a>
+      <a href="#" class="text-primary"><center><h6>Username</h6></center></a>
       <hr>
 			<p><i class="fa fa-pencil"></i> Friends</p>
 			<p><i class="fa fa-home"></i> Posts</p>
