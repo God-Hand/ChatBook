@@ -50,7 +50,7 @@
 										<input type="password" name="login_password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
 										<?php
 											if(in_array("Email or password was incorrect", $error_array)){
-												echo "<span class='label label-danger'>Email or password was incorrect</span>";
+												echo "<span class='text-danger'>Email or password was incorrect</span>";
 											}
 										?>
 									</div>
@@ -86,7 +86,7 @@
 										?>" required>
 										<?php
 											if(in_array("Your first name must be between 2 and 20 characters", $error_array)){
-												echo "<span class='label label-danger'>Your first name must be between 2 and 20 characters</span>";
+												echo "<span class='text-danger'>Your first name must be between 2 and 20 characters</span>";
 											}
 										?>
 									</div>
@@ -99,7 +99,7 @@
 										?>" required>
 										<?php
 											if(in_array("Your last name must be between 2 and 20 characters", $error_array)){
-												echo "<span class='label label-danger'>Your last name must be between 2 and 20 characters</span>";
+												echo "<span class='text-danger'>Your last name must be between 2 and 20 characters</span>";
 											}
 										?>
 									</div>
@@ -112,9 +112,9 @@
 										?>" required>
 										<?php
 											if(in_array("Email already in use", $error_array)){
-												echo "<span class='label label-danger'>Email already in use</span>";
+												echo "<span class='text-danger'>Email already in use</span>";
 											} elseif (in_array("Invalid Email format", $error_array)) {
-												echo "<span class='label label-danger'>Invalid Email format</span>";
+												echo "<span class='text-danger'>Invalid Email format</span>";
 											}
 										?>
 									</div>
@@ -123,9 +123,9 @@
 										<input type="password" name="reg_password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
 										<?php
 											if(in_array("Only allow [A-Za-z0-9_@]", $error_array)){
-												echo "<span class='label label-danger'>Only allow [A-Za-z0-9_@]</span>";
+												echo "<span class='text-danger'>Only allow [A-Za-z0-9_@]</span>";
 											} elseif (in_array("Your password must be betwen 8 to 15 characters", $error_array)) {
-												echo "<span class='label label-danger'>Your password must be betwen 8 to 15 characters</span>";
+												echo "<span class='text-danger'>Your password must be betwen 8 to 15 characters</span>";
 											}
 										?>
 									</div>
@@ -134,7 +134,7 @@
 										<input type="password" name="reg_confirm_password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" required>
 										<?php
 											if(in_array("Your passwords do not match", $error_array)){
-												echo "<span class='label label-danger'>Your passwords do not match</span>";
+												echo "<span class='text-danger'>Your passwords do not match</span>";
 											}
 										?>
 									</div>
@@ -145,7 +145,7 @@
 												<input type="submit" name="reg_button" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
 												<?php
 													if(in_array("You're all set! Go ahead and login!", $error_array)){
-														echo "<span class='label label-success'>You're all set! Go ahead and login!</span>";
+														echo "<span class='text-success'>You're all set! Go ahead and login!</span>";
 													}
 												?>
 											</div>
