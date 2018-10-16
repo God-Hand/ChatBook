@@ -16,6 +16,10 @@
   .form-group, .table{
     margin-bottom: 0px;
   }
+  .scrollClass {
+    height:200px;
+    overflow-y: scroll;
+  }
 </style>
 
 <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
