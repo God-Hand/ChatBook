@@ -7,14 +7,14 @@
 </head>
 <body>
 	<?php include("header.php"); ?>
-	<div style="padding-top: 70px;">
-		<div role="main" class="container">
-			<div class="row">
-				<?php
-					include("profile_card.php");
-					include("infinite_post_loading.php");
-				?>
-			</div>
+	<div style="min-height:70px;">
+	</div>
+	<div role="main" class="container">
+		<div class="row">
+			<?php
+				include("profile_card.php");
+				include("infinite_post_loading.php");
+			?>
 		</div>
 	</div>
 </body>
