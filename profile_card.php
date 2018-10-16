@@ -58,10 +58,17 @@
     </div>
     <div class="profile-card-body pt-5">
       <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="rounded profile border border-default"/>
-      <a href="#" class="btn btn-primary"><center><h6>Username</h6></center></a>
-      <hr>
-			<p><i class="fa fa-users"></i> Friends</p>
-			<p><i class="fa fa-home"></i> Posts</p>
+      <a href="#" style="text-decoration: none;" class="text-primary"><center><h6>Username</h6></center></a>
+      <table class="table">
+      	<tr>
+      		<td><i class="fa fa-users"></i> &nbsp;Friends</td>
+      		<td></td>
+      	</tr>
+      	<tr>
+      		<td><i class="fa fa-paperclip"></i> &nbsp;Posts</td>
+      		<td></td>
+      	</tr>
+      </table>
     </div>
   </div>
 </div>
