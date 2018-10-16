@@ -10,7 +10,10 @@
 	<div style="padding-top: 70px;">
 		<main role="main" class="container">
 			<div class="row">
-				<?php include("profile_card.php") ?>
+				<?php
+					include("profile_card.php");
+					include("infinite_post_loading.php");
+				?>
 			</div>
 		</main>
 	</div>
