@@ -48,7 +48,7 @@
 </style>
 
 <div class="col-md-4">
-	<div class="card profile-card shadow-lg p-3 mb-5 bg-white rounded">
+	<div class="card profile-card shadow p-3 mb-4 bg-white rounded">
     <div class="profile-card-img-block">
       <div class="profile-info-box bg-primary">
       	info about user
