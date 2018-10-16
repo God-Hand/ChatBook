@@ -11,7 +11,6 @@
 	    position:relative;
 	}
 	.profile-card .profile {
-	    border-radius: 50%;
 	    position: absolute;
 	    top: -62px;
 	    left: 50%;
@@ -49,7 +48,7 @@
       <img src="https://images.pexels.com/photos/965157/pexels-photo-965157.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" >
     </div>
     <div class="profile-card-body pt-5">
-      <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="profile border border-primary"/>
+      <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="rounded profile border border-default"/>
       <h5>Gail Schmidt</h5>
       <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       <div><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div>
