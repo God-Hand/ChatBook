@@ -19,7 +19,7 @@
       <div class="media p-3">
         <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="username" class="align-self-start mr-3 rounded-circle" style="width:60px;">
         <div class="media-body">
-          <h5>John Doe<h6><small><i>Posted on February 19, 2016</i></small></h5>
+          <h5>John Doe</h5><small><i>Posted on February 19, 2016</i></small>
         </div>
       </div>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -36,7 +36,7 @@
           <button class="btn btn-primary float-left"><i class="fa fa-comment-o"></i>&nbsp;Comment</button>
         </div>
       </div>
-      <iframe src="infinite_comment.php"></iframe>
+      <iframe src="infinite_comment_loading.php" style="border: none;"></iframe>
     </div>
   </div>
 </div>
