@@ -12,7 +12,7 @@
 		// insert post by the user
 		public function addPost( $user_to, $body) {
 			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES (DEFAULT, '$this->username', '$user_to', '$body', DEFAULT, DEFAULT, DEFAULT, DEFAULT)");
-			return mysql_insert_id($this->conn);
+			return mysqli_insert_id($this->conn);
 		}
 
 		public function uploadImage($post_id, $file) {
@@ -37,10 +37,15 @@
 		  if (move_uploaded_file($file["tmp_name"], $target_file)) {
 		  	$query = mysqli_query($this->conn, "UPDATE posts SET image='$target_file' WHERE post_id='$post_id'");
 		  	if ($query) {
-		    	return "The file ". basename( $file["name"]). " has been uploaded.";
+		    	return "The file ". $file["name"]. " has been uploaded.";
 		    }
 		  }
 		  return "Sorry, there was an error while uploading your file.";
+		}
+
+		// delete empty body and null image post
+		public function deleteWastePost($post_id){
+			$query = mysqli_query($this->conn, "DELETE FROM posts WHERE post_id='$post_id'");
 		}
 
 		// get the post by its id

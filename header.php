@@ -1,12 +1,3 @@
-<?php
-  include('config/config.php');
-  if (isset($_SESSION['user_logged_in'])){
-    $user_logged_in = $_SESSION['user_logged_in'];
-  } else {
-    header("Location: registration.php");
-  }
-?>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -22,6 +13,25 @@
   }
 </style>
 
+<?php
+  include('config/config.php');
+  if (isset($_SESSION['user_logged_in'])){
+    $user_logged_in = $_SESSION['user_logged_in'];
+  } else {
+    header("Location: registration.php");
+  }
+  include('includes/classes/User.php');
+  include('includes/classes/Post.php');
+  include('includes/classes/PostLike.php');
+  include('includes/classes/Comment.php');
+  include('includes/classes/Notification.php');
+  include('functions/text_filter.php');
+  $user = new User($conn, $user_logged_in);
+  $post = new Post($conn, $user_logged_in);
+  $post_like = new PostLike($conn, $user_logged_in);
+  $comment = new Comment($conn, $user_logged_in);
+  $notification = new Notification($conn, $user_logged_in);
+?>
 <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <a class="navbar-brand" href="index.php">ChatBook</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-3" aria-controls="navbarSupportedContent-3" aria-expanded="false" aria-label="Toggle navigation">

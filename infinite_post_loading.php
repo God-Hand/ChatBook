@@ -1,27 +1,7 @@
 <div class="col-md-8">
-	<div class="card shadow p-3 mb-4 bg-white rounded" style="margin-bottom: -5px;">
-    <form>
-      <div class="form-group">
-        <textarea class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="margin-bottom: 10px;"></textarea>
-        <div class="form-row">
-          <div class="col">
-            <input type="file" class="form-control-file btn float-left" style="padding-left: 0px;">
-          </div>
-          <div class="col">
-            <a href="#" class="btn btn-primary float-right"><i class="fa fa-pencil"></i>&nbsp;Post</a>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="alert alert-success alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Success!</strong> This alert box could indicate a successful or positive action.
-  </div>
-  <div class="alert alert-warning alert-dismissible">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Success!</strong> This alert box could indicate a successful or positive action.
-  </div>
+	<?php
+		include('submit_post.php');
+	?>
   <div class="post">
     <div class="card shadow p-3 mb-2 bg-white rounded">
       <div class="media p-3">
@@ -54,3 +34,56 @@
     </div>
   </div>
 </div>
+
+
+<div class="posts_area"></div>
+<img id="loading" src="assets/images/icons/loading.gif">
+
+<script>
+	var user_logged_in = '<?php echo $user_logged_in; ?>';
+
+	$(document).ready(function() {
+		$('#loading').show();
+
+		//Original ajax request for loading first posts 
+		$.ajax({
+			url: "includes/loaders/load_posts.php",
+			type: "POST",
+			data: {user_logged_in : user_logged_in, last_post_id : 0},
+			cache:false,
+
+			success: function(data) {
+				$('#loading').hide();
+				$('.posts_area').html(data);
+			}
+		});
+
+		$(window).scroll(function() {
+			// get id of last <div class='post' id='#post_id'></div>
+			var last_post_id = $('.post:last').attr('id');
+			var height = $('.posts_area').height();
+			var scroll_top = $(this).scrollTop();
+			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+
+			if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+				$('#loading').show();
+
+				var ajaxReq = $.ajax({
+					url: "includes/loaders/load_posts.php",
+					type: "POST",
+					data: {user_logged_in : user_logged_in, last_post_id : last_post_id},
+					cache:false,
+
+					success: function(response) {
+						$('.posts_area').find('.noMorePosts').remove(); //Removes current .nextpage 
+						$('.posts_area').find('.noMorePostsText').remove(); //Removes current .nextpage 
+
+						$('#loading').hide();
+						$('.posts_area').append(response);
+					}
+				});
+			}
+			return false;
+		});
+	});
+</script>
