@@ -58,8 +58,9 @@
 			$username = strtolower($first_name . "_" . $last_name);
 			$username = $username . round(microtime(true));
 			$profile_pic = "assets/images/profile_pics/defaults/profile_pic.png";
+			$cover_pic = "assets/images/cover_pics/defaults/cover_pic.jpg";
 
-			$query = mysqli_query($conn, "INSERT INTO users (first_name, last_name, username, email, password, signup_date, profile_pic, deactivate_account, friend_array, is_online) VALUES ('$first_name', '$last_name', '$username', '$email', '$password', DEFAULT,'$profile_pic', DEFAULT, ',', DEFAULT)");
+			$query = mysqli_query($conn, "INSERT INTO users (first_name, last_name, username, email, password, signup_date, profile_pic, cover_pic, friend_array) VALUES ('$first_name', '$last_name', '$username', '$email', '$password', DEFAULT,'$profile_pic', '$cover_pic',',')");
 			array_push($error_array, "You're all set! Go ahead and login!");
 
 			//Clear session variables

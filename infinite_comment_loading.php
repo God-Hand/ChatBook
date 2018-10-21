@@ -28,7 +28,7 @@
 	  }
 	</style>
 </head>
-<body>
+<body style="background-color: #e9ecef">
 	<div class="alert alert-dark" style="width:80%;margin:10px;">
 		<div class="media ">
       <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="username" class="align-self-start mr-3 rounded-circle" style="width:30px;">
