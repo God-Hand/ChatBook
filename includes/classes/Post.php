@@ -11,7 +11,7 @@
 
 		// insert post by the user
 		public function addPost( $user_to, $body) {
-			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES (DEFAULT, '$this->username', '$user_to', '$body', DEFAULT, DEFAULT, DEFAULT, DEFAULT)");
+			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES (DEFAULT, '$this->username', '$user_to', '$body', '', DEFAULT, DEFAULT, DEFAULT)");
 			return mysqli_insert_id($this->conn);
 		}
 
@@ -22,10 +22,6 @@
 		  $target_file = $target_dir . basename($newfilename);
 		  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-		  $check = getimagesize($file["tmp_name"]);
-		  if($check === false) {
-		    return "File is not an image.";
-		  }
 		  if ($file["size"] > 200000) {
 		    return "Sorry, your file is too large.";
 		  }

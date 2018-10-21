@@ -3,7 +3,7 @@
   $post_img = "";
   $alert_message = "";
   $upload_message = "";
-  if(isset($_POST['submit_post'])){
+  if(isset($_POST['submit_post']) && (!empty($_POST["post_body"]) || !empty($_POST["post_img"]))){
     $post_body = removeSpaces($_POST['post_body']);
     $post_id = $post->addPost('', $post_body);
     if(isset($_FILES['post_img'])){
@@ -18,9 +18,13 @@
                             <button type='button' class='close' data-dismiss='alert'>&times;</button>
                             ". $upload_message ."
                           </div>";
-        $post->deleteWastePost($post_id);
+        if($post_body == ''){
+          $post->deleteWastePost($post_id);
+        }
       }
     }
+    $_POST["post_body"] = null;
+    $_POST["submit_post"] = null;
   }
 ?>
 <div class="card shadow p-3 mb-4 bg-white rounded" style="margin-bottom: -5px;">
