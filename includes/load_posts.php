@@ -2,101 +2,158 @@
 	require '../config/config.php';
 	require 'classes/Post.php';
 	require 'classes/User.php';
+	require 'classes/Comment.php';
+	require 'classes/PostLike.php';
 	require '../functions/timeframe_function.php';
-	require '../functions/text_functions.php';
+	require '../functions/text_filter.php';
 
 	define('LIMIT', 10);
 	$user = new User($conn, $_REQUEST['user_logged_in']);
 	$post = new Post($conn, $_REQUEST['user_logged_in']);
+	$comment = new Comment($conn, $_REQUEST['user_logged_in']);
 	$post_like = new PostLike($conn, $_REQUEST['user_logged_in']);
 	$data_query = $post->loadAllPosts($_REQUEST['last_post_id'], LIMIT);
-	
 	$str = "";
 	if (mysqli_num_rows($data_query) == 0) {
 		$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted'> No more posts to show! </p>";
 	} else {
 		while ($row = mysqli_fetch_array($data_query)) {
-			if ($row['user_from'] == $user->getUsername() || $row['user_to'] == $user->getUsername || $user->isFriend($row['user_from'])) {
+			if ($row['user_from'] == $user->getUsername() || $row['user_to'] == $user->getUsername() || $user->isFriend($row['user_from'])) {
 
 				$post_id = $row['post_id'];
-				$body = replaceURLToLink($row['body']);
-				if ($row['image'] == none)
+				$post_body = replaceURLToLink($row['body']);
+				if ($row['image'] == '')
 					$imagePath = '';
 				else
-					$imagePath = "<img src='$row['image']' style='width:100%' class='margin-bottom'>";
+					$imagePath = "<img src='" . $row['image'] . "' alt='username' style='width: 100%; height: 100%;'>";
 				$posted_time = $row['posted_time'];
 
 				$user_from_obj = new User($conn, $row['user_from']);
-				$user_from_details = $user_from_obj->getPostUserInfo();
-				$user_from_fullname = $user_from_details['first_name'] . " " . $user_from_details['last_name'];
-				$user_from_profile_pic = $user_from_details['profile_pic'];
+				$user_from_details = $user_from_obj->getUserLessInfo();
+				$user_from_fullname = "<a href='profile.php?profile_username=" . $user_from_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'>" . $user_from_details['first_name'] . " " . $user_from_details['last_name'] . "</a>";
+				$user_from_profile_pic = "<a href='profile.php?profile_username=" . $user_from_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'> <img src='" . $user_from_details['profile_pic'] . "' alt='user_pic' class='align-self-start mr-3 rounded-circle' style='width:60px;'> </a>";
 
-				// if user_to is none. then user_to_name = '' 
-				if ($row['user_to'] == 'None') {
-					$user_to_name = '';
+				// if user_to is none. then user_to_fullname = '' 
+				if ($row['user_to'] == '') {
+					$user_to_fullname = '';
 				} else {
 					$user_to_obj = new User($conn, $row['user_to']);
-					$user_to_fullname = ' to ' . $user_to_obj->getFirstAndLastName();
+					$user_to_fullname = " to " . "<a href='profile.php?profile_username=" . $user_to_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'>" . $user_to_obj->getFirstAndLastName() . "</a>";
 				}
 				
 				$now_date = date("Y-m-d H:i:s");
 				$post_datetime = new DateTime($posted_time);
 				$now_datetime = new DateTime($now_date);
-				$message = getTimeFrame($now_datetime->diff($post_datetime));
+				$posted_time_in_text = getTimeFrame($now_datetime->diff($post_datetime));
+
+				$comment_count = $comment->getNumOfComments($post_id);
+				$post_like_count = $post_like->postLikesCount($post_id);
+				$is_user_like_post = $post_like->isUserLikePost($post_id);
+				if($is_user_like_post == 1){
+					$like = "UnLike";
+					$like_value = 1;
+				} else {
+					$like = "Like";
+					$like_value = 0;
+				}
 
 
 				$str .= "
 				<div class='card shadow p-3 mb-2 bg-white rounded'>
 				  <div class='media p-3'>
-				    <img src='" .$user_from_profile_pic. "' alt='user_pic' class='align-self-start mr-3 rounded-circle' style='width:60px;'>
+				    " . $user_from_profile_pic . "
 				    <div class='media-body'>
-				      <h5>" .$user_from_fullname. "<br><small class='text-muted'><i class='fa fa-clock-o'></i><em>Posted on February 19, 2016</em></small></h5>
+				      <h5>" .$user_from_fullname . $user_to_fullname . "<br><small class='text-muted'><i class='fa fa-clock-o'></i><em>" . $posted_time_in_text . "</em></small></h5>
 				    </div>
 				  </div>
-				  <p><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</em></p>
-				  <img src='https://randomuser.me/api/portraits/women/14.jpg' alt='username' style='width: 100%; height: 100%;'>
+				  <p>" . $post_body . "</p>
+				  " . $imagePath . "
+				  <div class='form-row' style='margin:-15px 0px;'>
+				    <div class='col'>
+				      <p class='text-muted float-left'>Like(<span id='likecount" . $post_id . "'>" . $post_like_count . "</span>)</p>
+				      <p class='text-muted float-right'>Comments(<span id='commentcountid" . $post_id . "'>" . $comment_count . "</span>)</p>
+				    </div>
+				  </div>
 				  <div class='form-row'>
 				    <div class='col'>
-				      <p class='text-muted float-left'>Like()</p>
-				      <p class='text-muted float-right'>Comments()</p>
+				      <button id='" . $post_id . "' class='btn btn-primary float-left' style='margin-right:2px;' onclick='likePost(this)' onmouseleave='saveAction(this)' value='" . $like_value . "'>" . $like . "</button>
+				      <button id='" . $post_id . "' class='btn btn-primary float-left' onclick='openCommentFrame(this)'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
 				    </div>
 				  </div>
-				  <div class='form-row'>
-				    <div class='col'>
-				      <button class='btn btn-primary float-left' style='margin-right:2px;'><i class='fa fa-thumbs-o-up'></i>&nbsp;Like</button>
-				      <button class='btn btn-primary float-left'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
-				    </div>
-				  </div>
-				  <iframe src='infinite_comment_loading.php' style='border:none;height:200px;margin:5px 0px;'></iframe>
-				  <div class='input-group mb-3'>
-				    <input type='text' class='form-control border border-primary' placeholder='Comment...' aria-label='Recipient's username' aria-describedby='button-addon2'>
+				  <iframe id='commentframe" . $post_id . "' src='infinite_comment_loading.php' style='border:none;height:200px;margin:5px 0px;display: none;'></iframe>
+				  <div class='input-group mb-3' style='margin:5px 0px;'>
+				    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...' aria-label='Recipient's username' aria-describedby='button-addon2'>
 				    <div class='input-group-append'>
-				      <button class='btn btn-primary' type='button'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
+				      <button id='" . $post_id . "' class='btn btn-primary' type='button' onclick='sendComment(this)'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
 				    </div>
 				  </div>
-				</div>
-				<div class='post container card white round margin' id='".$post_id."'><br>
-					<a href='profile.php?profile_username=".$user_from_obj->getUsername()"' target='_blank'>
-  					<img src='".$user_from_details['profile_pic']."' alt='Avatar' class='left circle margin-right' style='width:60px'>
-  				</a>
-  				<h4>
-  					<a href='profile.php?profile_username=".$user_from_obj->getUsername()"' target='_blank'>
-  					".$user_from_fullname ."
-  					</a>
-  				</h4>
-  				<h4>
-  					<a href='profile.php?profile_username=".$user_to_obj->getUsername()"' target='_blank'>
-  					".$user_to_fullname ."
-  					</a>
-  				</h4>
-  				<br>
-  				<span class='right opacity'>".$message."</span>
-  				<hr class='clear'>
-  				<p>".$body."</p>
-  				".$imagePath."
-  				<button type='button' class='button theme-d1 margin-bottom' id='".$post_id."'><i class='fa fa-thumbs-up'></i> &nbsp;Like</button> 
-  				<button type='button' class='button theme-d2 margin-bottom' id='".$post_id."'><i class='fa fa-comment'></i> &nbsp;Comment</button> 
 				</div>"; //here that html code. which need to be displayed
+				?>
+				<script> 
+						function openCommentFrame(obj) {
+							var commentframeid = "commentframe";
+							var element = document.getElementById(commentframeid.concat(obj.id));
+							if(element.style.display == "block") {
+								element.style.display = "none";
+								document.getElementById(commentframeid).contentWindow.location.reload();
+							}
+							else 
+								element.style.display = "block";
+						}
+						function likePost(obj) {
+							if(obj.innerHTML == "Like") {
+								obj.innerHTML = "UnLike";
+								obj.value = '1';
+								var likecountid = "likecount";
+								document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)+1;
+							} else {
+								obj.innerHTML = "Like";
+								obj.value = '0';
+								var likecountid = "likecount";
+								document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)-1;
+							}
+						}
+						function saveAction(obj){
+							var user_logged_in = '<?php echo $_REQUEST['user_logged_in']; ?>';
+							$.ajax({
+				        type: "POST",
+				        url: "includes/like_post.php",
+				        data: {
+				          username : user_logged_in,
+									post_id : obj.id,
+									user_action  : obj.value
+				        },
+				        success: function(result) {
+				        },
+				        error: function(result) {
+				          alert('error');
+				        }
+					    });
+						}
+						function sendComment(obj){
+							var user_logged_in = '<?php echo $_REQUEST['user_logged_in']; ?>';
+							var comment = "comment";
+							var body = document.getElementById(comment.concat(obj.id)).value;
+							$.ajax({
+				        type: "POST",
+				        url: "includes/save_comment.php",
+				        data: {
+				          username : user_logged_in,
+									post_id : obj.id,
+									comment_body  : body
+				        },
+				        success: function(result) {
+									document.getElementById(comment.concat(obj.id)).value = '';
+									var commentcountid = "commentcountid";
+									document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
+				        },
+				        error: function(result) {
+				          alert('error');
+				        }
+					    });
+						}
+					</script>
+				<?php
 			}
 		}
 		$str .= "<input type='hidden' class='noMorePosts' value='false'>";

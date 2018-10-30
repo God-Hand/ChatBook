@@ -5,9 +5,12 @@
 	class User {
 		private $conn;
 		private $username;
+		private $user_details;
 		function __construct($conn, $username){
 			$this->conn = $conn;
 			$this->username = $username;
+			$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username='$this->username'");
+			$this->user_details = mysqli_fetch_array($query);
 		}
 
 		// return username of the user
@@ -17,20 +20,28 @@
 
 		// return user's "first_name last_name" text format
 		public function getFirstAndLastName() {
-			$query = mysqli_query($this->conn, "SELECT first_name, last_name FROM users WHERE user_id='$this->user_id'");
-			$row = mysqli_fetch_array($query);
-			return $row['first_name'] . " " . $row['last_name'];
+			return $this->user_details['first_name'] . " " . $this->user_details['last_name'];
+		}
+
+		// return user bio
+		public function getBio() {
+			return $this->user_details['bio'];
+		}
+
+		// return coverpic
+		public function getCoverPic() {
+			return $this->user_details['cover_pic'];
 		}
 
 		// return first_name, last_name and profile_pic
 		public function getUserLessInfo() {
-			$query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic, cover_pic, is_online FROM users WHERE user_id='$this->user_id'");
+			$query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic, cover_pic, is_online FROM users WHERE username='$this->username'");
 			return mysqli_fetch_array($query);
 		}
 
 		// return user's friend_array in text format
 		public function getFriendArrayText() {
-			$query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE user_id='$this->user_id'");
+			$query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE username='$this->username'");
 			$row = mysqli_fetch_array($query);
 			return $row['friend_array'];
 		}
@@ -43,12 +54,12 @@
 
 		// return number of friends
 		public function getNumOfFriends() {
-			return count($this->getFriendArray());
+			return count($this->getFriendArray())-2;
 		}
 
 		// return weather user's account is closed or not
 		public function isClosed() {
-			$query = mysqli_query($this->conn, "SELECT deactivate_account FROM users WHERE user_id='$this->user_id'");
+			$query = mysqli_query($this->conn, "SELECT deactivate_account FROM users WHERE username='$this->username'");
 			$row = mysqli_fetch_array($query);
 			if($row['deactivate_account'] == 0)
 				return false;
@@ -123,7 +134,7 @@
 
 		// return user details array
 		public function userInfoArray() {
-			$query = mysqli_query($this->conn, "SELECT * FROM users WHERE user_id='$this->user_id'");
+			$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username='$this->username'");
 			return mysqli_fetch_array($query);
 		}
 
@@ -149,7 +160,7 @@
 
 		  // if everything is ok, try to upload file
 		  if (move_uploaded_file($file["tmp_name"], $target_file)) {
-		  	$query = mysqli_query($this->conn, "UPDATE users SET cover_pic='$target_file' WHERE user_id='$this->user_id'");
+		  	$query = mysqli_query($this->conn, "UPDATE users SET cover_pic='$target_file' WHERE username='$this->username'");
 		  	if ($query) {
 		    	return "The file ". basename( $file["name"]). " has been uploaded.";
 		    }
@@ -178,7 +189,7 @@
 
 		  // if everything is ok, try to upload file
 		  if (move_uploaded_file($file["tmp_name"], $target_file)) {
-		  	$query = mysqli_query($this->conn, "UPDATE users SET profile_pic='$target_file' WHERE user_id='$this->user_id'");
+		  	$query = mysqli_query($this->conn, "UPDATE users SET profile_pic='$target_file' WHERE username='$this->username'");
 		  	if ($query) {
 		    	return "The file ". basename( $file["name"]). " has been uploaded.";
 		    }

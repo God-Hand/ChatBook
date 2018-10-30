@@ -40,5 +40,11 @@
 			}
 			return $query;
 		}
+
+		// return number of comments by the user
+		public function getNumOfComments($post_id) {
+			$query = mysqli_query($this->conn, "SELECT * FROM comments WHERE commented_by='$this->username' AND post_id='$post_id' AND deleted=0 AND user_closed=0");
+			return mysqli_num_rows($query);
+		}
 	}
 ?>

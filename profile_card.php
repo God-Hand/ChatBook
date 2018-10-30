@@ -51,22 +51,22 @@
 	<div class="card profile-card shadow p-3 mb-4 bg-white rounded">
     <div class="profile-card-img-block">
       <div class="profile-info-box bg-primary">
-      	info about user
+      	<?php echo $user->getBio(); ?>
       </div>
-      <img class="rounded" src="https://images.pexels.com/photos/965157/pexels-photo-965157.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" >
+      <img class='rounded' src='<?php echo $user->getCoverPic(); ?>' style="height: 100%; width: 100%;">     
       <a href="#" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
     </div>
     <div class="profile-card-body pt-5">
-      <img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="rounded profile border border-default"/>
-      <a href="#" style="text-decoration: none;" class="text-primary"><center><h6>Username</h6></center></a>
+      <a href="profile.php?profile_username='<?php echo $user->getUsername(); ?>'" style="text-decoration: none;" class="text-primary"><img src="https://randomuser.me/api/portraits/women/14.jpg" alt="profile-image" class="rounded profile border border-default"/>
+      <center><h6><?php echo $user->getFirstAndLastName(); ?></h6></center></a>
       <table class="table">
       	<tr>
       		<td><i class="fa fa-users"></i> &nbsp;Friends</td>
-      		<td></td>
+      		<td><?php echo $user->getNumOfFriends(); ?></td>
       	</tr>
       	<tr>
       		<td><i class="fa fa-paperclip"></i> &nbsp;Posts</td>
-      		<td></td>
+      		<td><?php echo $user->getNumOfPosts(); ?></td>
       	</tr>
       </table>
     </div>

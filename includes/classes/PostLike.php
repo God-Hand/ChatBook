@@ -25,21 +25,10 @@
 			return 0;
 		}
 
-		// delete the previous like by user where post_id = '$post_id'
-		public function deletePreviousLike($post_id) {
-			$delete_query = mysqli_query($this->conn, "DELETE FROM post_likes WHERE post_id='$post_id AND username='$this->username'");
-		}
-
 		// like the given post_id
-		public function likeThePost($post_id) {
-			deletePreviousLike($post_id);
-			$insert_query = mysqli_query($this->conn, "INSERT INTO post_likes Values ('$this->username', 0,'$post_id')");
-		}
-
-		// unlike the given post_id 
-		public function unLikeThePost($post_id) {
-			deletePreviousLike($post_id);
-			$insert_query = mysqli_query($this->conn, "INSERT INTO post_likes Values ('$this->username', 1,'$post_id')");
+		public function likeThePost($post_id, $value) {
+			$delete_query = mysqli_query($this->conn, "DELETE FROM post_likes WHERE post_id='$post_id' AND username='$this->username'");
+			$insert_query = mysqli_query($this->conn, "INSERT INTO post_likes Values ('$this->username', '$value','$post_id')");
 		}
 	}
 ?>

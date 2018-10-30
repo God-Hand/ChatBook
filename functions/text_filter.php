@@ -16,7 +16,7 @@
 
 	// replace all text URLs to links "<a href='URL' target='_blank'>URL</a>"
 	function replaceURLToLink($text) {
-		$text = nl2br($row['text']);
+		$text = nl2br($text);
 		if(preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $match)) {
 			foreach ($match[0] as $url) {
 				$text = str_replace($url, "<a href='" . $url . "' target='_blank'>". $url . "</a>", $text);

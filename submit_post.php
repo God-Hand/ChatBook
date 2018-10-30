@@ -30,7 +30,7 @@
 <div class="card shadow p-3 mb-4 bg-white rounded" style="margin-bottom: -5px;">
   <form method="post" action="index.php" enctype="multipart/form-data">
     <div class="form-group">
-      <textarea name="post_body" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="margin-bottom: 10px;"></textarea>
+      <textarea name="post_body" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="margin-bottom: 10px;min-height: 100px; max-height: 200px;"></textarea>
       <div class="form-row">
         <div class="col">
           <input name="post_img" type="file" class="form-control-file btn float-left" style="padding-left: 0px;">
