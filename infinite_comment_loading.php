@@ -6,6 +6,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<style src="assets/css/comment.css"></style>
 	<style type="text/css">
 	  .form-group, .table{
 	    margin-bottom: 0px;
@@ -26,6 +27,17 @@
 	  ::-webkit-scrollbar-thumb:hover {
 	      background: #555; 
 	  }
+	  .image-size{
+			width: 24px;
+			margin-right:5px;
+		}
+		body{
+			font-size: 14px;
+		}
+		.delete-button {
+			padding: 0px 4px;
+			margin-left: 5px;
+		}
 	</style>
 </head>
 <body style="background-color: #e9ecef">
@@ -64,7 +76,7 @@
 				$('#loading').show();
 
 				var ajaxReq = $.ajax({
-					url: "includes/load_posts.php",
+					url: "includes/load_comments.php",
 					type: "POST",
 					data: {
 						username : '<?php echo $_REQUEST['username']; ?>', 

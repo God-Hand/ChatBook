@@ -10,17 +10,10 @@
 			}
 		} else if ($interval->m >= 1) { 
 			# check duration for months and days
-			if($interval->d == 0) {
-				$days = " ago";
-			} else if($interval->d == 1) {
-				$days = $interval->d . " day ago";
-			} else {
-				$days = $interval->d . " days ago";
-			}
 			if($interval->m == 1) {
-				$message = $interval->m . " month ". $days;
+				$message = $interval->m . " month ago". $days;
 			} else {
-				$message = $interval->m . " months ". $days;
+				$message = $interval->m . " months ago". $days;
 			}
 		} else if($interval->d >= 1) {
 			# check duration for days
