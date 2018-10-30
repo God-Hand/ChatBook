@@ -60,7 +60,7 @@
 
 
 				$str .= "
-				<div class='card shadow p-3 mb-2 bg-white rounded'>
+				<div class='card shadow p-3 mb-2 bg-white rounded post' id='" . $post_id . "'>
 				  <div class='media p-3'>
 				    " . $user_from_profile_pic . "
 				    <div class='media-body'>
@@ -89,72 +89,6 @@
 				    </div>
 				  </div>
 				</div>"; //here that html code. which need to be displayed
-				?>
-				<script> 
-						function openCommentFrame(obj) {
-							var commentframeid = "commentframe";
-							var element = document.getElementById(commentframeid.concat(obj.id));
-							if(element.style.display == "block") {
-								element.style.display = "none";
-								document.getElementById(commentframeid).contentWindow.location.reload();
-							}
-							else 
-								element.style.display = "block";
-						}
-						function likePost(obj) {
-							if(obj.innerHTML == "Like") {
-								obj.innerHTML = "UnLike";
-								obj.value = '1';
-								var likecountid = "likecount";
-								document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)+1;
-							} else {
-								obj.innerHTML = "Like";
-								obj.value = '0';
-								var likecountid = "likecount";
-								document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)-1;
-							}
-						}
-						function saveAction(obj){
-							var user_logged_in = '<?php echo $_REQUEST['user_logged_in']; ?>';
-							$.ajax({
-				        type: "POST",
-				        url: "includes/like_post.php",
-				        data: {
-				          username : user_logged_in,
-									post_id : obj.id,
-									user_action  : obj.value
-				        },
-				        success: function(result) {
-				        },
-				        error: function(result) {
-				          alert('error');
-				        }
-					    });
-						}
-						function sendComment(obj){
-							var user_logged_in = '<?php echo $_REQUEST['user_logged_in']; ?>';
-							var comment = "comment";
-							var body = document.getElementById(comment.concat(obj.id)).value;
-							$.ajax({
-				        type: "POST",
-				        url: "includes/save_comment.php",
-				        data: {
-				          username : user_logged_in,
-									post_id : obj.id,
-									comment_body  : body
-				        },
-				        success: function(result) {
-									document.getElementById(comment.concat(obj.id)).value = '';
-									var commentcountid = "commentcountid";
-									document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
-				        },
-				        error: function(result) {
-				          alert('error');
-				        }
-					    });
-						}
-					</script>
-				<?php
 			}
 		}
 		$str .= "<input type='hidden' class='noMorePosts' value='false'>";

@@ -29,11 +29,9 @@
 		$(window).scroll(function() {
 			// get id of last <div class='post' id='#post_id'></div>
 			var last_post_id = $('.post:last').attr('id');
-			var height = $('.posts_area').height();
-			var scroll_top = $(this).scrollTop();
 			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
 
-			if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
 				$('#loading').show();
 
 				var ajaxReq = $.ajax({
@@ -56,6 +54,72 @@
 	});
 </script>
 
+
+<script> 
+	// action in post
+	function openCommentFrame(obj) {
+		var commentframeid = "commentframe";
+		var element = document.getElementById(commentframeid.concat(obj.id));
+		if(element.style.display == "block") {
+			element.style.display = "none";
+			document.getElementById(commentframeid).contentWindow.location.reload();
+		}
+		else 
+			element.style.display = "block";
+	}
+	function likePost(obj) {
+		if(obj.innerHTML == "Like") {
+			obj.innerHTML = "UnLike";
+			obj.value = '1';
+			var likecountid = "likecount";
+			document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)+1;
+		} else {
+			obj.innerHTML = "Like";
+			obj.value = '0';
+			var likecountid = "likecount";
+			document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)-1;
+		}
+	}
+	function saveAction(obj){
+		var user_logged_in = '<?php echo $user_logged_in; ?>';
+		$.ajax({
+      type: "POST",
+      url: "includes/like_post.php",
+      data: {
+        username : user_logged_in,
+				post_id : obj.id,
+				user_action  : obj.value
+      },
+      success: function(result) {
+      },
+      error: function(result) {
+        alert('error');
+      }
+    });
+	}
+	function sendComment(obj){
+		var user_logged_in = '<?php echo $user_logged_in; ?>';
+		var comment = "comment";
+		var body = document.getElementById(comment.concat(obj.id)).value;
+		$.ajax({
+      type: "POST",
+      url: "includes/save_comment.php",
+      data: {
+        username : user_logged_in,
+				post_id : obj.id,
+				comment_body  : body
+      },
+      success: function(result) {
+				document.getElementById(comment.concat(obj.id)).value = '';
+				var commentcountid = "commentcountid";
+				document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
+      },
+      error: function(result) {
+        alert('error');
+      }
+    });
+	}
+</script>
 <!---
 <div class="card shadow p-3 mb-2 bg-white rounded">
   <div class="media p-3">

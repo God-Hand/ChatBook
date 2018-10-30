@@ -58,11 +58,9 @@
 		$(window).scroll(function() {
 			// get id of last <div class='post' id='#post_id'></div>
 			var last_comment_id = $('.comment:last').attr('id');
-			var height = $('.comment_area').height();
-			var scroll_top = $(this).scrollTop();
 			var noMoreComments = $('.comment_area').find('.noMoreComments').val();
 
-			if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMoreComments == 'false') {
+			if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMoreComments == 'false') {
 				$('#loading').show();
 
 				var ajaxReq = $.ajax({
