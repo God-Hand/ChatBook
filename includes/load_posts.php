@@ -46,6 +46,7 @@
 				$now_datetime = new DateTime($now_date);
 				$posted_time_in_text = getTimeFrame($now_datetime->diff($post_datetime));
 
+				$comment_frame_url = "infinite_comment_loading.php?username=" . $user_from_obj->getUsername() . "&post_id=" . $post_id;
 				$comment_count = $comment->getNumOfComments($post_id);
 				$post_like_count = $post_like->postLikesCount($post_id);
 				$is_user_like_post = $post_like->isUserLikePost($post_id);
@@ -80,7 +81,7 @@
 				      <button id='" . $post_id . "' class='btn btn-primary float-left' onclick='openCommentFrame(this)'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
 				    </div>
 				  </div>
-				  <iframe id='commentframe" . $post_id . "' src='infinite_comment_loading.php' style='border:none;height:200px;margin:5px 0px;display: none;'></iframe>
+				  <iframe id='commentframe" . $post_id . "' src='" . $comment_frame_url . "' style='border:none;height:200px;margin:5px 0px;display: none;'></iframe>
 				  <div class='input-group mb-3' style='margin:5px 0px;'>
 				    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...' aria-label='Recipient's username' aria-describedby='button-addon2'>
 				    <div class='input-group-append'>

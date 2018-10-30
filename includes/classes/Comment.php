@@ -32,7 +32,7 @@
 		}
 
 		// load posts, where comment_id< given comment_id and post_id=$post_id , limit='$limit'
-		public function loadAllComments($last_comment_id, $post_id, $limit) {
+		public function loadAllComments($post_id, $last_comment_id, $limit) {
 			if ( $last_comment_id == 0 ){
 				$query = mysqli_query($this->conn, "SELECT * FROM comments WHERE post_id='$post_id' AND deleted=0 AND user_closed=0 ORDER BY comment_id DESC LIMIT '$limit'");
 			} else {
