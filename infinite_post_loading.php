@@ -33,6 +33,7 @@
 
 			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
 				$('#loading').show();
+			$('.posts_area').find('.noMorePosts').remove(); //Removes current .nextpage 
 
 				var ajaxReq = $.ajax({
 					url: "includes/load_posts.php",
@@ -41,7 +42,6 @@
 					cache:false,
 
 					success: function(response) {
-						$('.posts_area').find('.noMorePosts').remove(); //Removes current .nextpage 
 						$('.posts_area').find('.noMorePostsText').remove(); //Removes current .nextpage 
 
 						$('#loading').hide();
