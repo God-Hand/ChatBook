@@ -9,8 +9,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 	<style src="assets/css/comment.css"></style>
 	<style type="text/css">
-	  .form-group, .table{
+	  .form-group{
 	    margin-bottom: 0px;
+	  }
+	  .col {
+	  	margin: -15px 0px;
 	  }
 	  .scrollClass {
 	    height:200px;

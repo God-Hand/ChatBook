@@ -48,7 +48,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">@</span>
         </div>
-        <input type="text" class="form-control" placeholder="Username">
+        <input type="text" class="form-control" onkeyup="SearchUsers(this)" name="q" placeholder="Search..." autocomplete="off" id="searchusers" value="">
       </div>
     </form>
     <ul class="navbar-nav ml-auto">
@@ -75,3 +75,12 @@
     </ul>
   </div>
 </nav>
+
+<script>
+  function SearchUsers(obj){
+    var username = '<?php echo $user_logged_in; ?>';
+    $.post("includes/search.php", {name:obj.value, username: username}, function(data) {
+      console.log(data);
+    });
+  }
+</script>
