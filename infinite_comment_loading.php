@@ -29,7 +29,7 @@
 	      background: #555; 
 	  }
 	  .image-size{
-			width: 24px;
+			width: 40px;
 			margin-right:5px;
 		}
 		body{
@@ -41,7 +41,7 @@
 		}
 	</style>
 </head>
-<body style="background-color: #e9ecef">
+<body style="background-color: #f3f3f3">
 	<div class="comment_area">
   </div>
   <img id="loading" src="assets/images/icons/loading.gif">
@@ -130,23 +130,5 @@
         alert('error');
       }
     });
-	}
-	function deleteComment(obj){
-		bootbox.confirm({
-	    message: "This is a confirm with custom button text and color! Do you like it?",
-	    buttons: {
-	        confirm: {
-	            label: 'Yes',
-	            className: 'btn-success'
-	        },
-	        cancel: {
-	            label: 'No',
-	            className: 'btn-danger'
-	        }
-	    },
-	    callback: function (result) {
-	        console.log('This was logged in the callback: ' + result);
-	    }
-	});
 	}
 </script>

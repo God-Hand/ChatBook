@@ -66,7 +66,7 @@
       	</tr>
       	<tr>
       		<td><i class="fa fa-paperclip"></i> &nbsp;Posts</td>
-      		<td><?php echo $user->getNumOfPosts(); ?></td>
+      		<td id='totalpostsCounts'><?php echo $user->getNumOfPosts(); ?></td>
       	</tr>
       </table>
     </div>

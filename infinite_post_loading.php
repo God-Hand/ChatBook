@@ -8,11 +8,10 @@
 </div>
 
 <script>
-	var user_logged_in = '<?php echo $user_logged_in; ?>';
 
 	$(document).ready(function() {
 		$('#loading').show();
-
+		var user_logged_in = '<?php echo $user_logged_in; ?>';
 		//Original ajax request for loading first posts 
 		$.ajax({
 			url: "includes/load_posts.php",
@@ -25,7 +24,6 @@
 				$('.posts_area').html(data);
 			}
 		});
-
 		$(window).scroll(function() {
 			// get id of last <div class='post' id='#post_id'></div>
 			var last_post_id = $('.post:last').attr('id');
@@ -52,19 +50,16 @@
 			return false;
 		});
 	});
-</script>
-
-
-<script> 
 	// action in post
 	function openCommentFrame(obj) {
 		var commentframeid = "commentframe";
 		var element = document.getElementById(commentframeid.concat(obj.id));
 		if(element.style.display == "block") {
 			element.style.display = "none";
-			document.getElementById(commentframeid).contentWindow.location.reload();
-		} else 
+		} else {
 			element.style.display = "block";
+			document.getElementById(commentframeid.concat(obj.id)).height = document.getElementById(commentframeid.concat(obj.id)).contentWindow.document.body.scrollHeight;
+		}
 	}
 	function likePost(obj) {
 		if(obj.value == "0") {
@@ -114,7 +109,7 @@
 				document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
 				var commentframeid = "commentframe";
 				document.getElementById(commentframeid.concat(obj.id)).contentWindow.location.reload();
-				document.getElementById(commentframeid.concat(obj.id)).style.display = "block";
+				//document.getElementById(commentframeid.concat(obj.id)).style.display = "block";
       },
       error: function(result) {
         alert('error');
@@ -123,7 +118,7 @@
 	}
 	function deletePost(obj){
 		bootbox.confirm({
-	    message: "This is a confirm with custom button text and color! Do you like it?",
+	    message: "Delete the post .Are you Sure?",
 	    buttons: {
 	      confirm: {
 	        label: 'Yes',
@@ -147,6 +142,45 @@
 			      success: function(result) {
 			      	var element = '.post#';
 							$(element.concat(obj.id)).fadeOut();
+							$('#totalpostsCounts').html(parseInt($('#totalpostsCounts').text())-1);
+			      },
+			      error: function(result) {
+			        alert('error');
+			      }
+			    });
+	      }
+	    }
+		});
+	}
+	function deleteComment(obj){
+		bootbox.confirm({
+	    message: "Delete the comment .Are you Sure?",
+	    buttons: {
+	      confirm: {
+	        label: 'Yes',
+	        className: 'btn-success'
+	      },
+	      cancel: {
+	        label: 'No',
+	        className: 'btn-danger'
+	      }
+	    },
+	    callback: function (result) {
+	      if(result){
+	      	var user_logged_in = '<?php echo $user_logged_in; ?>';
+					$.ajax({
+			      type: "POST",
+			      url: "includes/delete_comment.php",
+			      data: {
+			        username : user_logged_in,
+							comment_id : obj.id,
+			      },
+			      success: function(result) {
+							var commentframeid = "#commentframe";
+							var comment = '.comment#';
+							$(commentframeid.concat(result)).contents().find(comment.concat(obj.id)).fadeOut();
+							var commentcountid = "commentcountid";
+							document.getElementById(commentcountid.concat(result)).innerHTML = parseInt(document.getElementById(commentcountid.concat(result)).innerHTML) - 1;
 			      },
 			      error: function(result) {
 			        alert('error');

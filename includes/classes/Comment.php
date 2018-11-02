@@ -51,5 +51,12 @@
 			$query = mysqli_query($this->conn, "SELECT * FROM comments WHERE commented_by='$this->username' AND post_id='$post_id' AND deleted=0 AND user_closed=0");
 			return mysqli_num_rows($query);
 		}
+
+		// return post_id for a comment_id
+		public function getCommentPostId($comment_id){
+			$query = mysqli_query($this->conn, "SELECT post_id FROM comments WHERE comment_id='$comment_id'");
+			$row = mysqli_fetch_array($query);
+			return $row['post_id'];
+		}
 	}
 ?>

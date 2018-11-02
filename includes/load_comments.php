@@ -6,14 +6,14 @@
 	require '../functions/timeframe_function.php';
 	require '../functions/text_filter.php';
 
-	define('LIMIT', 10);
+	define('LIMIT', 5);
 	$user = new User($conn, $_REQUEST['username']);
 	$comment = new Comment($conn, $_REQUEST['username']);
 	$comment_like = new CommentLike($conn, $_REQUEST['username']);
 	$data_query = $comment->loadAllComments($_REQUEST['post_id'], $_REQUEST['last_comment_id'], LIMIT);
 	$str = "";
 	if (mysqli_num_rows($data_query) == 0) {
-		$str .= "<input type='hidden' class='noMoreComments' value='true'><p class='text-muted'> No more comments to show! </p>";
+		$str .= "<input type='hidden' class='noMoreComments' value='true'><p class='text-muted' style='padding-left:10px;'> No more comments to show! </p>";
 	} else {
 		while ($row = mysqli_fetch_array($data_query)) {
 			$comment_id = $row['comment_id'];
@@ -26,7 +26,7 @@
 			$commented_time = $row['commented_time'];
 
 			if($commented_by_user_obj->getUsername() == $user->getUsername()){
-				$delete = "<button id='" . $comment_id . "' class='btn btn-danger btn-sm button float-right' onclick='deleteComment(this)'><i class='fa fa-trash'></i></button>";
+				$delete = "<button id='" . $comment_id . "' class='btn btn-danger btn-sm button float-right' onclick='parent.deleteComment(this);'><i class='fa fa-trash'></i></button>";
 			} else {
 				$delete = "";
 			}

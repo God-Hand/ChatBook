@@ -89,11 +89,11 @@
 				      <button id='" . $post_id . "' class='btn btn-primary btn-sm float-left' onclick='openCommentFrame(this)'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
 				    </div>
 				  </div>
-				  <iframe id='commentframe" . $post_id . "' src='" . $comment_frame_url . "' style='border:none;height:200px;margin:5px 0px;display: none;'></iframe>
+				  <iframe id='commentframe" . $post_id . "' src='" . $comment_frame_url . "' style='border:none;max-height:200px;margin:5px 0px;display: none;'></iframe>
 				  <div class='input-group mb-3' style='margin:5px 0px;'>
 				    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...' aria-label='Recipient's username' aria-describedby='button-addon2'>
 				    <div class='input-group-append'>
-				      <button id='" . $post_id . "' class='btn btn-primary' type='button' onclick='sendComment(this)'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
+				      <button id='" . $post_id . "' class='btn btn-primary sendComment" . $post_id . "' type='button' onclick='sendComment(this)'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
 				    </div>
 				  </div>
 				</div>"; //here that html code. which need to be displayed
