@@ -25,6 +25,11 @@
 			$query = mysqli_query($this->conn, "UPDATE comments SET deleted=1 WHERE comment_id='$comment_id'");
 		}
 
+		// delete comment
+		public function deleteComments($post_id) {
+			$query = mysqli_query($this->conn, "UPDATE comments SET deleted=1 WHERE post_id='$post_id'");
+		}
+
 		// return those comments, which are commented_by user
 		public function loadUserComments() {
 			$query = mysqli_query($this->conn, "SELECT * FROM comments WHERE commented_by='$this->username' AND deleted=0 ORDER BY comment_id DESC");

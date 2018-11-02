@@ -19,13 +19,14 @@
 			$comment_id = $row['comment_id'];
 			$commented_by_user_obj = new User($conn, $row['commented_by']);
 			$user_details = $commented_by_user_obj->getUserLessInfo();
-			$user_fullname = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary' target='_blank'>" . $user_details['first_name'] . " " . $user_details['last_name'] . "</a>";
-			$user_profile_pic = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary' target='_blank'> <img src='" . $user_details['profile_pic'] . "' alt='" . $commented_by_user_obj->getUsername() . "' class='image-size align-self-start rounded-circle'> </a>";
+			$user_fullname = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'>" . $user_details['first_name'] . " " . $user_details['last_name'] . "</a>";
+			$user_profile_pic = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'> <img src='" . $user_details['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
+			
 			$body = $row['body'];
 			$commented_time = $row['commented_time'];
 
 			if($commented_by_user_obj->getUsername() == $user->getUsername()){
-				$delete = "<button class='btn btn-danger delete-button'><i class='fa fa-trash'></i></button>";
+				$delete = "<button id='" . $comment_id . "' class='btn btn-danger btn-sm button float-right' onclick='deleteComment(this)'><i class='fa fa-trash'></i></button>";
 			} else {
 				$delete = "";
 			}
@@ -34,18 +35,28 @@
 			$comment_datetime = new DateTime($commented_time);
 			$now_datetime = new DateTime($now_date);
 			$commented_time_in_text = getTimeFrame($now_datetime->diff($comment_datetime));
+			$comment_like_count = $comment_like->commentLikesCount($comment_id);
+			$is_user_like_comment = $comment_like->isUserLikeComment($comment_id);
+			if($is_user_like_comment == 1){
+				$like = "<i class='fa fa-thumbs-down'></i>&nbsp;UnLike";
+				$like_value = 1;
+			} else {
+				$like = "<i class='fa fa-thumbs-up'></i>&nbsp;Like";
+				$like_value = 0;
+			}
 
 			$str .= "<div class='alert alert-dark comment' style='width:80%;margin:10px;' id='" . $comment_id . "'>
-								<div class='media '>
+								<div class='media'>
 							    " . $user_profile_pic . "
-							    <div class='media-body'>
-							      <h6 class='comment_body'>" . $user_fullname . "<small class='time float-right text-muted'><i class='fa fa-clock-o'></i><em>" . $commented_time_in_text . "</em>" . $delete . "</small></h6>
+							    <div class='media-body' style='margin-left:5px;'>
+							      <h6>" .$user_fullname . $delete . "<br><small class='text-muted'><em>" . $commented_time_in_text . "</em></small></h6>
 							    </div>
 							  </div>
 							  <p class='comment_body'><em>" . $body . "</em></p>
 							  <div class='form-row'>
 							    <div class='col'>
-							      <button class='btn btn-primary btn-sm'>Like</button>
+							    	<p class='text-muted float-left'>Like(<span id='commentlikecount" . $comment_id . "'>" . $comment_like_count . "</span>)</p>
+							     	<button class='btn btn-primary btn-sm float-right button' id='" . $comment_id . "' value='" . $like_value ."'onclick='likeComment(this)' onmouseleave='saveAction(this)'>" . $like . "</button>
 							    </div>
 							  </div>
 							</div>";
