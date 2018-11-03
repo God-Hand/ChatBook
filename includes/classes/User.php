@@ -115,9 +115,9 @@
 		// return numbers of mutual_friends
 		public function getMutualFriendsCount($friend_username) {
 			$mutual_friends = 0;
-			$user_friend_array = getFriendArray();
+			$user_friend_array = $this->getFriendArray();
 
-			$friend = new User($conn, $friend_username);
+			$friend = new User($this->conn, $friend_username);
 			$friend_friend_array = $friend->getFriendArray();
 			
 			$mutual_friends = count(array_intersect($user_friend_array, $friend_friend_array));
@@ -127,12 +127,12 @@
 		// search user where first_name and last_name like
 		public function searchUsers($input_name) {
 			$first_last_name = explode(" ", $input_name);
-			if(strpos($input_name, "_") !== false) {
-				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username LIKE '$input_name%' AND user_closed=0 LIMIT 5");
+			if(strpos($input_name, "_") == true) {
+				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username LIKE '%$input_name%' AND deactivate_account=0 LIMIT 5");
 			} else if(count($first_last_name) == 2) {
-				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' AND last_name LIKE '%$first_last_name[1]%') AND user_closed=0 LIMIT 5");
+				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' AND last_name LIKE '%$first_last_name[1]%') AND deactivate_account=0 LIMIT 5");
 			} else {
-				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' OR last_name LIKE '%$first_last_name[0]%') AND user_closed=0 LIMIT 5");
+				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' OR last_name LIKE '%$first_last_name[0]%') AND deactivate_account=0 LIMIT 5");
 			}
 			return $query;
 		}

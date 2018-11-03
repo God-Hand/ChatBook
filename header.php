@@ -16,6 +16,18 @@
     padding: 0px 4px;
     margin-left: 5px;
   }
+  .searchresult{
+    max-width: 360px;
+    max-height: 300px;
+    width: 100%;
+  }
+  .searcheduser{
+    line-height: 0px;
+    word-wrap: break-word;
+  }
+  .searcheduser:hover{
+    background-color:#e0e0e0;
+  }
 </style>
 
 <?php
@@ -43,13 +55,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-3">
-    <form class="form-inline mr-auto" action="/action_page.php">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">@</span>
+    <form class="form-inline searchform" action="/action_page.php">
+      <div class="input-group" style="width:100%;">
+        <input type="text" class="form-control dropdown" onkeyup="SearchUsers(this)" name="q" placeholder="Search..." autocomplete="off" id="searchusers" value="" style="width: auto;">
+        <div class="input-group-postpend">
+          <button class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i></button>
         </div>
-        <input type="text" class="form-control" onkeyup="SearchUsers(this)" name="q" placeholder="Search..." autocomplete="off" id="searchusers" value="">
       </div>
+      <div class="searchresult dropdown-menu"></div>
     </form>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -77,10 +90,19 @@
 </nav>
 
 <script>
+  $(document).on("click", function(event){
+    $('.searchresult').hide();
+  });
   function SearchUsers(obj){
     var username = '<?php echo $user_logged_in; ?>';
     $.post("includes/search.php", {name:obj.value, username: username}, function(data) {
-      console.log(data);
+      $('.searchresult').empty();
+      if(data != ''){
+        $('.searchresult').html(data);
+        $('.searchresult').show();
+      } else {
+        $('.searchresult').hide();
+      }
     });
   }
 </script>
