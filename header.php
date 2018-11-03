@@ -20,10 +20,12 @@
     max-width: 360px;
     max-height: 300px;
     width: 100%;
+    padding: 0px;
   }
   .searcheduser{
     line-height: 0px;
     word-wrap: break-word;
+    padding: 10px;
   }
   .searcheduser:hover{
     background-color:#e0e0e0;
@@ -55,7 +57,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-3">
-    <form class="form-inline searchform" action="/action_page.php">
+    <form class="form-inline searchform">
       <div class="input-group" style="width:100%;">
         <input type="text" class="form-control dropdown" onkeyup="SearchUsers(this)" name="q" placeholder="Search..." autocomplete="off" id="searchusers" value="" style="width: auto;">
         <div class="input-group-postpend">
@@ -90,9 +92,36 @@
 </nav>
 
 <script>
+  $(document).on('click', '.addfriend', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
   $(document).on("click", function(event){
     $('.searchresult').hide();
   });
+  function friend(obj){
+    if (obj.value == '0'){
+      obj.classList.remove('btn-danger');
+      obj.classList.add('btn-success');
+      obj.innerHTML = 'Add Friend';
+      obj.value = 1;
+    } else if (obj.value == '1'){
+      obj.classList.remove('btn-success');
+      obj.classList.add('btn-warning');
+      obj.innerHTML = 'Cancel Request';
+      obj.value = 2;
+    } else if(obj.value == '2'){
+      obj.classList.remove('btn-warning');
+      obj.classList.add('btn-success');
+      obj.innerHTML = 'Add Friend';
+      obj.value = 1;
+    }
+  }
+  function friendAction(obj){
+   $.post("includes/add_friend.php", {action:obj.value, name:obj.id, username:'<?php echo $user_logged_in; ?>'}, function(data) {
+    console.log('hi');
+   })
+  }
   function SearchUsers(obj){
     var username = '<?php echo $user_logged_in; ?>';
     $.post("includes/search.php", {name:obj.value, username: username}, function(data) {

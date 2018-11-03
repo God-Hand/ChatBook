@@ -30,13 +30,13 @@
 		}
 
 		// check weather user receive friend request of a specific user
-		private function didReceiveRequest($user_from) {
+		public function didReceiveRequest($user_from) {
 			$check_request_query = mysqli_query($this->conn, "SELECT viewed FROM friend_requests WHERE user_to='$this->username' AND user_from='$user_from' AND viewed=1 AND deleted=0");
 			return $row['viewed'];
 		}
 
 		// check weather user send friend request to a specific user
-		private function didSendRequest($user_to) {
+		public function didSendRequest($user_to) {
 			$check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND user_from='$this->username' AND deleted=0");
 			if(mysqli_num_rows($check_request_query) > 0) {
 				return 1;
@@ -47,7 +47,7 @@
 
 		// insert request form the user to specific user
 		public function sendRequest($user_to) {
-			if( didSendRequest($user_to) != true) {
+			if( $this->didSendRequest($user_to) == 0) {
 				$query = mysqli_query($this->conn, "INSERT INTO friend_requests (request_id, user_from, user_to, request_time) VALUES (default, '$this->username', '$user_to', default)");
 			}
 		}
@@ -55,6 +55,12 @@
 		// reject request
 		public function rejectRequest($user_from) {
 			$query = mysqli_query($this->conn, "UPDATE friend_requests SET accepted=0, deleted=1 WHERE user_to='$this->username' AND user_from='$user_from' AND deleted=0");
+			return $query;
+		}
+
+		// cancel request
+		public function cancelRequest($user_to) {
+			$query = mysqli_query($this->conn, "UPDATE friend_requests SET accepted=0, deleted=1 WHERE user_from='$this->username' AND user_to='$user_to' AND deleted=0");
 			return $query;
 		}
 
