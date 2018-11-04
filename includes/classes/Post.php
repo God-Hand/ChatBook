@@ -74,5 +74,15 @@
 			}
 			return $query;
 		}
+
+		// return wheather there are more posts or not
+		public function haveMorePosts($last_post_id) {
+			$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE post_id<'$last_post_id' AND deleted=0 AND user_closed=0 ORDER BY post_id DESC");
+			if (mysqli_num_rows($query) == 0){
+				return false;
+			} else {
+				return true;
+			}
+		}
 	}
 ?>

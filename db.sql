@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 03, 2018 at 01:55 PM
+-- Generation Time: Oct 15, 2018 at 02:05 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -33,13 +33,21 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `commented_by` varchar(50) NOT NULL,
   `body` tinytext NOT NULL,
+  `image` varchar(255) NOT NULL DEFAULT '',
   `commented_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_closed` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `post_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `commented_by`, `body`, `image`, `commented_time`, `user_closed`, `deleted`, `post_id`) VALUES
+(1, 'jitendra', 'hi', '', '2018-10-12 18:21:11', 0, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -68,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
   `user_to` varchar(50) NOT NULL,
   `request_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `viewed` tinyint(1) NOT NULL DEFAULT '0',
-  `accepted` tinyint(1) DEFAULT NULL,
+  `accepted` tinyint(1) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -125,13 +133,13 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `user_from` varchar(50) NOT NULL,
   `user_to` varchar(50) NOT NULL,
   `body` text NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL DEFAULT '',
   `posted_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_closed` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -162,7 +170,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(100) NOT NULL,
   `signup_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `profile_pic` varchar(255) NOT NULL,
-  `cover_pic` varchar(255) NOT NULL,
   `deactivate_account` tinyint(1) NOT NULL DEFAULT '0',
   `friend_array` text,
   `moblie` varchar(15) DEFAULT NULL,
@@ -175,19 +182,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `college` text,
   `position` text,
   `company` text,
-  `bio` tinytext,
+  `bio` text,
   `is_online` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `cover_pic`, `deactivate_account`, `friend_array`, `moblie`, `gender`, `birthday`, `home_town`, `city`, `country`, `school`, `college`, `position`, `company`, `bio`, `is_online`) VALUES
-('arpit', 'sharma', 'arpit_sharma1541238046', 'arpit_cs@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-11-03 09:40:45', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-('jitendra', 'sharma', 'jitrendra_sharma1541174297', 'Jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-11-02 15:58:17', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -197,10 +196,11 @@ INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`,
 
 DROP TABLE IF EXISTS `user_login_durations`;
 CREATE TABLE IF NOT EXISTS `user_login_durations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `login_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `logout_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`login_time`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 COMMIT;
 

@@ -14,6 +14,7 @@
 	$post_like = new PostLike($conn, $_REQUEST['user_logged_in']);
 	$data_query = $post->loadAllPosts($_REQUEST['last_post_id'], LIMIT);
 	$str = "";
+	$last_post_id = $_REQUEST['last_post_id'];
 	if (mysqli_num_rows($data_query) == 0) {
 		$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted' style='padding-left:10px;'> No more posts to show! </p>";
 	} else {
@@ -21,6 +22,7 @@
 			if ($row['user_from'] == $user->getUsername() || $row['user_to'] == $user->getUsername() || $user->isFriend($row['user_from'])) {
 
 				$post_id = $row['post_id'];
+				$last_post_id = $post_id;
 				$post_body = replaceURLToLink($row['body']);
 				if ($row['image'] == '')
 					$imagePath = '';
@@ -99,7 +101,11 @@
 				</div>"; //here that html code. which need to be displayed
 			}
 		}
-		$str .= "<input type='hidden' class='noMorePosts' value='false'>";
+		if ($last_post_id == $_REQUEST['last_post_id']){
+			$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted' style='padding-left:10px;'> No more posts to show! </p>";
+		} else {
+			$str .= "<input type='hidden' class='noMorePosts' value='false'>";
+		}
 	}
 	echo $str;
 ?>

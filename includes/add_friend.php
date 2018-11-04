@@ -15,5 +15,7 @@
 		} else {
 			$request->cancelRequest($name);
 		}
+	} elseif($action == '0'){
+		echo "do nothing";
 	}
 ?>

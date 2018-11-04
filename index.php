@@ -9,7 +9,7 @@
 	<?php include("header.php"); ?>
 	<div style="min-height:70px;">
 	</div>
-	<div role="main" style="padding: 0px 10px;">
+	<div role="main" class="container">
 		<div class="row">
 			<?php
 				include("profile_card.php");
