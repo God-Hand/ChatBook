@@ -1,5 +1,4 @@
 <style type="text/css">
-
 	/*Profile card*/
 	.profile-card .profile-card-img-block{
 	    float:left;
@@ -16,6 +15,8 @@
 	    left: 50%;
 	    width:100px;
 	    margin-left: -50px;
+	    padding: 5px;
+	    background-color: white;
 	}
 	.profile-card .profile-card-img-block{
 	    position:relative;
@@ -24,7 +25,7 @@
 		position: absolute;
 		bottom: -10px;
     right: -25px;
-	  transform: translate(-50%, -50%);
+	  transform: translate(-50%, -300%);
 	  -ms-transform: translate(-50%, -50%);
 	}
 	.profile-card .profile-card-img-block > .profile-info-box{

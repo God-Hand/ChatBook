@@ -5,6 +5,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <style type="text/css">
+  /* On screens that are 992px or less, set the background color to blue */
+  @media screen and (max-width: 992px) {
+    .container {
+      max-width: 1366px;
+    }
+  }
+
+  /* On screens that are 768px or less, set the background color to olive */
+  @media screen and (max-width: 768px) {
+    .container {
+      max-width: 992px;
+    }
+  }
   .form-group, .table{
     margin-bottom: 0px;
   }
@@ -21,6 +34,7 @@
     max-height: 300px;
     width: 100%;
     padding: 0px;
+    margin: 0px 10px;
   }
   .searcheduser{
     line-height: 0px;
@@ -79,7 +93,7 @@
     </ul>
     <ul class="navbar-nav nav-flex-icons">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user-circle-o"></i>&nbsp;Username
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -118,9 +132,11 @@
     }
   }
   function friendAction(obj){
-   $.post("includes/add_friend.php", {action:obj.value, name:obj.id, username:'<?php echo $user_logged_in; ?>'}, function(data) {
-    console.log('hi');
-   })
+    if (obj.value != '0'){
+      $.post("includes/add_friend.php", {action:obj.value, name:obj.id, username:'<?php echo $user_logged_in; ?>'}, function(data) {
+        console.log('data');
+      })
+    }
   }
   function SearchUsers(obj){
     var username = '<?php echo $user_logged_in; ?>';
