@@ -34,6 +34,7 @@
 		  transform: translate(-50%, -430%);
 		  -ms-transform: translate(-50%, -50%);
 		}
+		
 		.profile-card .profile-card-img-block > .profile-info-box{
 		    position:absolute;
 		    width:100%;
@@ -76,6 +77,10 @@
 			      <div class="float-left"><img src="<?php echo $user->getProfilePic(); ?>" alt="profile-image" style="background-color: #fff; padding: 10px; border-radius: 50%;"/></div>
 			      <h5 class="float-left text-white" style="position: relative;top: 70px; left:10px;"><?php echo $user->getFirstAndLastName(); ?></h5>
 			    </div>
+			    <div style="position: relative;top: -30px;height: 0px;">
+					  <button class="btn btn-success btn-sm float-right" style="margin-left: 5px;">Add Post</button>
+					  <button class="btn btn-success btn-sm float-right">Add Friend</button>
+					</div>
 			  </div>
 			</div>
 		</div>
@@ -96,9 +101,9 @@
 
 				<!-- Tab panes -->
 				<div class="tab-content">
-				  <div class="tab-pane container active" id="tab1">
+				  <div class="tab-pane container active" id="tab1" style="padding: 10px;">
 				  	<?php
-				  		require 'infinite_post_loading.php';
+				  		require 'infinite_profile_post_loading.php';
 				  	?>
 				  </div>
 				  <div class="tab-pane container fade" id="tab2">page2</div>
