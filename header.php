@@ -55,6 +55,15 @@
   .media-body{
     margin-left: 5px;
   }
+  .post-body{
+    margin:0px 2px;
+  }
+  .commentframe{
+    border:none;
+    max-height:200px;
+    margin:5px 0px;
+    display: none;
+  }
 </style>
 
 <?php

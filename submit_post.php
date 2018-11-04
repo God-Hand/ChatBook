@@ -1,51 +1,46 @@
-<?php
-  $post_body = "";
-  $post_img = "";
-  $alert_message = "";
-  $upload_message = "";
-  if(isset($_POST['submit_post']) && (!empty($_POST["post_body"]) || !empty($_POST["post_img"]))){
-    $post_body = removeSpaces($_POST['post_body']);
-    $post_id = $post->addPost('', $post_body);
-    if(isset($_FILES['post_img'])){
-      $upload_message = $post->uploadImage($post_id, $_FILES["post_img"]);
-      if($upload_message == "The file ". $_FILES["post_img"]["name"] . " has been uploaded.") {
-        $alert_message = "<div class='alert alert-success alert-dismissible'>
-                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                            ". $upload_message ."
-                          </div>";
-      } else {
-        $alert_message = "<div class='alert alert-warning alert-dismissible'>
-                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                            ". $upload_message ."
-                          </div>";
-        if($post_body == ''){
-          $post->deleteWastePost($post_id);
-        }
-      }
-    }
-    $_POST["post_body"] = null;
-    $_POST["submit_post"] = null;
-  }
-?>
 <div class="card shadow p-3 mb-4 bg-white rounded" style="margin-bottom: -5px;">
-  <form method="post" action="index.php" enctype="multipart/form-data">
+  <form method="post" action="" enctype="multipart/form-data">
     <div class="form-group">
-      <textarea name="post_body" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="margin-bottom: 10px;min-height: 100px; max-height: 200px;"></textarea>
+      <textarea id="post_body" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="margin-bottom: 10px;min-height: 100px; max-height: 200px;"></textarea>
       <div class="form-row">
         <div class="col">
-          <input name="post_img" type="file" class="form-control-file btn float-left" style="padding-left: 0px;">
+          <input id="post_img" type="file" class="form-control-file btn float-left" style="padding-left: 0px;">
         </div>
         <div class="col">
-          <button name="submit_post" type="submit" ="#" class="btn btn-primary float-right"><i class="fa fa-pencil"></i>&nbsp;Post</button>
+          <button name="submit_post" type="submit" class="btn btn-primary float-right" id='sendpost'><i class="fa fa-pencil"></i>&nbsp;Post</button>
         </div>
       </div>
     </div>
   </form>
 </div>
+<div id="alert-message"></div>
 
-<?php echo $alert_message; ?>
+
 <script>
   $(".alert").fadeTo(2000, 500).slideUp(500, function(){
     $(".alert").slideUp(500);
   });
+  // send data on save changes click
+  $('#sendpost').on('click', function(event){
+    event.preventDefault();
+    if ($('#post_body').val().trim().length || $('#post_img').val()){
+      var formData = new FormData();
+      var files = $('#post_img')[0].files[0];
+      formData.append('post_img',files);
+      formData.append('post_body', $('#post_body').val());
+      formData.append('username', '<?php echo $user->getUsername(); ?>');
+      $.ajax({
+        url: 'includes/save_post.php',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+          $('#alert-message').html(response);
+          $('#post_body').val('');
+          $('#post_img').val('');
+        },
+      });
+    }
+  })
 </script>

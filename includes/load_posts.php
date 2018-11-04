@@ -76,10 +76,10 @@
 				    </div>
 				  </div>
 				  " . $imagePath . "
-				  <div style='margin:0px 2px;'>
+				  <div class='post-body'>
 				  	<p>" . $post_body . "</p>
 				  </div>
-				  <div class='form-row' style='margin:-15px 0px;'>
+				  <div class='form-row' style='margin:-15px -5px;'>
 				    <div class='col'>
 				      <p class='text-muted float-left'>Like(<span id='likecount" . $post_id . "'>" . $post_like_count . "</span>)</p>
 				      <p class='text-muted float-right'>Comments(<span id='commentcountid" . $post_id . "'>" . $comment_count . "</span>)</p>
@@ -91,9 +91,9 @@
 				      <button id='" . $post_id . "' class='btn btn-primary btn-sm float-left' onclick='openCommentFrame(this)'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
 				    </div>
 				  </div>
-				  <iframe id='commentframe" . $post_id . "' src='" . $comment_frame_url . "' style='border:none;max-height:200px;margin:5px 0px;display: none;'></iframe>
+				  <iframe class='commentframe' id='commentframe" . $post_id . "' src='" . $comment_frame_url . "'></iframe>
 				  <div class='input-group mb-3' style='margin:5px 0px;'>
-				    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...' aria-label='Recipient's username' aria-describedby='button-addon2'>
+				    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...'>
 				    <div class='input-group-append'>
 				      <button id='" . $post_id . "' class='btn btn-primary sendComment" . $post_id . "' type='button' onclick='sendComment(this)'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
 				    </div>
