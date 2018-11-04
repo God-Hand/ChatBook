@@ -7,9 +7,7 @@
 </head>
 <body>
 	<?php include("header.php"); ?>
-	<div style="min-height:70px;">
-	</div>
-	<div role="main" class="container">
+	<div role="main" class="new-container">
 		<div class="row">
 			<?php
 				include("profile_card.php");

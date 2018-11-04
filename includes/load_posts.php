@@ -16,7 +16,7 @@
 	$str = "";
 	$last_post_id = $_REQUEST['last_post_id'];
 	if (mysqli_num_rows($data_query) == 0) {
-		$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted' style='padding-left:10px;'> No more posts to show! </p>";
+		$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted'> No more posts to show! </p>";
 	} else {
 		while ($row = mysqli_fetch_array($data_query)) {
 			if ($row['user_from'] == $user->getUsername() || $row['user_to'] == $user->getUsername() || $user->isFriend($row['user_from'])) {
@@ -32,15 +32,15 @@
 
 				$user_from_obj = new User($conn, $row['user_from']);
 				$user_from_details = $user_from_obj->getUserLessInfo();
-				$user_from_fullname = "<a href='profile.php?profile_username=" . $user_from_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'>" . $user_from_details['first_name'] . " " . $user_from_details['last_name'] . "</a>";
-				$user_from_profile_pic = "<a href='profile.php?profile_username=" . $user_from_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'> <img src='" . $user_from_details['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
+				$user_from_fullname = "<a href='profile.php?profile_username=" . $user_from_obj->getUsername() . "' class='text-primary'>" . $user_from_details['first_name'] . " " . $user_from_details['last_name'] . "</a>";
+				$user_from_profile_pic = "<a href='profile.php?profile_username=" . $user_from_obj->getUsername() . "' class='text-primary'> <img src='" . $user_from_details['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
 
 				// if user_to is none. then user_to_fullname = '' 
 				if ($row['user_to'] == '') {
 					$user_to_fullname = '';
 				} else {
 					$user_to_obj = new User($conn, $row['user_to']);
-					$user_to_fullname = " to " . "<a href='profile.php?profile_username=" . $user_to_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'>" . $user_to_obj->getFirstAndLastName() . "</a>";
+					$user_to_fullname = " to " . "<a href='profile.php?profile_username=" . $user_to_obj->getUsername() . "' class='text-primary'>" . $user_to_obj->getFirstAndLastName() . "</a>";
 				}
 
 				if($user_from_obj->getUsername() == $user->getUsername()){
@@ -71,7 +71,7 @@
 				<div class='card shadow p-3 mb-2 bg-white rounded post' id='" . $post_id . "'>
 				  <div class='media'>
 				    " . $user_from_profile_pic . "
-				    <div class='media-body' style='margin-left:5px;'>
+				    <div class='media-body'>
 				      <h6>" .$user_from_fullname . $user_to_fullname . $delete . "<br><small class='text-muted'><em>" . $posted_time_in_text . "</em></small></h6>
 				    </div>
 				  </div>
@@ -102,7 +102,7 @@
 			}
 		}
 		if ($last_post_id == $_REQUEST['last_post_id']){
-			$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted' style='padding-left:10px;'> No more posts to show! </p>";
+			$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted'> No more posts to show! </p>";
 		} else {
 			$str .= "<input type='hidden' class='noMorePosts' value='false'>";
 		}

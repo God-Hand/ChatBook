@@ -50,8 +50,15 @@
 		    -webkit-transition: all 1s ease;
 		    transition: all 1s ease;
 		}
-		.profile-nav{
-			top:-70px;
+		.post-button{
+			position: relative;
+			top: -30px;
+			height: 0px;
+		}
+		.profile-name{
+			position: relative;
+			top: 70px;
+			left:10px;
 		}
 	</style>
 <body>
@@ -63,9 +70,7 @@
 			header('index.php');
 		}
 	?>
-	<div style="min-height:70px;">
-	</div>
-	<div role="main" class="container">
+	<div role="main" class="new-container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card profile-card shadow p-3 mb-4 bg-white rounded">
@@ -73,7 +78,7 @@
 			      <div class="profile-info-box bg-primary">
 			      	<?php echo $profile_user->getBio(); ?>
 			      </div>
-			      <img class='rounded' src='<?php echo $profile_user->getCoverPic(); ?>' style="height: 100%; width: 100%;">
+			      <img class='rounded cover-img' src='<?php echo $profile_user->getCoverPic(); ?>' id='profilecoverimage'>
 			      <?php
 					  	if ($user->getUsername() == $profile_user->getUsername()) {
 								$friend_button = "<button class='btn-over-img btn btn-primary btn-sm'><i class='fa fa-pencil'></i>&nbsp;Edit</button>";
@@ -90,15 +95,17 @@
 					  ?>
 			    </div>
 			    <div class="profile-card-body pt-5 profile">
-			      <div class="float-left"><img src="<?php echo $profile_user->getProfilePic(); ?>" alt="profile-image" style="background-color: #fff; padding: 5px; border-radius: 50%;"/></div>
-			      <h5 class="float-left text-white" style="position: relative;top: 70px; left:10px;"><?php echo $profile_user->getFirstAndLastName(); ?></h5>
+			      <div class="float-left"><img class="padding-5-circle"src="<?php echo $profile_user->getProfilePic(); ?>" alt="profile-image"/></div>
+			      <h5 class="float-left text-white profile-name"><?php echo $profile_user->getFirstAndLastName(); ?></h5>
 			    </div>
-			    <div style="position: relative;top: -30px;height: 0px;">
+			    <div class='post-button'>
 					  <button class="btn btn-success btn-sm float-right" id="addpost">Add Post</button>
+					  <?php require 'submit_profile_post.php'; ?>
 					</div>
 			  </div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-md-12">
 				<!-- Nav tabs -->
@@ -113,51 +120,19 @@
 				    <a class="nav-link" data-toggle="tab" href="#tab3">Message</a>
 				  </li>
 				</ul>
-
 				<!-- Tab panes -->
 				<div class="tab-content">
-				  <div class="tab-pane container active" id="tab1" style="padding: 10px;">
+				  <div class="tab-pane new-container active" id="tab1">
 				  	<?php
 				  		require 'infinite_profile_post_loading.php';
 				  	?>
 				  </div>
-				  <div class="tab-pane container fade" id="tab2">page2</div>
-				  <div class="tab-pane container fade" id="tab3">page3</div>
+				  <div class="tab-pane new-container fade" id="tab2">page2</div>
+				  <div class="tab-pane new-container fade" id="tab3">page3</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLongTitle">Profile Post</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <textarea placeholder="write here.." style="width: 100%;max-height: 200px;min-height: 100px;"></textarea>
-	        <input type="file" name="image">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" id="savechanges">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
 	</div>
-
-<script type="text/javascript">
-	$('#addpost').on('click', function(e){
-	  $('#myModal').modal('show');
-	});
-	$('#savechanges').on('click', function(event){
-  	console.log('ji');
-  	$('#myModal').modal('hide');
-  })
-</script>
 </body>
 </html>

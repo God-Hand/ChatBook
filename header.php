@@ -30,6 +30,31 @@
   .searcheduser:hover{
     background-color:#e0e0e0;
   }
+  .empty-70-height{
+    min-height: 70px;
+  }
+  .padding-5-circle{
+     background-color: #fff;
+     padding: 5px;
+     border-radius: 50%;
+  }
+  a:hover{
+    text-decoration: none;
+  }
+  .new-container{
+    padding: 0px 10px 0px 10px;
+    width: 100%;
+  }
+  .cover-img{
+    height: 100%;
+    width: 100%;"
+  }
+  .noMorePosts{
+    padding-left:10px;
+  }
+  .media-body{
+    margin-left: 5px;
+  }
 </style>
 
 <?php
@@ -92,6 +117,7 @@
     </ul>
   </div>
 </nav>
+<div class="empty-70-height"></div>
 
 <script>
   $(document).on('click', '.addfriend', function (e) {
