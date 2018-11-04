@@ -82,6 +82,15 @@
 			}
 		}
 
+		// return weather given username is a user or not
+		public function isUser($username) {
+			$query = mysqli_query($this->conn, "SELECT username FROM users WHERE username='$username'");
+			if(mysqli_num_rows($query) == 0)
+				return false;
+			else 
+				return true;
+		}
+
 		// add friend to user's friend_array
 		public function addFriend($friend_username) {
 			$user_friend_array_text = $this->getFriendArrayText();

@@ -29,10 +29,8 @@
 		}
 		.profile-card .profile-card-img-block .btn-over-img{
 			position: absolute;
-			bottom: -10px;
-	    right: -25px;
-		  transform: translate(-50%, -430%);
-		  -ms-transform: translate(-50%, -50%);
+			top: 10px;
+	    right: 10px;
 		}
 		
 		.profile-card .profile-card-img-block > .profile-info-box{
@@ -59,6 +57,11 @@
 <body>
 	<?php 
 		include("header.php");
+		if ($user->isUser($_REQUEST['profile_username'])){
+			$profile_user = new User($conn, $_REQUEST['profile_username']);
+		} else {
+			header('index.php');
+		}
 	?>
 	<div style="min-height:70px;">
 	</div>
@@ -68,18 +71,30 @@
 				<div class="card profile-card shadow p-3 mb-4 bg-white rounded">
 			    <div class="profile-card-img-block">
 			      <div class="profile-info-box bg-primary">
-			      	<?php echo $user->getBio(); ?>
+			      	<?php echo $profile_user->getBio(); ?>
 			      </div>
-			      <img class='rounded' src='<?php echo $user->getCoverPic(); ?>' style="height: 100%; width: 100%;">     
-			      <a href="#" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+			      <img class='rounded' src='<?php echo $profile_user->getCoverPic(); ?>' style="height: 100%; width: 100%;">
+			      <?php
+					  	if ($user->getUsername() == $profile_user->getUsername()) {
+								$friend_button = "<button class='btn-over-img btn btn-primary btn-sm'><i class='fa fa-pencil'></i>&nbsp;Edit</button>";
+							}else{
+								if ($user->isFriend($profile_user->getUsername())){
+									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn btn-danger btn-sm btn-over-img float-right addfriend' onclick='friend(this)' value='0' onmouseleave='friendAction(this)'>Remove Friend</button>";
+								} elseif ($request->didSendRequest($profile_user->getUsername()) == 1) {
+									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn btn-warning btn-sm btn-over-img float-right addfriend' onclick='friend(this)' value='2' onmouseleave='friendAction(this)'>Cancel Request</button>";
+								} else {
+									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn btn-success btn-sm btn-over-img float-right addfriend' onclick='friend(this)' value='1' onmouseleave='friendAction(this)'>Add Friend</button>";
+								}
+							}
+							echo $friend_button;
+					  ?>
 			    </div>
 			    <div class="profile-card-body pt-5 profile">
-			      <div class="float-left"><img src="<?php echo $user->getProfilePic(); ?>" alt="profile-image" style="background-color: #fff; padding: 10px; border-radius: 50%;"/></div>
-			      <h5 class="float-left text-white" style="position: relative;top: 70px; left:10px;"><?php echo $user->getFirstAndLastName(); ?></h5>
+			      <div class="float-left"><img src="<?php echo $profile_user->getProfilePic(); ?>" alt="profile-image" style="background-color: #fff; padding: 5px; border-radius: 50%;"/></div>
+			      <h5 class="float-left text-white" style="position: relative;top: 70px; left:10px;"><?php echo $profile_user->getFirstAndLastName(); ?></h5>
 			    </div>
 			    <div style="position: relative;top: -30px;height: 0px;">
-					  <button class="btn btn-success btn-sm float-right" style="margin-left: 5px;">Add Post</button>
-					  <button class="btn btn-success btn-sm float-right">Add Friend</button>
+					  <button class="btn btn-success btn-sm float-right" id="addpost">Add Post</button>
 					</div>
 			  </div>
 			</div>
@@ -112,5 +127,37 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Profile Post</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <textarea placeholder="write here.." style="width: 100%;max-height: 200px;min-height: 100px;"></textarea>
+	        <input type="file" name="image">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="savechanges">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+<script type="text/javascript">
+	$('#addpost').on('click', function(e){
+	  $('#myModal').modal('show');
+	});
+	$('#savechanges').on('click', function(event){
+  	console.log('ji');
+  	$('#myModal').modal('hide');
+  })
+</script>
 </body>
 </html>

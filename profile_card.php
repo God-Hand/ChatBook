@@ -57,7 +57,7 @@
       <a href="#" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
     </div>
     <div class="profile-card-body pt-5">
-      <a href="profile.php?profile_username='<?php echo $user->getUsername(); ?>'" style="text-decoration: none;" class="text-primary"><img src="<?php echo $user->getProfilePic(); ?>" alt="profile-image" class="profile border border-default" style="background-color: #fff; padding: 5px; border-radius: 50%;"/>
+      <a href="profile.php?profile_username=<?php echo $user->getUsername(); ?>" style="text-decoration: none;" class="text-primary"><img src="<?php echo $user->getProfilePic(); ?>" alt="profile-image" class="profile border border-default" style="background-color: #fff; padding: 5px; border-radius: 50%;"/>
       <center><h6><?php echo $user->getFirstAndLastName(); ?></h6></center></a>
       <table class="table">
       	<tr>

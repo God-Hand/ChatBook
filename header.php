@@ -43,12 +43,14 @@
   include('includes/classes/Post.php');
   include('includes/classes/PostLike.php');
   include('includes/classes/Comment.php');
+  include('includes/classes/FriendRequest.php');
   include('includes/classes/Notification.php');
   include('functions/text_filter.php');
   $user = new User($conn, $user_logged_in);
   $post = new Post($conn, $user_logged_in);
   $post_like = new PostLike($conn, $user_logged_in);
   $comment = new Comment($conn, $user_logged_in);
+  $request = new FriendRequest($conn, $user_logged_in);
   $notification = new Notification($conn, $user_logged_in);
 ?>
 <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-primary fixed-top">

@@ -1,17 +1,4 @@
 <?php
-
-	/**
-	* CREATE TABLE IF NOT EXISTS `friend_requests` (
-	*   `request_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-	*   `user_from` varchar(60) NOT NULL,
-	*   `user_to` varchar(60) NOT NULL,
-	*   `request_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	*   `viewed` tinyint(1) NOT NULL DEFAULT '0',
-	*   `accepted` tinyint(1) NOT NULL,
-	*   `deleted` tinyint(1) NOT NULL DEFAULT '0',
-	*   PRIMARY KEY (`request_id`)
-	* ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-	*/
 	class FriendRequest {
 		
 		private $conn;
