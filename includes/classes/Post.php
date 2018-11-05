@@ -10,10 +10,10 @@
 		}
 
 		// insert post by the user
-		public function addPost( $user_to, $body, $target_file='') {
+		public function addPost( $user_to, $body, $target_file='', $file_original_name) {
 			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES (DEFAULT, '$this->username', '$user_to', '$body', '$target_file', DEFAULT, DEFAULT, DEFAULT)");
 			if ($target_file != '') {
-		    return "The file ". $target_file. " has been uploaded.";
+		    return $file_original_name. " has been uploaded.";
 			}
 		}
 

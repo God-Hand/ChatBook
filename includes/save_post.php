@@ -13,7 +13,7 @@
   $post_body = secureText($conn, $post_body);
   echo $_FILES['post_img']['name'];
   if(!empty($_FILES['post_img'])){
-    $target_file = uploadImage($_FILES['post_img'], $_POST['username'], "/assets/images/post_pics/");
+    $target_file = uploadImage($_FILES['post_img'], $_POST['username'], "../assets/images/post_pics/");
     if (strpos($target_file, 'Sorry') !== false){
       if(!empty($post_body)) {
         $post->addPost('', $post_body);
@@ -24,7 +24,7 @@
                           ". $upload_message ."
                         </div>";
     } else {
-      $upload_message = $post->addPost('', $post_body, $target_file);
+      $upload_message = $post->addPost('', $post_body, $target_file, $_FILES['post_img']);
       $alert_message = "<div class='alert alert-success alert-dismissible'>
                           <button type='button' class='close' data-dismiss='alert'>&times;</button>
                           ". $upload_message ."
