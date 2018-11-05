@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Chatbook - settings</title>
+	<script src="assets/js/md5.js"></script>
 </head>
 <body>
 	<?php include("header.php"); ?>
@@ -181,6 +182,7 @@
                       <div class="form-group row">
                         <label for="password" class="col-4 col-form-label">Password</label> 
                         <div class="col-8">
+                          <input type="hidden" id="previouspassword" value='<?php echo $user->getPassword(); ?>'>
                           <input id="password" name="password" maxlength="100" placeholder="Password" class="form-control here border" onkeyup="checkPassword(this)" type="password">
                         </div>
                       </div>
@@ -198,7 +200,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button name="saveChangePassword" type="submit" class="btn btn-primary">Save</button>
+                          <button id="saveChangedPassword" type="submit" class="btn btn-primary">Save</button>
                         </div>
                       </div>
 		                </div>
@@ -210,7 +212,7 @@
 					        <div class="form-group row float-right" style="margin-right: 10px;">
 								    <button class="btn btn-danger" id='yesDeleteAccount'>Delete Account</button>
 								  </div><br/><br/>
-								  <p>After deleting your account, you won't have any kind of access to it. Also, no one can see your profile.</p>
+								  <p>After deleting your account, you won't have any kind of access to it. All Information related to your acccount will also be removed.</p>
 							  </div>
 
 							</div>
@@ -225,6 +227,8 @@
 </html>
 
 <script>
+
+	// change password actions
 	function checkPassword(obj){
 		var element = document.getElementById(obj.id);
 		if( obj.value.length < 8 || obj.value.length > 15){
@@ -243,6 +247,55 @@
 			element.classList.add('border-success');
 		}
 	}
+	$('#saveChangedPassword').click(function(){
+		var username = '<?php echo $user->getUsername(); ?>';
+		var previouspassword = $('#previouspassword').val();
+		var password = $('#password').val();
+		var newpassword = $('#newPassword').val();
+		var confirmpassword = $('#confirmPassword').val();
+    var hash = calcMD5(password);
+		if (password==0 || newpassword==0 || confirmpassword==0){
+			bootbox.alert("empty field");
+			if(password==0){
+				$('#password').addClass("border-danger");
+			}
+			if(newpassword==0){
+				$('#newPassword').addClass("border-danger");
+			}
+			if(confirmpassword==0){
+				$('#confirmPassword').addClass("border-danger");
+			}
+		} else if(hash != previouspassword){
+			bootbox.alert('Wrong Password');
+			if($('#password').hasClass('border-success')){
+				$('#password').removeClass('border-success');
+			}
+			$('#password').addClass('border-danger');
+			$('#password').val('');
+		} else if ($('#confirmPassword').val() != $('#newPassword').val()) {
+			bootbox.alert("Password Mismatch!");
+		} else if((password.length >= 8 && password.length <=15) && (newpassword.length >= 8 && newpassword.length <=15)){
+			$.post("includes/change_password.php",{
+			username : username,
+			password : password,
+			newpassword : newpassword
+			},function(data){
+				$('#previouspassword').val(data);
+				$('#password').val('');
+				$('#newPassword').val('');
+				$('#confirmPassword').val('');
+				$('#password').removeClass("border-success");
+				$('#newPassword').removeClass("border-success");
+				$('#confirmPassword').removeClass("border-success");
+				bootbox.alert("Password changed successfully...");
+			});
+		} else {
+			bootbox.alert("Password must be more than equal to 8 and less than equal to 15 Characters");
+		}
+	});
+
+
+	// delete account action
 	$('#yesDeleteAccount').click(function(){
 		bootbox.confirm({
 	  	message: "Are you sure?",

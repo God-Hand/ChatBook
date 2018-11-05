@@ -21,6 +21,11 @@
 		}
 
 		// return user bio
+		public function getPassword() {
+			return $this->user_details['password'];
+		}
+
+		// return user bio
 		public function getBio() {
 			return $this->user_details['bio'];
 		}
@@ -216,6 +221,17 @@
 			} else {
 				return false;
 			}
+		}
+
+		// change user password
+		public function changePassword($old_password, $new_password) {
+			$old_password = md5($old_password);
+			$new_password = md5($new_password);
+			$query = mysqli_query($this->conn, "UPDATE users SET password='$new_password' WHERE username='$this->username' and password='$old_password'");
+			if($query){
+				return $new_password;
+			}
+			return false;
 		}
 
 		// return number of posts by the user
