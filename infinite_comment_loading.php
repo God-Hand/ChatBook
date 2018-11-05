@@ -9,6 +9,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 	<style src="assets/css/comment.css"></style>
 	<style type="text/css">
+		div {
+	    word-wrap: break-word;
+		}
 	  .form-group{
 	    margin-bottom: 0px;
 	  }

@@ -7,6 +7,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
 <style type="text/css">
+  div {
+    word-wrap: break-word;
+  }
   .form-group, .table{
     margin-bottom: 0px;
   }
@@ -121,7 +124,7 @@
           <i class="fa fa-user-circle-o"></i>&nbsp;Username
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#"><i class="fa fa-cog"></i>&nbsp;Settings</a>
+          <a class="dropdown-item" href="settings.php"><i class="fa fa-cog"></i>&nbsp;Settings</a>
           <a class="dropdown-item" href="sign_out.php"><i class="fa fa-sign-out"></i>&nbsp;Sign-out</a>
         </div>
       </li>

@@ -20,7 +20,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <textarea placeholder="write here.." id='postBody'></textarea>
+        <textarea placeholder="write here.." id='postBody' maxlength="60000"></textarea>
         <input type="file" id="postImage"  class="form-control-file btn float-left" accept="image/*">
         <input type="hidden" id='userTo' value='<?php
                                                   if ($user->getUsername()==$profile_user->getUsername()){
