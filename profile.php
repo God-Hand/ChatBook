@@ -95,7 +95,7 @@
 					  ?>
 			    </div>
 			    <div class="profile-card-body pt-5 profile">
-			      <div class="float-left"><img class="padding-5-circle"src="<?php echo $profile_user->getProfilePic(); ?>" alt="profile-image"/></div>
+			      <div class="float-left"><img class="padding-5-circle"src="<?php echo $profile_user->getProfilePic(); ?>" style="width: 150px;" alt="profile-image"/></div>
 			      <h5 class="float-left text-white profile-name"><?php echo $profile_user->getFirstAndLastName(); ?></h5>
 			    </div>
 			    <div class='post-button'>

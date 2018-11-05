@@ -150,24 +150,24 @@
                         <label for="uploadProfilePic" class="col-sm-4 col-form-label">Profile Image</label> 
                         <div class="col-sm-8">
                           <input id="uploadProfilePic" name="uploadProfilePic" class="form-control-file here" type="file" style="padding-top: 5px;" accept="image/*">
+        									<input type="hidden" id='uploadedProfilePic' value=''>
                         </div>
-                        <div class="col-sm-12" id="uploadedProfilePic"></div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button name="uploadProfilePicBtn" type="submit" class="btn btn-success float-right">Upload</button>
+                          <button id="uploadProfilePicBtn" type="button" class="btn btn-success float-right">Upload</button>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="uploadCoverPic" class="col-sm-4 col-form-label">Cover Image</label> 
                         <div class="col-sm-8">
                           <input id="uploadCoverPic" name="uploadCoverPic" class="form-control-file here" type="file" style="padding-top: 5px;" accept="image/*">
+        									<input type="hidden" id='uploadedCoverPic' value=''>
                         </div>
-                        <div class="col-sm-12" id="uploadedCoverPic"></div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button name="uploadCoverPicBtn" type="submit" class="btn btn-success float-right">Upload</button>
+                          <button id="uploadCoverPicBtn" type="button" class="btn btn-success float-right">Upload</button>
                         </div>
                       </div>
 		                </div>
@@ -226,7 +226,95 @@
 </body>
 </html>
 
+
+<!--- upload image model --->
+<div id="myUploadProfilePicModel" z-index="-2" class="modal" role="dialog">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Crop & Upload Image</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="text-center">
+        <div id="uploadedProfilePicDemo"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" id="cropProfilePic">Upload Image</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+   </div>
+  </div>
+</div>
+
 <script>
+
+	// upload images
+  $(document).ready(function(){
+   $image_crop = $('#uploadedProfilePicDemo').croppie({
+      enableExif: true,
+      viewport: {
+        width:200,
+        height:200,
+        type:'square'
+      },
+      boundary:{
+        width:300,
+        height:300
+      }
+    });
+    $('#uploadProfilePic').on('change', function(){
+      var fileExtension = ['jpeg', 'jpg', 'png'];
+      if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        alert("Only formats are allowed : "+fileExtension.join(', '));
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          $image_crop.croppie('bind', {
+            url: event.target.result
+          }).then(function(){
+            console.log('jQuery bind complete');
+          });
+        }
+        reader.readAsDataURL(this.files[0]);
+        $('#myUploadProfilePicModel').modal('show');
+      }
+    });
+    $('#cropProfilePic').click(function(event){
+      $image_crop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+      }).then(function(response){
+        $.ajax({
+          url:"upload.php",
+          type: "POST",
+          data:{
+            image: response,
+            targetDir : "assets/images/profile_pics/",
+            username : "<?php echo $user->getUsername(); ?>"
+          },
+          success:function(data) {
+            $('#myUploadProfilePicModel').modal('hide');
+            $('#uploadedProfilePic').val(data);
+          }
+        });
+      })
+    });
+    $('#uploadProfilePicBtn').on('click', function(event){
+	    if ($('#uploadedProfilePic').val()){
+	      $.post("includes/change_profile_pic.php", {
+	        username : '<?php echo $user->getUsername(); ?>',
+	        userTo : $('#userTo').val(),
+	        postBody : $('#postBody').val(),
+	        uploadedProfilePic : $('#uploadedProfilePic').val()}
+	        , function(data) {
+	          $('#uploadProfilePic').val('');
+	          $('#uploadedProfilePic').val('');
+	      })
+	    }
+	  });
+  });
 
 	// change password actions
 	function checkPassword(obj){

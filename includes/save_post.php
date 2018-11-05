@@ -4,7 +4,6 @@
   require 'classes/User.php';
   require '../functions/timeframe_function.php';
   require '../functions/text_filter.php';
-  require '../functions/upload.php';
 
   if(isset($_POST['username']) and (isset($_POST['imageLocation']) or isset($_POST['postBody']))){
     $post = new Post($conn, $_POST['username']);

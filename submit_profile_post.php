@@ -78,7 +78,7 @@
       }
     });
     $('#postImage').on('change', function(){
-      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+      var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
       if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
         alert("Only formats are allowed : "+fileExtension.join(', '));
       } else {
@@ -105,7 +105,7 @@
           data:{
             image: response,
             targetDir : "assets/images/post_pics/",
-            username : "<?php $user->getUsername(); ?>"
+            username : "<?php echo $user->getUsername(); ?>"
           },
           success:function(data) {
             $('#myUploadImageModel').modal('hide');
