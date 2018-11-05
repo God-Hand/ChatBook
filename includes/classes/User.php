@@ -15,6 +15,11 @@
 			return $this->username;
 		}
 
+		// return user first name
+		public function getFirstName() {
+			return $this->user_details['first_name'];
+		}
+
 		// return user's "first_name last_name" text format
 		public function getFirstAndLastName() {
 			return $this->user_details['first_name'] . " " . $this->user_details['last_name'];
@@ -38,6 +43,11 @@
 		// return profile_pic
 		public function getProfilePic() {
 			return $this->user_details['profile_pic'];
+		}
+
+		// return email
+		public function getEmail(){
+			return $this->user_details['email'];
 		}
 
 		// return first_name, last_name and profile_pic
@@ -154,6 +164,20 @@
 			return mysqli_fetch_array($query);
 		}
 
+		// set user first name
+		public function setFirstName($first_name)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET first_name='$first_name' WHERE username='$this->username'");
+		}
+
+		// set user last name
+		public function setLastName($last_name)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET last_name='$last_name' WHERE username='$this->username'");
+		}
+
+		// set user first name
+		public function setBio($bio)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET bio='$bio' WHERE username='$this->username'");
+		}
 
 		// upload cover_pic of user
 	  public function uploadCoverPic($filepath) {
@@ -175,7 +199,25 @@
 			}
 		}
 
-		// change user password
+		public function checkEmailIdExists($email) {
+			$query = mysqli_query($this->conn, "SELECT email FROM users WHERE email='$email' and deactivate_account=0");
+			if (mysqli_num_rows($query) == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// change email
+		public function changeEmail($email) {
+			if($this->checkEmailIdExists($email)){
+				return 'no';
+			} else {
+				$query = mysqli_query($this->conn, "UPDATE users SET email='$email' WHERE username='$this->username'");
+			}
+		}
+
+		// change password
 		public function changePassword($old_password, $new_password) {
 			$old_password = md5($old_password);
 			$new_password = md5($new_password);
