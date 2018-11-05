@@ -280,7 +280,7 @@
 		var firstname = $('#firstName').val();
 		var lastname = $('#lastName').val();
 		var email = $('#email').val();
-		var bio = $('#Bio').val();
+		var bio = $('#bio').val();
 		if(validateEmail(email) || email.length==0){
 			if($('#email').hasClass('border-danger')){
 				$('#email').removeClass('border-danger');
