@@ -46,28 +46,26 @@
 	}
 </style>
 
-<div class="col-md-4">
-	<div class="card profile-card shadow p-3 mb-4 bg-white rounded">
-    <div class="profile-card-img-block">
-      <div class="profile-info-box bg-primary">
-      	<?php echo $user->getBio(); ?>
-      </div>
-      <img class='rounded cover-img' src='<?php echo $user->getCoverPic(); ?>'>     
-      <a href="#" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+<div class="card profile-card shadow p-3 mb-4 bg-white rounded">
+  <div class="profile-card-img-block">
+    <div class="profile-info-box bg-primary">
+    	<?php echo $user->getBio(); ?>
     </div>
-    <div class="profile-card-body pt-5">
-      <a href="profile.php?profile_username=<?php echo $user->getUsername(); ?>" class="text-primary"><img src="<?php echo $user->getProfilePic(); ?>" alt="profile-image" class="profile border border-default padding-5-circle"/>
-      <center><h6><?php echo $user->getFirstAndLastName(); ?></h6></center></a>
-      <table class="table">
-      	<tr>
-      		<td><i class="fa fa-users"></i> &nbsp;Friends</td>
-      		<td><?php echo $user->getNumOfFriends(); ?></td>
-      	</tr>
-      	<tr>
-      		<td><i class="fa fa-paperclip"></i> &nbsp;Posts</td>
-      		<td id='totalpostsCounts'><?php echo $user->getNumOfPosts(); ?></td>
-      	</tr>
-      </table>
-    </div>
+    <img class='rounded cover-img' src='<?php echo $user->getCoverPic(); ?>'>     
+    <a href="#" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+  </div>
+  <div class="profile-card-body pt-5">
+    <a href="profile.php?profile_username=<?php echo $user->getUsername(); ?>" class="text-primary"><img src="<?php echo $user->getProfilePic(); ?>" alt="profile-image" class="profile border border-default padding-5-circle"/>
+    <center><h6><?php echo $user->getFirstAndLastName(); ?></h6></center></a>
+    <table class="table">
+    	<tr>
+    		<td><i class="fa fa-users"></i> &nbsp;Friends</td>
+    		<td><?php echo $user->getNumOfFriends(); ?></td>
+    	</tr>
+    	<tr>
+    		<td><i class="fa fa-paperclip"></i> &nbsp;Posts</td>
+    		<td id='totalpostsCounts'><?php echo $user->getNumOfPosts(); ?></td>
+    	</tr>
+    </table>
   </div>
 </div>

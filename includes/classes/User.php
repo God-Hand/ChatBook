@@ -211,6 +211,16 @@
 		  return "Sorry, there was an error while uploading your file.";
 		}
 
+		//deactivate_account of that user
+		public function closeAccount() {
+			$query = mysqli_query($this->conn, "UPDATE users SET deactivate_account=1 WHERE username='$this->username'");
+			if ($query){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		// return number of posts by the user
 		public function getNumOfPosts() {
 			$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE user_from='$this->username' and deleted=0");

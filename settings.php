@@ -7,48 +7,26 @@
 	<?php include("header.php"); ?>
 	<div role="main" class="container">
 		<div class="row">
-			<?php
-				include("profile_card.php");
-			?>
-
-			<style>
-				button{
-					text-align: left;
-				}
-				.form-group{
-					margin-bottom: 5px;
-				}
-			</style>
+			<div class="col-md-4">
+				<?php include("profile_card.php"); ?>
+			</div>
+<style>
+	button{
+		text-align: left;
+	}
+	.form-group{
+		margin-bottom: 5px;
+	}
+	.card-body{
+		min-height: 300px;
+	}
+</style>
 			<div class="col-md-8">
 				<div class="container card">
-
 					<div class="row">
 				  	<button class="btn btn-default btn-block float-left personalInformation" type="button" data-toggle="collapse" data-target="#personalInformation" aria-expanded="false" aria-controls="personalInformation" style="border-radius:0px;text-align: left;"><i class="fa fa-edit"></i>&nbsp;Edit Personal Info</button>
 					  <div class="collapse multi-collapse new-container" id="personalInformation">
 				      <div class="card-body">
-				      	<form>
-								  <div class="form-group row">
-								    <label for="originalPassword" class="col-md-3 col-form-label">Password</label>
-								    <div class="col-md-9">
-								      <input type="email" class="form-control" id="originalPassword" placeholder="Password" required>
-								    </div>
-								  </div>
-								  <div class="form-group row">
-								    <label for="newPassword" class="col-md-3 col-form-label">New Password</label>
-								    <div class="col-md-9">
-								      <input type="password" class="form-control" id="newPassword" placeholder="New Password" required>
-								    </div>
-								  </div>
-								  <div class="form-group row">
-								    <label for="confirnNewPassword" class="col-md-3 col-form-label">Confirn New Password</label>
-								    <div class="col-md-9">
-								      <input type="password" class="form-control" id="confirnNewPassword" placeholder="Confirn New Password" required>
-								    </div>
-								  </div>
-								  <div class="form-group row float-right">
-								    <button class="btn btn-primary" id='saveNewPassword'>Save Changes</button>
-								  </div> 
-								</form>
 				      </div>
 				    </div>
 				  </div>
@@ -134,8 +112,22 @@
 		    }
 		  },
 		  callback: function (result) {
-	      console.log('accountDeleted: ' + result);
-		  }
+	      if(result){
+					$.ajax({
+			      type: "POST",
+			      url: "includes/delete_account.php",
+			      data: {
+			        username : '<?php echo $user->getUsername(); ?>',
+			      },
+			      success: function(result) {
+			      	window.location.href = "sign_out.php?";
+			      },
+			      error: function(result) {
+			        alert('error');
+			      }
+			    });
+	      }
+	    }
 		});
 	})
 </script>

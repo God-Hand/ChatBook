@@ -9,10 +9,10 @@
 	<?php include("header.php"); ?>
 	<div role="main" class="container">
 		<div class="row">
-			<?php
-				include("profile_card.php");
-				include("infinite_post_loading.php");
-			?>
+			<div class="col-md-4">
+				<?php include("profile_card.php"); ?>
+			</div>
+			<?php include("infinite_post_loading.php"); ?>
 		</div>
 	</div>
 </body>

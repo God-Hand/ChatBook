@@ -72,12 +72,6 @@
 </style>
 
 <?php
-  include('config/config.php');
-  if (isset($_SESSION['user_logged_in'])){
-    $user_logged_in = $_SESSION['user_logged_in'];
-  } else {
-    header("Location: registration.php");
-  }
   include('includes/classes/User.php');
   include('includes/classes/Post.php');
   include('includes/classes/PostLike.php');
@@ -85,12 +79,19 @@
   include('includes/classes/FriendRequest.php');
   include('includes/classes/Notification.php');
   include('functions/text_filter.php');
-  $user = new User($conn, $user_logged_in);
-  $post = new Post($conn, $user_logged_in);
-  $post_like = new PostLike($conn, $user_logged_in);
-  $comment = new Comment($conn, $user_logged_in);
-  $request = new FriendRequest($conn, $user_logged_in);
-  $notification = new Notification($conn, $user_logged_in);
+  include('config/config.php');
+  if (isset($_SESSION['user_logged_in'])){
+    $user_logged_in = $_SESSION['user_logged_in'];
+    $user = new User($conn, $_SESSION['user_logged_in']);
+  } else {
+    header("Location: registration.php");
+  }
+  $user = new User($conn, $user->getUsername());
+  $post = new Post($conn, $user->getUsername());
+  $post_like = new PostLike($conn, $user->getUsername());
+  $comment = new Comment($conn, $user->getUsername());
+  $request = new FriendRequest($conn, $user->getUsername());
+  $notification = new Notification($conn, $user->getUsername());
 ?>
 <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <a class="navbar-brand" href="index.php">ChatBook</a>
@@ -160,12 +161,12 @@
     }
   }
   function friendAction(obj){
-   $.post("includes/add_friend.php", {action:obj.value, name:obj.id, username:'<?php echo $user_logged_in; ?>'}, function(data) {
+   $.post("includes/add_friend.php", {action:obj.value, name:obj.id, username:'<?php echo $user->getUsername(); ?>'}, function(data) {
     console.log('hi');
    })
   }
   function SearchUsers(obj){
-    var username = '<?php echo $user_logged_in; ?>';
+    var username = '<?php echo $user->getUsername(); ?>';
     $.post("includes/search.php", {name:obj.value, username: username}, function(data) {
       $('.searchresult').empty();
       if(data != ''){
