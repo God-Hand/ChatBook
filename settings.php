@@ -8,8 +8,16 @@
 	<div role="main" class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<?php include("profile_card.php"); ?>
+				<div class="list-group ">
+				  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+				    <a class="list-group-item list-group-item-action active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+				    <a class="list-group-item list-group-item-action" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+				    <a class="list-group-item list-group-item-action" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+				  </div>
+          <br>
+        </div> 
 			</div>
+
 <style>
 	button{
 		text-align: left;
@@ -21,64 +29,28 @@
 		min-height: 300px;
 	}
 </style>
+
 			<div class="col-md-8">
 				<div class="container card">
 					<div class="row">
-				  	<button class="btn btn-default btn-block float-left personalInformation" type="button" data-toggle="collapse" data-target="#personalInformation" aria-expanded="false" aria-controls="personalInformation" style="border-radius:0px;text-align: left;"><i class="fa fa-edit"></i>&nbsp;Edit Personal Info</button>
-					  <div class="collapse multi-collapse new-container" id="personalInformation">
-				      <div class="card-body">
-				      </div>
-				    </div>
+			      <div class="card-body">
+							<div class="tab-content" id="nav-tabContent">
+							  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">page1</div>
+							  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">page2</div>
+							  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">page3</div>
+							</div>
+			      </div>
 				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
 
-				  <div class="row">
-				  	<button class="btn btn-default btn-block float-left changPassword" type="button" data-toggle="collapse" data-target="#changPassword" aria-expanded="false" aria-controls="changPassword" style="border-radius:0px;text-align: left;"><i class="fa fa-edit"></i>&nbsp;Edit Password</button>
-					  <div class="collapse multi-collapse new-container" id="changPassword">
-				      <div class="card-body">
-				       	<form>
-								  <div class="form-group row">
-								    <label for="originalPassword" class="col-md-3 col-form-label">Password</label>
-								    <div class="col-md-9">
-								      <input type="email" class="form-control" id="originalPassword" placeholder="Password" required>
-								    </div>
-								  </div>
-								  <div class="form-group row">
-								    <label for="newPassword" class="col-md-3 col-form-label">New Password</label>
-								    <div class="col-md-9">
-								      <input type="password" class="form-control" id="newPassword" placeholder="New Password" required>
-								    </div>
-								  </div>
-								  <div class="form-group row">
-								    <label for="confirnNewPassword" class="col-md-3 col-form-label">Confirn New Password</label>
-								    <div class="col-md-9">
-								      <input type="password" class="form-control" id="confirnNewPassword" placeholder="Confirn New Password" required>
-								    </div>
-								  </div>
-								  <div class="form-group row float-right">
-								    <button class="btn btn-primary" id='saveNewPassword'>Save Changes</button>
-								  </div> 
-								</form>
-				      </div>
-				    </div>
-				  </div>
-
-					<div class="row">
-				  	<button class="btn btn-default btn-block float-left accountInformation" type="button" data-toggle="collapse" data-target="#accountInformation" aria-expanded="false" aria-controls="accountInformation" style="border-radius:0px;text-align: left;"><i class="fa fa-edit"></i>&nbsp;accountInformation</button>
-					  <div class="collapse multi-collapse new-container" id="accountInformation">
-				      <div class="card-body">
-				        accountInformation
-				      </div>
-				    </div>
-				  </div>
-				  <div class="row">
-				  	<button class="btn btn-default btn-block float-left uploadPics" type="button" data-toggle="collapse" data-target="#uploadPics" aria-expanded="false" aria-controls="uploadPics" style="border-radius:0px;text-align: left;"><i class="fa fa-cloud-upload"></i>&nbsp;uploadPics</button>
-					  <div class="collapse multi-collapse new-container" id="uploadPics">
-				      <div class="card-body">
-				        uploadPics
-				      </div>
-				    </div>
-				  </div>
-					<div class="row">
+<script>
+	/*
+	<div class="row">
 				  	<button class="btn btn-default btn-block float-left deleteAccount" type="button" data-toggle="collapse" data-target="#deleteAccount" aria-expanded="false" aria-controls="deleteAccount" style="border-radius:0px;text-align: left;"><i class="fa fa-trash"></i>&nbsp;deleteAccount</button>
 					  <div class="collapse multi-collapse new-container" id="deleteAccount">
 				      <div class="card-body">
@@ -89,15 +61,7 @@
 				      </div>
 				    </div>
 				  </div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
-</html>
-
-<script>
-	$('.personalInformation').click();
+	*/
 	$('#yesDeleteAccount').click(function(){
 		bootbox.confirm({
 	  	message: "Are you sure?",

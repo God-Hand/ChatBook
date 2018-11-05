@@ -1,7 +1,4 @@
 <?php
-	/**
-	 * 
-	 */
 	class User {
 		private $conn;
 		private $username;
@@ -225,16 +222,6 @@
 		public function getNumOfPosts() {
 			$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE user_from='$this->username' and deleted=0");
 			return mysqli_num_rows($query);
-		}
-
-		// add login_time of user
-		public function setLogInTime() {
-			$query = mysqli_query($this->conn, "INSERT INTO user_login_durations (username) VALUES ('$this->username')");
-		}
-
-		// update logout_time of user for last login
-		public function setLogOutTime() {
-			$query = mysqli_query($this->conn, "UPDATE user_login_durations SET logout_time=NOW() WHERE username='$this->username' ORDER BY id DESC LIMIT 1)");
 		}
 	}
 ?>

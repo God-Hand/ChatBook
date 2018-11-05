@@ -1,5 +1,8 @@
 <?php
-	include('config/config.php');
+	require 'config/config.php';
+  require 'includes/classes/Register.php';
+  require 'includes/classes/User.php';
+  
 	include('form_handlers/registration_handler.php');
 	if (isset($_SESSION['user_logged_in'])){
 		header("Location: index.php");
