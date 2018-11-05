@@ -10,11 +10,8 @@
 		}
 
 		// insert post by the user
-		public function addPost( $user_to, $body, $target_file='', $file_original_name) {
+		public function addPost( $user_to, $body, $target_file='') {
 			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES (DEFAULT, '$this->username', '$user_to', '$body', '$target_file', DEFAULT, DEFAULT, DEFAULT)");
-			if ($target_file != '') {
-		    return $file_original_name. " has been uploaded.";
-			}
 		}
 
 		// get the post by its id

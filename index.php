@@ -7,7 +7,7 @@
 </head>
 <body>
 	<?php include("header.php"); ?>
-	<div role="main" class="new-container">
+	<div role="main" class="container">
 		<div class="row">
 			<?php
 				include("profile_card.php");

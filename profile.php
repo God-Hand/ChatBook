@@ -70,7 +70,7 @@
 			header('index.php');
 		}
 	?>
-	<div role="main" class="new-container">
+	<div role="main" class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card profile-card shadow p-3 mb-4 bg-white rounded">
