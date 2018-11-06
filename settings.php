@@ -47,19 +47,19 @@
                       <div class="form-group row">
                         <label for="firstName" class="col-4 col-form-label">First Name</label> 
                         <div class="col-8">
-                          <input id="firstName" name="firstName" maxlength="20" placeholder="First Name" class="form-control here" type="text">
+                          <input id="firstName" name="firstName" maxlength="25" placeholder="First Name" onkeyup="isValid(this)" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="lastName" class="col-4 col-form-label">Last Name</label> 
                         <div class="col-8">
-                          <input id="lastName" name="lastName" maxlength="20" placeholder="Last Name" class="form-control here" type="text">
+                          <input id="lastName" name="lastName" maxlength="25" placeholder="Last Name" onkeyup="isValid(this)" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="email" class="col-4 col-form-label">Email</label> 
                         <div class="col-8">
-                          <input id="email" name="email" maxlength="100" placeholder="Email" class="form-control here" type="email">
+                          <input id="email" name="email" maxlength="100" placeholder="Email" class="form-control here border" type="email">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -70,7 +70,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button name="savAccountInfo" type="submit" class="btn btn-primary">Save</button>
+                          <button id="saveAccountInfoBtn" type="submit" class="btn btn-primary">Save</button>
                         </div>
                       </div>
 		                </div>
@@ -111,25 +111,25 @@
                       <div class="form-group row">
                         <label for="city" class="col-4 col-form-label">City</label> 
                         <div class="col-8">
-                          <input id="city" name="city" maxlength="100" placeholder="City" class="form-control here" type="text">
+                          <input id="city" name="city" maxlength="100" placeholder="City" onkeyup="isValid(this)" class="form-control here" type="text">
                         </div>
                       </div> 
                       <div class="form-group row">
                         <label for="country" class="col-4 col-form-label">Country</label> 
                         <div class="col-8">
-                          <input id="country" name="country" maxlength="100" placeholder="Country" class="form-control here" type="text">
+                          <input id="country" name="country" maxlength="100" placeholder="Country" onkeyup="isValid(this)" class="form-control here" type="text">
                         </div>
                       </div>    
                       <div class="form-group row">
                         <label for="school" class="col-4 col-form-label">School</label> 
                         <div class="col-8">
-                          <input id="school" name="school" maxlength="255" placeholder="School" class="form-control here" type="text">
+                          <input id="school" name="school" maxlength="255" placeholder="School" onkeyup="isValid(this)" class="form-control here" type="text">
                         </div>
                       </div>                        
                       <div class="form-group row">
                         <label for="college" class="col-4 col-form-label">College</label> 
                         <div class="col-8">
-                          <input id="college" name="college" maxlength="255" placeholder="College" class="form-control here" type="text">
+                          <input id="college" name="college" maxlength="255" placeholder="College" onkeyup="isValid(this)" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -200,7 +200,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button id="saveChangedPassword" type="submit" class="btn btn-primary">Save</button>
+                          <button id="saveChangedPasswordBtn" type="submit" class="btn btn-primary">Save</button>
                         </div>
                       </div>
 		                </div>
@@ -210,7 +210,7 @@
 							  <div class="tab-pane fade" id="deleteAccount" role="tabpanel" aria-labelledby="nav-contact-tab">
 							  	<div class="text-danger">Do yo want to remove your account?</div>
 					        <div class="form-group row float-right" style="margin-right: 10px;">
-								    <button class="btn btn-danger" id='yesDeleteAccount'>Delete Account</button>
+								    <button class="btn btn-danger" id='yesDeleteAccountBtn'>Delete Account</button>
 								  </div><br/><br/>
 								  <p>After deleting your account, you won't have any kind of access to it. All Information related to your acccount will also be removed.</p>
 							  </div>
@@ -270,10 +270,52 @@
 </div>
 
 <script>
+	// edit account info
+	function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	  return re.test(String(email).toLowerCase());
+	}
+	$('#saveAccountInfoBtn').click(function(){
+		var username = '<?php echo $user->getUsername(); ?>';
+		var firstname = $('#firstName').val();
+		var lastname = $('#lastName').val();
+		var email = $('#email').val();
+		var bio = $('#bio').val();
+		if(validateEmail(email) || email.length==0){
+			if($('#email').hasClass('border-danger')){
+				$('#email').removeClass('border-danger');
+			}
+			$.post("includes/change_account_info.php",{
+			username : username,
+			firstname : firstname,
+			lastname : lastname,
+			email : email,
+			bio : bio
+			},function(data){
+				if(data=='no'){
+					bootbox.alert('This email_id belongs to another account.');
+					$('#email').addClass('border-danger');
+				} else {
+					$('#firstName').val('');
+					$('#lastName').val('');
+					$('#email').val('');
+					$('#bio').val('');
+				}
+			});
+		} else {
+			$('#email').addClass('border-danger');
+			bootbox.alert("Invalid Email format.");
+		}
+	});
+
+	// edit personal info
+	function isValid(obj){ 
+    obj.value = obj.value.replace(/[^a-zA-Z0-9@_-]+/g, "");
+	}
 
 	// upload images
   $(document).ready(function(){
-   $image_crop = $('#uploadedProfilePicDemo').croppie({
+   $proileimagecrop = $('#uploadedProfilePicDemo').croppie({
       enableExif: true,
       viewport: {
         width:200,
@@ -292,7 +334,7 @@
       } else {
         var reader = new FileReader();
         reader.onload = function (event) {
-          $image_crop.croppie('bind', {
+          $proileimagecrop.croppie('bind', {
             url: event.target.result
           }).then(function(){
             console.log('jQuery bind complete');
@@ -303,7 +345,7 @@
       }
     });
     $('#cropProfilePic').click(function(event){
-      $image_crop.croppie('result', {
+      $proileimagecrop.croppie('result', {
         type: 'canvas',
         size: 'viewport'
       }).then(function(response){
@@ -334,7 +376,7 @@
 	    }
 	  });
 
-	 $image_crop = $('#uploadedCoverPicDemo').croppie({
+	 $coverimagecrop = $('#uploadedCoverPicDemo').croppie({
       enableExif: true,
       viewport: {
         width:200,
@@ -342,7 +384,7 @@
         type:'square'
       },
       boundary:{
-        width:400,
+        width:300,
         height:150
       }
     });
@@ -353,7 +395,7 @@
       } else {
         var reader = new FileReader();
         reader.onload = function (event) {
-          $image_crop.croppie('bind', {
+          $coverimagecrop.croppie('bind', {
             url: event.target.result
           }).then(function(){
             console.log('jQuery bind complete');
@@ -364,7 +406,7 @@
       }
     });
     $('#cropCoverPic').click(function(event){
-      $image_crop.croppie('result', {
+      $coverimagecrop.croppie('result', {
         type: 'canvas',
         size: 'viewport'
       }).then(function(response){
@@ -396,6 +438,7 @@
 	  });
   });
 
+
 	// change password actions
 	function checkPassword(obj){
 		var element = document.getElementById(obj.id);
@@ -415,7 +458,7 @@
 			element.classList.add('border-success');
 		}
 	}
-	$('#saveChangedPassword').click(function(){
+	$('#saveChangedPasswordBtn').click(function(){
 		var username = '<?php echo $user->getUsername(); ?>';
 		var previouspassword = $('#previouspassword').val();
 		var password = $('#password').val();
@@ -458,13 +501,13 @@
 				bootbox.alert("Password changed successfully...");
 			});
 		} else {
-			bootbox.alert("Password must be more than equal to 8 and less than equal to 15 Characters");
+			bootbox.alert("Password must be in between 8 to 15 Characters");
 		}
 	});
 
 
 	// delete account action
-	$('#yesDeleteAccount').click(function(){
+	$('#yesDeleteAccountBtn').click(function(){
 		bootbox.confirm({
 	  	message: "Are you sure?",
 	    buttons: {

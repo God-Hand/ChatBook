@@ -15,6 +15,11 @@
 			return $this->username;
 		}
 
+		// return user first name
+		public function getFirstName() {
+			return $this->user_details['first_name'];
+		}
+
 		// return user's "first_name last_name" text format
 		public function getFirstAndLastName() {
 			return $this->user_details['first_name'] . " " . $this->user_details['last_name'];

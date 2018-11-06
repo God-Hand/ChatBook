@@ -122,7 +122,7 @@
     <ul class="navbar-nav nav-flex-icons">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-user-circle-o"></i>&nbsp;Username
+          <i class="fa fa-user-circle-o"></i>&nbsp;<?php echo $user->getFirstName(); ?>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="settings.php"><i class="fa fa-cog"></i>&nbsp;Settings</a>
