@@ -47,7 +47,7 @@
 		}
 	</style>
 </head>
-<body style="background-color: #f3f3f3">
+<body style="background-color: #f9f9f9">
 	<div class="comment_area">
   </div>
   <img id="loading" src="assets/images/icons/loading.gif">

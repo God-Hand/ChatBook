@@ -115,10 +115,13 @@
         <a class="nav-link" href="#"><i class="fa fa-envelope"></i>&nbsp;Messages</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-bell"></i>&nbsp;Notifications</a>
+        <a class="nav-link" href="#"><i class="fa fa-bell"></i>&nbsp;Notifications
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="friend_request.php"><i class="fa fa-users"></i>&nbsp;Friend Request</a>
+        <a class="nav-link" href="friend_request.php"><i class="fa fa-users"></i>&nbsp;Friend Request
+          <span class="badge badge-pill badge-danger"><?php echo $request->getFriendRequestsCount(); ?></span>
+        </a>
       </li>
     </ul>
     <ul class="navbar-nav nav-flex-icons">

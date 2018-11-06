@@ -16,12 +16,6 @@
 			return mysqli_num_rows($query);
 		}
 
-		// check weather user receive friend request of a specific user
-		public function didReceiveRequest($user_from) {
-			$check_request_query = mysqli_query($this->conn, "SELECT viewed FROM friend_requests WHERE user_to='$this->username' AND user_from='$user_from' AND viewed=1 AND deleted=0");
-			return $row['viewed'];
-		}
-
 		// check weather user send friend request to a specific user
 		public function didSendRequest($user_to) {
 			$check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND user_from='$this->username' AND deleted=0");
@@ -47,7 +41,7 @@
 
 		// cancel request
 		public function cancelRequest($user_to) {
-			$query = mysqli_query($this->conn, "UPDATE friend_requests SET accepted=0, deleted=1 WHERE user_from='$this->username' AND user_to='$user_to' AND deleted=0");
+			$query = mysqli_query($this->conn, "UPDATE friend_requests SET deleted=1 WHERE user_from='$this->username' AND user_to='$user_to' AND deleted=0");
 			return $query;
 		}
 
@@ -57,20 +51,14 @@
 			return $query;
 		}
 
-		// return all request
-		public function getAllFriendRequests() {
-			$query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE ( user_to='$this->username' OR user_from='$this->username') AND deleted=0");
+		// return all requests for or by user
+		public function getAllFriendRequests($last_request_id, $limit) {
+			if ($last_request_id == 0){
+				$query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE deleted=0 AND accepted IS NULL AND user_to='$this->username' ORDER BY request_id DESC LIMIT $limit");
+			} else {
+				$query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE request_id<'last_request_id' AND deleted=0 AND accepted IS NULL AND user_to='$this->username' ORDER BY request_id DESC LIMIT $limit");
+			}
 			return $query;
-		}
-
-		// user view friend request from user_from
-		public function viewRequest($user_from) {
-			$query = mysqli_query($this->conn, "UPDATE friend_requests SET viewed=1 WHERE user_to='$this->username' AND user_from='$user_from' and deleted=0");
-		}
-
-		// delete the request
-		public function deleteRequest($user_to) {
-			$query = mysqli_query($this->conn, "UPDATE friend_requests SET deleted=1 WHERE user_to='$user_to' AND user_from='$this->username' and deleted=0");
 		}
 	}
 ?>

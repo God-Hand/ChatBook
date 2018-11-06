@@ -215,7 +215,7 @@
 							  </div>
 
 							  <div class="tab-pane fade" id="deleteAccount" role="tabpanel" aria-labelledby="nav-contact-tab">
-							  	<div class="text-danger">Do yo want to remove your account?</div>
+							  	<div class="text-danger">Do yo want to delete your account?</div>
 					        <div class="form-group row float-right" style="margin-right: 10px;">
 								    <button class="btn btn-danger" id='yesDeleteAccountBtn'>Delete Account</button>
 								  </div><br/><br/>

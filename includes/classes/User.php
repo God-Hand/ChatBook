@@ -142,7 +142,7 @@
 			$friend_friend_array = $friend->getFriendArray();
 			
 			$mutual_friends = count(array_intersect($user_friend_array, $friend_friend_array));
-			return $mutual_friends;
+			return $mutual_friends-2;
 		}
 
 		// search user where first_name and last_name like
