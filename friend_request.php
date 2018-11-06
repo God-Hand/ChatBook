@@ -16,9 +16,11 @@
         <?php include("profile_card.php") ?>
       </div>
 			<div class="col-md-8">
-        <div class="container card">
-          <div class="row">
-            <?php include("infinite_friend_request_loading.php"); ?>
+        <div class="card>">
+          <div class="container card">
+            <div class="row">
+              <?php include("infinite_friend_request_loading.php"); ?>
+            </div>
           </div>
         </div>
       </div>

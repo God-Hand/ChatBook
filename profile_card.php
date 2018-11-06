@@ -59,7 +59,7 @@
     <table class="table">
     	<tr>
     		<td><i class="fa fa-users"></i> &nbsp;Friends</td>
-    		<td><?php echo $user->getNumOfFriends(); ?></td>
+    		<td id='totalfriendCounts'><?php echo $user->getNumOfFriends(); ?></td>
     	</tr>
     	<tr>
     		<td><i class="fa fa-paperclip"></i> &nbsp;Posts</td>

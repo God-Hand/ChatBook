@@ -42,6 +42,26 @@
 			return false;
 		});
 	});
+
+	function deleteRequest(obj){
+		var element = '.request#';
+		$(element.concat(obj.id)).fadeOut();
+	}
+	function acceptRequest(obj){
+		$.post("includes/accept_friend_request.php",{
+			username : '<?php $user->getUsername(); ?>',
+			request_id : obj.value
+		}, function(e){
+			$('#totalfriendCounts').html(parseInt($('#totalfriendCounts').text())+1);
+		});
+	}
+	function rejectRequest(obj){
+		$.post("includes/reject_friend_request.php",{
+			username : '<?php $user->getUsername(); ?>',
+			request_id : obj.value
+		}, function(e){
+		});
+	}
 </script>
 
 <!---
