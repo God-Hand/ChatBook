@@ -357,18 +357,18 @@
         school : school,
         college : college
         }, function(data) {
+          $('#phoneNumber').val('');
+          $('#phoneNumber').removeClass('border-success');
+          $('input[name=gender]:checked').prop("checked", false);
+          $('#city').val('');
+          $('#state').val('');
+          $('#country').val('');
+          $('#school').val('');
+          $('#college').val('');
           if(data=='Invalid'){
             bootbox.alert('Invalid date');
           } else {
             $('#birthDay').val("");
-            $('#phoneNumber').val('');
-            $('#phoneNumber').removeClass('border-success');
-            $('input[name=gender]:checked').prop("checked", false);
-            $('#city').val('');
-            $('#state').val('');
-            $('#country').val('');
-            $('#school').val('');
-            $('#college').val('');
           }
       });
     }
