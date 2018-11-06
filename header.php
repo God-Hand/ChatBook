@@ -118,7 +118,7 @@
         <a class="nav-link" href="#"><i class="fa fa-bell"></i>&nbsp;Notifications</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-users"></i>&nbsp;Friend Request</a>
+        <a class="nav-link" href="friend_request.php"><i class="fa fa-users"></i>&nbsp;Friend Request</a>
       </li>
     </ul>
     <ul class="navbar-nav nav-flex-icons">

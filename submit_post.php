@@ -13,6 +13,9 @@
   #postImage{
     padding-left: 0px;
   }
+  #sendPost{
+    margin-top: 5px;
+  }
 </style>
 <div class="card shadow p-3 mb-4 bg-white rounded post_block">
   <div class="form-group">

@@ -45,14 +45,13 @@
 	    transition: all 1s ease;
 	}
 </style>
-
 <div class="card profile-card shadow p-3 mb-4 bg-white rounded">
   <div class="profile-card-img-block">
     <div class="profile-info-box bg-primary">
     	<?php echo $user->getBio(); ?>
     </div>
     <img class='rounded cover-img' src='<?php echo $user->getCoverPic(); ?>'>     
-    <a href="#" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
+    <a href="settings.php" class="btn-over-img btn btn-primary"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
   </div>
   <div class="profile-card-body pt-5">
     <a href="profile.php?profile_username=<?php echo $user->getUsername(); ?>" class="text-primary"><img src="<?php echo $user->getProfilePic(); ?>" alt="profile-image" class="profile border border-default padding-5-circle"/>
