@@ -31,10 +31,10 @@
 		                  </div>
 		                  <div class='form-row' style='width:30%;'>
 		                    <div class='col-xs-6'>
-		                      <button id='" . $request_id . "' class='btn btn-sm width-60 btn-success' onclick='acceptRequest(this);deleteRequest(this);'> Accept</button>
+		                      <button id='" . $request_id . "' class='btn btn-sm width-60 btn-success' value='" . $user_from . "' onclick='acceptRequest(this);deleteRequest(this);'> Accept</button>
 		                    </div>
 		                    <div class='col-xs-6'>
-		                      <button id='" . $request_id . "' class='btn btn-sm width-60 btn-danger' onclick='rejectRequest(this);deleteRequest(this);'> Reject</button>
+		                      <button id='" . $request_id . "' class='btn btn-sm width-60 btn-danger' value='" . $user_from . "' onclick='rejectRequest(this);deleteRequest(this);'> Reject</button>
 		                    </div>
 		                  </div>
 		                </div>

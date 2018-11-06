@@ -25,7 +25,7 @@
 				return 0;
 			}
 		}
-
+		
 		// insert request form the user to specific user
 		public function sendRequest($user_to) {
 			if( $this->didSendRequest($user_to) == 0) {

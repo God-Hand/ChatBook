@@ -49,16 +49,18 @@
 	}
 	function acceptRequest(obj){
 		$.post("includes/accept_friend_request.php",{
-			username : '<?php $user->getUsername(); ?>',
-			request_id : obj.value
+			username : '<?php echo $user->getUsername(); ?>',
+			user_from : obj.value,
+			request_id : obj.id
 		}, function(e){
 			$('#totalfriendCounts').html(parseInt($('#totalfriendCounts').text())+1);
 		});
 	}
 	function rejectRequest(obj){
 		$.post("includes/reject_friend_request.php",{
-			username : '<?php $user->getUsername(); ?>',
-			request_id : obj.value
+			username : '<?php echo $user->getUsername(); ?>',
+			user_from : obj.value,
+			request_id : obj.id
 		}, function(e){
 		});
 	}
