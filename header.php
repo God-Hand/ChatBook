@@ -120,7 +120,11 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="friend_request.php"><i class="fa fa-users"></i>&nbsp;Friend Request
-          <span class="badge badge-pill badge-danger"><?php echo $request->getFriendRequestsCount(); ?></span>
+          <span class="badge badge-pill badge-danger"><?php 
+            $FriendRequestsCount = $request->getFriendRequestsCount();
+            if($FriendRequestsCount > 0)
+              echo $FriendRequestsCount;
+          ?></span>
         </a>
       </li>
     </ul>
