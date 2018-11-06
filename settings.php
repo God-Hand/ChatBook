@@ -84,58 +84,64 @@
 		                  <h4>Edit Personal Information</h4>
 		                  <hr>
                       <div class="form-group row">
-                        <label for="mobileNumber" class="col-4 col-form-label">Mobile</label> 
+                        <label for="phoneNumber" class="col-4 col-form-label">Phone No</label> 
                         <div class="col-8">
-                          <input id="mobileNumber" name="mobileNumber" maxlength="15" placeholder="Mobile No." class="form-control here" type="text">
+                          <input id="phoneNumber" name="phoneNumber" maxlength="10" placeholder="Phone No." onkeyup="validateMobileNumber(this)" class="form-control here border" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="birthDay" class="col-4 col-form-label">BirthDay</label> 
                         <div class="col-8">
-                          <input id="birthDay" name="birthDay" placeholder="BirthDay" class="form-control here" type="text">
+                          <input id="birthDay" name="birthDay" placeholder="mm/dd/yyyy" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="gender" class="col-4 col-form-label">Gender</label> 
                         <div class="col-8">
                           <div class="radio">
-													  <label><input type="radio" name="gender">Male</label>
+													  <label><input type="radio" name="gender" value="male">Male</label>
 													</div>
 													<div class="radio">
-													  <label><input type="radio" name="gender">Female</label>
+													  <label><input type="radio" name="gender" value="female">Female</label>
 													</div>
 													<div class="radio">
-													  <label><input type="radio" name="gender">Other</label>
+													  <label><input type="radio" name="gender" value="other">Other</label>
 													</div>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="city" class="col-4 col-form-label">City</label> 
                         <div class="col-8">
-                          <input id="city" name="city" maxlength="100" placeholder="City" onkeyup="isValid(this)" class="form-control here" type="text">
+                          <input id="city" name="city" maxlength="100" placeholder="City" class="form-control here" type="text">
+                        </div>
+                      </div> 
+                      <div class="form-group row">
+                        <label for="state" class="col-4 col-form-label">State</label> 
+                        <div class="col-8">
+                          <input id="state" name="state" maxlength="100" placeholder="State" class="form-control here" type="text">
                         </div>
                       </div> 
                       <div class="form-group row">
                         <label for="country" class="col-4 col-form-label">Country</label> 
                         <div class="col-8">
-                          <input id="country" name="country" maxlength="100" placeholder="Country" onkeyup="isValid(this)" class="form-control here" type="text">
+                          <input id="country" name="country" maxlength="100" placeholder="Country" class="form-control here" type="text">
                         </div>
                       </div>    
                       <div class="form-group row">
                         <label for="school" class="col-4 col-form-label">School</label> 
                         <div class="col-8">
-                          <input id="school" name="school" maxlength="255" placeholder="School" onkeyup="isValid(this)" class="form-control here" type="text">
+                          <input id="school" name="school" maxlength="255" placeholder="School" class="form-control here" type="text">
                         </div>
                       </div>                        
                       <div class="form-group row">
                         <label for="college" class="col-4 col-form-label">College</label> 
                         <div class="col-8">
-                          <input id="college" name="college" maxlength="255" placeholder="College" onkeyup="isValid(this)" class="form-control here" type="text">
+                          <input id="college" name="college" maxlength="255" placeholder="College" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button name="savPersonalInfo" type="submit" class="btn btn-primary">Save</button>
+                          <button id="savePersonalInfoBtn" type="button" class="btn btn-primary">Save</button>
                         </div>
                       </div>
 		                </div>
@@ -314,7 +320,58 @@
     obj.value = obj.value.replace(/[^a-zA-Z0-9@_-]+/g, "");
 	}
   $('#birthDay').datepicker({
-    uiLibrary: 'bootstrap4'
+    uiLibrary: 'bootstrap4',
+    useCurrent: false
+  });
+  function validateMobileNumber(phoneno){
+    if(phoneno.value.match(/^\d{10}$/)){
+      $('#phoneNumber').removeClass('border-danger');
+      $('#phoneNumber').addClass('border-success');
+    } else {
+      $('#phoneNumber').addClass('border-danger');
+    }
+  }
+  $('#savePersonalInfoBtn').click(function(){
+    var username = '<?php echo $user->getUsername(); ?>';
+    var birthday = $('#birthDay').val();
+    var phoneno = $('#phoneNumber').val();
+    var gender = $('input[name=gender]:checked').val();
+    var city = $('#city').val();
+    var state = $('#state').val();
+    var country = $('#country').val();
+    var school = $('#school').val();
+    var college = $('#college').val();
+    if (phoneno.length != 0 && !(phoneno.match(/^\d{10}$/))) {
+      bootbox.alert('Invalid Number');
+    } else if(birthday.length !=0 && !birthday.match(/^(?:(0[1-9]|1[012])[\/.](0[1-9]|[12][0-9]|3[01])[\/.](19|20)[0-9]{2})$/)) {
+      bootbox.alert('Invalid date');
+    } else {
+      $.post("includes/change_personal_info.php", {
+        username : username,
+        birthday : birthday,
+        phoneno : phoneno,
+        gender : gender,
+        city : city,
+        state : state,
+        country : country,
+        school : school,
+        college : college
+        }, function(data) {
+          if(data=='Invalid'){
+            bootbox.alert('Invalid date');
+          } else {
+            $('#birthDay').val("");
+            $('#phoneNumber').val('');
+            $('#phoneNumber').removeClass('border-success');
+            $('input[name=gender]:checked').prop("checked", false);
+            $('#city').val('');
+            $('#state').val('');
+            $('#country').val('');
+            $('#school').val('');
+            $('#college').val('');
+          }
+      });
+    }
   });
 
 	// upload images
@@ -376,7 +433,7 @@
 	        , function(data) {
 	          $('#uploadProfilePic').val('');
 	          $('#uploadedProfilePic').val('');
-	      })
+	      });
 	    }
 	  });
 

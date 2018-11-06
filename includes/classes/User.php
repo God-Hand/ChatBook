@@ -174,9 +174,49 @@
 			$query = mysqli_query($this->conn, "UPDATE users SET last_name='$last_name' WHERE username='$this->username'");
 		}
 
-		// set user first name
+		// set user bio
 		public function setBio($bio)	{
 			$query = mysqli_query($this->conn, "UPDATE users SET bio='$bio' WHERE username='$this->username'");
+		}
+
+		// set user phone_no number
+		public function setPhoneNumber($phone_no)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET phone_no='$phone_no' WHERE username='$this->username'");
+		}
+
+		// set user birthday
+		public function setBirthDay($birthday)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET birthday=STR_TO_DATE('$birthday','%m/%d/%y') WHERE username='$this->username'");
+		}
+
+		// set user gender
+		public function setGender($gender)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET gender='$gender' WHERE username='$this->username'");
+		}
+
+		// set user city
+		public function setCity($city)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET city='$city' WHERE username='$this->username'");
+		}
+
+		// set user state
+		public function setState($state)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET state='$state' WHERE username='$this->username'");
+		}
+
+		// set user first name
+		public function setCountry($country)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET country='$country' WHERE username='$this->username'");
+		}
+
+		// set user school
+		public function setSchool($school)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET school='$school' WHERE username='$this->username'");
+		}
+
+		// set user college
+		public function setCollege($college)	{
+			$query = mysqli_query($this->conn, "UPDATE users SET college='$college' WHERE username='$this->username'");
 		}
 
 		// upload cover_pic of user
