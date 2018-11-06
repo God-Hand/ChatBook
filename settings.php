@@ -3,6 +3,7 @@
 <head>
 	<title>Chatbook - settings</title>
 	<script src="assets/js/md5.js"></script>
+
 </head>
 <body>
 	<?php include("header.php"); ?>
@@ -312,6 +313,9 @@
 	function isValid(obj){ 
     obj.value = obj.value.replace(/[^a-zA-Z0-9@_-]+/g, "");
 	}
+  $('#birthDay').datepicker({
+    uiLibrary: 'bootstrap4'
+  });
 
 	// upload images
   $(document).ready(function(){
