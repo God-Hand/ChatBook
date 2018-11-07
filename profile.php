@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ChatBook - Profile.php</title>
+	<?php 
+		include("header.php");
+		if ($user->isUser($_REQUEST['profile_username'])){
+			$profile_user = new User($conn, $_REQUEST['profile_username']);
+		} else {
+			header('Location: index.php');
+		}
+	?>
 		<meta charset="utf-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title><?php echo $profile_user->getFirstAndLastName(); ?> - Profile</title>
 	</head>
 	<style type="text/css">
 		/*Profile card*/
@@ -62,14 +70,7 @@
 		}
 	</style>
 <body>
-	<?php 
-		include("header.php");
-		if ($user->isUser($_REQUEST['profile_username'])){
-			$profile_user = new User($conn, $_REQUEST['profile_username']);
-		} else {
-			header('index.php');
-		}
-	?>
+
 	<div role="main" class="container">
 		<div class="row">
 			<div class="col-md-12">
