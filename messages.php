@@ -137,7 +137,7 @@
 				<br>
 			</div>
 			<div class="col-md-8">
-				<iframe src="message_card.php?user_to=arpit_gupta1541532293" class="border border-default" style="height:514px;width:100%;background-color:#f1f1f1;">
+				<iframe src="message_card.php?user_to=arpit_gupta1541532293" class="border border-default" style="height:514px;width:100%;">
 					
 				</iframe>
 			</div>
