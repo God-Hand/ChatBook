@@ -1,11 +1,11 @@
 <?php
-	if(isset($_POST['username']) and isset($_POST['action']) and isset($_POST['name'])) {
+	if(isset($_POST['action']) and isset($_POST['name'])) {
 		require '../config/config.php';
 		require 'classes/User.php';
 		require 'classes/FriendRequest.php';
 		
-		$user = new User($conn, $_POST['username']);
-		$request = new FriendRequest($conn, $_POST['username']);
+		$user = new User($conn, $_SESSION['username']);
+		$request = new FriendRequest($conn, $_SESSION['username']);
 		$name = $_POST['name'];
 		$action = $_POST['action'];
 		$is_friend = $user->isFriend($name);

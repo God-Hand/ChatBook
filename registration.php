@@ -4,7 +4,7 @@
   require 'includes/classes/User.php';
   
 	include('form_handlers/registration_handler.php');
-	if (isset($_SESSION['user_logged_in'])){
+	if (isset($_SESSION['username'])){
 		header("Location: index.php");
 	}
 ?>

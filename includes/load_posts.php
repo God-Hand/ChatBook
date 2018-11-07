@@ -1,18 +1,18 @@
 <?php
-	if (isset($_POST['username']) and isset($_POST['last_post_id'])){
-		require '../config/config.php';
-		require 'classes/Post.php';
-		require 'classes/User.php';
-		require 'classes/Comment.php';
-		require 'classes/PostLike.php';
-		require '../functions/timeframe_function.php';
-		require '../functions/text_filter.php';
+	require '../config/config.php';
+	require 'classes/Post.php';
+	require 'classes/User.php';
+	require 'classes/Comment.php';
+	require 'classes/PostLike.php';
+	require '../functions/timeframe_function.php';
+	require '../functions/text_filter.php';
+	if (isset($_POST['last_post_id'])){
 
 		define('LIMIT', 10);
-		$user = new User($conn, $_POST['username']);
-		$post = new Post($conn, $_POST['username']);
-		$comment = new Comment($conn, $_POST['username']);
-		$post_like = new PostLike($conn, $_POST['username']);
+		$user = new User($conn, $_SESSION['username']);
+		$post = new Post($conn, $_SESSION['username']);
+		$comment = new Comment($conn, $_SESSION['username']);
+		$post_like = new PostLike($conn, $_SESSION['username']);
 		$data_query = $post->loadAllPosts($_POST['last_post_id'], LIMIT);
 		$str = "";
 		$last_post_id = $_POST['last_post_id'];

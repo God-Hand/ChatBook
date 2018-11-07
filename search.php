@@ -21,27 +21,27 @@
 	      </div><br/>
 	      <div class="searchedResult card">
         </div>
-        <?php
-        	if(isset($_REQUEST['name'])){
-        		echo "<script>
-        						$(document).ready(function($) {
-										  $('#searchusers').val('" . $_REQUEST['name'] . "').trigger('keyup'); 
-										});
-        					</script>";
-        	} else {
-        		echo "<script>
-        						$(document).ready(function($) {
-										  $('#searchusers').val('').trigger('keyup'); 
-										});
-        					</script>";
-        	}
-        ?>
 			</div>
 		</div>
 	</div>
 </body>
 </html>
 
+<?php
+	if(isset($_REQUEST['name'])){
+		echo "<script>
+						$(document).ready(function($) {
+						  $('#searchusers').val('" . $_REQUEST['name'] . "').trigger('keyup'); 
+						});
+					</script>";
+	} else {
+		echo "<script>
+						$(document).ready(function($) {
+						  $('#searchusers').val('').trigger('keyup'); 
+						});
+					</script>";
+	}
+?>
 <script>
 	function SearchUsers(obj){
     var username = '<?php echo $user->getUsername(); ?>';

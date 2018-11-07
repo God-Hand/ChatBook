@@ -51,7 +51,7 @@
 	}
 	if (isset($_POST['login_button'])) {
 		if ($register->getLogin($_POST['login_email'], $_POST['login_password'])){
-			$_SESSION['user_logged_in'] = $register->getUsername();
+			$_SESSION['username'] = $register->getUsername();
 		} else {
 			array_push($error_array, "Email or password was incorrect");
 		}

@@ -74,17 +74,17 @@
 </style>
 
 <?php
-  include('includes/classes/User.php');
-  include('includes/classes/Post.php');
-  include('includes/classes/PostLike.php');
-  include('includes/classes/Comment.php');
-  include('includes/classes/FriendRequest.php');
-  include('includes/classes/Notification.php');
-  include('functions/text_filter.php');
-  include('config/config.php');
-  if (isset($_SESSION['user_logged_in'])){
-    $user_logged_in = $_SESSION['user_logged_in'];
-    $user = new User($conn, $_SESSION['user_logged_in']);
+  require('includes/classes/User.php');
+  require('includes/classes/Post.php');
+  require('includes/classes/PostLike.php');
+  require('includes/classes/Comment.php');
+  require('includes/classes/FriendRequest.php');
+  require('includes/classes/Notification.php');
+  require('functions/text_filter.php');
+  require('config/config.php');
+  if (isset($_SESSION['username'])){
+    $user_logged_in = $_SESSION['username'];
+    $user = new User($conn, $_SESSION['username']);
   } else {
     header("Location: registration.php");
   }
@@ -112,7 +112,7 @@
     </form>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-envelope"></i>&nbsp;Messages</a>
+        <a class="nav-link" href="messages.php"><i class="fa fa-envelope"></i>&nbsp;Messages</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="fa fa-bell"></i>&nbsp;Notifications
