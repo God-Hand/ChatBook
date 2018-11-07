@@ -8,40 +8,32 @@
 </div>
 
 <script>
-
+	var username = '<?php echo $user->getUsername(); ?>';
 	$(document).ready(function() {
 		$('#loading').show();
-		var user_logged_in = '<?php echo $user_logged_in; ?>';
-		//Original ajax request for loading first posts 
 		$.ajax({
 			url: "includes/load_posts.php",
 			type: "POST",
-			data: {user_logged_in : user_logged_in, last_post_id : 0},
+			data: {username : username, last_post_id : 0},
 			cache:false,
-
 			success: function(data) {
 				$('#loading').hide();
 				$('.posts_area').html(data);
 			}
 		});
 		$(window).scroll(function() {
-			// get id of last <div class='post' id='#post_id'></div>
 			var last_post_id = $('.post:last').attr('id');
 			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
-
 			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
 				$('#loading').show();
-				$('.posts_area').find('.noMorePosts').remove(); //Removes current .nextpage 
-
+				$('.posts_area').find('.noMorePosts').remove(); 
 				var ajaxReq = $.ajax({
 					url: "includes/load_posts.php",
 					type: "POST",
-					data: {user_logged_in : user_logged_in, last_post_id : last_post_id},
+					data: {username : username, last_post_id : last_post_id},
 					cache:false,
-
 					success: function(response) {
-						$('.posts_area').find('.noMorePostsText').remove(); //Removes current .nextpage 
-
+						$('.posts_area').find('.noMorePostsText').remove(); 
 						$('#loading').hide();
 						$('.posts_area').append(response);
 					}
@@ -75,12 +67,11 @@
 		}
 	}
 	function saveAction(obj){
-		var user_logged_in = '<?php echo $user_logged_in; ?>';
 		$.ajax({
       type: "POST",
       url: "includes/like_post.php",
       data: {
-        username : user_logged_in,
+        username : username,
 				post_id : obj.id,
 				user_action  : obj.value
       },
@@ -92,14 +83,13 @@
     });
 	}
 	function sendComment(obj){
-		var user_logged_in = '<?php echo $user_logged_in; ?>';
 		var comment = "comment";
 		var body = document.getElementById(comment.concat(obj.id)).value;
 		$.ajax({
       type: "POST",
       url: "includes/save_comment.php",
       data: {
-        username : user_logged_in,
+        username : username,
 				post_id : obj.id,
 				comment_body  : body
       },
@@ -109,7 +99,6 @@
 				document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
 				var commentframeid = "commentframe";
 				document.getElementById(commentframeid.concat(obj.id)).contentWindow.location.reload();
-				//document.getElementById(commentframeid.concat(obj.id)).style.display = "block";
       },
       error: function(result) {
         alert('error');
@@ -131,12 +120,11 @@
 	    },
 	    callback: function (result) {
 	      if(result){
-	      	var user_logged_in = '<?php echo $user_logged_in; ?>';
 					$.ajax({
 			      type: "POST",
 			      url: "includes/delete_post.php",
 			      data: {
-			        username : user_logged_in,
+			        username : username,
 							post_id : obj.id,
 			      },
 			      success: function(result) {
@@ -167,12 +155,11 @@
 	    },
 	    callback: function (result) {
 	      if(result){
-	      	var user_logged_in = '<?php echo $user_logged_in; ?>';
 					$.ajax({
 			      type: "POST",
 			      url: "includes/delete_comment.php",
 			      data: {
-			        username : user_logged_in,
+			        username : username,
 							comment_id : obj.id,
 			      },
 			      success: function(result) {
