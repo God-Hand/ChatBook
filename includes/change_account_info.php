@@ -1,7 +1,7 @@
 <?php
-	require '../config/config.php';
-  require 'classes/User.php';
   if(isset($_POST['username'])) {
+    require '../config/config.php';
+    require 'classes/User.php';
     $user = new User($conn, $_POST['username']);
     if(isset($_POST['firstname']) and !empty($_POST['firstname']))
     	$user->setFirstName($_POST['firstname']);

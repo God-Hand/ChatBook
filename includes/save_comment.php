@@ -4,9 +4,9 @@
 	require '../functions/text_filter.php';
 
 	if(isset($_POST['username'])) {
-		$username = $_REQUEST['username'];
-		$post_id = $_REQUEST['post_id'];
-		$comment_body  = removeSpaces($_REQUEST['comment_body']);
+		$username = $_POST['username'];
+		$post_id = $_POST['post_id'];
+		$comment_body  = removeSpaces($_POST['comment_body']);
 		$comment_body = secureText($conn , $comment_body);
 		$comment = new Comment($conn, $username);
 		if ($comment_body != '') {

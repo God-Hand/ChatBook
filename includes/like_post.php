@@ -1,8 +1,8 @@
 <?php
-	require '../config/config.php';
-	require 'classes/PostLike.php';
-
 	if(isset($_POST['username'])){
+		require '../config/config.php';
+		require 'classes/PostLike.php';
+
 		$username = $_POST['username'];
 		$post_id = $_POST['post_id'];
 		$user_action  = $_POST['user_action'];

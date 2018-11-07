@@ -1,9 +1,9 @@
 <?php
-	require '../config/config.php';
-  require 'classes/User.php';
-  require '../functions/text_filter.php';
-
   if(isset($_POST['username'])) {
+    require '../config/config.php';
+    require 'classes/User.php';
+    require '../functions/text_filter.php';
+
     $user = new User($conn, $_POST['username']);
     if(isset($_POST['phoneno']) and !empty($_POST['phoneno'])){
       $user->setPhoneNumber($_POST['phoneno']);

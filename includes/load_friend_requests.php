@@ -1,9 +1,9 @@
 <?php
-	require '../config/config.php';
-	require 'classes/FriendRequest.php';
-	require 'classes/User.php';
-
 	if(isset($_POST['username'])){
+		require '../config/config.php';
+		require 'classes/FriendRequest.php';
+		require 'classes/User.php';
+
 		define('LIMIT', 10);
 		$user = new User($conn, $_POST['username']);
 		$request = new FriendRequest($conn, $_POST['username']);

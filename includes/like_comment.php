@@ -1,12 +1,13 @@
 <?php
-	require '../config/config.php';
-	require 'classes/CommentLike.php';
-	$username = $_REQUEST['username'];
-	$comment_id = $_REQUEST['comment_id'];
-	$user_action  = $_REQUEST['user_action'];
-	if($user_action != 2){
-		$comment_like = new CommentLike($conn, $username);
-		$comment_like->likeTheComment($comment_id, $user_action);
-		//echo $user_action;
+	if(isset($_POST['username'])){
+		require '../config/config.php';
+		require 'classes/CommentLike.php';
+		$username = $_POST['username'];
+		$comment_id = $_POST['comment_id'];
+		$user_action  = $_POST['user_action'];
+		if($user_action != 2){
+			$comment_like = new CommentLike($conn, $username);
+			$comment_like->likeTheComment($comment_id, $user_action);
+		}
 	}
 ?>

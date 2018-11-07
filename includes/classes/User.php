@@ -146,14 +146,14 @@
 		}
 
 		// search user where first_name and last_name like
-		public function searchUsers($input_name) {
+		public function searchUsers($input_name, $limit) {
 			$first_last_name = explode(" ", $input_name);
 			if(strpos($input_name, "_") == true) {
-				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username LIKE '%$input_name%' AND deactivate_account=0 LIMIT 5");
+				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username LIKE '%$input_name%' AND deactivate_account=0 LIMIT $limit");
 			} else if(count($first_last_name) == 2) {
-				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' AND last_name LIKE '%$first_last_name[1]%') AND deactivate_account=0 LIMIT 5");
+				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' AND last_name LIKE '%$first_last_name[1]%') AND deactivate_account=0 LIMIT $limit");
 			} else {
-				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' OR last_name LIKE '%$first_last_name[0]%') AND deactivate_account=0 LIMIT 5");
+				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' OR last_name LIKE '%$first_last_name[0]%') AND deactivate_account=0 LIMIT $limit");
 			}
 			return $query;
 		}
