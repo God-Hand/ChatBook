@@ -408,7 +408,7 @@
     $('#cropProfilePic').click(function(event){
       $proileimagecrop.croppie('result', {
         type: 'canvas',
-        size: 'viewport'
+        size: 'original'
       }).then(function(response){
         $.ajax({
           url:"upload.php",
@@ -469,7 +469,7 @@
     $('#cropCoverPic').click(function(event){
       $coverimagecrop.croppie('result', {
         type: 'canvas',
-        size: 'viewport'
+        size: 'original'
       }).then(function(response){
         $.ajax({
           url:"upload.php",

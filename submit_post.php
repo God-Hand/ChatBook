@@ -88,7 +88,7 @@
     $('#cropImage').click(function(event){
       $image_crop.croppie('result', {
         type: 'canvas',
-        size: 'viewport'
+        size: 'original'
       }).then(function(response){
         $.ajax({
           url:"upload.php",
