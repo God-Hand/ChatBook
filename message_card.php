@@ -34,6 +34,9 @@
 		::-webkit-scrollbar-thumb:hover {
 			background: #555; 
 		}
+		p{
+			line-height: 16px;
+		}
 	</style>
 </head>
 <body>
@@ -46,7 +49,7 @@
 			  </div>
 			</div>
 		</div>
-		<div class="container-fluid" style="height:400px;overflow-y:scroll;">
+		<div class="container-fluid" style="height:408px;overflow-y:scroll;">
 			<div class="mb-3"></div>
 			<div class="row float-left mr-0">
 				<div class="col-12 alert bg-primary text-white">
@@ -66,7 +69,7 @@
 				<div class="col-12 alert bg-success text-white">
 					<div class="media">
 					  <div class="media-body">
-					    <h6 class="m-0">You</h6>
+					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
 					    <p class="m-0">hi friend.
 					    	How are you? long time, no see
 					    </p>
@@ -93,7 +96,7 @@
 				<div class="col-12 alert bg-success text-white">
 					<div class="media">
 					  <div class="media-body">
-					    <h6 class="m-0">You</h6>
+					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
 					    <p class="m-0">hi friend.
 					    	How are you? long time, no see
 					    </p>
@@ -120,7 +123,7 @@
 				<div class="col-12 alert bg-success text-white">
 					<div class="media">
 					  <div class="media-body">
-					    <h6 class="m-0">You</h6>
+					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
 					    <p class="m-0">hi friend.
 					    	How are you? long time, no see
 					    </p>
@@ -147,7 +150,7 @@
 				<div class="col-12 alert bg-success text-white">
 					<div class="media">
 					  <div class="media-body">
-					    <h6 class="m-0">You</h6>
+					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
 					    <p class="m-0">hi friend.
 					    	How are you? long time, no see
 					    </p>
@@ -157,5 +160,11 @@
 				</div>
 			</div>
 		</div>
+		<div class='input-group'>
+	    <input id='messageTyped' type='text' class='form-control' placeholder='Type a message'>
+	    <div class='input-group-append' maxlength='250'>
+	      <button id='messagedBtn' class='btn btn-success' type='button' onclick='sendMessage(this)'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
+	    </div>
+	  </div>
 </body>
 </html>
