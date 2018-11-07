@@ -27,7 +27,7 @@
 				if ($row['image'] == '')
 					$imagePath = '';
 				else
-					$imagePath = "<img src='" . $row['image'] . "' alt='username' style='width: 100%; height: 100%;'>";
+					$imagePath = "<img src='" . $row['image'] . "' alt='post image' style='width: 100%; height: 100%;'>";
 				$posted_time = $row['posted_time'];
 
 				$user_from_obj = new User($conn, $row['user_from']);

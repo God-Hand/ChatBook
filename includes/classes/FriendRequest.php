@@ -16,14 +16,22 @@
 			return mysqli_num_rows($query);
 		}
 
+		// check weather user receive friend request from a specific user
+		public function didReceiveRequest($user_to) {
+			$check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$this->username' AND user_from='$user_to' AND deleted=0");
+			if(mysqli_num_rows($check_request_query) > 0) {
+				return 1;
+			}
+			return 0;
+		}
+
 		// check weather user send friend request to a specific user
 		public function didSendRequest($user_to) {
 			$check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND user_from='$this->username' AND deleted=0");
 			if(mysqli_num_rows($check_request_query) > 0) {
 				return 1;
-			} else {
-				return 0;
 			}
+			return 0;
 		}
 		
 		// insert request form the user to specific user
@@ -54,7 +62,7 @@
 		// return all requests for or by user
 		public function getAllFriendRequests($last_request_id, $limit) {
 			if ($last_request_id == 0){
-				$query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE deleted=0 AND accepted IS NULL AND user_to='$this->username' ORDER BY request_id DESC LIMIT $limit");
+				$query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE deleted=0 AND (user_to='$this->username' OR user_from='$this->username') ORDER BY request_id DESC LIMIT $limit");
 			} else {
 				$query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE request_id<'last_request_id' AND deleted=0 AND accepted IS NULL AND user_to='$this->username' ORDER BY request_id DESC LIMIT $limit");
 			}

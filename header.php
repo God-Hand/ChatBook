@@ -156,22 +156,26 @@
       obj.classList.remove('btn-danger');
       obj.classList.add('btn-success');
       obj.innerHTML = 'Add Friend';
-      obj.value = 1;
+      obj.value = 3;
     } else if (obj.value == '1'){
       obj.classList.remove('btn-success');
-      obj.classList.add('btn-warning');
-      obj.innerHTML = 'Cancel Request';
-      obj.value = 2;
+      obj.classList.add('btn-danger');
+      obj.innerHTML = 'Remove Friend';
+      obj.value = 0;
     } else if(obj.value == '2'){
       obj.classList.remove('btn-warning');
       obj.classList.add('btn-success');
       obj.innerHTML = 'Add Friend';
-      obj.value = 1;
+      obj.value = 3;
+    } else if(obj.value == '3'){
+      obj.classList.remove('btn-success');
+      obj.classList.add('btn-warning');
+      obj.innerHTML = 'Cancel Request';
+      obj.value = 2;
     }
   }
   function friendAction(obj){
-   $.post("includes/add_friend.php", {action:obj.value, name:obj.id, username:'<?php echo $user->getUsername(); ?>'}, function(data) {
-    console.log('hi');
+   $.post("includes/friend_request_response.php", {action:obj.value, name:obj.id, username:'<?php echo $user->getUsername(); ?>'}, function(data) {
    })
   }
   function SearchUsers(obj){

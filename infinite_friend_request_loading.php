@@ -1,7 +1,7 @@
 <div class="friend_request_area" style="width:100%;">
 </div>
 <br>
-<img id="loading" src="assets/images/icons/loading.gif" style="display: none;">
+<img id="loading" src="assets/images/icons/loading.gif">
 
 <script>
 	$(document).ready(function() {

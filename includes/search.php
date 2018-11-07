@@ -4,6 +4,14 @@
 	require 'classes/FriendRequest.php';
 	require '../functions/text_filter.php';
 
+	/*
+	* value = 0 => remove friend
+	* value = 1 => accept request
+	* value = 2 => cancel request
+	* value = 3 => add friend
+	* value = 4 => reject request
+	*/
+
 	$user = new User($conn, $_REQUEST['username']);
 	$request = new FriendRequest($conn , $_REQUEST['username']);
 	$name  = removeSpaces($_REQUEST['name']);
@@ -19,11 +27,13 @@
 				$mutual_friends = "";
 			}else{
 				if ($user->isFriend($row['username'])){
-					$friend_button = "<button id='" . $row['username'] . "' class='btn btn-danger float-right addfriend' onclick='friend(this)' value='0' onmouseleave='friendAction(this)'>Remove Friend</button>";
+					$friend_button = "<button id='" . $row['username'] . "' class='btn btn-sm btn-danger float-right addfriend' onclick='friend(this)' value='0' onmouseleave='friendAction(this)'>Remove Friend</button>";
+				} elseif ($request->didReceiveRequest($row['username']) == 1) {
+					$friend_button = "<button id='" . $row['username'] . "' class='btn btn-sm btn-success float-right addfriend' onclick='friend(this)' value='1' onmouseleave='friendAction(this)'>Accept Request</button>";
 				} elseif ($request->didSendRequest($row['username']) == 1) {
-					$friend_button = "<button id='" . $row['username'] . "' class='btn btn-warning float-right addfriend' onclick='friend(this)' value='2' onmouseleave='friendAction(this)'>Cancel Request</button>";
+					$friend_button = "<button id='" . $row['username'] . "' class='btn btn-sm btn-warning float-right addfriend' onclick='friend(this)' value='2' onmouseleave='friendAction(this)'>Cancel Request</button>";
 				} else {
-					$friend_button = "<button id='" . $row['username'] . "' class='btn btn-success float-right addfriend' onclick='friend(this)' value='1' onmouseleave='friendAction(this)'>Add Friend</button>";
+					$friend_button = "<button id='" . $row['username'] . "' class='btn btn-sm btn-success float-right addfriend' onclick='friend(this)' value='3' onmouseleave='friendAction(this)'>Add Friend</button>";
 				}
 				$mutual_friends = "<small class='text-muted'><em>mutual friends : ". $user->getMutualFriendsCount($row['username']) . "</em></small>";
 			}
