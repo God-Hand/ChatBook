@@ -11,15 +11,13 @@
 		require 'classes/User.php';
 		require 'classes/FriendRequest.php';
 		require '../functions/text_filter.php';
-
-		define('LIMIT', 5);
 		
 		$user = new User($conn, $_POST['username']);
 		$request = new FriendRequest($conn , $_POST['username']);
 		$name  = removeSpaces($_POST['name']);
 		$str = "";
 		if ($name != ''){
-			$data = $user->searchUsers($name,LIMIT);
+			$data = $user->searchUsers($name,$_POST['limit']);
 			while ($row = mysqli_fetch_array($data)) {
 				$searched_user = $row['username'];
 				$searched_user_profile_pic = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary'> <img src='" . $row['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
@@ -51,8 +49,8 @@
 									</div>
 								</div>";
 			}
-			if (mysqli_num_rows($data) > 0){
-				$str .= "<a class='btn btn-primary btn-block btn-sm' href='search.php?name=" . $_POST['name'] . "'>See All<a>";
+			if (mysqli_num_rows($data) > 0 and $_POST['requestby']==1){
+				$str .= "<a id='seeAll' class='btn btn-primary btn-block btn-sm' href='search.php?name=" . $_POST['name'] . "'>See All<a>";
 			}
 		}
 		echo $str;

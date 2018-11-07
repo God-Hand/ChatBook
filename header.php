@@ -103,7 +103,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent-3">
     <form class="form-inline searchform">
       <div class="input-group" style="width:100%;">
-        <input type="text" class="form-control dropdown" onkeyup="SearchUsers(this)" name="q" placeholder="Search..." autocomplete="off" id="searchusers" value="" style="width: auto;">
+        <input type="text" class="form-control dropdown" onkeyup="SearchUser(this)" name="q" placeholder="Search..." autocomplete="off" id="searchuser" value="" style="width: auto;">
         <div class="input-group-postpend">
           <button class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i></button>
         </div>
@@ -178,9 +178,9 @@
    $.post("includes/friend_request_response.php", {action:obj.value, name:obj.id, username:'<?php echo $user->getUsername(); ?>'}, function(data) {
    })
   }
-  function SearchUsers(obj){
+  function SearchUser(obj){
     var username = '<?php echo $user->getUsername(); ?>';
-    $.post("includes/search.php", {name:obj.value, username: username}, function(data) {
+    $.post("includes/search.php", {name:obj.value, username: username, limit:5, requestby:1}, function(data) {
       $('.searchresult').empty();
       if(data != ''){
         $('.searchresult').html(data);
