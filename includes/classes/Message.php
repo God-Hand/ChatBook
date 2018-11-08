@@ -1,18 +1,5 @@
 <?php
 
-	/**
-	* CREATE TABLE IF NOT EXISTS `messages` (
-	*   `message_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-	*   `user_from` varchar(60) NOT NULL,
-	*   `user_to` varchar(60) NOT NULL,
-	*   `message_body` text NOT NULL,
-	*   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	*   `viewed` tinyint(1) NOT NULL DEFAULT '0',
-	*   `opened` tinyint(1) NOT NULL DEFAULT '0',
-	*   `deleted` tinyint(1) NOT NULL DEFAULT '0',
-	*   PRIMARY KEY (`message_id`)
-	* ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-	*/
 	class Message {
 		private $username;
 		private $conn;
@@ -32,9 +19,9 @@
 		// return messages between user and other
 		public function getMessages($user_from, $last_message_id, $limit) {
 			if ($last_message_id==0) {
-				$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE (user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')  AND deleted=0 ORDER BY message_id DESC LIMIT '$limit'");
+				$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE (user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')  AND deleted=0 ORDER BY message_id DESC LIMIT $limit");
 			} else {
-				$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE message_id<'last_message_id' AND (user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')  AND deleted=0 ORDER BY message_id DESC LIMIT '$limit'");
+				$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE message_id<'last_message_id' AND (user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')  AND deleted=0 ORDER BY message_id DESC LIMIT $limit");
 			}
 			return $query;
 		}

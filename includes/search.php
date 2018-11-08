@@ -14,6 +14,7 @@
 	$user = new User($conn, $_SESSION['username']);
 	$request = new FriendRequest($conn , $_SESSION['username']);
 	$name  = removeSpaces($_POST['name']);
+	$name = strip_tags($name);
 	$str = "";
 	if ($name != ''){
 		$data = $user->searchUsers($name,$_POST['limit']);
