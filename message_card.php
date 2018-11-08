@@ -37,19 +37,32 @@
 		p{
 			line-height: 16px;
 		}
+		.resize-box{
+			max-width: 200px;
+		}
+		.container-fluid{
+			height:408px;
+			overflow-y:scroll;
+		}
+		img{
+			width:40px;
+			border-radius:50%;
+		}
 	</style>
 </head>
 <body>
 		<div class="col-12 alert bg-primary text-white mb-0">
 			<div class="media">
-			  <img class="mr-1" src="assets/images/profile_pics/arpit_gupta15415322931541581420.png" style="width:40px;border-radius:50%;" alt="Generic placeholder image">
+			  <img class="mr-1" src="assets/images/profile_pics/arpit_gupta15415322931541581420.png" alt="Generic placeholder image">
 			  <div class="media-body">
-			    <h6 class="m-0">Jitendra Sharma</h6>
-			    <p class="m-0">Typing...<small class="float-right"><em>12days ago</em></small></p>
+			    <div class="float-left resize-box">
+			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;">Jitendra Sharma</h6><br/>
+			  		<p class="m-0 d-inline-block text-truncate"  style="max-width: inherit;">typing...</p>
+			  	</div>
 			  </div>
 			</div>
 		</div>
-		<div class="container-fluid" style="height:408px;overflow-y:scroll;">
+		<div class="container-fluid">
 			<div class="mb-3"></div>
 			<div class="row float-left mr-0">
 				<div class="col-12 alert bg-primary text-white">
@@ -168,3 +181,10 @@
 	  </div>
 </body>
 </html>
+<script>
+	window.onresize = function() {
+	  $('.resize-box').css({
+	    "maxWidth": $('.resize-box').parent().width() - 50 + "px"
+	  });
+	}
+</script>
