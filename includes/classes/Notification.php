@@ -89,7 +89,7 @@
 
 		// delete all notifications
 		public function deleteAllNotifications() {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET deleted=1, viewed=1 WHERE user_to='$this->username' AND deleted=0");
+			$query = mysqli_query($this->conn, "UPDATE notifications SET deleted=1 WHERE user_to='$this->username' OR  user_from='$this->username' AND deleted=0");
 			return $query;
 		}
 	}

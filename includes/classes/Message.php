@@ -31,16 +31,6 @@
 			return $query;
 		}
 
-		// return username array, to whom user interact
-		/*public function getMessageSendersArray() {
-			$senders = array();
-			$query = mysqli_query($this->conn, "SELECT DISTINCT user_from FROM messages WHERE user_to='$this->username' OR user_from='$this->username' ORDER BY message_id DESC");
-			while($row = mysqli_fetch_array($query)) {
-				array_push($senders, $row['user_from']);
-			}
-			return $senders;
-		}*/
-
 		// return new messages count
 		public function getNewMessagesCount() {
 			$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE user_to='$this->username' AND deleted=0 AND viewed=0");
@@ -71,6 +61,11 @@
 		// delete all messages of a user
 		public function deleteMessages($user_to) {
 			$query = mysqli_query($this->conn, "UPDATE messages SET deleted=1 WHERE user_from='$this->username' AND user_to='$user_to'");
+		}
+
+		// delete all messages of a user
+		public function deleteAllMessages(){
+			$query = mysqli_query($this->conn, "UPDATE messages SET deleted=1 WHERE user_from='$this->username' OR user_to='$this->username'");
 		}
 	}
 ?>

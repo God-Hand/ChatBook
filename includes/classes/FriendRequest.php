@@ -68,5 +68,10 @@
 			}
 			return $query;
 		}
+
+		//delete all requests for or by user 
+		public function deleteAllRequests(){
+			$query = mysqli_query($this->conn, "UPDATE friend_requests SET deleted=1 WHERE user_from='$this->username' OR user_to='$this->username'");
+		}
 	}
 ?>

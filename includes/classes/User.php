@@ -96,7 +96,7 @@
 
 		// return weather given username is a user or not
 		public function isUser($username) {
-			$query = mysqli_query($this->conn, "SELECT username FROM users WHERE username='$username'");
+			$query = mysqli_query($this->conn, "SELECT username FROM users WHERE username='$username' AND deactivate_account=0");
 			if(mysqli_num_rows($query) == 0)
 				return false;
 			else 
@@ -233,6 +233,10 @@
 		public function closeAccount() {
 			$query = mysqli_query($this->conn, "UPDATE users SET deactivate_account=1 WHERE username='$this->username'");
 			if ($query){
+				$friends = $this->getFriendArray();
+				foreach ($friends as $friend) {
+					$this->removeFriend($friend);
+				}
 				return true;
 			} else {
 				return false;

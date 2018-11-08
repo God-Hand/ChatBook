@@ -25,6 +25,11 @@
 			return 0;
 		}
 
+		// delete like by user
+		public function deleteAllLikes(){
+			$query = mysqli_query($this->conn, "DELETE FROM comment_likes WHERE username='$this->username'");
+		}
+
 		// like the given comment_id
 		public function likeTheComment($comment_id, $value) {
 			$delete_query = mysqli_query($this->conn, "DELETE FROM comment_likes WHERE comment_id='$comment_id' AND username='$this->username'");

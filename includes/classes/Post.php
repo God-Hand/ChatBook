@@ -25,6 +25,11 @@
 			$query = mysqli_query($this->conn, "UPDATE posts SET deleted=1 WHERE post_id='$post_id'");
 		}
 
+		// delete post
+		public function deleteAllPosts() {
+			$query = mysqli_query($this->conn, "UPDATE posts SET deleted=1 WHERE user_to='$this->username' OR user_from='$this->username'");
+		}
+
 		// load posts, where post_id< given post_id and specific limit 
 		public function loadAllPosts($last_post_id, $limit) {
 			if ( $last_post_id == 0 ){

@@ -25,7 +25,12 @@
 			$query = mysqli_query($this->conn, "UPDATE comments SET deleted=1 WHERE comment_id='$comment_id'");
 		}
 
-		// delete comment
+		// delete all comments by user
+		public function deleteAllComments() {
+			$query = mysqli_query($this->conn, "UPDATE comments SET deleted=1 WHERE commented_by='$this->username'");
+		}
+
+		// delete comments
 		public function deleteComments($post_id) {
 			$query = mysqli_query($this->conn, "UPDATE comments SET deleted=1 WHERE post_id='$post_id'");
 		}
