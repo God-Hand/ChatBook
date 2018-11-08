@@ -124,10 +124,7 @@
       }
     });
     $('#cropImage').click(function(event){
-      $image_crop.croppie('result', {
-        type: 'canvas',
-        size: 'original'
-      }).then(function(response){
+      $image_crop.croppie('result', { type: 'canvas', size: 'original' }).then(function(response){
         $.post("upload.php",{image : response, targetDir : "assets/images/post_pics/"}, function(data){
           $('#myUploadImageModel').modal('hide');
           $('#imageLocation').val(data);
@@ -138,11 +135,7 @@
   // send data on save changes click
   $('#sendPost').on('click', function(event){
     if ($('#postBody').val().trim().length || $('#imageLocation').val()){
-      $.post("includes/save_post.php", {
-        userTo : $('#userTo').val(),
-        postBody : $('#postBody').val(),
-        imageLocation : $('#imageLocation').val()}
-        , function(data) {
+      $.post("includes/save_post.php", { userTo : $('#userTo').val(), postBody : $('#postBody').val(), imageLocation : $('#imageLocation').val()} , function(data) {
           location.reload();
       })
     }
