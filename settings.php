@@ -3,7 +3,6 @@
 <head>
 	<title>Chatbook - settings</title>
 	<script src="assets/js/md5.js"></script>
-
 </head>
 <body>
 	<?php include("header.php"); ?>
@@ -283,7 +282,6 @@
 	  return re.test(String(email).toLowerCase());
 	}
 	$('#saveAccountInfoBtn').click(function(){
-		var username = '<?php echo $user->getUsername(); ?>';
 		var firstname = $('#firstName').val();
 		var lastname = $('#lastName').val();
 		var email = $('#email').val();
@@ -292,13 +290,7 @@
 			if($('#email').hasClass('border-danger')){
 				$('#email').removeClass('border-danger');
 			}
-			$.post("includes/change_account_info.php",{
-			username : username,
-			firstname : firstname,
-			lastname : lastname,
-			email : email,
-			bio : bio
-			},function(data){
+			$.post("includes/change_account_info.php",{ firstname : firstname, lastname : lastname, email : email, bio : bio },function(data){
 				if(data=='no'){
 					bootbox.alert('This email_id belongs to another account.');
 					$('#email').addClass('border-danger');
@@ -319,10 +311,7 @@
 	function isValid(obj){ 
     obj.value = obj.value.replace(/[^a-zA-Z0-9@_-]+/g, "");
 	}
-  $('#birthDay').datepicker({
-    uiLibrary: 'bootstrap4',
-    useCurrent: false
-  });
+  $('#birthDay').datepicker({ uiLibrary: 'bootstrap4', useCurrent: false });
   function validateMobileNumber(phoneno){
     if(phoneno.value.match(/^\d{10}$/)){
       $('#phoneNumber').removeClass('border-danger');
@@ -332,7 +321,6 @@
     }
   }
   $('#savePersonalInfoBtn').click(function(){
-    var username = '<?php echo $user->getUsername(); ?>';
     var birthday = $('#birthDay').val();
     var phoneno = $('#phoneNumber').val();
     var gender = $('input[name=gender]:checked').val();
@@ -346,17 +334,8 @@
     } else if(birthday.length !=0 && !birthday.match(/^(?:(0[1-9]|1[012])[\/.](0[1-9]|[12][0-9]|3[01])[\/.](19|20)[0-9]{2})$/)) {
       bootbox.alert('Invalid date');
     } else {
-      $.post("includes/change_personal_info.php", {
-        username : username,
-        birthday : birthday,
-        phoneno : phoneno,
-        gender : gender,
-        city : city,
-        state : state,
-        country : country,
-        school : school,
-        college : college
-        }, function(data) {
+      $.post("includes/change_personal_info.php", { birthday : birthday, phoneno : phoneno, gender : gender,
+        city : city, state : state, country : country, school : school, college : college }, function(data) {
           $('#phoneNumber').val('');
           $('#phoneNumber').removeClass('border-success');
           $('input[name=gender]:checked').prop("checked", false);
@@ -378,15 +357,8 @@
   $(document).ready(function(){
    $proileimagecrop = $('#uploadedProfilePicDemo').croppie({
       enableExif: true,
-      viewport: {
-        width:200,
-        height:200,
-        type:'square'
-      },
-      boundary:{
-        width:300,
-        height:300
-      }
+      viewport: { width:200, height:200, type:'square' },
+      boundary:{ width:300, height:300 }
     });
     $('#uploadProfilePic').on('change', function(){
       var fileExtension = ['jpeg', 'jpg', 'png'];
@@ -410,27 +382,15 @@
         type: 'canvas',
         size: 'original'
       }).then(function(response){
-        $.ajax({
-          url:"upload.php",
-          type: "POST",
-          data:{
-            image: response,
-            targetDir : "assets/images/profile_pics/",
-            username : "<?php echo $user->getUsername(); ?>"
-          },
-          success:function(data) {
-            $('#myUploadProfilePicModel').modal('hide');
-            $('#uploadedProfilePic').val(data);
-          }
-        });
+        $.post("upload.php", {image:response, targetDir : "assets/images/profile_pics/"}, function(data){
+          $('#myUploadProfilePicModel').modal('hide');
+          $('#uploadedProfilePic').val(data);
+        })
       })
     });
     $('#uploadProfilePicBtn').on('click', function(event){
 	    if ($('#uploadedProfilePic').val()){
-	      $.post("includes/change_profile_pic.php", {
-	        username : '<?php echo $user->getUsername(); ?>',
-	        uploadedProfilePic : $('#uploadedProfilePic').val()}
-	        , function(data) {
+	      $.post("includes/change_profile_pic.php", { uploadedProfilePic : $('#uploadedProfilePic').val()}, function(data) {
 	          $('#uploadProfilePic').val('');
 	          $('#uploadedProfilePic').val('');
 	      });
@@ -439,15 +399,8 @@
 
 	 $coverimagecrop = $('#uploadedCoverPicDemo').croppie({
       enableExif: true,
-      viewport: {
-        width:200,
-        height:100,
-        type:'square'
-      },
-      boundary:{
-        width:300,
-        height:150
-      }
+      viewport: { width:200, height:100, type:'square' },
+      boundary:{ width:300, height:150 }
     });
     $('#uploadCoverPic').on('change', function(){
       var fileExtension = ['jpeg', 'jpg', 'png'];
@@ -467,33 +420,18 @@
       }
     });
     $('#cropCoverPic').click(function(event){
-      $coverimagecrop.croppie('result', {
-        type: 'canvas',
-        size: 'original'
-      }).then(function(response){
-        $.ajax({
-          url:"upload.php",
-          type: "POST",
-          data:{
-            image: response,
-            targetDir : "assets/images/cover_pics/",
-            username : "<?php echo $user->getUsername(); ?>"
-          },
-          success:function(data) {
-            $('#myUploadCoverPicModel').modal('hide');
-            $('#uploadedCoverPic').val(data);
-          }
+      $coverimagecrop.croppie('result', { type: 'canvas', size: 'original' }).then(function(response){
+        $.post("upload.php", {image : response, targetDir : "assets/images/cover_pics/"}, function(data){
+          $('#myUploadCoverPicModel').modal('hide');
+          $('#uploadedCoverPic').val(data);
         });
       })
     });
     $('#uploadCoverPicBtn').on('click', function(event){
 	    if ($('#uploadedCoverPic').val()){
-	      $.post("includes/change_cover_pic.php", {
-	        username : '<?php echo $user->getUsername(); ?>',
-	        uploadedCoverPic : $('#uploadedCoverPic').val()}
-	        , function(data) {
-	          $('#uploadCoverPic').val('');
-	          $('#uploadedCoverPic').val('');
+	      $.post("includes/change_cover_pic.php", { uploadedCoverPic : $('#uploadedCoverPic').val() }, function(data) {
+          $('#uploadCoverPic').val('');
+          $('#uploadedCoverPic').val('');
 	      })
 	    }
 	  });
@@ -520,7 +458,6 @@
 		}
 	}
 	$('#saveChangedPasswordBtn').click(function(){
-		var username = '<?php echo $user->getUsername(); ?>';
 		var previouspassword = $('#previouspassword').val();
 		var password = $('#password').val();
 		var newpassword = $('#newPassword').val();
@@ -547,11 +484,7 @@
 		} else if ($('#confirmPassword').val() != $('#newPassword').val()) {
 			bootbox.alert("Password Mismatch!");
 		} else if((password.length >= 8 && password.length <=15) && (newpassword.length >= 8 && newpassword.length <=15)){
-			$.post("includes/change_password.php",{
-			username : username,
-			password : password,
-			newpassword : newpassword
-			},function(data){
+			$.post("includes/change_password.php",{ password : password, newpassword : newpassword },function(data){
 				$('#previouspassword').val(data);
 				$('#password').val('');
 				$('#newPassword').val('');
@@ -572,30 +505,14 @@
 		bootbox.confirm({
 	  	message: "Are you sure?",
 	    buttons: {
-	      confirm: {
-          label: 'Yes',
-          className: 'btn-danger'
-        },
-		    cancel: {
-		  	  label: 'No',
-			    className: 'btn-secondary'
-		    }
+	      confirm: { label: 'Yes', className: 'btn-danger' },
+		    cancel: { label: 'No', className: 'btn-secondary' }
 		  },
 		  callback: function (result) {
 	      if(result){
-					$.ajax({
-			      type: "POST",
-			      url: "includes/delete_account.php",
-			      data: {
-			        username : '<?php echo $user->getUsername(); ?>',
-			      },
-			      success: function(result) {
-			      	window.location.href = "sign_out.php?";
-			      },
-			      error: function(result) {
-			        alert('error');
-			      }
-			    });
+          $.post("includes/delete_account.php", {}, function(data){
+            window.location.href = "sign_out.php?";
+          });
 	      }
 	    }
 		});
