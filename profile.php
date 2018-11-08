@@ -102,9 +102,6 @@
 				</div>
 				<div class="card">
 					<div class="card-body">
-						<?php
-							$row = $profile_user->userInfoArray();
-						?>						
 					</div>					
 				</div>
 			</div>
@@ -127,7 +124,7 @@
 				  ?>
 				</ul>
 				<!-- Tab panes -->
-				<div class="tab-content">
+				<div class="tab-content mb-2">
 				  <div class="tab-pane new-container active" id="profile_post_box">
 				  	<div class="posts_area">
 						</div>
@@ -138,7 +135,7 @@
 				  <?php
 				  	if($user->getUsername() != $profile_user->getUsername()){
 				  		echo "<div class='tab-pane new-container fade' id='message_box'>
-									  	<iframe src='message_card.php?user_to=<?php echo $profile_user->getUsername(); ?>' class='border border-default' style='height:514px;width:100%;'></iframe>
+									  	<iframe src='message_card.php?user_to=" . $profile_user->getUsername() . "' class='border border-default' style='height:514px;width:100%;'></iframe>
 									  </div>";
 				  	} 
 				  ?>
