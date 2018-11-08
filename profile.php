@@ -135,9 +135,13 @@
 				  </div>
 				  <div class="tab-pane new-container fade" id="friend_box">
 				  </div>
-				  <div class="tab-pane new-container fade" id="message_box">
-				  	<iframe src="message_card.php?user_to=<?php echo $profile_user->getUsername(); ?>" class="border border-default" style="height:514px;width:100%;"></iframe>
-				  </div>
+				  <?php
+				  	if($user->getUsername() != $profile_user->getUsername()){
+				  		echo "<div class='tab-pane new-container fade' id='message_box'>
+									  	<iframe src='message_card.php?user_to=<?php echo $profile_user->getUsername(); ?>' class='border border-default' style='height:514px;width:100%;'></iframe>
+									  </div>";
+				  	} 
+				  ?>
 				</div>
 			</div>
 		</div>
