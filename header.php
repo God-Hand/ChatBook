@@ -216,78 +216,33 @@
     }
   }
   function saveAction(obj){
-    var user_logged_in = '<?php echo $user_logged_in; ?>';
-    $.ajax({
-      type: "POST",
-      url: "includes/like_post.php",
-      data: {
-        username : user_logged_in,
-        post_id : obj.id,
-        user_action  : obj.value
-      },
-      success: function(result) {
-      },
-      error: function(result) {
-        alert('error');
-      }
+    $.post("includes/like_post.php", {post_id : obj.id, user_action : obj.value}, function(data){
     });
   }
   function sendComment(obj){
-    var user_logged_in = '<?php echo $user_logged_in; ?>';
     var comment = "comment";
     var body = document.getElementById(comment.concat(obj.id)).value;
-    $.ajax({
-      type: "POST",
-      url: "includes/save_comment.php",
-      data: {
-        username : user_logged_in,
-        post_id : obj.id,
-        comment_body  : body
-      },
-      success: function(result) {
-        document.getElementById(comment.concat(obj.id)).value = '';
-        var commentcountid = "commentcountid";
-        document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
-        var commentframeid = "commentframe";
-        document.getElementById(commentframeid.concat(obj.id)).contentWindow.location.reload();
-        //document.getElementById(commentframeid.concat(obj.id)).style.display = "block";
-      },
-      error: function(result) {
-        alert('error');
-      }
+    $.post("includes/save_comment.php", {post_id : obj.id, comment_body : body}, function(data){
+      document.getElementById(comment.concat(obj.id)).value = '';
+      var commentcountid = "commentcountid";
+      document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
+      var commentframeid = "commentframe";
+      document.getElementById(commentframeid.concat(obj.id)).contentWindow.location.reload();
     });
   }
   function deletePost(obj){
     bootbox.confirm({
       message: "Delete the post .Are you Sure?",
       buttons: {
-        confirm: {
-          label: 'Yes',
-          className: 'btn-success'
-        },
-        cancel: {
-          label: 'No',
-          className: 'btn-danger'
-        }
+        confirm: { label: 'Yes', className: 'btn-success' },
+        cancel: { label: 'No', className: 'btn-danger' }
       },
       callback: function (result) {
         if(result){
-          var user_logged_in = '<?php echo $user_logged_in; ?>';
-          $.ajax({
-            type: "POST",
-            url: "includes/delete_post.php",
-            data: {
-              username : user_logged_in,
-              post_id : obj.id,
-            },
-            success: function(result) {
-              var element = '.post#';
-              $(element.concat(obj.id)).fadeOut();
-              $('#totalpostsCounts').html(parseInt($('#totalpostsCounts').text())-1);
-            },
-            error: function(result) {
-              alert('error');
-            }
+          $.post("includes/delete_post.php", {post_id : obj.id}, function(data){
+            var element = '.post#';
+            $(element.concat(obj.id)).fadeOut();
+            $('#totalpostsCounts').html(parseInt($('#totalpostsCounts').text())-1);
           });
         }
       }
@@ -297,35 +252,17 @@
     bootbox.confirm({
       message: "Delete the comment .Are you Sure?",
       buttons: {
-        confirm: {
-          label: 'Yes',
-          className: 'btn-success'
-        },
-        cancel: {
-          label: 'No',
-          className: 'btn-danger'
-        }
+        confirm: { label: 'Yes', className: 'btn-success' },
+        cancel: { label: 'No', className: 'btn-danger' }
       },
       callback: function (result) {
         if(result){
-          var user_logged_in = '<?php echo $user_logged_in; ?>';
-          $.ajax({
-            type: "POST",
-            url: "includes/delete_comment.php",
-            data: {
-              username : user_logged_in,
-              comment_id : obj.id,
-            },
-            success: function(result) {
-              var commentframeid = "#commentframe";
-              var comment = '.comment#';
-              $(commentframeid.concat(result)).contents().find(comment.concat(obj.id)).fadeOut();
-              var commentcountid = "commentcountid";
-              document.getElementById(commentcountid.concat(result)).innerHTML = parseInt(document.getElementById(commentcountid.concat(result)).innerHTML) - 1;
-            },
-            error: function(result) {
-              alert('error');
-            }
+          $.post("includes/delete_comment.php", {comment_id : obj.id}, function(data){
+            var commentframeid = "#commentframe";
+            var comment = '.comment#';
+            $(commentframeid.concat(result)).contents().find(comment.concat(obj.id)).fadeOut();
+            var commentcountid = "commentcountid";
+            document.getElementById(commentcountid.concat(result)).innerHTML = parseInt(document.getElementById(commentcountid.concat(result)).innerHTML) - 1;
           });
         }
       }
