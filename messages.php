@@ -11,7 +11,6 @@
 
 <style>
 .list-group{
-  max-height: 476px;
   min-height: 2px;
   width: 100%;
   overflow-y:scroll;
@@ -81,11 +80,30 @@
 		var newWidth = $('#senderSearch').width() - 50 + "px";
 		console.log(newWidth);
 		$.post('includes/senderSearch.php', { name : obj.value, width : newWidth }, function(data){
+		$.post('includes/senderSearch.php', { name : obj.value, last_message_id : 0}, function(data){
 			$('.list-group').empty();
 			$('.list-group').html(data);
 			resizeContent();
 		});
 	}
+
+	$('.list-group').scroll(function(){
+		var $this = $(this);
+    var height = this.scrollHeight - $this.height();
+    var scroll = $this.scrollTop();
+    var name = $('#senderSearch').val();
+		var last_message_id = $('.messageSenders:last').attr('id');
+		var noMoreMessageSenders = $('.list-group').find('#noMoreMessageSenders').val();
+    var isScrolledToEnd = (scroll >= height);
+    $(".scroll-pos").text(scroll);
+    $(".scroll-height").text(height);
+    if (isScrolledToEnd || noMoreMessageSenders=='false') {
+      $.post('includes/senderSearch.php', { name : name, last_message_id : last_message_id}, function(data){
+				$this.append(data);
+				resizeContent();
+			});
+    }
+	});
 
 	$(document).ready(function(){
 		$('#senderSearch').val('').trigger('keyup');

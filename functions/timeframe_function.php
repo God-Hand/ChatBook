@@ -11,9 +11,9 @@
 		} else if ($interval->m >= 1) { 
 			# check duration for months and days
 			if($interval->m == 1) {
-				$message = $interval->m . " month ago". $days;
+				$message = $interval->m . " month ago";
 			} else {
-				$message = $interval->m . " months ago". $days;
+				$message = $interval->m . " months ago";
 			}
 		} else if($interval->d >= 1) {
 			# check duration for days
@@ -39,6 +39,30 @@
 		} else {
 			# duration in seconds
 			$message = "Just now";	
+		}
+
+		return $message;
+	}
+
+	function getTimeFrameMin($interval) {
+
+		if($interval->y >= 1) {	
+			# check duration for years
+			$message = $interval->y . " Y";
+		} else if ($interval->m >= 1) { 
+			# check duration for months
+			$message = $interval->m . " M".;
+		} else if($interval->d >= 1) {
+			# check duration for days
+			$message = $interval->d . " d".;
+		} else if($interval->h >= 1) {
+			# check duration for hours
+			$message = $interval->h . " h";
+		} else if($interval->i >= 1) {
+			# check duration for minutes
+			$message = $interval->i . " m";
+		} else {
+			$message = $interval->s . " s";	
 		}
 
 		return $message;
