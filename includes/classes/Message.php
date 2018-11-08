@@ -1,18 +1,4 @@
 <?php
-
-	/**
-	* CREATE TABLE IF NOT EXISTS `messages` (
-	*   `message_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-	*   `user_from` varchar(60) NOT NULL,
-	*   `user_to` varchar(60) NOT NULL,
-	*   `message_body` text NOT NULL,
-	*   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	*   `viewed` tinyint(1) NOT NULL DEFAULT '0',
-	*   `opened` tinyint(1) NOT NULL DEFAULT '0',
-	*   `deleted` tinyint(1) NOT NULL DEFAULT '0',
-	*   PRIMARY KEY (`message_id`)
-	* ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-	*/
 	class Message {
 		private $username;
 		private $conn;
@@ -46,20 +32,14 @@
 		}
 
 		// return username array, to whom user interact
-		public function getMessageSendersArray() {
+		/*public function getMessageSendersArray() {
 			$senders = array();
 			$query = mysqli_query($this->conn, "SELECT DISTINCT user_from FROM messages WHERE user_to='$this->username' OR user_from='$this->username' ORDER BY message_id DESC");
 			while($row = mysqli_fetch_array($query)) {
 				array_push($senders, $row['user_from']);
 			}
 			return $senders;
-		}
-
-		// return unreaded messages count
-		public function getUnreadMessagesCount() {
-			$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE user_to='$this->username' AND deleted=0 AND  opened=0");
-			return mysqli_num_rows($query);
-		}
+		}*/
 
 		// return new messages count
 		public function getNewMessagesCount() {
@@ -68,7 +48,7 @@
 		}
 
 		// return new messages count
-		public function getNewMessagesCountFromUser($user_from) {
+		public function getNewMessagesCountUserFrom($user_from) {
 			$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE user_to='$this->username' AND user_from='$user_from' AND deleted=0 AND viewed=0");
 			return mysqli_num_rows($query);
 		}
@@ -81,16 +61,6 @@
 		// view all messages of a user
 		public function viewMessages($user_from) {
 			$query = mysqli_query($this->conn, "UPDATE messages SET viewed=1 WHERE user_to='$this->username' AND user_from='$user_from'");
-		}
-
-		// read a message of a user
-		public function readMessage($message_id) {
-			$query = mysqli_query($this->conn, "UPDATE messages SET opened=1 WHERE message_id='$message_id'");
-		}
-
-		// read all messages of a user
-		public function readMessages($user_from) {
-			$query = mysqli_query($this->conn, "UPDATE messages SET opened=1 WHERE user_to='$this->username' AND user_from='$user_from'");
 		}
 
 		// delete a message of a user

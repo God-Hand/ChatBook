@@ -51,10 +51,10 @@
 			$message = $interval->y . " Y";
 		} else if ($interval->m >= 1) { 
 			# check duration for months
-			$message = $interval->m . " M".;
+			$message = $interval->m . " M";
 		} else if($interval->d >= 1) {
 			# check duration for days
-			$message = $interval->d . " d".;
+			$message = $interval->d . " d";
 		} else if($interval->h >= 1) {
 			# check duration for hours
 			$message = $interval->h . " h";

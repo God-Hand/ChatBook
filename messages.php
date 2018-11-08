@@ -11,6 +11,7 @@
 
 <style>
 .list-group{
+	max-height: 475px;
   min-height: 2px;
   width: 100%;
   overflow-y:scroll;
@@ -79,7 +80,6 @@
 	function searchMessageUser(obj) {
 		var newWidth = $('#senderSearch').width() - 50 + "px";
 		console.log(newWidth);
-		$.post('includes/senderSearch.php', { name : obj.value, width : newWidth }, function(data){
 		$.post('includes/senderSearch.php', { name : obj.value, last_message_id : 0}, function(data){
 			$('.list-group').empty();
 			$('.list-group').html(data);
