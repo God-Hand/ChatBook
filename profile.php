@@ -129,7 +129,9 @@
 						</div>
 						<img id="loading" src="assets/images/icons/loading.gif">
 				  </div>
-				  <div class="tab-pane new-container fade" id="friend_box">page2</div>
+				  <div class="tab-pane new-container fade" id="friend_box">
+				  	<iframe src="message_card.php?user_to=<?php echo $profile_user->getUsername(); ?>"></iframe>
+				  </div>
 				  <div class="tab-pane new-container fade" id="message_box">page3</div>
 				</div>
 			</div>
