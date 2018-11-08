@@ -20,7 +20,7 @@
 		while ($row = mysqli_fetch_array($data)) {
 			$searched_user = $row['username'];
 			$searched_user_profile_pic = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary'> <img src='" . $row['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
-			$searched_user_fullname = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary'> <h6 class='text-primary' style='overflow:hidden;text-overflow: ellipsis;'>" . $row['first_name'] . " " . $row['last_name'] . "</h6> </a>";
+			$searched_user_fullname = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary'> <h6 class='text-primary'>" . $row['first_name'] . " " . $row['last_name'] . "</h6> </a>";
 
 			if ($user->getUsername() == $searched_user){
 				$friend_button = "";
@@ -39,10 +39,13 @@
 			}
 			$str .= "<div class='dropdown-item container searcheduser'>
 								<div class='row'>
-									<div class='col-2'>" . $searched_user_profile_pic . "</div>
-									<div class='col-6' style='padding:0px;'>
-										" . $searched_user_fullname . "<br>
-										" . $mutual_friends . "
+									<div class='col-8'>
+										<div class='media'>
+										  " . $searched_user_profile_pic . "
+										  <div class='media-body'>
+										    " . $searched_user_fullname . $mutual_friends . "
+										  </div>
+										</div>
 									</div>
 									<div class='col-4'>" . $friend_button . "</div>
 								</div>
