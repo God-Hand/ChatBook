@@ -7,8 +7,6 @@
 </head>
 <body>
 	<?php include("header.php"); ?>
-
-
 <style>
 .list-group{
 	max-height: 475px;
@@ -61,14 +59,12 @@
 				    <input id="senderSearch" type="text" class="form-control" placeholder="Search..." onkeyup="searchMessageUser(this)">
 				  </div>
 					<div class="list-group">
-					  
 					</div>
 				</div>
 				<br>
 			</div>
 			<div class="col-md-8">
 				<iframe src="message_card.php?user_to=arpit_gupta1541532293" class="border border-default" style="height:514px;width:100%;">
-					
 				</iframe>
 			</div>
 		</div><br/>
