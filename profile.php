@@ -118,9 +118,13 @@
 				  <li class="nav-item">
 				    <a class="nav-link" data-toggle="tab" href="#friend_box">Friends</a>
 				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="#message_box">Message</a>
-				  </li>
+				  <?php
+				  	if($user->getUsername() != $profile_user->getUsername()){
+				  		echo "<li class='nav-item'>
+									    <a class='nav-link' data-toggle='tab' href='#message_box'>Message</a>
+									  </li>";
+				  	} 
+				  ?>
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
@@ -130,9 +134,10 @@
 						<img id="loading" src="assets/images/icons/loading.gif">
 				  </div>
 				  <div class="tab-pane new-container fade" id="friend_box">
-				  	<iframe src="message_card.php?user_to=<?php echo $profile_user->getUsername(); ?>"></iframe>
 				  </div>
-				  <div class="tab-pane new-container fade" id="message_box">page3</div>
+				  <div class="tab-pane new-container fade" id="message_box">
+				  	<iframe src="message_card.php?user_to=<?php echo $profile_user->getUsername(); ?>" class="border border-default" style="height:514px;width:100%;"></iframe>
+				  </div>
 				</div>
 			</div>
 		</div>
