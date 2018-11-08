@@ -58,6 +58,7 @@
    </div>
   </div>
 </div>
+
 <script type="text/javascript">
 	// show model on add post click
 	$('#addpost').on('click', function(e){
@@ -67,15 +68,8 @@
   $(document).ready(function(){
    $image_crop = $('#uploadedImageDemo').croppie({
       enableExif: true,
-      viewport: {
-        width:200,
-        height:200,
-        type:'square' //circle
-      },
-      boundary:{
-        width:300,
-        height:300
-      }
+      viewport: { width:200, height:200, type:'square' },
+      boundary:{ width:300, height:300 }
     });
     $('#postImage').on('change', function(){
       var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
@@ -99,18 +93,9 @@
         type: 'canvas',
         size: 'original'
       }).then(function(response){
-        $.ajax({
-          url:"upload.php",
-          type: "POST",
-          data:{
-            image: response,
-            targetDir : "assets/images/post_pics/",
-            username : "<?php echo $user->getUsername(); ?>"
-          },
-          success:function(data) {
-            $('#myUploadImageModel').modal('hide');
-            $('#imageLocation').val(data);
-          }
+        $.post("upload.php", {image:response, targetDir:"assets/images/post_pics/"}, function(data){
+          $('#myUploadImageModel').modal('hide');
+          $('#imageLocation').val(data);
         });
       })
     });
@@ -119,7 +104,6 @@
   $('#sendPost').on('click', function(event){
     if ($('#postBody').val().trim().length || $('#imageLocation').val()){
       $.post("includes/save_post.php", {
-        username : '<?php echo $user->getUsername(); ?>',
         userTo : $('#userTo').val(),
         postBody : $('#postBody').val(),
         imageLocation : $('#imageLocation').val()}
