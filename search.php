@@ -45,7 +45,7 @@
 <script>
 	function SearchUsers(obj){
     var username = '<?php echo $user->getUsername(); ?>';
-    $.post("includes/search.php", {name:obj.value, username:username, limit:5, requestby:2}, function(data) {
+    $.post("includes/search.php", {name:obj.value, limit:5, requestby:2}, function(data) {
       $('.searchedResult').empty();
       if(data != ''){
         $('.searchedResult').html(data);
