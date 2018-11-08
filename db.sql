@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 07, 2018 at 11:32 AM
+-- Generation Time: Nov 08, 2018 at 06:46 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -39,16 +39,18 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`comment_id`, `commented_by`, `body`, `commented_time`, `user_closed`, `deleted`, `post_id`) VALUES
-(4, 'jitendra_sharma1541494133', 'https://www.youtube.com/', '2018-11-06 19:14:43', 0, 1, 23),
-(5, 'jitendra_sharma1541494133', 'https://www.youtube.com/watch?v=StFguMg6guI', '2018-11-06 19:14:59', 0, 1, 23),
-(6, 'jitendra_sharma1541494133', 'aa', '2018-11-07 16:58:33', 0, 1, 26);
+(14, 'deepak_thakur1541695563', 'hi', '2018-11-08 22:40:46', 0, 0, 46),
+(15, 'deepak_thakur1541695563', 'bye', '2018-11-08 23:00:01', 0, 0, 46),
+(16, 'deepak_thakur1541695563', 'good night', '2018-11-08 23:26:51', 0, 0, 46),
+(17, 'deepak_thakur1541695563', 'good night', '2018-11-08 23:27:30', 0, 0, 46),
+(18, 'deepak_thakur1541695563', 'is it', '2018-11-08 23:28:45', 0, 0, 47);
 
 -- --------------------------------------------------------
 
@@ -69,8 +71,7 @@ CREATE TABLE IF NOT EXISTS `comment_likes` (
 --
 
 INSERT INTO `comment_likes` (`username`, `liked`, `comment_id`) VALUES
-('jitendra_sharma1541494133', 0, 4),
-('jitendra_sharma1541494133', 1, 5);
+('deepak_thakur1541695563', 0, 14);
 
 -- --------------------------------------------------------
 
@@ -87,15 +88,14 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
   `accepted` tinyint(1) DEFAULT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `friend_requests`
 --
 
 INSERT INTO `friend_requests` (`request_id`, `user_from`, `user_to`, `request_time`, `accepted`, `deleted`) VALUES
-(54, 'jitendra_sharma1541494133', 'deepak_thakur1541532208', '2018-11-07 16:31:59', 1, 1),
-(55, 'jitendra_sharma1541494133', 'arpit_gupta1541532293', '2018-11-07 16:32:00', 1, 1);
+(90, 'deepak_thakur1541695563', 'jitrendra_sharma1541694954', '2018-11-08 22:21:24', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -111,10 +111,9 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `message_body` text NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `viewed` tinyint(1) NOT NULL DEFAULT '0',
-  `opened` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -155,17 +154,19 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`post_id`, `user_from`, `user_to`, `body`, `image`, `posted_time`, `user_closed`, `deleted`) VALUES
-(23, 'jitendra_sharma1541494133', '', 'i love this', 'assets/images/post_pics/jitendra_sharma15414941331541511529.png', '2018-11-06 19:08:56', 0, 1),
-(24, 'jitendra_sharma1541494133', '', 'https://www.tutorialrepublic.com/faq/how-to-check-or-uncheck-radio-button-dynamically-using-jquery.php', '', '2018-11-06 19:10:58', 0, 1),
-(25, 'jitendra_sharma1541494133', '', 'hi', '', '2018-11-07 16:39:40', 0, 0),
-(26, 'jitendra_sharma1541494133', '', 'cloud computing', 'assets/images/post_pics/jitendra_sharma15414941331541589007.png', '2018-11-07 16:40:08', 0, 0);
+(44, 'jitrendra_sharma1541694954', '', 'hi everyone', 'assets/images/post_pics/jitrendra_sharma15416949541541695102.png', '2018-11-08 22:08:23', 0, 0),
+(45, 'deepak_thakur1541695563', '', 'hi', '', '2018-11-08 22:40:29', 0, 1),
+(46, 'deepak_thakur1541695563', '', 'hi', '', '2018-11-08 22:40:40', 0, 0),
+(47, 'deepak_thakur1541695563', '', 'hello everyone', '', '2018-11-08 23:14:20', 0, 0),
+(48, 'deepak_thakur1541695563', '', 'see', '', '2018-11-08 23:14:42', 0, 0),
+(49, 'deepak_thakur1541695563', '', '', 'assets/images/post_pics/deepak_thakur15416955631541699168.png', '2018-11-08 23:16:09', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -186,9 +187,10 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
 --
 
 INSERT INTO `post_likes` (`username`, `liked`, `post_id`) VALUES
-('jitendra_sharma1541494133', 0, 23),
-('jitendra_sharma1541494133', 0, 25),
-('jitendra_sharma1541494133', 1, 26);
+('deepak_thakur1541695563', 1, 46),
+('deepak_thakur1541695563', 1, 47),
+('deepak_thakur1541695563', 1, 48),
+('deepak_thakur1541695563', 1, 49);
 
 -- --------------------------------------------------------
 
@@ -227,9 +229,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `cover_pic`, `deactivate_account`, `friend_array`, `phone_no`, `gender`, `birthday`, `city`, `state`, `country`, `school`, `college`, `bio`, `is_online`) VALUES
-('arpit', 'gupta', 'arpit_gupta1541532293', 'arpit.gupta_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-11-06 19:24:53', 'assets/images/profile_pics/arpit_gupta15415322931541581420.png', 'assets/images/cover_pics/arpit_gupta15415322931541581450.png', 0, ',jitendra_sharma1541494133,', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-('deepak', 'thakur', 'deepak_thakur1541532208', 'deepak.singh_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-11-06 19:23:28', 'assets/images/profile_pics/deepak_thakur15415322081541581310.png', 'assets/images/cover_pics/deepak_thakur15415322081541581335.png', 0, ',jitendra_sharma1541494133,', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-('Jitendra', 'Sharma', 'jitendra_sharma1541494133', 'Jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-11-06 08:48:53', 'assets/images/profile_pics/jitendra_sharma15414941331541537240.png', 'assets/images/cover_pics/jitendra_sharma15414941331541537259.png', 0, ',deepak_thakur1541532208,arpit_gupta1541532293,', '9536097795', 'male', '2018-03-03', 'mathura', 'uttar pradesh', 'india', 'shriji baba saraswati vidya mandir', 'gla university, mathura', 'god hand', 0);
+('deepak', 'thakur', 'deepak_thakur1541695563', 'deepak.singh_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-11-08 16:46:03', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+('jitrendra', 'Sharma', 'jitrendra_sharma1541694954', 'Jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-11-08 16:35:54', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
