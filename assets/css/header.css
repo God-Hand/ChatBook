@@ -1,0 +1,62 @@
+div {
+  word-wrap: break-word;
+}
+.form-group, .table{
+  margin-bottom: 0px;
+}
+.scrollClass {
+  height:200px;
+  overflow-y: scroll;
+}
+.button {
+  padding: 0px 4px;
+  margin-left: 5px;
+}
+.searchresult{
+  max-width: 360px;
+  max-height: 300px;
+  width: 100%;
+  padding: 0px;
+}
+.searcheduser{
+  line-height: 0px;
+  word-wrap: break-word;
+  padding: 10px;
+}
+.searcheduser:hover{
+  background-color:#e0e0e0;
+}
+.empty-70-height{
+  min-height: 70px;
+}
+.padding-5-circle{
+   background-color: #fff;
+   padding: 5px;
+   border-radius: 50%;
+}
+a:hover{
+  text-decoration: none;
+}
+.new-container{
+  padding: 0px 10px 0px 10px;
+  width: 100%;
+}
+.cover-img{
+  height: 100%;
+  width: 100%;"
+}
+.noMorePosts{
+  padding-left:10px;
+}
+.media-body{
+  margin-left: 5px;
+}
+.post-body{
+  margin:0px 2px;
+}
+.commentframe{
+  border:none;
+  max-height:200px;
+  margin:5px 0px;
+  display: none;
+}

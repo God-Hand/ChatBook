@@ -2,76 +2,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.css">
 <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="assets/css/header.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
-<style type="text/css">
-  div {
-    word-wrap: break-word;
-  }
-  .form-group, .table{
-    margin-bottom: 0px;
-  }
-  .scrollClass {
-    height:200px;
-    overflow-y: scroll;
-  }
-  .button {
-    padding: 0px 4px;
-    margin-left: 5px;
-  }
-  .searchresult{
-    max-width: 360px;
-    max-height: 300px;
-    width: 100%;
-    padding: 0px;
-  }
-  .searcheduser{
-    line-height: 0px;
-    word-wrap: break-word;
-    padding: 10px;
-  }
-  .searcheduser:hover{
-    background-color:#e0e0e0;
-  }
-  .empty-70-height{
-    min-height: 70px;
-  }
-  .padding-5-circle{
-     background-color: #fff;
-     padding: 5px;
-     border-radius: 50%;
-  }
-  a:hover{
-    text-decoration: none;
-  }
-  .new-container{
-    padding: 0px 10px 0px 10px;
-    width: 100%;
-  }
-  .cover-img{
-    height: 100%;
-    width: 100%;"
-  }
-  .noMorePosts{
-    padding-left:10px;
-  }
-  .media-body{
-    margin-left: 5px;
-  }
-  .post-body{
-    margin:0px 2px;
-  }
-  .commentframe{
-    border:none;
-    max-height:200px;
-    margin:5px 0px;
-    display: none;
-  }
-</style>
+
 
 <?php
   require('includes/classes/User.php');
@@ -225,7 +163,7 @@
     $.post("includes/save_comment.php", {post_id : obj.id, comment_body : body}, function(data){
       document.getElementById(comment.concat(obj.id)).value = '';
       var commentcountid = "commentcountid";
-      document.getElementById(commentcountid.concat(obj.id)).innerHTML = result;
+      document.getElementById(commentcountid.concat(obj.id)).innerHTML = data;
       var commentframeid = "commentframe";
       document.getElementById(commentframeid.concat(obj.id)).contentWindow.location.reload();
     });
