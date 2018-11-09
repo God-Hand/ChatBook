@@ -35,11 +35,11 @@
 		} else {
 			array_push($error_array, "Invalid Email format");
 		}
-		if (strlen($first_name) > 20 || strlen($first_name) < 2) {
-			array_push($error_array, "Your first name must be between 2 and 20 characters");
+		if (strlen($first_name) > 25 || strlen($first_name) < 2) {
+			array_push($error_array, "Your first name must be between 2 and 25 characters");
 		}
-		if (strlen($last_name) > 20 || strlen($last_name) < 2) {
-			array_push($error_array, "Your last name must be between 2 and 20 characters");
+		if (strlen($last_name) > 25 || strlen($last_name) < 2) {
+			array_push($error_array, "Your last name must be between 2 and 25 characters");
 		}
 		if ($password != $confirm_password) {
 			array_push($error_array, "Your passwords do not match");
@@ -104,22 +104,17 @@
 										?>" required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="login_password" class="form-control" placeholder="Password" required>
+										<input type="password" name="login_password" class="form-control" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Your Password" required>
 										<?php
 											if(in_array("Email or password was incorrect", $error_array)){
 												echo "<span class='text-danger'>Email or password was incorrect</span>";
 											}
 										?>
 									</div>
-
-									<div class="form-group text-center">
-										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-										<label for="remember"> Remember Me</label>
-									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login_button" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+												<input type="submit" name="login_button" id="login-submit" class="form-control btn btn-login" value="Log In">
 											</div>
 										</div>
 									</div>
@@ -127,7 +122,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="recover.php" tabindex="5" class="forgot-password">Forgot Password?</a>
+													<a href="#" class="forgot-password" data-toggle="tooltip" data-placement="top" title="This feature is not supported for now">Forgot Password?</a>
 												</div>
 											</div>
 										</div>
@@ -142,8 +137,8 @@
 											}
 										?>" required>
 										<?php
-											if(in_array("Your first name must be between 2 and 20 characters", $error_array)){
-												echo "<span class='text-danger'>Your first name must be between 2 and 20 characters</span>";
+											if(in_array("Your first name must be between 2 and 25 characters", $error_array)){
+												echo "<span class='text-danger'>Your first name must be between 2 and 25 characters</span>";
 											}
 										?>
 									</div>
@@ -155,8 +150,8 @@
 											}
 										?>" required>
 										<?php
-											if(in_array("Your last name must be between 2 and 20 characters", $error_array)){
-												echo "<span class='text-danger'>Your last name must be between 2 and 20 characters</span>";
+											if(in_array("Your last name must be between 2 and 25 characters", $error_array)){
+												echo "<span class='text-danger'>Your last name must be between 2 and 25 characters</span>";
 											}
 										?>
 									</div>
