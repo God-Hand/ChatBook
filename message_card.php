@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<div class="container-fluid" id="message_area">
-			<div class='row mb-0'></div>
+			<div class='row mb-3'></div>
 			<div class='row float-right ml-0 message' id='0' display='none'></div>
 		</div>
 		<div class='input-group'>
@@ -85,28 +85,31 @@
 </body>
 </html>
 <script>
-	var last_message_id = 0;
+	window.onresize = function() {
+	  $('.resize-box').css({
+	    "maxWidth": $('.resize-box').parent().width() - 10 + "px"
+	  });
+	}
 	function sendMessage(){
 		var msg_body = $('#messageTyped').val();
 		$.post("includes/save_message.php", {body:msg_body, name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
 			$('#messageTyped').val('');
 		});
 	}
-	window.onresize = function() {
-	  $('.resize-box').css({
-	    "maxWidth": $('.resize-box').parent().width() - 10 + "px"
-	  });
-	}
 	function loadOldMessages(){
-		$('.container-fluid').find('#loadRow').remove();
+		var last_message_id = $('.message:first').attr('id');
+		console.log(last_message_id);
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 8 }, function(data){
 			if(data != "nothing"){
+				$('.container-fluid').find('#loadRow').remove();
 				$('.container-fluid').prepend(data);
+			} else {
+				console.log(data);
 			}
 		});
 	}
 	function loadNewMessages(){
-		last_message_id = $('.message:last').attr('id');
+		var last_message_id = $('.message:last').attr('id');
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
 			$('.container-fluid').append(data);
 		});

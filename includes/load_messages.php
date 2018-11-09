@@ -23,7 +23,7 @@
 
 				if( $row['user_from'] == $user->getUsername()){
 					$message_by = "You";
-					$str .= "<div class='row float-right ml-0 message' id='" . $message_id . "'>
+					$str = "<div class='row float-right ml-0 message' id='" . $message_id . "'>
 										<div class='col-12 alert bg-success text-white'>
 											<div class='media'>
 											  <div class='media-body'>
@@ -33,10 +33,10 @@
 											  </div>
 											</div>
 										</div>
-									</div>";
+									</div>" . $str;
 				} else {
 					$message_by = $fullname;
-					$str .= "<div class='row float-left mr-0 message' id='" . $message_id . "'>
+					$str = "<div class='row float-left mr-0 message' id='" . $message_id . "'>
 										<div class='col-12 alert bg-primary text-white'>
 											<div class='media'>
 											  <div class='media-body'>
@@ -46,10 +46,10 @@
 											  </div>
 											</div>
 										</div>
-									</div>";
+									</div>" . $str;
 				}
 			}
-			$str = "<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>" . $str;
+			$str = "<div class='row' id='loadRow'><div class='col-12 mb-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>" . $str;
 			echo $str;
 		} else {
 			echo "nothing";
