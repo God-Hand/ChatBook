@@ -126,6 +126,21 @@
 				<!-- Tab panes -->
 				<div class="tab-content mb-2">
 				  <div class="tab-pane container-fluid active" id="profile_post_box">
+				  	<div class="card shadow p-3 mb-4 bg-white rounded post_block">
+						  <div class="form-group">
+						    <textarea id="postBody" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..."></textarea>
+						    <div class="form-row">
+						      <div class="col">
+						        <input type="file" id="postImage"  class="form-control-file btn float-left pl-0" accept="image/*">
+						        <input type="hidden" id='userTo' value='<?php if($user->getUsername() != $profile_user->getUsername()){echo $profile_user->getUsername();}else{ echo '';} ?>'>
+						        <input type="hidden" id='imageLocation' value=''>
+						      </div>
+						      <div class="col">
+						        <button type="submit" class="btn btn-primary float-right mt-5" id='sendPost'><i class="fa fa-pencil"></i>&nbsp;Post</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 				  	<div class="posts_area">
 						</div>
 						<img id="loading" src="assets/images/icons/loading.gif">
@@ -171,4 +186,44 @@
 			}
 		});
 	});
+	  $(document).ready(function(){
+   $image_crop = $('#uploadedImageDemo').croppie({
+      enableExif: true,
+      viewport: { width:200, height:200, type:'square' },
+      boundary:{ width:300, height:300 }
+    });
+    $('#postImage').on('change', function(){
+      var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+      if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        alert("Only formats are allowed : "+fileExtension.join(', '));
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          $image_crop.croppie('bind', {
+            url: event.target.result
+          }).then(function(){
+            console.log('jQuery bind complete');
+          });
+        }
+        reader.readAsDataURL(this.files[0]);
+        $('#myUploadImageModel').modal('show');
+      }
+    });
+    $('#cropImage').click(function(event){
+      $image_crop.croppie('result', { type: 'canvas', size: 'original' }).then(function(response){
+        $.post("upload.php",{image : response, targetDir : "assets/images/post_pics/"}, function(data){
+          $('#myUploadImageModel').modal('hide');
+          $('#imageLocation').val(data);
+        });
+      })
+    });
+  });
+  // send data on save changes click
+  $('#sendPost').on('click', function(event){
+    if ($('#postBody').val().trim().length || $('#imageLocation').val()){
+      $.post("includes/save_post.php", { userTo : $('#userTo').val(), postBody : $('#postBody').val(), imageLocation : $('#imageLocation').val()} , function(data) {
+          location.reload();
+      })
+    }
+  });
 </script>

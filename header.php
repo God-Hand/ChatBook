@@ -205,8 +205,6 @@
     });
   }
 
-
-
   //resize-text inside resize-box
   $(document).ready(function(){
     $(window).resize(function() {
