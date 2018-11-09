@@ -83,13 +83,13 @@
 		$.post("includes/user_isOnline.php", { name : '<?php echo $user_to_obj->getUsername(); ?>'}, function(data){
 			if(data=='true'){
 				if($('#userToOnline').text()==""){
-					$('#userToOnline').fadeOut('slow',function(){
-						$(this).text("Online").fadeIn('slow');
+					$('#userToOnline').fadeOut('fast',function(){
+						$(this).text("Online").fadeIn('fast');
 					});
 				}
 			}else if(data=='false'){
-				$('#userToOnline').fadeOut('slow',function(){
-					$(this).text("").fadeIn('slow');
+				$('#userToOnline').fadeOut('fast',function(){
+					$(this).text("").fadeIn('fast');
 				});
 			}
 		});

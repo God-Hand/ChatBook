@@ -10,7 +10,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
 
-
 <?php
   require('includes/classes/User.php');
   require('includes/classes/Post.php');
@@ -32,7 +31,6 @@
   $comment = new Comment($conn, $user->getUsername());
   $request = new FriendRequest($conn, $user->getUsername());
   $notification = new Notification($conn, $user->getUsername());
-  $user->setOnline();
 ?>
 <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <a class="navbar-brand" href="index.php">ChatBook</a>
@@ -82,7 +80,7 @@
 </nav>
 <div class="empty-70-height"></div>
 
-<script>
+<script>  
   $(document).on('click', '.addfriend', function (e) {
     e.preventDefault();
     e.stopPropagation();
