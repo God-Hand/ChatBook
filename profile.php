@@ -176,7 +176,7 @@
 
 	$(document).ready(function() {
 		$('#loading').show();
-		$.post("includes/load_posts.php", {last_post_id : 0}, function(data){
+		$.post("includes/load_profile_posts.php", {last_post_id : 0, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
 			$('#loading').hide();
 			$('.posts_area').html(data);
 		});
@@ -186,7 +186,7 @@
 			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
 				$('#loading').show();
 				$('.posts_area').find('.noMorePosts').remove(); 
-				$.post("includes/load_posts.php", {last_post_id : last_post_id}, function(data){
+				$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
 					$('.posts_area').find('.noMorePostsText').remove();
 					$('#loading').hide();
 					$('.posts_area').append(data);
