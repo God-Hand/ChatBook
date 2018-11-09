@@ -35,10 +35,10 @@
 		} else {
 			array_push($error_array, "Invalid Email format");
 		}
-		if (strlen($first_name) > 25 || strlen($first_name) < 2 || preg_match('/[^A-Za-z0-9_-@.#]/', $password)) {
+		if (strlen($first_name) > 25 || strlen($first_name) < 2) {
 			array_push($error_array, "first name must be between 2 and 25 characters");
 		}
-		if (strlen($last_name) > 25 || strlen($last_name) < 2 || preg_match('/[^A-Za-z0-9_-@.#]/', $password)) {
+		if (strlen($last_name) > 25 || strlen($last_name) < 2) {
 			array_push($error_array, "last name must be between 2 and 25 characters");
 		}
 		if ($password != $confirm_password) {
@@ -132,7 +132,7 @@
 								<form id="register-form" action="registration.php" method="post" role="form" style="display: none;">
 
 									<div class="form-group">
-										<input type="text" name="first_name" id="first_name" tabindex="1" maxlength="25" class="form-control" placeholder="First Name" data-toggle="tooltip" data-placement="top" title="valid inputs are a-zA-Z0-9_-@.#" value="<?php 
+										<input type="text" name="first_name" id="first_name" tabindex="1" maxlength="25" class="form-control" placeholder="First Name" data-toggle="tooltip" data-placement="top" title="name length must be (>=2 and <=25)" value="<?php 
 											if(isset($_SESSION['first_name'])) {
 												echo $_SESSION['first_name'];
 											}
@@ -145,7 +145,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="text" name="last_name" id="last_name" tabindex="2" maxlength="25" class="form-control" placeholder="Last Name" data-toggle="tooltip" data-placement="top" title="valid inputs are a-zA-Z0-9_-@.#" value="<?php 
+										<input type="text" name="last_name" id="last_name" tabindex="2" maxlength="25" class="form-control" placeholder="Last Name" data-toggle="tooltip" data-placement="top" title="name length must be (>=2 and <=25)" value="<?php 
 											if(isset($_SESSION['last_name'])) {
 												echo $_SESSION['last_name'];
 											}
