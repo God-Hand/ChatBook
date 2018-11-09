@@ -36,7 +36,7 @@
 											  </div>
 											</div>
 										</div>
-									</div><br/>";
+									</div>";
 				} else {
 					$message_by = "<a class='text-light' href='profile.php?profile_username=" . $name . "'>" . $fullname . "</a>";
 					$str .= "<div class='row float-left mr-0 message' id='" . $message_id . "'>
@@ -49,7 +49,7 @@
 											  </div>
 											</div>
 										</div>
-									</div><br/>";
+									</div>";
 				}
 			}
 			echo $str;
