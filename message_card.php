@@ -78,7 +78,7 @@
 <script>
 	function sendMessage(){
 		$msg_body = $('#messageTyped').val();
-		$.post("includes/save_message.php", {body:msg_body},function(data){
+		$.post("includes/save_message.php", {body:msg_body, name'<?php echo $user_to_obj->getUsername(); ?>'},function(data){
 		});
 	}
 
