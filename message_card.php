@@ -98,9 +98,9 @@
 	}
 	function loadNewMessages(){
 		console.log(last_message_id);
-		/*$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(data){
+		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(data){
 			$('.container-fluid').append(data);
-		});*/
+		});
 	}
 
 	$(document).ready(function(){
@@ -109,6 +109,6 @@
 			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
 
-		setInterval(loadNewMessages,1000);
+		setInterval(loadNewMessages,2000);
 	});
 </script>
