@@ -49,7 +49,10 @@
 									</div>";
 				}
 			}
+			$str = "<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>" . $str;
 			echo $str;
+		} else {
+			echo "nothing";
 		}
 	}
 ?>

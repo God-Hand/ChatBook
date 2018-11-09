@@ -17,7 +17,7 @@
 		// return messages between user and other
 		public function getMessages($user_from, $last_message_id, $limit) {
 			if ($last_message_id==0) {
-				$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE deleted=0 AND ((user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')) ORDER BY message_id LIMIT $limit");
+				$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE deleted=0 AND ((user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')) ORDER BY message_id DESC LIMIT $limit");
 			} else {
 				$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE message_id<'last_message_id' AND deleted=0 AND ((user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')) ORDER BY message_id LIMIT $limit");
 			}

@@ -73,8 +73,8 @@
 			</div>
 		</div>
 		<div class="container-fluid" id="message_area">
-			<div class='row float-right ml-0 message' id='0' display='none'>
-			</div>
+			<div class='row mb-0'></div>
+			<div class='row float-right ml-0 message' id='0' display='none'></div>
 		</div>
 		<div class='input-group'>
 	    <input id='messageTyped' type='text' class='form-control' placeholder='Type a message'>
@@ -100,8 +100,9 @@
 	function loadOldMessages(){
 		$('.container-fluid').find('#loadRow').remove();
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 8 }, function(data){
-			$('.container-fluid').prepend(data);
-			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
+			if(data != "nothing"){
+				$('.container-fluid').prepend(data);
+			}
 		});
 	}
 	function loadNewMessages(){
@@ -113,8 +114,10 @@
 
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0, limit : 8}, function(data){
-			$('.container-fluid').append(data);
-			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
+			if(data != "nothing"){
+				$('.container-fluid').find('.message:first').remove();
+				$('.container-fluid').append(data);
+			}
 		});
 
 		setInterval(loadNewMessages,1000);
