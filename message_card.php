@@ -48,10 +48,6 @@
 			width:40px;
 			border-radius:50%;
 		}
-		.message{
-			min-width: 60%;
-			max-width: 100%;
-		}
 	</style>
 </head>
 <body>
