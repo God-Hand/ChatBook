@@ -8,8 +8,7 @@
 		$message = new Message($conn, $user->getUsername());
 		$data_query = $message->getLatestMessages($_POST['name'], $_POST['last_message_id']);
 		if(mysqli_num_rows($data_query)==0){
-			echo "
-			<div class='row float-left mr-0'>
+			echo "<div class='row float-left mr-0 message'>
 				<div class='col-12 alert bg-primary text-white'>
 					<div class='media'>
 					  <div class='media-body'>
@@ -23,7 +22,7 @@
 				</div>
 			</div>
 			<br/>
-			<div class='row float-right ml-0'>
+			<div class='row float-right ml-0 message'>
 				<div class='col-12 alert bg-success text-white'>
 					<div class='media'>
 					  <div class='media-body'>
@@ -35,7 +34,8 @@
 					  </div>
 					</div>
 				</div>
-			</div>";
+			</div>
+			<br/>";
 		}
 	}
 ?>

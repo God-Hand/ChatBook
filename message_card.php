@@ -42,12 +42,15 @@
 		}
 		.container-fluid{
 			height:408px;
-			max-width: 680px;
 			overflow-y:scroll;
 		}
 		img{
 			width:40px;
 			border-radius:50%;
+		}
+		.message{
+			min-width: 60%;
+			max-width: 100%;
 		}
 	</style>
 </head>
@@ -67,12 +70,18 @@
 		<div class='input-group'>
 	    <input id='messageTyped' type='text' class='form-control' placeholder='Type a message'>
 	    <div class='input-group-append' maxlength='250'>
-	      <button id='messagedBtn' class='btn btn-success' type='button' onclick='sendMessage(this)'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
+	      <button id='messagedBtn' class='btn btn-success' type='button' onclick='sendMessage()'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
 	    </div>
 	  </div>
 </body>
 </html>
 <script>
+	function sendMessage(){
+		$msg_body = $('#messageTyped').val();
+		$.post("includes/save_message.php", {body:msg_body},function(data){
+		});
+	}
+
 	var last_message_id = 0;
 	window.onresize = function() {
 	  $('.resize-box').css({
@@ -80,10 +89,10 @@
 	  });
 	}
 	function loadOldMessages(){
-		$('.container-fluid').find('#loadPreviousMessages').remove();
-		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id, limit : 5 }, function(data){
+		$('.container-fluid').find('#loadRow').remove();
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id, limit : 10 }, function(data){
 			$('.container-fluid').prepend(data);
-			$('.container-fluid').prepend("<div class='row'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
+			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
 	}
 	function loadNewMessages(){
@@ -96,7 +105,7 @@
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 10}, function(data){
 			$('.container-fluid').append(data);
-			$('.container-fluid').prepend("<div class='row'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
+			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
 
 		setInterval(loadNewMessages,1000);

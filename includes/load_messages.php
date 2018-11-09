@@ -8,8 +8,7 @@
 		$message = new Message($conn, $user->getUsername());
 		$data_query = $message->getMessages($_POST['name'], $_POST['last_message_id'],$_POST['limit']);
 		if(mysqli_num_rows($data_query)==0){
-			echo "
-			<div class='row float-left mr-0'>
+			echo "<div class='row float-left mr-0 message'>
 				<div class='col-12 alert bg-primary text-white'>
 					<div class='media'>
 					  <div class='media-body'>
@@ -22,12 +21,11 @@
 					</div>
 				</div>
 			</div>
-			<br/>
-			<div class='row float-right ml-0'>
+			<div class='row float-right ml-0 message'>
 				<div class='col-12 alert bg-success text-white'>
 					<div class='media'>
 					  <div class='media-body'>
-					    <h6 class='m-0'>You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class='fa fa-times'></i></a></h6>
+					    <h6 class='m-0'>You<a id='message_id' class='btn btn-sm text-light text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class='fa fa-times'></i></a></h6>
 					    <p class='m-0'>hi friend.
 					    	How are you? long time, no see
 					    </p>
@@ -35,8 +33,7 @@
 					  </div>
 					</div>
 				</div>
-			</div>
-			<br/>";
+			</div>";
 		}
 	}
 ?>
