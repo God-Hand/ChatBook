@@ -11,8 +11,7 @@
 
 		// send message to a particular user
 		public function sendMessage($user_to, $body) {
-			$query = mysqli_query($this->conn, "INSERT INTO messages VALUES (default, '$this->username', '$user_to', '$body', default, default, default, default)");
-			return mysqli_insert_id($conn);
+			$query = mysqli_query($this->conn, "INSERT INTO messages VALUES (default, '$this->username', '$user_to', '$body', default, default, default)");
 		}
 
 		// return messages between user and other
