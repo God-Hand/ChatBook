@@ -113,7 +113,7 @@
 	}
 
 	$(document).ready(function(){
-		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0, limit : 8}, function(data){
+		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0}, function(data){
 			if(data != "nothing"){
 				$('.container-fluid').find('.message:first').remove();
 				$('.container-fluid').append(data);
