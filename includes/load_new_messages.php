@@ -25,7 +25,7 @@
 				$message_time_in_text = getTimeFrame($now_datetime->diff($message_datetime));
 
 				if( $row['user_from'] == $user->getUsername()){
-					$message_by = "<a class='text-light' href='profile.php?profile_username=" . $user->getUsername() . "'>You</a>";
+					$message_by = "<a class='text-light' href='profile.php?profile_username=" . $user->getUsername() . "' style='width:inherit'>You</a>";
 					$str .= "<div class='row float-right ml-0 message' id='" . $message_id . "'>
 										<div class='col-12 alert bg-success text-white'>
 											<div class='media'>
