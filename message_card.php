@@ -50,7 +50,7 @@
 			border-radius:50%;
 		}
 		.message{
-			min-width:
+			min-width:60%;
 		}
 	</style>
 </head>
