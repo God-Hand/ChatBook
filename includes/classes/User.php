@@ -74,6 +74,16 @@
 			return count($this->getFriendArray())-2;
 		}
 
+		// return weather user's is online or not
+		public function isOnline() {
+			$query = mysqli_query($this->conn, "SELECT is_online FROM users WHERE username='$this->username'");
+			$row = mysqli_fetch_array($query);
+			if($row['is_online'] == 0)
+				return false;
+			else 
+				return true;
+		}
+
 		// return weather user's account is closed or not
 		public function isClosed() {
 			$query = mysqli_query($this->conn, "SELECT deactivate_account FROM users WHERE username='$this->username'");

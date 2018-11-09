@@ -53,11 +53,11 @@
 <body>
 		<div class="col-12 alert bg-primary text-white mb-0">
 			<div class="media">
-			  <img class="mr-1" src="assets/images/profile_pics/arpit_gupta15415322931541581420.png" alt="Generic placeholder image">
+			  <img class="mr-1" src="assets/images/profile_pics/defaults/profile_pic.png" alt="Generic placeholder image">
 			  <div class="media-body">
 			    <div class="float-left resize-box">
-			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;">Jitendra Sharma</h6><br/>
-			  		<p class="m-0 d-inline-block text-truncate"  style="max-width: inherit;">typing...</p>
+			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6><br/>
+			  		<p id="userToOnline" class="m-0 d-inline-block text-truncate" style="max-width: inherit;">Online</p>
 			  	</div>
 			  </div>
 			</div>
@@ -187,4 +187,19 @@
 	    "maxWidth": $('.resize-box').parent().width() - 50 + "px"
 	  });
 	}
+	function update(){
+		$.post("includes/user_isOnline.php", { name : '<?php echo $user_to_obj->getUsername(); ?>'}, function(data){
+			if(data=='false'){
+				$('#userToOnline').html("");
+			}else{
+				$('#userToOnline').html("Online");
+			}
+		});
+	}
+	setInterval(update, 10000);
+	$(document).ready(function(){
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 15}, function(data){
+
+		})
+	});
 </script>
