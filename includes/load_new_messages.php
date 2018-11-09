@@ -50,6 +50,8 @@
 				}
 			}
 			echo $str;
+		} else {
+			echo "nothing";
 		}
 	}
 ?>
