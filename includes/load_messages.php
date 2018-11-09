@@ -26,7 +26,7 @@
 
 				if( $row['user_from'] == $user->getUsername()){
 					$message_by = "<a href='profile.php?profile_username=" . $user->getUsername() . "'>You</a>";
-					$str .= "<div class='row float-right ml-0 message'>
+					$str .= "<div class='row float-right ml-0 message' id='" . $message_id . "'>
 										<div class='col-12 alert bg-success text-white'>
 											<div class='media'>
 											  <div class='media-body'>
@@ -39,7 +39,7 @@
 									</div>";
 				} else {
 					$message_by = "<a href='profile.php?profile_username=" . $name . "'>" . $fullname . "</a>";
-					$str .= "<div class='row float-left mr-0 message'>
+					$str .= "<div class='row float-left mr-0 message' id='" . $message_id . "'>
 										<div class='col-12 alert bg-primary text-white'>
 											<div class='media'>
 											  <div class='media-body'>
