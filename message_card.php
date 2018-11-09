@@ -42,6 +42,7 @@
 			max-width: 200px;
 		}
 		.container-fluid{
+			padding-top: 1em;
 			height:408px;
 			overflow-y:scroll;
 		}
@@ -73,7 +74,6 @@
 			</div>
 		</div>
 		<div class="container-fluid" id="message_area">
-			<div class='row mb-3'></div>
 			<div class='row float-right ml-0 message' id='0' display='none'></div>
 		</div>
 		<div class='input-group'>
@@ -98,13 +98,10 @@
 	}
 	function loadOldMessages(){
 		var last_message_id = $('.message:first').attr('id');
-		console.log(last_message_id);
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 8 }, function(data){
+			$('.container-fluid').find('#loadRow').remove();
 			if(data != "nothing"){
-				$('.container-fluid').find('#loadRow').remove();
 				$('.container-fluid').prepend(data);
-			} else {
-				console.log(data);
 			}
 		});
 	}
