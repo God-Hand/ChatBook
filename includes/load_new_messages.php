@@ -16,7 +16,7 @@
 		if(mysqli_num_rows($data_query)!=0){
 
 			while($row = mysqli_fetch_array($data_query)){
-
+				$message_id = $row['message_id'];
 				$message_body = replaceURLToLink($row['message_body']);
 				$message_time = $row['time'];
 				$now_date = date("Y-m-d H:i:s");
