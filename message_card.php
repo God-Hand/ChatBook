@@ -61,7 +61,7 @@
 			  </div>
 			</div>
 		</div>
-		<div class="container-fluid">
+		<div class="container-fluid" id="message_area">
 			<div class="mb-3"></div>
 	  	<img id="loading" src="assets/images/icons/loading.gif">
 		</div>
@@ -86,26 +86,14 @@
 		});
 	}
 	function loadNewMessages(){
-		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(data){
+		console.log(last_message_id);
+		/*$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(data){
 			$('.container-fluid').append(data);
-		});
+		});*/
 	}
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 10}, function(data){
-			$('.container-fluid').html(data);
-		});
-		$(window).scroll(function() {
-			var last_message_id = $('.message:first').attr('id');
-			var noMorePreviousMessages = $('.container-fluid').find('.noMorePreviousMessages').val();
-			if (window.scrollY == 0 && noMorePreviousMessages == 'false') {
-				$('#loading').show();
-				$.post("includes/load_comments.php", {post_id : post_id, last_comment_id : last_comment_id}, function(data){
-					$('.container-fluid').find('.noMorePreviousMessages').remove();
-					$('.container-fluid').find('.noMorePreviousMessagesText').remove();
-					$('#loading').hide();
-					$('.container-fluid').append(data);
-				});
-			}
+			$('.container-fluid').append(data);
 		});
 		setInterval(loadNewMessages,1000);
 	});
