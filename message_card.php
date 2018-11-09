@@ -102,6 +102,8 @@
 			$('.container-fluid').find('#loadRow').remove();
 			if(data != "nothing"){
 				$('.container-fluid').prepend(data);
+				last_message_id = $('.message:last').attr('id');
+				$.post("includes/view_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(){});
 			}
 		});
 	}
@@ -111,7 +113,7 @@
 			if(data != "nothing"){
 				$('.container-fluid').append(data);
 				last_message_id = $('.message:last').attr('id');
-				$.post("includes/view_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', })
+				$.post("includes/view_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(){});
 			}
 		});
 	}
