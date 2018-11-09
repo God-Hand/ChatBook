@@ -43,9 +43,9 @@
 		// load posts, where post_id< given post_id and specific limit 
 		public function loadProfilePosts($last_post_id, $name, $limit) {
 			if ( $last_post_id == 0 ){
-				$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE deleted=0 AND ((user_from='$this->username' AND user_to='$name') OR (user_from='$name' AND (user_to='' OR user_to='$this->username')) ORDER BY post_id DESC LIMIT $limit");
+				$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE deleted=0 AND ((user_from='$this->username' AND user_to='$name') OR (user_from='$name' AND (user_to='' OR user_to='$this->username'))) ORDER BY post_id DESC LIMIT $limit");
 			} else {
-				$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE post_id<'$last_post_id' AND deleted=0 AND ((user_from='$this->username' AND user_to='$name') OR (user_from='$name' AND (user_to='' OR user_to='$this->username')) ORDER BY post_id DESC LIMIT $limit");
+				$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE post_id<'$last_post_id' AND deleted=0 AND ((user_from='$this->username' AND user_to='$name') OR (user_from='$name' AND (user_to='' OR user_to='$this->username'))) ORDER BY post_id DESC LIMIT $limit");
 			}
 			return $query;
 		}
