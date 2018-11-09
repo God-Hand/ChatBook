@@ -96,6 +96,12 @@
 			$('#messageTyped').val('');
 		});
 	}
+	function deleteMessage(obj){
+		$.post("includes/delete_message.php", {message_id : obj.id},function(data){
+			var message = '.message#'+obj.id;
+			$(message).fadeOut('slow');
+		});
+	}
 	function loadOldMessages(){
 		var last_message_id = $('.message:first').attr('id');
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 8 }, function(data){

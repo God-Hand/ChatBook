@@ -27,7 +27,7 @@
 										<div class='col-12 alert bg-success text-white'>
 											<div class='media'>
 											  <div class='media-body'>
-											    <h6 class='m-0'>" . $message_by . "<a id='message_id' class='btn btn-sm text-light text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class='fa fa-times'></i></a></h6>
+											    <h6 class='m-0'>" . $message_by . "<a id='" . $message_id . "' class='btn btn-sm text-light text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class='fa fa-times'></i></a></h6>
 											    <p class='m-0'>" . $message_body . "</p>
 											    <small class='float-right'><em>" . $message_datetime_text . "</em></small>
 											  </div>
