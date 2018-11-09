@@ -79,23 +79,6 @@
 	    "maxWidth": $('.resize-box').parent().width() - 50 + "px"
 	  });
 	}
-	function update(){
-		$.post("includes/user_isOnline.php", { name : '<?php echo $user_to_obj->getUsername(); ?>'}, function(data){
-			if(data=='true'){
-				if($('#userToOnline').text()==""){
-					$('#userToOnline').fadeOut('fast',function(){
-						$(this).text("Online").fadeIn('fast');
-					});
-				}
-			}else if(data=='false'){
-				$('#userToOnline').fadeOut('fast',function(){
-					$(this).text("").fadeIn('fast');
-				});
-			}
-		});
-	}
-	$(document).ready(update());
-	setInterval(update, 10000);
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 15}, function(data){
 			$('.container-fluid').html(data);
