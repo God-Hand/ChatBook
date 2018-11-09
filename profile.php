@@ -108,7 +108,7 @@
 
 			<div class="col-md-8">
 				<!-- Nav tabs -->
-				<ul class="nav nav-tabs">
+				<ul class="nav nav-tabs mb-3">
 				  <li class="nav-item">
 				    <a class="nav-link active" data-toggle="tab" href="#profile_post_box">Profile Post</a>
 				  </li>
@@ -148,23 +148,10 @@
 </html>
 <script>
 	$(document).ready(function() {
-		$('#loading').show();
-		$.post("includes/load_posts.php", {last_post_id : 0}, function(data){
-			$('#loading').hide();
-			$('.posts_area').html(data);
-		});
-		$(window).scroll(function() {
-			var last_post_id = $('.post:last').attr('id');
-			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
-			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
-				$('#loading').show();
-				$('.posts_area').find('.noMorePosts').remove(); 
-				$.post("includes/load_posts.php", {last_post_id : last_post_id}, function(data){
-					$('.posts_area').find('.noMorePostsText').remove();
-					$('#loading').hide();
-					$('.posts_area').append(data);
-				});
-			}
+		$('#loading2').show();
+		$.post("includes/load_user_friends.php", {name : '<?php echo $profile_user->getUsename(); ?>'}, function(data){
+			$('#loading2').hide();
+			$('.friend_area').html(data);
 		});
 	});
 </script>
