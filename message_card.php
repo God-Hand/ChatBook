@@ -97,32 +97,25 @@
 		});
 	}
 	function loadOldMessages(){
-		var first_message_id = $('.message:first').attr('id');
-		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', first_message_id : first_message_id, limit : 8 }, function(data){
+		var last_message_id = $('.message:first').attr('id');
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 8 }, function(data){
 			$('.container-fluid').find('#loadRow').remove();
 			if(data != "nothing"){
 				$('.container-fluid').prepend(data);
-				last_message_id = $('.message:last').attr('id');
-				$.post("includes/view_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(){});
 			}
 		});
 	}
 	function loadNewMessages(){
 		var last_message_id = $('.message:last').attr('id');
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
-			if(data != "nothing"){
-				$('.container-fluid').append(data);
-				last_message_id = $('.message:last').attr('id');
-				$.post("includes/view_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(){});
-			}
+			$('.container-fluid').append(data);
 		});
 	}
 
 	$(document).ready(function(){
-		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0}, function(data){
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0, limit : 8}, function(data){
 			if(data != "nothing"){
 				$('.container-fluid').find('.message:first').remove();
-				$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 mb-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 				$('.container-fluid').append(data);
 			}
 		});

@@ -24,13 +24,23 @@
 			$searched_user_fullname = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary'> <h6 class='text-primary'>" . $row['first_name'] . " " . $row['last_name'] . "</h6> </a>";
 
 			if ($user->getUsername() == $searched_user){
+				$friend_button = "";
 				$mutual_friends = "";
 			}else{
+				if ($user->isFriend($searched_user)){
+					$friend_button = "<button id='" . $searched_user . "' class='btn btn-sm btn-danger float-right addfriend' onclick='friend(this)' value='0' onmouseleave='friendAction(this)'>Remove Friend</button>";
+				} elseif ($request->didReceiveRequest($searched_user) == 1) {
+					$friend_button = "<button id='" . $searched_user . "' class='btn btn-sm btn-success float-right addfriend' onclick='friend(this)' value='1' onmouseleave='friendAction(this)'>Accept Request</button>";
+				} elseif ($request->didSendRequest($searched_user) == 1) {
+					$friend_button = "<button id='" . $searched_user . "' class='btn btn-sm btn-warning float-right addfriend' onclick='friend(this)' value='2' onmouseleave='friendAction(this)'>Cancel Request</button>";
+				} else {
+					$friend_button = "<button id='" . $searched_user . "' class='btn btn-sm btn-success float-right addfriend' onclick='friend(this)' value='3' onmouseleave='friendAction(this)'>Add Friend</button>";
+				}
 				$mutual_friends = "<small class='text-muted'><em>mutual friends : ". $user->getMutualFriendsCount($searched_user) . "</em></small>";
 			}
 			$str .= "<div class='dropdown-item container searcheduser'>
 								<div class='row'>
-									<div class='col-12'>
+									<div class='col-8'>
 										<div class='media'>
 										  " . $searched_user_profile_pic . "
 										  <div class='media-body'>
@@ -38,6 +48,7 @@
 										  </div>
 										</div>
 									</div>
+									<div class='col-4'>" . $friend_button . "</div>
 								</div>
 							</div>";
 		}

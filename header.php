@@ -38,15 +38,15 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-3">
-    <div class="searchform">
+    <form class="form-inline searchform">
       <div class="input-group" style="width:100%;">
         <input type="text" class="form-control dropdown" onkeyup="SearchUser(this)" name="q" placeholder="Search..." autocomplete="off" id="searchuser" value="" style="width: auto;">
         <div class="input-group-postpend">
-          <button id="searchUserBtn" class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i></button>
+          <button class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i></button>
         </div>
       </div>
       <div class="searchresult dropdown-menu"></div>
-    </div>
+    </form>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="messages.php"><i class="fa fa-envelope"></i>&nbsp;Messages</a>
@@ -128,9 +128,6 @@
       }
     });
   }
-  $('#searchUserBtn').click(function(){
-    location.href = "search.php?name=" + $('#searchuser').val();
-  });
 
   // action in post
   function openCommentFrame(obj) {
