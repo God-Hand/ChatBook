@@ -13,7 +13,7 @@
 			for ($i=0; $i < 10; $i++) { 
 				$str .= "<li class='list-group-item list-group-item-action'>
 							  	<div class='media'>
-									  <img class='mr-1' src='assets/images/profile_pics/arpit_gupta15415322931541581420.png' style='width:40px;border-radius:50%;' alt='username'>
+									  <img class='mr-1' src='assets/images/profile_pics/defaults/profile_pic.png' style='width:40px;border-radius:50%;' alt='username'>
 									  <div class='media-body'>
 									  	<div class='float-left resize-box'>
 									  		<h6 class='m-0 d-inline-block text-truncate'>Jitendra sharma</h6><br/>

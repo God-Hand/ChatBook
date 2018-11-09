@@ -73,14 +73,26 @@
 </body>
 </html>
 <script>
+	var last_message_id = 0;
 	window.onresize = function() {
 	  $('.resize-box').css({
 	    "maxWidth": $('.resize-box').parent().width() - 50 + "px"
 	  });
 	}
+	function loadOldMessages(){
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id, limit : 5 }, function(data){
+			$('.container-fluid').prepend(data);
+		});
+	}
+	function loadNewMessages(){
+		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id}, function(data){
+			$('.container-fluid').append(data);
+		});
+	}
 	$(document).ready(function(){
-		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 15}, function(data){
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 10}, function(data){
 			$('.container-fluid').html(data);
-		})
+		});
+		setInterval(loadNewMessages,1000);
 	});
 </script>

@@ -27,7 +27,7 @@
 
 		// return latest messages between user and other
 		public function getLatestMessages($user_from, $last_message_id) {
-			$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE message_id>'$last_message_id' AND (user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from')  AND deleted=0");
+			$query = mysqli_query($this->conn, "SELECT * FROM messages WHERE message_id>'$last_message_id' AND deleted=0 AND ((user_to='$this->username' AND user_from='$user_from') OR (user_from='$this->username' AND user_to='$user_from'))");
 			return $query;
 		}
 
