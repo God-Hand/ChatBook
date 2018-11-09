@@ -63,7 +63,7 @@
 							  <div class='form-row'>
 							    <div class='col'>
 							    	<p class='text-muted float-left'>Like(<span id='commentlikecount" . $comment_id . "'>" . $comment_like_count . "</span>)</p>
-							     	<button class='btn btn-primary btn-sm float-right button' id='" . $comment_id . "' value='" . $like_value ."'onclick='likeComment(this)' onmouseleave='saveAction(this)'>" . $like . "</button>
+							     	<button class='btn btn-primary btn-sm float-right button' id='" . $comment_id . "' value='" . $like_value ."'onclick='likeComment(this)'>" . $like . "</button>
 							    </div>
 							  </div>
 							</div>";
