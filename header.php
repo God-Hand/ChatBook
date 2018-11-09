@@ -49,9 +49,6 @@
     </form>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="messages.php"><i class="fa fa-envelope"></i>&nbsp;Messages</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="#"><i class="fa fa-bell"></i>&nbsp;Notifications
         </a>
       </li>
