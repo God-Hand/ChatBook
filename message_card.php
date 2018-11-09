@@ -42,6 +42,7 @@
 		}
 		.container-fluid{
 			height:408px;
+			max-width: 680px;
 			overflow-y:scroll;
 		}
 		img{
