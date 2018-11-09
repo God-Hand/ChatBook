@@ -43,19 +43,16 @@
 										<div class='col-12 alert bg-primary text-white'>
 											<div class='media'>
 											  <div class='media-body'>
-											    <h6 class='m-0'>Jitendra Sharma</h6>
-											    <p class='m-0'>hi friend.
-											    	How are you? long time, no see
-											    </p>
-											    <small class='float-right'><em>12days ago</em></small>
+											    <h6 class='m-0'>" . $message_by . "</h6>
+											    <p class='m-0'>" . $message_body . "</p>
+											    <small class='float-right'><em>" . $message_time_in_text . "</em></small>
 											  </div>
 											</div>
 										</div>
 									</div>";
 				}
 			}
-			echo "
-			";
+			echo $str;
 		}
 	}
 ?>
