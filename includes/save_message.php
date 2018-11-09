@@ -6,7 +6,9 @@
 
 		$body = removeSpaces($_POST['body']);
 		$body = secureText($conn, $body);
-		$message = new Message($conn, $_SESSION['username']);
-		$message->sendMessage($_POST['name'], $body);
+		if ($body != ""){
+			$message = new Message($conn, $_SESSION['username']);
+			$message->sendMessage($_POST['name'], $body);
+		}
 	}
 ?>
