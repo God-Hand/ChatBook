@@ -52,6 +52,13 @@
 		.message{
 			min-width:60%;
 		}
+		a, a:active{
+			text-decoration: none;
+			color:#fff;
+		}
+		a:hover{
+			color:#f1f1f1;
+		}
 	</style>
 </head>
 <body>
