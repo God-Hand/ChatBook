@@ -17,12 +17,6 @@
   #uploadedImageDemo{
     max-height: 400px;
   }
-  #postImage{
-    padding-left: 0px;
-  }
-  #sendPost{
-    margin-top: 5px;
-  }
 </style>
 <body>
 	<?php include("header.php"); ?>
@@ -37,12 +31,12 @@
 				    <textarea id="postBody" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..."></textarea>
 				    <div class="form-row">
 				      <div class="col">
-				        <input type="file" id="postImage"  class="form-control-file btn float-left" accept="image/*">
+				        <input type="file" id="postImage"  class="form-control-file btn float-left pl-0" accept="image/*">
 				        <input type="hidden" id='userTo' value=''>
 				        <input type="hidden" id='imageLocation' value=''>
 				      </div>
 				      <div class="col">
-				        <button type="submit" class="btn btn-primary float-right" id='sendPost'><i class="fa fa-pencil"></i>&nbsp;Post</button>
+				        <button type="submit" class="btn btn-primary float-right mt-5" id='sendPost'><i class="fa fa-pencil"></i>&nbsp;Post</button>
 				      </div>
 				    </div>
 				  </div>

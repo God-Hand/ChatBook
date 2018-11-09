@@ -73,13 +73,13 @@
 				    		echo "<a href='settings.php' class='btn-over-img btn btn-primary float-right'><i class='fa fa-pencil'></i>&nbsp;Edit</a>";
 				    	} else {
 				    		if ($user->isFriend($profile_user->getUsername())){
-									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-danger float-right addfriend' onclick='friend(this)' value='0' onmouseleave='friendAction(this)'>Remove Friend</button>";
+									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-danger float-right addfriend' onclick='friend(this);friendAction(this);reload()' value='0'>Remove Friend</button>";
 								} elseif ($request->didReceiveRequest($profile_user->getUsername()) == 1) {
-									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-success float-right addfriend' onclick='friend(this)' value='1' onmouseleave='friendAction(this)'>Accept Request</button>";
+									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-success float-right addfriend' onclick='friend(this);friendAction(this);' value='1'>Accept Request</button>";
 								} elseif ($request->didSendRequest($profile_user->getUsername()) == 1) {
-									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-warning float-right addfriend' onclick='friend(this)' value='2' onmouseleave='friendAction(this)'>Cancel Request</button>";
+									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-warning float-right addfriend' onclick='friend(this);friendAction(this);' value='2'>Cancel Request</button>";
 								} else {
-									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-success float-right addfriend' onclick='friend(this)' value='3' onmouseleave='friendAction(this)'>Add Friend</button>";
+									$friend_button = "<button id='" . $profile_user->getUsername() . "' class='btn-over-img btn btn-sm btn-success float-right addfriend' onclick='friend(this);friendAction(this);' value='3'>Add Friend</button>";
 								}
 								echo $friend_button;
 				    	}
@@ -147,11 +147,28 @@
 </body>
 </html>
 <script>
+	function reload(){
+		location.reload();
+	}
+
 	$(document).ready(function() {
-		$('#loading2').show();
-		$.post("includes/load_user_friends.php", {name : '<?php echo $profile_user->getUsename(); ?>'}, function(data){
-			$('#loading2').hide();
-			$('.friend_area').html(data);
+		$('#loading').show();
+		$.post("includes/load_posts.php", {last_post_id : 0}, function(data){
+			$('#loading').hide();
+			$('.posts_area').html(data);
+		});
+		$(window).scroll(function() {
+			var last_post_id = $('.post:last').attr('id');
+			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
+				$('#loading').show();
+				$('.posts_area').find('.noMorePosts').remove(); 
+				$.post("includes/load_posts.php", {last_post_id : last_post_id}, function(data){
+					$('.posts_area').find('.noMorePostsText').remove();
+					$('#loading').hide();
+					$('.posts_area').append(data);
+				});
+			}
 		});
 	});
 </script>
