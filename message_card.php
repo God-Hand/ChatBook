@@ -64,114 +64,6 @@
 		</div>
 		<div class="container-fluid">
 			<div class="mb-3"></div>
-			<div class="row float-left mr-0">
-				<div class="col-12 alert bg-primary text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">Jitendra Sharma</h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<br/>
-			<div class="row float-right ml-0">
-				<div class="col-12 alert bg-success text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<div class="row float-left mr-0">
-				<div class="col-12 alert bg-primary text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">Jitendra Sharma</h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<br/>
-			<div class="row float-right ml-0">
-				<div class="col-12 alert bg-success text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<div class="row float-left mr-0">
-				<div class="col-12 alert bg-primary text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">Jitendra Sharma</h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<br/>
-			<div class="row float-right ml-0">
-				<div class="col-12 alert bg-success text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<div class="row float-left mr-0">
-				<div class="col-12 alert bg-primary text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">Jitendra Sharma</h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<br/>
-			<div class="row float-right ml-0">
-				<div class="col-12 alert bg-success text-white">
-					<div class="media">
-					  <div class="media-body">
-					    <h6 class="m-0">You<a id='message_id' class='btn btn-md text-secondary pr-0 float-right' onclick='deleteMessage(this)'><i class="fa fa-times"></i></a></h6>
-					    <p class="m-0">hi friend.
-					    	How are you? long time, no see
-					    </p>
-					    <small class="float-right"><em>12days ago</em></small>
-					  </div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div class='input-group'>
 	    <input id='messageTyped' type='text' class='form-control' placeholder='Type a message'>
@@ -190,9 +82,11 @@
 	function update(){
 		$.post("includes/user_isOnline.php", { name : '<?php echo $user_to_obj->getUsername(); ?>'}, function(data){
 			if(data=='true'){
-				$('#userToOnline').fadeOut('slow',function(){
-					$(this).text("Online").fadeIn('slow');
-				});
+				if($('#userToOnline').text()==""){
+					$('#userToOnline').fadeOut('slow',function(){
+						$(this).text("Online").fadeIn('slow');
+					});
+				}
 			}else if(data=='false'){
 				$('#userToOnline').fadeOut('slow',function(){
 					$(this).text("").fadeIn('slow');
@@ -204,7 +98,7 @@
 	setInterval(update, 10000);
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 15}, function(data){
-
+			$('.container-fluid').html(data);
 		})
 	});
 </script>
