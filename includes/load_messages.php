@@ -12,7 +12,7 @@
 		$message = new Message($conn, $user->getUsername());
 		
 		$str = "";
-		$data_query = $message->getMessages($_POST['name'], $_POST['last_message_id'],$_POST['limit']);
+		$data_query = $message->getMessages($_POST['name'], $_POST['first_message_id'],$_POST['limit']);
 		if(mysqli_num_rows($data_query)!=0){
 
 			while($row = mysqli_fetch_array($data_query)){
