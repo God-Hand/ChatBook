@@ -16,7 +16,7 @@
 				<div class="input-group" style="width:100%;">
 	        <input type="text" class="form-control dropdown" onkeyup="SearchUsers(this)" name="q" placeholder="Search..." autocomplete="off" id="searchusers" value="" width="auto">
 	        <div class="input-group-postpend">
-	          <button class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i></button>
+	          <button id="searchUsersBtn" class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i></button>
 	        </div>
 	      </div><br/>
 	      <div class="searchedResult card">
@@ -53,4 +53,7 @@
       }
     });
   }
+  $('#searchUsersBtn').click(function(){
+    location.href = "search.php?name=" + $('#searchusers').val();
+  });
 </script>
