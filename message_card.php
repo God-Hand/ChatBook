@@ -110,6 +110,8 @@
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
 			if(data != "nothing"){
 				$('.container-fluid').append(data);
+				var last_message_id = $('.message:last').attr('id');
+				$.post("includes/view_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', })
 			}
 		});
 	}
