@@ -63,6 +63,7 @@
 		</div>
 		<div class="container-fluid">
 			<div class="mb-3"></div>
+	  	<img id="loading" src="assets/images/icons/loading.gif">
 		</div>
 		<div class='input-group'>
 	    <input id='messageTyped' type='text' class='form-control' placeholder='Type a message'>
@@ -92,6 +93,19 @@
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 10}, function(data){
 			$('.container-fluid').html(data);
+		});
+		$(window).scroll(function() {
+			var last_message_id = $('.message:first').attr('id');
+			var noMorePreviousMessages = $('.container-fluid').find('.noMorePreviousMessages').val();
+			if (window.scrollY == 0 && noMorePreviousMessages == 'false') {
+				$('#loading').show();
+				$.post("includes/load_comments.php", {post_id : post_id, last_comment_id : last_comment_id}, function(data){
+					$('.container-fluid').find('.noMorePreviousMessages').remove();
+					$('.container-fluid').find('.noMorePreviousMessagesText').remove();
+					$('#loading').hide();
+					$('.container-fluid').append(data);
+				});
+			}
 		});
 		setInterval(loadNewMessages,1000);
 	});
