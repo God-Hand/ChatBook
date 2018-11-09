@@ -229,6 +229,16 @@
 			$query = mysqli_query($this->conn, "UPDATE users SET college='$college' WHERE username='$this->username'");
 		}
 
+		// set user online
+		public function setOnline(){
+			$query = mysqli_query($this->conn, "UPDATE users SET is_online=1 WHERE username='$this->username'");
+		}
+
+		// unset user online
+		public function setOffline(){
+			$query = mysqli_query($this->conn, "UPDATE users SET is_online=0 WHERE username='$this->username'");
+		}
+
 		// upload cover_pic of user
 	  public function uploadCoverPic($filepath) {
 		 	$query = mysqli_query($this->conn, "UPDATE users SET cover_pic='$filepath' WHERE username='$this->username'");

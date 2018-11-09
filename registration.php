@@ -98,14 +98,14 @@
 								<form id="login-form" action="registration.php" method="post" role="form" style="display: block;">
 
 									<div class="form-group">
-										<input type="email" name="login_email" id="email" tabindex="1" class="form-control" placeholder="Email Address" data-toggle="tooltip" data-placement="top" title="Login Email" value="<?php 
+										<input type="email" name="login_email" tabindex="1" class="form-control" placeholder="Email Address" data-toggle="tooltip" data-placement="top" title="Login Email" value="<?php 
 											if(isset($_SESSION['login_email'])) {
 												echo $_SESSION['login_email'];
 											}
 										?>" required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="login_password" id="password" tabindex="2" maxlength="15" class="form-control" data-toggle="tooltip" data-placement="top" title="Login Password" placeholder="Password" required>
+										<input type="password" name="login_password" tabindex="2" maxlength="15" class="form-control" data-toggle="tooltip" data-placement="top" title="Login Password" placeholder="Password" required>
 										<?php
 											if(in_array("Email or password was incorrect", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>Email or password was incorrect</span>";
@@ -132,7 +132,7 @@
 								<form id="register-form" action="registration.php" method="post" role="form" style="display: none;">
 
 									<div class="form-group">
-										<input type="text" name="first_name" id="first_name" tabindex="1" maxlength="25" class="form-control" placeholder="First Name" data-toggle="tooltip" data-placement="top" title="name length must be (>=2 and <=25)" value="<?php 
+										<input type="text" name="first_name" tabindex="1" maxlength="25" class="form-control" placeholder="First Name" data-toggle="tooltip" data-placement="top" title="name length must be (>=2 and <=25)" value="<?php 
 											if(isset($_SESSION['first_name'])) {
 												echo $_SESSION['first_name'];
 											}
@@ -145,7 +145,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="text" name="last_name" id="last_name" tabindex="2" maxlength="25" class="form-control" placeholder="Last Name" data-toggle="tooltip" data-placement="top" title="name length must be (>=2 and <=25)" value="<?php 
+										<input type="text" name="last_name" tabindex="2" maxlength="25" class="form-control" placeholder="Last Name" data-toggle="tooltip" data-placement="top" title="name length must be (>=2 and <=25)" value="<?php 
 											if(isset($_SESSION['last_name'])) {
 												echo $_SESSION['last_name'];
 											}
@@ -158,7 +158,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="email" name="reg_email" id="email" tabindex="3" class="form-control" placeholder="Email Address" data-toggle="tooltip" data-placement="top" title="Email id" value="<?php
+										<input type="email" name="reg_email" tabindex="3" class="form-control" placeholder="Email Address" data-toggle="tooltip" data-placement="top" title="Email id" value="<?php
 											if(isset($_SESSION['reg_email'])) {
 												echo $_SESSION['reg_email'];
 											}
@@ -173,7 +173,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="password" name="reg_password" id="password" tabindex="4" maxlength="15" class="form-control" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
+										<input type="password" name="reg_password" tabindex="4" maxlength="15" class="form-control" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
 										<?php
 											if(in_array("Only allow [A-Za-z0-9_@]", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>Only allow [A-Za-z0-9_@]</span>";
@@ -184,7 +184,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="password" name="reg_confirm_password" id="confirm-password" tabindex="5" maxlength="15" class="form-control" placeholder="Confirm Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
+										<input type="password" name="reg_confirm_password" tabindex="5" maxlength="15" class="form-control" placeholder="Confirm Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
 										<?php
 											if(in_array("passwords do not match", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>passwords do not match</span>";

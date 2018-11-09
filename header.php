@@ -32,6 +32,7 @@
   $comment = new Comment($conn, $user->getUsername());
   $request = new FriendRequest($conn, $user->getUsername());
   $notification = new Notification($conn, $user->getUsername());
+  $user->setOnline();
 ?>
 <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <a class="navbar-brand" href="index.php">ChatBook</a>

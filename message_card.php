@@ -189,13 +189,18 @@
 	}
 	function update(){
 		$.post("includes/user_isOnline.php", { name : '<?php echo $user_to_obj->getUsername(); ?>'}, function(data){
-			if(data=='false'){
-				$('#userToOnline').html("");
-			}else{
-				$('#userToOnline').html("Online");
+			if(data=='true'){
+				$('#userToOnline').fadeOut('slow',function(){
+					$(this).text("Online").fadeIn('slow');
+				});
+			}else if(data=='false'){
+				$('#userToOnline').fadeOut('slow',function(){
+					$(this).text("").fadeIn('slow');
+				});
 			}
 		});
 	}
+	$(document).ready(update());
 	setInterval(update, 10000);
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 15}, function(data){
