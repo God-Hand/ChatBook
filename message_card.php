@@ -62,8 +62,6 @@
 			</div>
 		</div>
 		<div class="container-fluid" id="message_area">
-			<div class="mb-3"></div>
-	  	<img id="loading" src="assets/images/icons/loading.gif">
 		</div>
 		<div class='input-group'>
 	    <input id='messageTyped' type='text' class='form-control' placeholder='Type a message'>
@@ -77,12 +75,14 @@
 	var last_message_id = 0;
 	window.onresize = function() {
 	  $('.resize-box').css({
-	    "maxWidth": $('.resize-box').parent().width() - 50 + "px"
+	    "maxWidth": $('.resize-box').parent().width() - 10 + "px"
 	  });
 	}
 	function loadOldMessages(){
+		$('.container-fluid').find('#loadPreviousMessages').remove();
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : last_message_id, limit : 5 }, function(data){
 			$('.container-fluid').prepend(data);
+			$('.container-fluid').prepend("<div class='row'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
 	}
 	function loadNewMessages(){
@@ -91,10 +91,13 @@
 			$('.container-fluid').append(data);
 		});*/
 	}
+
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', last_message_id : 0, limit : 10}, function(data){
 			$('.container-fluid').append(data);
+			$('.container-fluid').prepend("<div class='row'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
+
 		setInterval(loadNewMessages,1000);
 	});
 </script>
