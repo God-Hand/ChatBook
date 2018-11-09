@@ -70,6 +70,9 @@
 			    <div class="float-left resize-box">
 			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6>
 			  	</div>
+			  	<div>
+			  		<button class="btn btn-sm btn-danger float-right" onclick="deleteAllMessages()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+			  	</div>
 			  </div>
 			</div>
 		</div>
@@ -98,6 +101,12 @@
 	}
 	function deleteMessage(obj){
 		$.post("includes/delete_message.php", {message_id : obj.id},function(data){
+			var message = '.message#'+obj.id;
+			$(message).fadeOut('slow');
+		});
+	}
+	function deleteAll(obj){
+		$.post("includes/delete_all_message.php", {name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
 			var message = '.message#'+obj.id;
 			$(message).fadeOut('slow');
 		});
