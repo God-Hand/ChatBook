@@ -66,6 +66,8 @@
 			</div>
 		</div>
 		<div class="container-fluid" id="message_area">
+			<div class='row float-right ml-0 message' id='0' display='none'>
+			</div>
 		</div>
 		<div class='input-group'>
 	    <input id='messageTyped' type='text' class='form-control' placeholder='Type a message'>
@@ -76,14 +78,13 @@
 </body>
 </html>
 <script>
+	var last_message_id = 0;
 	function sendMessage(){
 		var msg_body = $('#messageTyped').val();
 		$.post("includes/save_message.php", {body:msg_body, name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
 			$('#messageTyped').val('');
 		});
 	}
-
-	var last_message_id = 0;
 	window.onresize = function() {
 	  $('.resize-box').css({
 	    "maxWidth": $('.resize-box').parent().width() - 10 + "px"
@@ -97,7 +98,6 @@
 		});
 	}
 	function loadNewMessages(){
-		console.log(last_message_id);
 		last_message_id = $('.message:last').attr('id');
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
 			$('.container-fluid').append(data);
