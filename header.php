@@ -151,8 +151,6 @@
       var likecountid = "likecount";
       document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)-1;
     }
-  }
-  function saveAction(obj){
     $.post("includes/like_post.php", {post_id : obj.id, user_action : obj.value}, function(data){
     });
   }

@@ -93,7 +93,7 @@
 					  </div>
 					  <div class='form-row'>
 					    <div class='col'>
-					      <button id='" . $post_id . "' class='btn btn-primary btn-sm float-left' style='margin-right:2px;' onclick='likePost(this)' onmouseleave='saveAction(this)' value='" . $like_value . "'>" . $like . "</button>
+					      <button id='" . $post_id . "' class='btn btn-primary btn-sm float-left' style='margin-right:2px;' onclick='likePost(this)' value='" . $like_value . "'>" . $like . "</button>
 					      <button id='" . $post_id . "' class='btn btn-primary btn-sm float-left' onclick='openCommentFrame(this)'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
 					    </div>
 					  </div>
