@@ -110,6 +110,6 @@
 			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
 
-		setInterval(loadNewMessages,500);
+		setInterval(loadNewMessages,1000);
 	});
 </script>
