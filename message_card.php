@@ -118,6 +118,7 @@
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0}, function(data){
 			if(data != "nothing"){
 				$('.container-fluid').find('.message:first').remove();
+				$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 mb-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 				$('.container-fluid').append(data);
 			}
 		});
