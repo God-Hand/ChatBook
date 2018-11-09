@@ -72,7 +72,7 @@
 					$('.comment_area').find('.noMoreComments').remove();
 					$('.comment_area').find('.noMoreCommentsText').remove();
 					$('#loading').hide();
-					$('.comment_area').append(response);
+					$('.comment_area').append(data);
 				});
 			}
 		});
@@ -90,8 +90,6 @@
 			var likecountid = "commentlikecount";
 			document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)-1;
 		}
-	}
-	function saveAction(obj){
 		$.post("includes/like_comment.php", {comment_id : obj.id, user_action : obj.value}, function(data){
 		});
 	}

@@ -56,8 +56,7 @@
 			  <img class="mr-1" src="assets/images/profile_pics/defaults/profile_pic.png" alt="Generic placeholder image">
 			  <div class="media-body">
 			    <div class="float-left resize-box">
-			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6><br/>
-			  		<p id="userToOnline" class="m-0 d-inline-block text-truncate" style="max-width: inherit;">Online</p>
+			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6>
 			  	</div>
 			  </div>
 			</div>
