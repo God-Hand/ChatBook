@@ -125,16 +125,17 @@
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content mb-2">
-				  <div class="tab-pane new-container active" id="profile_post_box">
+				  <div class="tab-pane container-fluid active" id="profile_post_box">
 				  	<div class="posts_area">
 						</div>
 						<img id="loading" src="assets/images/icons/loading.gif">
 				  </div>
-				  <div class="tab-pane new-container fade" id="friend_box">
+				  <div class="tab-pane container-fluid fade" id="friend_box">
+				  	<?php include 'infinite_friends_loading.php' ?>
 				  </div>
 				  <?php
 				  	if($user->getUsername() != $profile_user->getUsername()){
-				  		echo "<div class='tab-pane new-container fade' id='message_box'>
+				  		echo "<div class='tab-pane container-fluid fade' id='message_box'>
 									  	<iframe src='message_card.php?user_to=" . $profile_user->getUsername() . "' class='border border-default' style='height:514px;width:100%;'></iframe>
 									  </div>";
 				  	} 

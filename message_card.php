@@ -73,7 +73,7 @@
 			  </div>
 			</div>
 		</div>
-		<div class="container-fluid" id="message_area">
+		<div class="container-fluid">
 			<div class='row float-right ml-0 message' id='0' display='none'></div>
 		</div>
 		<div class='input-group'>

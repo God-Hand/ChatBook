@@ -80,7 +80,8 @@
 </nav>
 <div class="empty-70-height"></div>
 
-<script>  
+<script>
+
   $(document).on('click', '.addfriend', function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -201,6 +202,21 @@
           });
         }
       }
+    });
+  }
+
+
+
+  //resize-text inside resize-box
+  $(document).ready(function(){
+    $(window).resize(function() {
+        resizeContent();
+    });
+  });
+
+  function resizeContent() {
+    $('.resize-box').css({
+      "maxWidth": $('.resize-box').parent().width() - 50 + "px"
     });
   }
 </script>

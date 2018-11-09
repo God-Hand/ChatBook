@@ -103,14 +103,5 @@
 
 	$(document).ready(function(){
 		$('#senderSearch').val('').trigger('keyup');
-    $(window).resize(function() {
-        resizeContent();
-    });
 	});
-
-	function resizeContent() {
-		$('.resize-box').css({
-	    "maxWidth": $('.resize-box').parent().width() - 50 + "px"
-	  });
-	}
 </script>
