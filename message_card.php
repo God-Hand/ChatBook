@@ -41,7 +41,7 @@
 		.resize-box{
 			max-width: 200px;
 		}
-		.container{
+		.container-fluid{
 			height:408px;
 			overflow-y:scroll;
 		}
@@ -62,7 +62,7 @@
 			  </div>
 			</div>
 		</div>
-		<div class="container" id="message_area">
+		<div class="container-fluid" id="message_area">
 			<div class='row float-right ml-0 message' id='0' display='none'>
 			</div>
 		</div>
@@ -88,23 +88,23 @@
 	  });
 	}
 	function loadOldMessages(){
-		$('.container').find('#loadRow').remove();
+		$('.container-fluid').find('#loadRow').remove();
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 10 }, function(data){
-			$('.container').prepend(data);
-			$('.container').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
+			$('.container-fluid').prepend(data);
+			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
 	}
 	function loadNewMessages(){
 		last_message_id = $('.message:last').attr('id');
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
-			$('.container').append(data);
+			$('.container-fluid').append(data);
 		});
 	}
 
 	$(document).ready(function(){
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0, limit : 10}, function(data){
-			$('.container').append(data);
-			$('.container').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
+			$('.container-fluid').append(data);
+			$('.container-fluid').prepend("<div class='row' id='loadRow'><div class='col-12 my-3'><center><button class='btn btn-sm btn-default' onclick='loadOldMessages()' id='loadPreviousMessages'>Load Messages</button></center></div></div>");
 		});
 
 		setInterval(loadNewMessages,1000);
