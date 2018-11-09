@@ -49,6 +49,9 @@
 			width:40px;
 			border-radius:50%;
 		}
+		.message{
+			min-width:
+		}
 	</style>
 </head>
 <body>
