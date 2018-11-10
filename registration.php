@@ -123,7 +123,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="recover.php" tabindex="4" class="forgot-password" data-toggle="tooltip" data-placement="top" title="This feature is not added now">Forgot Password?</a>
+													<a href="#" tabindex="4" class="forgot-password" data-toggle="tooltip" data-placement="top" title="This feature is not added now">Forgot Password?</a>
 												</div>
 											</div>
 										</div>
