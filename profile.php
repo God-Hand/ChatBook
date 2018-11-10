@@ -212,6 +212,40 @@
 		location.reload();
 	}
 
+	// called whenever user delete post or scroll down
+  function loadPosts(){
+    var last_post_id = $('.post:last').attr('id');
+		var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+		if ( noMorePosts == 'false') {
+			$('#loading').show();
+			$('.posts_area').find('.noMorePosts').remove(); 
+			$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
+				$('.posts_area').find('.noMorePostsText').remove();
+				$('#loading').hide();
+				$('.posts_area').append(data);
+			});
+		}
+  }
+  function deletePost(obj){
+    bootbox.confirm({
+      message: "Delete the post .Are you Sure?",
+      buttons: {
+        confirm: { label: 'Yes', className: 'btn-success' },
+        cancel: { label: 'No', className: 'btn-danger' }
+      },
+      callback: function (result) {
+        if(result){
+          $.post("includes/delete_post.php", {post_id : obj.id}, function(data){
+            var element = '.post#';
+            $(element.concat(obj.id)).fadeOut();
+            $('#totalpostsCounts').html(parseInt($('#totalpostsCounts').text())-1);
+            loadPosts();
+          });
+        }
+      }
+    });
+  }
+
 	$(document).ready(function() {
 		$('#loading').show();
 		$.post("includes/load_profile_posts.php", {last_post_id : 0, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
@@ -219,16 +253,8 @@
 			$('.posts_area').html(data);
 		});
 		$(window).scroll(function() {
-			var last_post_id = $('.post:last').attr('id');
-			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
-			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
-				$('#loading').show();
-				$('.posts_area').find('.noMorePosts').remove(); 
-				$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
-					$('.posts_area').find('.noMorePostsText').remove();
-					$('#loading').hide();
-					$('.posts_area').append(data);
-				});
+			if ( (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+				loadPosts();
 			}
 		});
 	});
