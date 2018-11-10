@@ -4,7 +4,9 @@
 
 	$notification = new Notification($conn, $_SESSION['username']);
 	$count = $notification->getUnreadNotificationsCount();
-	if($count != 0){
+	if($count > 99){
+		echo "99+";
+	}elseif($count != 0){
 		echo $count;
 	}
 ?>

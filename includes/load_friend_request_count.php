@@ -4,7 +4,9 @@
 
 	$request = new FriendRequest($conn, $_SESSION['username']);
 	$count = $request->getFriendRequestsCount();
-	if($count != 0){
+	if($count > 99){
+		echo "99+";
+	}elseif($count != 0){
 		echo $count;
 	}
 ?>
