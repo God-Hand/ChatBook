@@ -10,7 +10,6 @@
     $post = new Post($conn, $_SESSION['username']);
     $notification = new Notification($conn, $_SESSION['username']);
     $user = new User($conn, $_SESSION['username']);
-    $friends = $user->getFriendArray();
     if (isset($_POST['imageLocation']) and isset($_POST['postBody'])){ 
       $post_body = removeSpaces($_POST['postBody']);
       $post_body = secureText($conn, $post_body);
@@ -25,6 +24,13 @@
       $post->addPost('', $post_body);
     } elseif (isset($_POST['imageLocation'])) {
       $post->addPost('', '', $_POST['imageLocation']);
+    }
+
+    $friends = $user->getFriendArray();
+    foreach ($friends as $friend) {
+      if ($friend != ''){
+        $notification->sendNotification($friend, $notification_body, "post", );
+      }
     }
   }
 ?>
