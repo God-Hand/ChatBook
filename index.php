@@ -75,18 +75,21 @@
 		$.post("includes/load_posts.php", {last_post_id : 0}, function(data){
 			$('#loading').hide();
 			$('.posts_area').html(data);
+
+<?php
+  if(isset($_REQUEST['type']) and isset($_REQUEST['post_id'])){
+    if($_REQUEST['type']=='post'){
+      echo "var element = '.post#" . $_REQUEST['post_id'] ."';
+            $('html, body').animate({scrollTop:$('.post#" . $_REQUEST['post_id'] ."').offset().top -80}, 2000);
+            ";
+    }
+  }
+?>
+
 		});
 		$(window).scroll(function() {
-			var last_post_id = $('.post:last').attr('id');
-			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
-			if ( ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMorePosts == 'false') {
-				$('#loading').show();
-				$('.posts_area').find('.noMorePosts').remove(); 
-				$.post("includes/load_posts.php", {last_post_id : last_post_id}, function(data){
-					$('.posts_area').find('.noMorePostsText').remove();
-					$('#loading').hide();
-					$('.posts_area').append(data);
-				});
+			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+				loadPosts();
 			}
 		});
 	});
