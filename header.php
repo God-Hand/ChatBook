@@ -80,6 +80,10 @@
 
 <script>
 
+  $(document).ready(function(){
+    $("#FriendRequestsCount").load("load_new_notifications_count.php");
+    setInterval(function(){$("#FriendRequestsCount").load('load_new_notifications_count.php')}, 15000);
+  });
   $(document).on('click', '.addfriend', function (e) {
     e.preventDefault();
     e.stopPropagation();
