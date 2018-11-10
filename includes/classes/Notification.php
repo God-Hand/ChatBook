@@ -14,23 +14,13 @@
 			$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND viewed=0 AND deleted=0");
 			return mysqli_num_rows($query);
 		}
-
-		// return all of unread notifications
-		public function getUnreadNotifications($last_id, $limit) {
-			if ($last_id==0) {
-				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND viewed=0 AND deleted=0 ORDER BY id DESC LIMIT '$limit'");
-			} else {
-				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE id<$last_id AND user_to='$this->username' AND viewed=0 AND deleted=0 ORDER BY id DESC LIMIT '$limit'");
-			}
-			return $query;
-		}
 		
 		// return all notifications
-		public function getViewedNotifications($last_id, $limit) {
+		public function getNotifications($last_id, $limit) {
 			if ($last_id==0) {
-				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND viewed=1 AND deleted=0 ORDER BY id DESC LIMIT '$limit'");
+				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND deleted=0 ORDER BY id DESC LIMIT $limit");
 			} else {
-				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE id<$last_id AND user_to='$this->username' AND viewed=1 AND deleted=0 ORDER BY id DESC LIMIT '$limit'");
+				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE id<'$last_id' AND user_to='$this->username' AND deleted=0 ORDER BY id DESC LIMIT $limit");
 			}
 			return $query;
 		}
@@ -38,12 +28,6 @@
 		// send notification to user_to
 		public function sendNotification($user_to, $notification_body, $type, $link) {
 			$query = mysqli_query($this->conn, "INSERT INTO notifications (user_from, user_to, type, notification_body, link) VALUES ('$this->username', '$user_to', '$type', '$notification_body', '$link')");
-		}
-
-		// set notification as readed
-		public function readNotification($id) {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE id='$id' and deleted=0");
-			return $query;
 		}
 
 		// delete notification
@@ -60,8 +44,8 @@
 		}
 
 		// set all notifications as readed
-		public function readAllNotifications() {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE user_to='$this->username' AND deleted=0");
+		public function readAllNotifications($first) {
+			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE user_to='$this->username' AND deleted=0 AND id<='$first'");
 			return $query;
 		}
 
