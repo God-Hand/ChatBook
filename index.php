@@ -11,8 +11,6 @@
   }
   #postBody.textarea{
     margin-bottom: 10px;
-    min-height: 100px;
-    max-height: 200px;
   }
   #uploadedImageDemo{
     max-height: 400px;
@@ -28,7 +26,7 @@
 			<div class="col-md-8">
 				<div class="card shadow p-3 mb-4 bg-white rounded post_block">
 				  <div class="form-group">
-				    <textarea id="postBody" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..."></textarea>
+				    <textarea id="postBody" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="min-height: 100px;max-height: 200px;"></textarea>
 				    <div class="form-row">
 				      <div class="col">
 				        <input type="file" id="postImage"  class="form-control-file btn float-left pl-0" accept="image/*">

@@ -79,9 +79,9 @@
 
   $(document).ready(function(){
     $("#newNotificationCount").load("includes/load_new_notifications_count.php");
-    setInterval(function(){$("#newNotificationCount").load('includes/load_new_notifications_count.php')}, 15000);
+    setInterval(function(){$("#newNotificationCount").load('includes/load_new_notifications_count.php')}, 10000);
     $("#friendRequestsCount").load("includes/load_friend_request_count.php");
-    setInterval(function(){$("#friendRequestsCount").load('includes/load_friend_request_count.php')}, 15000);
+    setInterval(function(){$("#friendRequestsCount").load('includes/load_friend_request_count.php')}, 10000);
   });
   $(document).on('click', '.addfriend', function (e) {
     e.preventDefault();
