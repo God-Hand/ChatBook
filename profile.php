@@ -202,14 +202,14 @@
       callback: function (result) {
         if(result){
           $.post("includes/delete_all_messages.php", {name : '<?php echo $profile_user->getUsername(); ?>'},function(data){
-						location.reload();
+						location.href = 'profile.php?profile_username=<?php echo $profile_user->getUsername(); ?>';
 					});
         }
       }
     });
 	}
 	function reload(){
-		location.reload();
+		location.href = 'profile.php?profile_username=<?php echo $profile_user->getUsername(); ?>';
 	}
 
 	// called whenever user delete post or scroll down
@@ -226,6 +226,49 @@
 			});
 		}
   }
+
+  function scrollDown(id){
+    var myInterval = false;
+    var found = true;
+    myInterval = setInterval(AutoScroll, 1500);
+    function AutoScroll() {
+      if($('#loading').is(':visible') == false){
+        var iScroll = $(window).scrollTop();
+        iScroll = iScroll + 1500;
+        $('html, body').animate({
+          scrollTop: iScroll
+        }, 1500);
+      }
+      loadPosts();
+    }
+    var scrollHandler = function () {
+      var iScroll = $(window).scrollTop();
+      if (iScroll == 0) {
+        myInterval = setInterval(AutoScroll, 1500);
+      }
+      var last_id = $('.post:last').attr('id');
+      if (iScroll + $(window).height() == $(document).height() || last_id < id) {
+        clearInterval(myInterval);
+        if($('.posts_area').find('.post#'+id).length > 0){
+          $('html, body').animate({ scrollTop: $('#'+id).offset().top-80 }, 2000);
+        } else {
+          $('html, body').animate({ scrollTop: $('#'+last_id).offset().top-80 }, 2000);
+          found = false;
+        }
+        $(window).unbind('scroll');
+        if(!found){
+          alert('no found');
+        }
+        $(window).scroll(function(){
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            loadPosts();
+          }
+        });
+      }
+    }
+    $(window).scroll(scrollHandler);
+  }
+
   function deletePost(obj){
     bootbox.confirm({
       message: "Delete the post .Are you Sure?",
@@ -251,6 +294,7 @@
 		$.post("includes/load_profile_posts.php", {last_post_id : 0, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
 			$('#loading').hide();
 			$('.posts_area').html(data);
+			<?php if(isset($_REQUEST['post_id'])) { echo "scrollDown(" . $_REQUEST['post_id'] . ");";} ?>
 		});
 		$(window).scroll(function() {
 			if ( (window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -294,7 +338,7 @@
   $('#sendPost').on('click', function(event){
     if ($('#postBody').val().trim().length || $('#imageLocation').val()){
       $.post("includes/save_post.php", { userTo : $('#userTo').val(), postBody : $('#postBody').val(), imageLocation : $('#imageLocation').val()} , function(data) {
-          location.reload();
+          location.href = 'profile.php?profile_username=<?php echo $profile_user->getUsername(); ?>';
       })
     }
   });

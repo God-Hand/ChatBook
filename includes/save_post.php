@@ -33,7 +33,7 @@
         $notification->sendNotification($_POST['userTo'], $notification_body, $type, $link);
       } else {
         $notification_body = "Share a post";
-        $link = "index.php?type=post&post_id=" . $post_id;
+        $link = "index.php?post_id=" . $post_id;
         $friends = $user->getFriendArray();
         foreach ($friends as $friend) {
           if ($friend != ''){
