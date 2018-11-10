@@ -12,6 +12,7 @@
 		// insert post by the user
 		public function addPost( $user_to, $body, $target_file='') {
 			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES (DEFAULT, '$this->username', '$user_to', '$body', '$target_file', DEFAULT, DEFAULT)");
+			return mysql_insert_id($conn);
 		}
 
 		// get the post by its id
