@@ -32,9 +32,14 @@
 			$notification_datetime = new DateTime($row['notification_time']);
 			$now_datetime = new DateTime($now_date);
 			$notification_time_in_text = getTimeFrame($now_datetime->diff($notification_datetime));
+			if($row['viewed']==0){
+				$alert_class = 'alert-dark';
+			} else {
+				$alert_class = 'alert-secondary';
+			}
 
 			$str .= "<div id='" . $id . "' class='row notification'>
-								<div class='alert alert-secondary col-12' role='alert'>
+								<div class='alert " . $alert_class . " col-12' role='alert'>
 							  	<p class='m-0'>
 							  		" . $notification_box . "
 							  	</p>
