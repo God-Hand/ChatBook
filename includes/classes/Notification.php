@@ -41,15 +41,9 @@
 			return mysql_insert_id($conn);
 		}
 
-		// update notification as viewed
-		public function viewNotification($id) {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE id='$id' and deleted=0");
-			return $query;
-		}
-
 		// set notification as readed
 		public function readNotification($id) {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET opened=1 WHERE id='$id' and deleted=0");
+			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE id='$id' and deleted=0");
 			return $query;
 		}
 
@@ -59,15 +53,9 @@
 			return $query;
 		}
 
-		// update all notifications as viewed
-		public function viewAllNotifications() {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE user_to='$this->username' AND deleted=0");
-			return $query;
-		}
-
 		// set all notifications as readed
 		public function readAllNotifications() {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET opened=1 WHERE user_to='$this->username' AND deleted=0");
+			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE user_to='$this->username' AND deleted=0");
 			return $query;
 		}
 
