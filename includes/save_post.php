@@ -14,30 +14,32 @@
       $post_body = removeSpaces($_POST['postBody']);
       $post_body = secureText($conn, $post_body);
       if (isset($_POST['userTo'])){
-        $post->addPost($_POST['userTo'], $post_body, $_POST['imageLocation']);
+        $post_id = $post->addPost($_POST['userTo'], $post_body, $_POST['imageLocation']);
       } else {
-        $post->addPost('', $post_body, $_POST['imageLocation']);
+        $post_id = $post->addPost('', $post_body, $_POST['imageLocation']);
       }
     } elseif (isset($_POST['postBody'])) {
       $post_body = removeSpaces($_POST['postBody']);
       $post_body = secureText($conn, $post_body);
-      $post->addPost('', $post_body);
+      $post_id = $post->addPost('', $post_body);
     } elseif (isset($_POST['imageLocation'])) {
-      $post->addPost('', '', $_POST['imageLocation']);
+      $post_id = $post->addPost('', '', $_POST['imageLocation']);
     }
 
     $type = "post";
-    if (isset($_POST['userTo']) and !empty($_POST['userTo'])){
-      $notification_body = "<a href='profile.php?profile_username=" . $user->getUsername() . "' class='text-primary'>" .$user->getUsername() . "</a> Share a post on your profile";
-      $link = "profile.php?profile_username=" . $user->getUsername();
-      $notification->sendNotification($_POST['userTo'], $notification_body, $type, $link)
-    } else {
-      $notification_body = "<a href='profile.php?profile_username=" . $user->getUsername() . "' class='text-primary'>" .$user->getUsername() . "</a> Share a post";
-      $link = "index.php?type=post&post_id=" . $;
-      $friends = $user->getFriendArray();
-      foreach ($friends as $friend) {
-        if ($friend != ''){
-          $notification->sendNotification($friend, $notification_body, $type, $link);
+    if($post_id != 0){
+      if (isset($_POST['userTo']) and !empty($_POST['userTo'])){
+        $notification_body = "<a href='profile.php?profile_username=" . $user->getUsername() . "' class='text-primary'>" .$user->getUsername() . "</a> Share a post on your profile";
+        $link = "profile.php?profile_username=" . $user->getUsername();
+        $notification->sendNotification($_POST['userTo'], $notification_body, $type, $link)
+      } else {
+        $notification_body = "<a href='profile.php?profile_username=" . $user->getUsername() . "' class='text-primary'>" .$user->getUsername() . "</a> Share a post";
+        $link = "index.php?type=post&post_id=" . $post_id;
+        $friends = $user->getFriendArray();
+        foreach ($friends as $friend) {
+          if ($friend != ''){
+            $notification->sendNotification($friend, $notification_body, $type, $link);
+          }
         }
       }
     }
