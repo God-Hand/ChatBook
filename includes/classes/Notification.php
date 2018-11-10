@@ -11,28 +11,12 @@
 		
 		// return numbers of unread notifications
 		public function getUnreadNotificationsCount() {
-			$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND opened=0 AND deleted=0");
-			return mysqli_num_rows($row);
-		}
-
-		// return numbers of new notifications
-		public function getNewNotificationsCount() {
 			$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND viewed=0 AND deleted=0");
 			return mysqli_num_rows($row);
 		}
 
 		// return all of unread notifications
 		public function getUnreadNotifications($last_id, $limit) {
-			if ($last_id==0) {
-				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND opened=0 AND deleted=0 ORDER BY id DESC LIMIT '$limit'");
-			} else {
-				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE id<$last_id AND user_to='$this->username' AND opened=0 AND deleted=0 ORDER BY id DESC LIMIT '$limit'");
-			}
-			return $query;
-		}
-
-		// return all new notifications
-		public function getNewNotifications($last_id, $limit) {
 			if ($last_id==0) {
 				$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND viewed=0 AND deleted=0 ORDER BY id DESC LIMIT '$limit'");
 			} else {
