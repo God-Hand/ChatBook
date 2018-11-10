@@ -118,7 +118,9 @@
 		var last_message_id = $('.message:last').attr('id');
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
 			$('.container-fluid').append(data);
-			console.log($('.container-fluid').height() + " " + $('.container-fluid').scrollTop() + " " + $('.message:last').attr('id'));
+			var objDiv = document.getElementById("message_area");
+			objDiv.scrollTop = objDiv.scrollHeight;
+			console.log($(window).height() + " " + $('.container-fluid').scrollTop() + " " + $('.message:last').attr('id'));
 		});
 	}
 
