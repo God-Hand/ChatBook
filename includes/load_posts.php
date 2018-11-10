@@ -25,7 +25,7 @@
 			$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted'> No more posts to show! </p>";
 		} else {
 			while ($row = mysqli_fetch_array($data_query)) {
-				if ($row['user_from'] == $user->getUsername() or $row['user_to'] == $user->getUsername() or ($user->isFriend($row['user_from']) and $row['user_to']=='')) {
+				if ($row['user_from'] == $user->getUsername() or $row['user_to'] == $user->getUsername() or ($user->isFriend($row['user_from']) and ($row['user_to']=='' or $user->isFriend($row['user_to'])))) {
 
 					$post_id = $row['post_id'];
 					$last_post_id = $post_id;
