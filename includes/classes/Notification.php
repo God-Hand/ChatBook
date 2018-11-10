@@ -32,7 +32,7 @@
 
 		// delete notification
 		public function deleteNotification($id) {
-			$query = mysqli_query($this->conn, "UPDATE notifications SET deleted=1, viewed=1 WHERE id='$id' and deleted=0");
+			$query = mysqli_query($this->conn, "UPDATE notifications SET deleted=1 WHERE id='$id'");
 			return $query;
 		}
 

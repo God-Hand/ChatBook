@@ -23,6 +23,24 @@
 </html>
 
 <script>
+	function DeleteNotification(obj){
+		$.post('includes/delete_notification.php', {id : obj.id}, function(data){
+			$('.notification#' + obj.id).fadeOut('slow');
+			loadNotifications();
+		});
+	}
+	function loadNotifications(){
+		var last_id = $('.notification:last').attr('id');
+		var noMoreNotifications = $('.container-fluid').find('#noMoreNotifications').val();
+		if (noMoreNotifications == 'false') {
+			$('#loading').show();
+			$.post("includes/load_notifications.php", {last_id : last_id, limit : 5}, function(data){
+				$('.container-fluid').find('#noMoreNotifications').remove();
+				$('#loading').hide();
+				$('.container-fluid').append(data);
+			});
+		}
+	}
 	$(document).ready(function() {
 		$('#loading').show();
 		$.post("includes/load_notifications.php", {last_id : 0 , limit : 7}, function(data){
@@ -36,13 +54,8 @@
 		$(window).scroll(function() {
 			var last_id = $('.notification:last').attr('id');
 			var noMoreNotifications = $('.container-fluid').find('#noMoreNotifications').val();
-			if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMoreNotifications == 'false') {
-				$('#loading').show();
-				$.post("includes/load_notifications.php", {last_id : last_id, limit : 5}, function(data){
-					$('.container-fluid').find('#noMoreNotifications').remove();
-					$('#loading').hide();
-					$('.container-fluid').append(data);
-				});
+			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+				loadNotifications();
 			}
 		});
 	});
