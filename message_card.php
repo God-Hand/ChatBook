@@ -107,8 +107,7 @@
 	}
 	function deleteAll(obj){
 		$.post("includes/delete_all_message.php", {name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
-			var message = '.message#'+obj.id;
-			$(message).fadeOut('slow');
+			location.reload();
 		});
 	}
 	function loadOldMessages(){
