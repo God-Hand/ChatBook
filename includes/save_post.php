@@ -26,5 +26,13 @@
       $post_id = $post->addPost('', '', $_POST['imageLocation']);
     }
 
+    $type = "post";
+    if($post_id != 0){
+      if (isset($_POST['userTo']) and !empty($_POST['userTo'])){
+        $notification_body = "<a href='profile.php?profile_username=" . $user->getUsername() . "' class='text-primary'>" .$user->getUsername() . "</a> Share a post on your profile";
+        $link = "profile.php?profile_username=" . $user->getUsername();
+        $notification->sendNotification($_POST['userTo'], $notification_body, $type, $link);
+      }
+    }
   }
 ?>
