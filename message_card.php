@@ -71,7 +71,7 @@
 			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6>
 			  	</div>
 			  	<div>
-			  		<button class="btn btn-sm btn-danger float-right" onclick="parent.deleteAllMessages()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+			  		<button class="p-1 btn btn-sm btn-danger float-right" onclick="parent.deleteAllMessages()"><i class="fa fa-trash" aria-hidden="true"></i></button>
 			  	</div>
 			  </div>
 			</div>
