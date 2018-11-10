@@ -4,6 +4,6 @@
 		require 'classes/Message.php';
 
 		$message = new Message($conn, $_SESSION['username']);
-		$message->deleteAllMessage($_POST['name']);
+		$message->deleteMessagesBy($_POST['name']);
 	}
 ?>
