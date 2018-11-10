@@ -170,6 +170,22 @@
 </body>
 </html>
 <script>
+	function deleteAllMessages(){
+		bootbox.confirm({
+      message: "this will delete all messages by you to " + '<?php echo $profile_user->getFirstAndLastName(); ?>'+'.',
+      buttons: {
+        confirm: { label: 'Yes', className: 'btn-success' },
+        cancel: { label: 'No', className: 'btn-danger' }
+      },
+      callback: function (result) {
+        if(result){
+          $.post("includes/delete_all_messages.php", {name : '<?php echo $profile_user->getUsername(); ?>'},function(data){
+						location.reload();
+					});
+        }
+      }
+    });
+	}
 	function reload(){
 		location.reload();
 	}

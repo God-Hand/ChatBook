@@ -71,7 +71,7 @@
 			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6>
 			  	</div>
 			  	<div>
-			  		<button class="btn btn-sm btn-danger float-right" onclick="deleteAllMessages()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+			  		<button class="btn btn-sm btn-danger float-right" onclick="parent.deleteAllMessages()"><i class="fa fa-trash" aria-hidden="true"></i></button>
 			  	</div>
 			  </div>
 			</div>
@@ -104,22 +104,6 @@
 			var message = '.message#'+obj.id;
 			$(message).fadeOut('slow');
 		});
-	}
-	function deleteAll(obj){
-		bootbox.confirm({
-      message: "this will delete all messages by you to " + '<?php echo $user_to_obj->getFirstAndLastName(); ?>'+'.',
-      buttons: {
-        confirm: { label: 'Yes', className: 'btn-success' },
-        cancel: { label: 'No', className: 'btn-danger' }
-      },
-      callback: function (result) {
-        if(result){
-          $.post("includes/delete_all_message.php", {name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
-						location.reload();
-					});
-        }
-      }
-    });
 	}
 	function loadOldMessages(){
 		var last_message_id = $('.message:first').attr('id');
