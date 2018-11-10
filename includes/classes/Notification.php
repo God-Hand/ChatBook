@@ -12,7 +12,7 @@
 		// return numbers of unread notifications
 		public function getUnreadNotificationsCount() {
 			$query = mysqli_query($this->conn, "SELECT * FROM notifications WHERE user_to='$this->username' AND viewed=0 AND deleted=0");
-			return mysqli_num_rows($row);
+			return mysqli_num_rows($query);
 		}
 
 		// return all of unread notifications

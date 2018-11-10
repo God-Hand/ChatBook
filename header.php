@@ -50,15 +50,12 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="fa fa-bell"></i>&nbsp;Notifications
+          <span id='newNotificationCount' class="badge badge-pill badge-danger"></span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="friend_request.php"><i class="fa fa-users"></i>&nbsp;Friend Request
-          <span id='FriendRequestsCount' class="badge badge-pill badge-danger"><?php 
-            $FriendRequestsCount = $request->getFriendRequestsCount();
-            if($FriendRequestsCount > 0)
-              echo $FriendRequestsCount;
-          ?></span>
+          <span id='friendRequestsCount' class="badge badge-pill badge-danger"></span>
         </a>
       </li>
     </ul>
@@ -81,8 +78,10 @@
 <script>
 
   $(document).ready(function(){
-    $("#FriendRequestsCount").load("load_new_notifications_count.php");
-    setInterval(function(){$("#FriendRequestsCount").load('load_new_notifications_count.php')}, 15000);
+    $("#newNotificationCount").load("includes/load_new_notifications_count.php");
+    setInterval(function(){$("#newNotificationCount").load('includes/load_new_notifications_count.php')}, 15000);
+    $("#friendRequestsCount").load("includes/load_friend_request_count.php");
+    setInterval(function(){$("#friendRequestsCount").load('includes/load_friend_request_count.php')}, 15000);
   });
   $(document).on('click', '.addfriend', function (e) {
     e.preventDefault();
