@@ -284,8 +284,9 @@
 
 		// return number of posts by the user
 		public function getNumOfPosts() {
-			$query = mysqli_query($this->conn, "SELECT * FROM posts WHERE user_from='$this->username' and deleted=0");
-			return mysqli_num_rows($query);
+			$query = mysqli_query($this->conn, "SELECT COUNT(*) as numPosts FROM posts WHERE user_from='$this->username' and deleted=0");
+			$row = mysqli_fetch_array($query);
+			return $row['numPosts'];
 		}
 	}
 ?>

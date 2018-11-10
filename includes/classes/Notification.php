@@ -52,6 +52,13 @@
 			return $query;
 		}
 
+		// delete notification
+		public function deleteNotifications($post_id) {
+			$link = "&post_id=" . $post_id;
+			$query = mysqli_query($this->conn, "UPDATE notifications SET deleted=1 WHERE link LIKE '%$link' and deleted=0");
+			return $query;
+		}
+
 		// set all notifications as readed
 		public function readAllNotifications() {
 			$query = mysqli_query($this->conn, "UPDATE notifications SET viewed=1 WHERE user_to='$this->username' AND deleted=0");

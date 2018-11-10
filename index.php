@@ -91,7 +91,6 @@
 		});
 	});
 
-
   $(document).ready(function(){
    $image_crop = $('#uploadedImageDemo').croppie({
       enableExif: true,

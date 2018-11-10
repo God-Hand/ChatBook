@@ -3,7 +3,6 @@
   require 'classes/Post.php';
   require 'classes/User.php';
   require 'classes/Notification.php';
-  require '../functions/timeframe_function.php';
   require '../functions/text_filter.php';
   
   if((isset($_POST['imageLocation']) or isset($_POST['postBody']))){
@@ -30,8 +29,8 @@
     if($post_id != 0){
       if (isset($_POST['userTo']) and !empty($_POST['userTo'])){
         $notification_body = "Share a post on your profile";
-        $link = "profile.php?profile_username=" . $user->getUsername();
-        $notification->sendNotification($_POST['userTo'], $notification_body, $type, $link)
+        $link = "profile.php?profile_username=" . $user->getUsername() . "&post_id=" . $post_id;
+        $notification->sendNotification($_POST['userTo'], $notification_body, $type, $link);
       } else {
         $notification_body = "Share a post";
         $link = "index.php?type=post&post_id=" . $post_id;

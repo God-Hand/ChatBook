@@ -91,11 +91,11 @@
 				    <table class="table">
 				    	<tr>
 				    		<td><i class="fa fa-users"></i> &nbsp;Friends</td>
-				    		<td id='totalfriendCounts'><?php echo $profile_user->getNumOfFriends(); ?></td>
+				    		<td><?php echo $profile_user->getNumOfFriends(); ?></td>
 				    	</tr>
 				    	<tr>
 				    		<td><i class="fa fa-paperclip"></i> &nbsp;Posts</td>
-				    		<td id='totalpostsCounts'><?php echo $profile_user->getNumOfPosts(); ?></td>
+				    		<td><?php echo $profile_user->getNumOfPosts(); ?></td>
 				    	</tr>
 				    </table>
 				  </div>
