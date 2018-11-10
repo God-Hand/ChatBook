@@ -106,9 +106,20 @@
 		});
 	}
 	function deleteAll(obj){
-		$.post("includes/delete_all_message.php", {name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
-			location.reload();
-		});
+		bootbox.confirm({
+      message: "this will delete all messages by you to " + '<?php echo $user_to_obj->getFirstAndLastName(); ?>'+'.',
+      buttons: {
+        confirm: { label: 'Yes', className: 'btn-success' },
+        cancel: { label: 'No', className: 'btn-danger' }
+      },
+      callback: function (result) {
+        if(result){
+          $.post("includes/delete_all_message.php", {name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
+						location.reload();
+					});
+        }
+      }
+    });
 	}
 	function loadOldMessages(){
 		var last_message_id = $('.message:first').attr('id');
