@@ -84,6 +84,40 @@
       });
     }
   }
+
+  function scrollDown(id){
+    var myInterval = false;
+    myInterval = setInterval(AutoScroll, 1500);
+    function AutoScroll() {
+      if($('#loading').is(':visible') == false){
+        var iScroll = $(window).scrollTop();
+        iScroll = iScroll + 1000;
+        $('html, body').animate({
+          scrollTop: iScroll
+        }, 1500);
+      }
+      loadPosts();
+    }
+    var scrollHandler = function () {
+      var iScroll = $(window).scrollTop();
+      if (iScroll == 0) {
+        myInterval = setInterval(AutoScroll, 1500);
+      }
+      var last_id = $('.post:last').attr('id');
+      if (iScroll + $(window).height() == $(document).height() || last_id < id) {
+        clearInterval(myInterval);
+        $('html, body').animate({ scrollTop: $('#'+id).offset().top-80 }, 1500);
+        $(window).unbind('scroll');
+        $(window).scroll(function(){
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            loadPosts();
+          }
+        });
+      }
+    }
+    $(window).scroll(scrollHandler);
+  }
+
   function deletePost(obj){
     bootbox.confirm({
       message: "Delete the post .Are you Sure?",
@@ -109,12 +143,13 @@
 		$.post("includes/load_posts.php", {last_post_id : 0}, function(data){
 			$('#loading').hide();
 			$('.posts_area').html(data);
+      <?php if(isset($_REQUEST['post_id'])) { echo "scrollDown(" . $_REQUEST['post_id'] . ");";} ?>
 		});
-		$(window).scroll(function() {
+    $(window).scroll(function() {
 			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 				loadPosts();
 			}
-		});
+    });
 	});
 
   $(document).ready(function(){
