@@ -114,13 +114,15 @@
 			}
 		});
 	}
+	
+	var objDiv = document.getElementById("message_area");
 	function loadNewMessages(){
 		var last_message_id = $('.message:last').attr('id');
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
-			$('.container-fluid').append(data);
-			var objDiv = document.getElementById("message_area");
-			objDiv.scrollTop = objDiv.scrollHeight;
-			console.log($(window).height() + " " + $('.container-fluid').scrollTop() + " " + $('.message:last').attr('id'));
+			if( data != 'nothing'){
+				$('.container-fluid').append(data);
+				objDiv.scrollTop = objDiv.scrollHeight;
+			}
 		});
 	}
 
@@ -129,6 +131,7 @@
 			if(data != "nothing"){
 				$('.container-fluid').find('.message:first').remove();
 				$('.container-fluid').append(data);
+				objDiv.scrollTop = objDiv.scrollHeight;
 			}
 		});
 

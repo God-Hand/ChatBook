@@ -169,6 +169,28 @@
 	</div>
 </body>
 </html>
+
+<!--- upload image model --->
+<div id="myUploadImageModel" z-index="-2" class="modal" role="dialog">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Crop & Upload Image</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="text-center">
+        <div id="uploadedImageDemo"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" id="cropImage">Upload Image</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+   </div>
+  </div>
+</div>
+
 <script>
 	function deleteAllMessages(){
 		bootbox.confirm({
@@ -210,13 +232,13 @@
 			}
 		});
 	});
-	  $(document).ready(function(){
+  $(document).ready(function(){
    $image_crop = $('#uploadedImageDemo').croppie({
       enableExif: true,
       viewport: { width:200, height:200, type:'square' },
       boundary:{ width:300, height:300 }
     });
-    $('#postImage').on('change', function(){
+  $('#postImage').on('change', function(){
       var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
       if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
         alert("Only formats are allowed : "+fileExtension.join(', '));
