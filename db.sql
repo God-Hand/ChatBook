@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 08, 2018 at 06:46 PM
+-- Generation Time: Nov 10, 2018 at 09:46 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -39,18 +39,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`comment_id`, `commented_by`, `body`, `commented_time`, `user_closed`, `deleted`, `post_id`) VALUES
-(14, 'deepak_thakur1541695563', 'hi', '2018-11-08 22:40:46', 0, 0, 46),
-(15, 'deepak_thakur1541695563', 'bye', '2018-11-08 23:00:01', 0, 0, 46),
-(16, 'deepak_thakur1541695563', 'good night', '2018-11-08 23:26:51', 0, 0, 46),
-(17, 'deepak_thakur1541695563', 'good night', '2018-11-08 23:27:30', 0, 0, 46),
-(18, 'deepak_thakur1541695563', 'is it', '2018-11-08 23:28:45', 0, 0, 47);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -65,13 +54,6 @@ CREATE TABLE IF NOT EXISTS `comment_likes` (
   `comment_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`username`,`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comment_likes`
---
-
-INSERT INTO `comment_likes` (`username`, `liked`, `comment_id`) VALUES
-('deepak_thakur1541695563', 0, 14);
 
 -- --------------------------------------------------------
 
@@ -88,14 +70,16 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
   `accepted` tinyint(1) DEFAULT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `friend_requests`
 --
 
 INSERT INTO `friend_requests` (`request_id`, `user_from`, `user_to`, `request_time`, `accepted`, `deleted`) VALUES
-(90, 'deepak_thakur1541695563', 'jitrendra_sharma1541694954', '2018-11-08 22:21:24', NULL, 0);
+(59, 'jitendra_sharma1541806301', 'deepak_thakur1541806323', '2018-11-10 05:03:46', 1, 1),
+(60, 'arpit_gupta1541808987', 'deepak_thakur1541806323', '2018-11-10 05:46:50', NULL, 0),
+(61, 'arpit_gupta1541808987', 'jitendra_sharma1541806301', '2018-11-10 05:51:34', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -108,12 +92,25 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `message_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_from` varchar(60) NOT NULL,
   `user_to` varchar(60) NOT NULL,
-  `message_body` text NOT NULL,
+  `message_body` tinytext NOT NULL,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `viewed` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `user_from`, `user_to`, `message_body`, `time`, `deleted`) VALUES
+(87, 'jitendra_sharma1541806301', 'deepak_thakur1541806323', 'hi', '2018-11-10 05:05:43', 1),
+(88, 'deepak_thakur1541806323', 'jitendra_sharma1541806301', 'hi bro', '2018-11-10 05:05:52', 1),
+(89, 'jitendra_sharma1541806301', 'deepak_thakur1541806323', 'so, is everything alright', '2018-11-10 05:06:17', 1),
+(90, 'deepak_thakur1541806323', 'jitendra_sharma1541806301', 'yes', '2018-11-10 05:06:27', 1),
+(91, 'jitendra_sharma1541806301', 'deepak_thakur1541806323', 'gn', '2018-11-10 05:06:37', 1),
+(92, 'deepak_thakur1541806323', 'jitendra_sharma1541806301', 'bye', '2018-11-10 05:09:27', 1),
+(93, 'jitendra_sharma1541806301', 'deepak_thakur1541806323', 'sweet dreams', '2018-11-10 05:18:47', 1),
+(94, 'jitendra_sharma1541806301', 'deepak_thakur1541806323', 'bye', '2018-11-10 05:19:14', 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +128,6 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `link` varchar(255) NOT NULL,
   `notification_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `viewed` tinyint(1) NOT NULL DEFAULT '0',
-  `opened` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -150,23 +146,20 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `body` text NOT NULL,
   `image` varchar(255) NOT NULL,
   `posted_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_closed` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `user_from`, `user_to`, `body`, `image`, `posted_time`, `user_closed`, `deleted`) VALUES
-(44, 'jitrendra_sharma1541694954', '', 'hi everyone', 'assets/images/post_pics/jitrendra_sharma15416949541541695102.png', '2018-11-08 22:08:23', 0, 0),
-(45, 'deepak_thakur1541695563', '', 'hi', '', '2018-11-08 22:40:29', 0, 1),
-(46, 'deepak_thakur1541695563', '', 'hi', '', '2018-11-08 22:40:40', 0, 0),
-(47, 'deepak_thakur1541695563', '', 'hello everyone', '', '2018-11-08 23:14:20', 0, 0),
-(48, 'deepak_thakur1541695563', '', 'see', '', '2018-11-08 23:14:42', 0, 0),
-(49, 'deepak_thakur1541695563', '', '', 'assets/images/post_pics/deepak_thakur15416955631541699168.png', '2018-11-08 23:16:09', 0, 1);
+INSERT INTO `posts` (`post_id`, `user_from`, `user_to`, `body`, `image`, `posted_time`, `deleted`) VALUES
+(14, 'jitendra_sharma1541806301', '', '', 'assets/images/post_pics/jitendra_sharma15418063011541806360.png', '2018-11-10 05:02:41', 0),
+(15, 'deepak_thakur1541806323', '', '', 'assets/images/post_pics/deepak_thakur15418063231541806370.png', '2018-11-10 05:02:51', 0),
+(16, 'jitendra_sharma1541806301', 'deepak_thakur1541806323', 'hi deepak', '', '2018-11-10 05:04:42', 0),
+(17, 'deepak_thakur1541806323', 'jitendra_sharma1541806301', 'ok', '', '2018-11-10 05:04:55', 0);
 
 -- --------------------------------------------------------
 
@@ -181,16 +174,6 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   `post_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`username`,`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `post_likes`
---
-
-INSERT INTO `post_likes` (`username`, `liked`, `post_id`) VALUES
-('deepak_thakur1541695563', 1, 46),
-('deepak_thakur1541695563', 1, 47),
-('deepak_thakur1541695563', 1, 48),
-('deepak_thakur1541695563', 1, 49);
 
 -- --------------------------------------------------------
 
@@ -219,7 +202,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `school` varchar(255) DEFAULT NULL,
   `college` varchar(255) DEFAULT NULL,
   `bio` tinytext,
-  `is_online` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -228,9 +210,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `cover_pic`, `deactivate_account`, `friend_array`, `phone_no`, `gender`, `birthday`, `city`, `state`, `country`, `school`, `college`, `bio`, `is_online`) VALUES
-('deepak', 'thakur', 'deepak_thakur1541695563', 'deepak.singh_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-11-08 16:46:03', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-('jitrendra', 'Sharma', 'jitrendra_sharma1541694954', 'Jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-11-08 16:35:54', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `cover_pic`, `deactivate_account`, `friend_array`, `phone_no`, `gender`, `birthday`, `city`, `state`, `country`, `school`, `college`, `bio`) VALUES
+('arpit', 'gupta', 'arpit_gupta1541808987', 'arpit.gupta_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-11-10 00:16:26', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'bas name hi kaafi hai'),
+('deepak', 'thakur', 'deepak_thakur1541806323', 'deepak.singh_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-11-09 23:32:03', 'assets/images/profile_pics/deepak_thakur15418063231541808911.png', 'assets/images/cover_pics/deepak_thakur15418063231541808945.png', 0, ',jitendra_sharma1541806301,', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('Jitendra', 'Sharma', 'jitendra_sharma1541806301', 'Jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-11-09 23:31:40', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',deepak_thakur1541806323,', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
