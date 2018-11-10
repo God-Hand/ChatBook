@@ -49,7 +49,7 @@
     </div>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-bell"></i>&nbsp;Notifications
+        <a class="nav-link" href="notification.php"><i class="fa fa-bell"></i>&nbsp;Notifications
           <span id='newNotificationCount' class="badge badge-pill badge-danger"></span>
         </a>
       </li>
