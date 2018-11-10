@@ -54,7 +54,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="friend_request.php"><i class="fa fa-users"></i>&nbsp;Friend Request
-          <span class="badge badge-pill badge-danger"><?php 
+          <span id='FriendRequestsCount' class="badge badge-pill badge-danger"><?php 
             $FriendRequestsCount = $request->getFriendRequestsCount();
             if($FriendRequestsCount > 0)
               echo $FriendRequestsCount;
@@ -68,6 +68,7 @@
           <i class="fa fa-user-circle-o"></i>&nbsp;<?php echo $user->getFirstName(); ?>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="index.php"><i class="fa fa-home"></i>&nbsp;Home</a>
           <a class="dropdown-item" href="settings.php"><i class="fa fa-cog"></i>&nbsp;Settings</a>
           <a class="dropdown-item" href="sign_out.php"><i class="fa fa-sign-out"></i>&nbsp;Sign-out</a>
         </div>
