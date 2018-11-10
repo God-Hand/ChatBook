@@ -36,9 +36,8 @@
 		}
 
 		// send notification to user_to
-		public function sendNotification($user_to, $notification_body='', $type='', $link='') {
-			$query = mysqli_query($this->conn, "INSERT INTO notifications VALUES (DEFAULT, '$this->username', '$user_to', '$type', '$notification_body', '$link', DEFAULT, DEFAULT, DEFAULT)");
-			return mysql_insert_id($this->conn);
+		public function sendNotification($user_to, $notification_body, $type, $link) {
+			$query = mysqli_query($this->conn, "INSERT INTO notifications (user_from, user_to, type, notification_body, link) VALUES ('$this->username', '$user_to', '$type', '$notification_body', '$link')");
 		}
 
 		// set notification as readed
