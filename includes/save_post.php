@@ -26,11 +26,6 @@
       $post->addPost('', '', $_POST['imageLocation']);
     }
 
-    $friends = $user->getFriendArray();
-    foreach ($friends as $friend) {
-      if ($friend != ''){
-        $notification->sendNotification($friend, $notification_body, "post", );
-      }
-    }
+    
   }
 ?>
