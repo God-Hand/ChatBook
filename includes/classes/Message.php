@@ -36,7 +36,7 @@
 		}
 
 		// delete all messages of a user
-		public function deleteMessages($user_to) {
+		public function deleteMessagesBy($user_to) {
 			$query = mysqli_query($this->conn, "UPDATE messages SET deleted=1 WHERE user_from='$this->username' AND user_to='$user_to'");
 		}
 
