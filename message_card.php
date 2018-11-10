@@ -76,7 +76,7 @@
 			  </div>
 			</div>
 		</div>
-		<div class="container-fluid">
+		<div class="container-fluid" id="message_area">
 			<div class='row float-right ml-0 message' id='0' display='none'></div>
 		</div>
 		<div class='input-group'>
@@ -118,6 +118,7 @@
 		var last_message_id = $('.message:last').attr('id');
 		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
 			$('.container-fluid').append(data);
+			console.log($('.container-fluid').height() + " " + $('.container-fluid').scrollTop() + " " + $('.message:last').attr('id'));
 		});
 	}
 
