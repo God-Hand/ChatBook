@@ -13,7 +13,11 @@
 		$post = new Post($conn, $_SESSION['username']);
 		$comment = new Comment($conn, $_SESSION['username']);
 		$post_like = new PostLike($conn, $_SESSION['username']);
-		$data_query = $post->loadProfilePosts($_POST['last_post_id'], $_POST['name'], LIMIT);
+		if( $user->getUsername() != $_POST['name']){
+			$data_query = $post->loadProfilePosts($_POST['last_post_id'], $_POST['name'], LIMIT);
+		} else {
+			$data_query = $post->loadUserProfilePosts($_POST['last_post_id'],LIMIT);
+		}
 		$str = "";
 		$last_post_id = $_POST['last_post_id'];
 		if (mysqli_num_rows($data_query) == 0 and $_POST['last_post_id'] == 0) {
