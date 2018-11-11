@@ -1,4 +1,61 @@
 <?php
+
+	/**
+	class User {
+		private $conn;
+		private $username;
+		private $user_details;
+		__construct($conn, $username) 							: query userdata and store in user_details
+		getUsername() 															: return username of the user
+		getFirstName() 															: return user first name
+		getFirstAndLastName() 											: return user's "first_name last_name" text format
+		getPassword() 															: return user bio
+		getBio() 																		: return user bio
+		getCoverPic() 															: return coverpic
+		getProfilePic() 														: return profile_pic
+		getEmail() 																	: return email
+		getBirthday() 															: return birthday
+		getPhoneNo() 																: return phone_no
+		getGender() 																: return gender
+		getCity() 																	: return city
+		getState() 																	: return state
+		getCountry() 																: return country
+		getSchool() 																: return school
+		getCollege() 																: return college
+		getUserLessInfo() 													: return first_name, last_name and profile_pic
+		getFriendArrayText() 												: return user's friend_array in text format
+		getFriendArray() 														: return user's friend_array
+		getNumOfFriends() 													: return number of friends
+		isOnline() 																	: return weather user's is online or not
+		isClosed() 																	: return weather user's account is closed or not
+		isFriend($friend_username) 									: return weather given username is user's friend or not
+		isUser($username) 													: return weather given username is a user or not
+		addFriend($friend_username) 								: add friend to user's friend_array and vice-versa
+		removeFriend($friend_username) 							: remove username of user from friend's friend_array and vice-versa
+		getMutualFriendsCount($friend_username) 		: return numbers of mutual_friends
+		searchUsers($input_name, $limit) 						: search user where first_name and last_name like
+		userInfoArray() 														: return user details array
+		setFirstName($first_name) 									: set user first name
+		setLastName($last_name) 										: set user last name
+		setBio($bio) 																: set user bio
+		setPhoneNumber($phone_no) 									: set user phone_no number
+		setBirthDay($birthday) 											: set user birthday
+		setGender($gender) 													: set user gender
+		setCity($city) 															: set user city
+		setState($state) 														: set user state
+		setCountry($country) 												: set user first name
+		setSchool($school) 													: set user school
+		setCollege($college) 												: set user college
+		uploadCoverPic($filepath) 									: upload cover_pic of user
+		uploadProfilePic($filepath) 								: upload profile_pic of user
+		closeAccount() 															: eactivate_account of that user
+		checkEmailIdExists($email)									: check email weather email already in use or not
+		changeEmail($email) 												: change email
+		changePassword($old_password, $new_password): change password
+		getNumOfPosts() 														: return number of posts by the user
+		}
+	}
+	*/
 	class User {
 		private $conn;
 		private $username;
@@ -11,19 +68,13 @@
 		}
 
 		// return username of the user
-		public function getUsername() {
-			return $this->username;
-		}
+		public function getUsername() { return $this->username; }
 
 		// return user first name
-		public function getFirstName() {
-			return $this->user_details['first_name'];
-		}
+		public function getFirstName() { return $this->user_details['first_name']; }
 
 		// return user's "first_name last_name" text format
-		public function getFirstAndLastName() {
-			return $this->user_details['first_name'] . " " . $this->user_details['last_name'];
-		}
+		public function getFirstAndLastName() { return $this->user_details['first_name'] . " " . $this->user_details['last_name']; }
 
 		// return user bio
 		public function getPassword() {

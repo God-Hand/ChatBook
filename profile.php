@@ -92,13 +92,14 @@
 				</div>
 				<?php
 				  $profile_fullname = "<div class='row text-dark'><div class='col-4 pr-0'>Name </div><div class='col-8 px-0 float-left'>- " . $profile_user->getFirstAndLastName() . "</div></div>";
+				  $profile_user_username = "<div class='row text-dark'><div class='col-4 pr-0'>Username </div><div class='col-8 px-0 float-left'>- " . $profile_user->getUsername() . "</div></div>";
 				  $profile_user_friend_count = "<div class='row text-dark'><div class='col-4 pr-0'>Friends </div><div class='col-8 px-0 float-left'>- " . $profile_user->getNumOfFriends() . "</div></div>";
 				  $profile_user_post_count = "<div class='row text-dark'><div class='col-4 pr-0'>Posts </div><div class='col-8 px-0 float-left'>- " . $profile_user->getNumOfPosts() . "</div></div>";
 				  if($profile_user->getBio() != '')
 				  	$profile_bio = "<div class='row text-dark'><div class='col-4 pr-0'>Bio </div><div class='col-8 px-0 float-left'>- " . $profile_user->getBio() . "</div></div>";
 				  else
 				  	$profile_bio = "";
-				  echo "<div class='card mb-3'><div class='card-body'><div class='row col-12'><h5>Account Info</h5></div>" . $profile_fullname . $profile_user_friend_count . $profile_user_post_count . $profile_bio . "</div></div>";
+				  echo "<div class='card mb-3'><div class='card-body'><div class='row col-12'><h5>Account Info</h5></div>" . $profile_fullname . $profile_user_username . $profile_user_friend_count . $profile_user_post_count . $profile_bio . "</div></div>";
 
 					$birthday = $profile_user->getBirthday();
 					$phone_no = $profile_user->getPhoneNo();
