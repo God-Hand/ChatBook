@@ -1,4 +1,18 @@
 <?php
+	/**
+	class Message {
+		private $username;
+		private $conn;
+
+		__construct($conn, $username) 										: create message object for username
+		sendMessage($user_to, $body)											: send message to a particular user
+		getMessages($user_from, $last_message_id, $limit) : return messages between user and other
+		getLatestMessages($user_from, $last_message_id) 	: return latest messages between user and other
+		deleteMessage($message_id)												: delete a message of a user
+		deleteAllMessagesTo($user_to) 												: delete all messages of a user
+		deleteAllMessages() 															: delete all messages of a user
+	}
+	*/
 	class Message {
 		private $username;
 		private $conn;
@@ -36,7 +50,7 @@
 		}
 
 		// delete all messages of a user
-		public function deleteMessagesBy($user_to) {
+		public function deleteAllMessagesTo($user_to) {
 			$query = mysqli_query($this->conn, "UPDATE messages SET deleted=1 WHERE user_from='$this->username' AND user_to='$user_to'");
 		}
 
