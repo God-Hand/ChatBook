@@ -33,7 +33,7 @@
 				$commented_time = $row['commented_time'];
 
 				if($commented_by_user_obj->getUsername() == $user->getUsername()){
-					$delete = "<button id='" . $comment_id . "' class='btn btn-danger btn-sm button float-right' onclick='parent.deleteComment(this);'><i class='fa fa-trash'></i></button>";
+					$delete = "<button id='" . $comment_id . "' class='btn btn-danger btn-sm py-0 px-1 m-0 float-right' onclick='parent.deleteComment(this);'><i class='fa fa-trash'></i></button>";
 				} else {
 					$delete = "";
 				}
@@ -63,7 +63,7 @@
 								  <div class='form-row'>
 								    <div class='col'>
 								    	<p class='text-muted float-left'>Like(<span id='commentlikecount" . $comment_id . "'>" . $comment_like_count . "</span>)</p>
-								     	<button class='btn btn-primary btn-sm float-right button' id='" . $comment_id . "' value='" . $like_value ."'onclick='likeComment(this)'>" . $like . "</button>
+								     	<button class='btn btn-primary btn-sm float-right py-0 px-1 m-0' id='" . $comment_id . "' value='" . $like_value ."'onclick='likeComment(this)'>" . $like . "</button>
 								    </div>
 								  </div>
 								</div>";

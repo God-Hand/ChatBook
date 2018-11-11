@@ -4,10 +4,6 @@ div {
 .form-group, .table{
   margin-bottom: 0px;
 }
-.scrollClass {
-  height:200px;
-  overflow-y: scroll;
-}
 .button {
   padding: 0px 4px;
   margin-left: 5px;

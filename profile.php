@@ -165,7 +165,7 @@
 				<!-- Tab panes -->
 				<div class="tab-content mb-2">
 
-				  <!--- post by profile_user and user--->
+				  <!--- post by profile_user and user if user and profile_user are same make user_to none--->
 				  <div class="tab-pane active" id="profile_post_box">
 				  	<div class="card shadow p-3 mb-4 bg-white rounded post_block">
 						  <div class="form-group">

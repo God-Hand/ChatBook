@@ -18,10 +18,6 @@
 		  .col {
 		  	margin: -15px 0px;
 		  }
-		  .scrollClass {
-		    height:200px;
-		    overflow-y: scroll;
-		  }
 		  ::-webkit-scrollbar {
 		      width: 5px;
 		  }
