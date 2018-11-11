@@ -52,7 +52,7 @@
 					$like_value = 0;
 				}
 
-				$str .= "<div class='alert alert-secondary comment m-2 p-2' style='width:90%;' id='" . $comment_id . "'>
+				$str .= "<div class='alert alert-secondary comment m-2 p-2 ' style='width:90%;' id='" . $comment_id . "'>
 									<div class='media'>
 								    " . $user_profile_pic . "
 								    <div class='media-body pl-1'>
