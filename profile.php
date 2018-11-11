@@ -110,7 +110,7 @@
 							$state = $profile_user->getState();
 							$country = $profile_user->getCountry();
 							$school  = $profile_user->getSchool();
-							$college = $profile_user->college();
+							$college = $profile_user->getCollege();
 							$location = '';
 							if ( $city != ''){
 								$location = $city;
