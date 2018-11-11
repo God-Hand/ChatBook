@@ -3,7 +3,6 @@
 		require '../config/config.php';
 		require 'classes/Message.php';
 		require '../functions/text_filter.php';
-
 		$body = removeSpaces($_POST['body']);
 		$body = secureText($conn, $body);
 		if ($body != ""){
