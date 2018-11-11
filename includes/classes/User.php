@@ -50,6 +50,8 @@
 			return $this->user_details['email'];
 		}
 
+		// return birthday
+
 		// return first_name, last_name and profile_pic
 		public function getUserLessInfo() {
 			$query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic, cover_pic FROM users WHERE username='$this->username'");
