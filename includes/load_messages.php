@@ -1,5 +1,5 @@
 <?php
-	if(isset($_POST['name'])){
+	if(isset($_POST['name']) and isset($_POST['fullname'])){
 		require '../config/config.php';
 		require 'classes/User.php';
 		require 'classes/Message.php';
