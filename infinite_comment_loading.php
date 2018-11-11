@@ -24,16 +24,8 @@
 		  ::-webkit-scrollbar-thumb:hover {
 		      background: #555; 
 		  }
-		  .image-size{
-				width: 40px;
-				margin-right:5px;
-			}
 			body{
 				font-size: 14px;
-			}
-			.button {
-				padding: 0px 4px;
-				margin-left: 5px;
 			}
 		</style>
 	</head>
