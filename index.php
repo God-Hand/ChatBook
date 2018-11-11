@@ -71,13 +71,16 @@
 
 <script>
   // called whenever user delete post or scroll down
+  var postRequestResponse = true;
   function loadPosts(){
     var last_post_id = $('.post:last').attr('id');
     var noMorePosts = $('.posts_area').find('.noMorePosts').val();
-    if ( noMorePosts == 'false') {
+    if ( noMorePosts == 'false' && postRequestResponse) {
+      postRequestResponse = false;
       $('#loading').show();
       $('.posts_area').find('.noMorePosts').remove(); 
       $.post("includes/load_posts.php", {last_post_id : last_post_id}, function(data){
+        postRequestResponse = true;
         $('.posts_area').find('.noMorePostsText').remove();
         $('#loading').hide();
         $('.posts_area').append(data);
@@ -149,8 +152,10 @@
 
 	$(document).ready(function() {
 		$('#loading').show();
+    postRequestResponse = false;
 		$.post("includes/load_posts.php", {last_post_id : 0}, function(data){
-			$('#loading').hide();
+			postRequestResponse = true;
+      $('#loading').hide();
 			$('.posts_area').html(data);
       <?php if(isset($_REQUEST['post_id'])) { echo "scrollDown(" . $_REQUEST['post_id'] . ");";} ?>
 		});

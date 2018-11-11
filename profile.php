@@ -262,21 +262,19 @@
 		location.href = 'profile.php?profile_username=<?php echo $profile_user->getUsername(); ?>';
 	}
   function loadPosts(){
-  	if(postRequestResponse){
-  		postRequestResponse = false;
-  		var last_post_id = $('.post:last').attr('id');
-			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
-			if ( noMorePosts == 'false') {
-				$('#loading').show();
-				$('.posts_area').find('.noMorePosts').remove(); 
-				$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : profileUsername}, function(data){
-					$('.posts_area').find('.noMorePostsText').remove();
-					$('#loading').hide();
-					$('.posts_area').append(data);
-					postRequestResponse = true;
-				});
-			}
-  	}
+		var last_post_id = $('.post:last').attr('id');
+		var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+		if ( noMorePosts == 'false' && postRequestResponse) {
+			postRequestResponse = false;
+			$('#loading').show();
+			$('.posts_area').find('.noMorePosts').remove(); 
+			$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : profileUsername}, function(data){
+				postRequestResponse = true;
+				$('.posts_area').find('.noMorePostsText').remove();
+				$('#loading').hide();
+				$('.posts_area').append(data);
+			});
+		}
   }
   function scrollDown(id){
     var myInterval = false;
@@ -339,7 +337,9 @@
   }
 	$(document).ready(function() {
 		$('#loading').show();
+		postRequestResponse = false;
 		$.post("includes/load_profile_posts.php", {last_post_id : 0, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
+			postRequestResponse = true;
 			$('#loading').hide();
 			$('.posts_area').html(data);
 			<?php if(isset($_REQUEST['post_id'])) { echo "scrollDown(" . $_REQUEST['post_id'] . ");";} ?>
