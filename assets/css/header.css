@@ -29,16 +29,9 @@ div {
 a:hover{
   text-decoration: none;
 }
-.new-container{
-  padding: 0px 10px 0px 10px;
-  width: 100%;
-}
 .cover-img{
   height: 100%;
   width: 100%;"
-}
-.noMorePosts{
-  padding-left:10px;
 }
 .commentframe{
   border:none;

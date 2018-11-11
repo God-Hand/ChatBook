@@ -23,7 +23,7 @@
 										No Posts
 									</div>";
 			} elseif (mysqli_num_rows($data_query) == 0) {
-				$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted'> No more posts to show! </p>";
+				$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted px-3 bg-light'> No more posts to show! </p>";
 			} else {
 				while ($row = mysqli_fetch_array($data_query)) {
 					if ($row['user_from'] == $user->getUsername() or $row['user_to'] == $user->getUsername() or ($user->isFriend($row['user_from']) and ($row['user_to']=='' or $user->isFriend($row['user_to'])))) {
@@ -109,7 +109,7 @@
 					}
 				}
 				if ($last_post_id == $_POST['last_post_id']){
-					$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted'> No more posts to show! </p>";
+					$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted px-3 bg-light'> No more posts to show! </p>";
 				} else {
 					$str .= "<input type='hidden' class='noMorePosts' value='false'>";
 				}
