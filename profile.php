@@ -88,7 +88,7 @@
 				  <div class="profile-card-body pt-5">
 				    <img src="<?php echo $profile_user->getProfilePic(); ?>" alt="profile-image" class="profile border border-default padding-5-circle"/>
 				    <center><h6 class="text-primary"><?php echo $profile_user->getFirstAndLastName(); ?></h6></center>
-				    <table class="table">
+				    <table class="table p-0">
 				    	<tr>
 				    		<td><i class="fa fa-users"></i> &nbsp;Friends</td>
 				    		<td><?php echo $profile_user->getNumOfFriends(); ?></td>
