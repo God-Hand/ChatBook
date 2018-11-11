@@ -91,11 +91,11 @@
 				  </div>
 				</div>
 				<?php
-				  $profile_fullname = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Name </div><div class='col-6 px-0 float-left'>- " . $profile_user->getFirstAndLastName() . "</div></div>";
-				  $profile_user_friend_count = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Friends </div><div class='col-6 px-0 float-left'>- " . $profile_user->getNumOfFriends() . "</div></div>";
-				  $profile_user_post_count = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Posts </div><div class='col-6 px-0 float-left'>- " . $profile_user->getNumOfPosts() . "</div></div>";
+				  $profile_fullname = "<div class='row text-dark'><div class='col-4 pr-0'>Name </div><div class='col-8 px-0 float-left'>- " . $profile_user->getFirstAndLastName() . "</div></div>";
+				  $profile_user_friend_count = "<div class='row text-dark'><div class='col-4 pr-0'>Friends </div><div class='col-8 px-0 float-left'>- " . $profile_user->getNumOfFriends() . "</div></div>";
+				  $profile_user_post_count = "<div class='row text-dark'><div class='col-4 pr-0'>Posts </div><div class='col-8 px-0 float-left'>- " . $profile_user->getNumOfPosts() . "</div></div>";
 				  if($profile_user->getBio() != '')
-				  	$profile_bio = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Bio </div><div class='col-6 px-0 float-left'>- " . $profile_user->getBio() . "</div></div>";
+				  	$profile_bio = "<div class='row text-dark'><div class='col-4 pr-0'>Bio </div><div class='col-8 px-0 float-left'>- " . $profile_user->getBio() . "</div></div>";
 				  else
 				  	$profile_bio = "";
 				  echo "<div class='card mb-3'><div class='card-body'><div class='row col-12'><h5>Account Info</h5></div>" . $profile_fullname . $profile_user_friend_count . $profile_user_post_count . $profile_bio . "</div></div>";
@@ -121,22 +121,22 @@
 					}
 					if( $birthday != '' || $gender != '' || $phone_no != '' || $school != '' || $college != '' || $location != ''){
 						if( $gender != ''){
-							$gender = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Gender </div><div class='col-6 px-0 float-left'>- " . $gender . "</div></div>";
+							$gender = "<div class='row text-dark'><div class='col-4 pr-0'>Gender </div><div class='col-8 px-0 float-left'>- " . $gender . "</div></div>";
 						}
 						if( $birthday != ''){
-							$birthday = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Birthday </div><div class='col-6 px-0 float-left'>- " . date( 'd M Y', strtotime($birthday)) . "</div></div>";
+							$birthday = "<div class='row text-dark'><div class='col-4 pr-0'>Birthday </div><div class='col-8 px-0 float-left'>- " . date( 'd M Y', strtotime($birthday)) . "</div></div>";
 						}
 						if( $phone_no != ''){
-							$phone_no = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Phone No </div><div class='col-6 px-0 float-left'>- " . $phone_no . "</div></div>";
+							$phone_no = "<div class='row text-dark'><div class='col-4 pr-0'>Phone No </div><div class='col-8 px-0 float-left'>- " . $phone_no . "</div></div>";
 						}
 						if( $location != ''){
-							$location = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>Address </div><div class='col-6 px-0 float-left'>- " . $location . "</div></div>";
+							$location = "<div class='row text-dark'><div class='col-4 pr-0'>Address </div><div class='col-8 px-0 float-left'>- " . $location . "</div></div>";
 						}
 						if( $school != ''){
-							$school = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>School </div><div class='col-6 px-0 float-left'>- " . $school . "</div></div>";
+							$school = "<div class='row text-dark'><div class='col-4 pr-0'>School </div><div class='col-8 px-0 float-left'>- " . $school . "</div></div>";
 						}
 						if( $college != ''){
-							$college = "<div class='row text-dark'><div class='pr-0' style='width:80px;'>College </div><div class='col-6 px-0 float-left'>- " . $college . "</div></div>";
+							$college = "<div class='row text-dark'><div class='col-4 pr-0'>College </div><div class='col-8 px-0 float-left'>- " . $college . "</div></div>";
 						}
 						echo  "<div class='card mb-3'><div class='card-body'><div class='row col-12'><h5>Personal Info</h5></div>" . $gender . $birthday . $phone_no . $location . $school . $college . "</div></div>";
 					}
