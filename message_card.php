@@ -107,7 +107,7 @@
 	}
 	function loadOldMessages(){
 		var last_message_id = $('.message:first').attr('id');
-		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 8 }, function(data){
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 10 }, function(data){
 			$('.container-fluid').find('#loadRow').remove();
 			if(data != "nothing"){
 				$('.container-fluid').prepend(data);
@@ -127,7 +127,7 @@
 	}
 
 	$(document).ready(function(){
-		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0, limit : 8}, function(data){
+		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0, limit : 10}, function(data){
 			if(data != "nothing"){
 				$('.container-fluid').find('.message:first').remove();
 				$('.container-fluid').append(data);
