@@ -184,9 +184,9 @@
           $.post("includes/delete_comment.php", {comment_id : obj.id}, function(data){
             var commentframeid = "#commentframe";
             var comment = '.comment#';
-            $(commentframeid.concat(result)).contents().find(comment.concat(obj.id)).fadeOut();
+            $(commentframeid.concat(data)).contents().find(comment.concat(obj.id)).fadeOut();
             var commentcountid = "commentcountid";
-            document.getElementById(commentcountid.concat(result)).innerHTML = parseInt(document.getElementById(commentcountid.concat(result)).innerHTML) - 1;
+            document.getElementById(commentcountid.concat(data)).innerHTML = parseInt(document.getElementById(commentcountid.concat(data)).innerHTML) - 1;
           });
         }
       }

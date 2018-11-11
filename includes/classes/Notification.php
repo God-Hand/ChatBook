@@ -46,7 +46,7 @@
 		}
 
 		public function deleteNotifications($post_id) {
-			$link = "&post_id=" . $post_id;
+			$link = "post_id=" . $post_id;
 			$query = mysqli_query($this->conn, "UPDATE notifications SET deleted=1 WHERE link LIKE '%$link%' and deleted=0");
 			return $query;
 		}

@@ -35,8 +35,8 @@
 		}
 
 		public function getRegister($first_name, $last_name, $email, $password) {
-			$first_name = mysqli_real_escape_string($conn , $first_name);
-			$last_name = mysqli_real_escape_string($conn, $last_name);
+			$first_name = mysqli_real_escape_string($this->conn , $first_name);
+			$last_name = mysqli_real_escape_string($this->conn, $last_name);
 			$password = md5($password);
 			$username = strtolower($first_name . "_" . $last_name);
 			$username = $username . round(microtime(true));
