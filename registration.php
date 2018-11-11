@@ -18,8 +18,8 @@
 		$first_name = $register->trimTags($_POST['first_name']);
 		$last_name = $register->trimTags($_POST['last_name']);
 		$email = $register->trimTags($_POST['reg_email']);
-		$password = strip_tags($_POST['reg_password']);
-		$confirm_password = strip_tags($_POST['reg_confirm_password']);
+		$password = $_POST['reg_password'];
+		$confirm_password = $_POST['reg_confirm_password'];
 
 		$_SESSION['first_name'] = $first_name;
 		$_SESSION['last_name'] = $last_name;
