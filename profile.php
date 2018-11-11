@@ -103,13 +103,51 @@
 				<div class="card">
 					<div class="card-body">
 						<?php
-							$birthday = $user->getBirthday();
-							$phone_no = $user->getPhoneNo();
-							$gender = $user->getGender();
-							$city = $user->getCity();
-							$state = $user->getState();
-							$country = $user->getCountry();
-							$school  = $user->getSchool();
+							$birthday = $profile_user->getBirthday();
+							$phone_no = $profile_user->getPhoneNo();
+							$gender = $profile_user->getGender();
+							$city = $profile_user->getCity();
+							$state = $profile_user->getState();
+							$country = $profile_user->getCountry();
+							$school  = $profile_user->getSchool();
+							$college = $profile_user->college();
+							$location = '';
+							if ( $city != ''){
+								$location = $city;
+								if($state != ''){
+									$location .= ", " . $state;
+								}
+								if($country != ''){
+									$location .= ", " . $country;
+								}
+							} elseif ( $state != '') {
+								$location = $state;
+								if($country != ''){
+									$location .= ", " . $country;
+								}
+							} elseif ( $country != '') {
+								$location = $country;
+							}
+							// "<tr class='table-light'><td></td><td></td></tr>"
+							if( $birthday != '' || $gender != '' || $phone_no != ''){
+								if( $gender != ''){
+									$gender = "<tr class='table-light'><td>Gender - </td><td>" . $gender . "</td></tr>";
+								}
+								if( $birthday != ''){
+									$birthday = "<tr class='table-light'><td>Birthday - </td><td>" . $birthday . "</td></tr>";
+								}
+								if( $phone_no != ''){
+									$phone_no = "<tr class='table-light'><td>Phone No - </td><td>" . $phone_no . "</td></tr>";
+								}
+								echo "<table class='table table-borderless>
+												<thead>
+													<tr>
+										        <th>Personal Info :</th>
+										      </tr>
+												</thead>
+												" . $gender . $birthday . $phone_no ."
+											</table>'";
+							}
 						?>
 					</div>					
 				</div>
