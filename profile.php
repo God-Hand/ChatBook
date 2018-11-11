@@ -100,7 +100,7 @@
 				    </table>
 				  </div>
 				</div>
-				<div class="card">
+				<div class="card mb-3">
 					<div class="card-body">
 						<?php
 							$birthday = $profile_user->getBirthday();
@@ -139,14 +139,13 @@
 								if( $phone_no != ''){
 									$phone_no = "<tr class='table-light'><td>Phone No - </td><td>" . $phone_no . "</td></tr>";
 								}
-								echo "<table class='table table-borderless>
-												<thead>
-													<tr>
-										        <th>Personal Info :</th>
-										      </tr>
-												</thead>
-												" . $gender . $birthday . $phone_no ."
-											</table>'";
+								if( $location != ''){
+									$location = "<tr class='table-light'><td>Address - </td><td>" . $location . "</td></tr>";
+								}
+								echo "<table class='table'>
+												<thead><tr><th>Personal Info :</th></tr></thead>
+												" . $gender . $birthday . $phone_no . $location ."
+											</table>";
 							}
 						?>
 					</div>					
