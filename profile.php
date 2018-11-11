@@ -131,49 +131,18 @@
 							// "<tr class='table-light'><td></td><td></td></tr>"
 							if( $birthday != '' || $gender != '' || $phone_no != ''){
 								if( $gender != ''){
-									$gender = "<tr class='table-light'><td>Gender </td><td>- " . $gender . "</td></tr>";
+									$gender = "<div class='row text-dark'><div class='col-xs-6'>Gender </div><div class='col-xs-6'>- " . $gender . "</div></div>";
 								}
 								if( $birthday != ''){
-									$birthday = "<tr class='table-light'><td>Birthday </td><td>- " . $birthday . "</td></tr>";
+									$birthday = "<div class='row text-dark'><div class='col-xs-6'>Birthday </div><div class='col-xs-6'>- " . $birthday . "</div></div>";
 								}
 								if( $phone_no != ''){
-									$phone_no = "<tr class='table-light'><td>Phone No </td><td>- " . $phone_no . "</td></tr>";
+									$phone_no = "<div class='row text-dark'><div class='col-xs-6'>Phone No </div><div class='col-xs-6'>- " . $phone_no . "</div></div>";
 								}
 								if( $location != ''){
-									$location = "<tr class='table-light'><td>Address </td><td>- " . $location . "</td></tr>";
+									$location = "<div class='row text-dark'><div class='col-xs-6'>Address </div><div class='col-xs-6'>- " . $location . "</div></div>";
 								}
-								echo "<table class='table table-borderless table-hover'>
-  <thead>
-    <tr>
-      <th scope='col'>#</th>
-      <th scope='col'>First</th>
-      <th scope='col'>Last</th>
-      <th scope='col'>Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope='row'>1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope='row'>2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope='row'>3</th>
-      <td colspan='2'>Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table><table class='table table-borderless'>
-												<thead><tr>Personal Info :</tr></thead><tbody>
-												" . $gender . $birthday . $phone_no . $location ."
-											</tbody></table>";
+								echo  $gender . $birthday . $phone_no . $location ;
 							}
 						?>
 					</div>					
