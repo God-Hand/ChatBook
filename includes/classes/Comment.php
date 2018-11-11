@@ -25,7 +25,7 @@
 			$this->conn = $conn;
 			$this->username = $username;
 		}
-		
+
 		public function addComment( $body, $post_id) {
 			$query = mysqli_query($this->conn, "INSERT INTO comments VALUES (default, '$this->username', '$body', DEFAULT, DEFAULT, '$post_id')");
 		}
@@ -62,7 +62,7 @@
 		}
 
 		public function getNumOfComments($post_id) {
-			$query = mysqli_query($this->conn, "SELECT count(*) as commentcount FROM comments WHERE commented_by='$this->username' AND post_id='$post_id' AND deleted=0");
+			$query = mysqli_query($this->conn, "SELECT count(*) as commentcount FROM comments WHERE post_id='$post_id' AND deleted=0");
 			$row = mysqli_fetch_array($query);
 			return $row['commentcount'];
 		}
