@@ -51,6 +51,44 @@
 		}
 
 		// return birthday
+		public function getBirthday(){
+			return $this->user_details['birthday'];
+		}
+
+		// return phone_no
+		public function getPhoneNo(){
+			return $this->user_details['phone_no'];
+		}
+
+		// return gender
+		public function getGender(){
+			return $this->user_details['gender'];
+		}
+
+		// return city
+		public function getCity(){
+			return $this->user_details['city'];
+		}
+
+		// return state
+		public function getState(){
+			return $this->user_details['state'];
+		}
+
+		// return country
+		public function getCountry(){
+			return $this->user_details['country'];
+		}
+
+		// return school
+		public function getSchool(){
+			return $this->user_details['school'];
+		}
+
+		// return college
+		public function getCollege(){
+			return $this->user_details['college'];
+		}
 
 		// return first_name, last_name and profile_pic
 		public function getUserLessInfo() {
