@@ -59,10 +59,10 @@
 								      <h6>" .$user_fullname . $delete . "<br><small class='text-muted'><em>" . $commented_time_in_text . "</em></small></h6>
 								    </div>
 								  </div>
-								  <p class='comment_body'><em>" . $body . "</em></p>
+								  <p class='comment_body m-0 px-1'><em>" . $body . "</em></p>
 								  <div class='form-row'>
 								    <div class='col'>
-								    	<p class='text-muted float-left'>Like(<span id='commentlikecount" . $comment_id . "'>" . $comment_like_count . "</span>)</p>
+								    	<p class='text-muted float-left m-0'>Like(<span id='commentlikecount" . $comment_id . "'>" . $comment_like_count . "</span>)</p>
 								     	<button class='btn btn-primary btn-sm float-right py-0 px-1 m-0' id='" . $comment_id . "' value='" . $like_value ."'onclick='likeComment(this)'>" . $like . "</button>
 								    </div>
 								  </div>

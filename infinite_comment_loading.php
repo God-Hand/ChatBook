@@ -12,12 +12,6 @@
 			div {
 		    word-wrap: break-word;
 			}
-		  .form-group{
-		    margin-bottom: 0px;
-		  }
-		  .col {
-		  	margin: -15px 0px;
-		  }
 		  ::-webkit-scrollbar {
 		      width: 5px;
 		  }
