@@ -131,21 +131,21 @@
 							// "<tr class='table-light'><td></td><td></td></tr>"
 							if( $birthday != '' || $gender != '' || $phone_no != ''){
 								if( $gender != ''){
-									$gender = "<tr class='table-light'><td>Gender - </td><td>" . $gender . "</td></tr>";
+									$gender = "<tr class='table-light'><td>Gender </td><td>- " . $gender . "</td></tr>";
 								}
 								if( $birthday != ''){
-									$birthday = "<tr class='table-light'><td>Birthday - </td><td>" . $birthday . "</td></tr>";
+									$birthday = "<tr class='table-light'><td>Birthday </td><td>- " . $birthday . "</td></tr>";
 								}
 								if( $phone_no != ''){
-									$phone_no = "<tr class='table-light'><td>Phone No - </td><td>" . $phone_no . "</td></tr>";
+									$phone_no = "<tr class='table-light'><td>Phone No </td><td>- " . $phone_no . "</td></tr>";
 								}
 								if( $location != ''){
-									$location = "<tr class='table-light'><td>Address - </td><td>" . $location . "</td></tr>";
+									$location = "<tr class='table-light'><td>Address </td><td>- " . $location . "</td></tr>";
 								}
 								echo "<table class='table'>
-												<thead><tr><th>Personal Info :</th></tr></thead>
+												<thead><tr>Personal Info :</tr></thead><tbody>
 												" . $gender . $birthday . $phone_no . $location ."
-											</table>";
+											</tbody></table>";
 							}
 						?>
 					</div>					
