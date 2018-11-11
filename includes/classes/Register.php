@@ -1,4 +1,16 @@
 <?php
+	/**
+	class Register{
+		private $conn;
+		private $username;
+		__construct($conn) : create variable
+		getUsername() : return username after successfully logined
+		trimTags($input) : remove spacing and tages
+		checkEmailExists($email) : return true if email already exits for a active account
+		getRegister($first_name, $last_name, $email, $password) : return true if user successfully registered
+		getLogin($email, $password) : return true if user successfully logined
+	}
+	*/
 	class Register{
 		
 		private $conn;
@@ -9,12 +21,9 @@
 			$this->conn = $conn;
 		}
 
+		// return username after login
 		public function getUsername() {
-			if (isset($this->username)) {
-				return $this->username;
-			} else {
-				return false;
-			}
+			if (isset($this->username)) { return $this->username; } else { return false; }
 		}
 
 		public function trimTags($input) {
@@ -24,11 +33,7 @@
 
 		public function checkEmailExists($email) {
 			$query = mysqli_query($this->conn, "SELECT email FROM users WHERE email='$email' and deactivate_account=0");
-			if (mysqli_num_rows($query) == 1) {
-				return true;
-			} else {
-				return false;
-			}
+			if (mysqli_num_rows($query) == 1) { return true; } else { return false; }
 		}
 
 		//add user in users table
