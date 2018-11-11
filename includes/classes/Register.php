@@ -16,12 +16,10 @@
 		private $conn;
 		private $username;
 		
-		// set connection variable
 		function __construct($conn){
 			$this->conn = $conn;
 		}
 
-		// return username after login
 		public function getUsername() {
 			if (isset($this->username)) { return $this->username; } else { return false; }
 		}
@@ -36,8 +34,9 @@
 			if (mysqli_num_rows($query) == 1) { return true; } else { return false; }
 		}
 
-		//add user in users table
 		public function getRegister($first_name, $last_name, $email, $password) {
+			$first_name = mysqli_real_escape_string($conn , $first_name);
+			$last_name = mysqli_real_escape_string($conn, $last_name);
 			$password = md5($password);
 			$username = strtolower($first_name . "_" . $last_name);
 			$username = $username . round(microtime(true));
@@ -51,13 +50,10 @@
 				$_SESSION['last_name'] = "";
 				$_SESSION['reg_email'] = "";
 				return true;
-			} else {
-				return false;
-			}
+			} else { return false; }
 		}
 
 		public function getLogin($email, $password) {
-			$email = $this->trimTags($email);
 			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 			$password = md5($password);
 			$query = mysqli_query($this->conn, "SELECT * FROM users WHERE email='$email' AND password='$password' AND deactivate_account=0");
@@ -65,9 +61,7 @@
 				$row = mysqli_fetch_array($query);
 				$this->username = $row['username'];
 				return true;
-			} else {
-				return false;
-			}
+			} else { return false; }
 		}
 	}
 ?>
