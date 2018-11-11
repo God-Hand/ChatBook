@@ -1,4 +1,18 @@
 <?php
+	/**
+	class Post {
+		private $username;
+		private $conn;
+		__construct($conn, $username) 									: construct post object for given username
+		addPost( $user_to, $body, $target_file='') 			: insert post by the user
+		getPost($post_id)																: get the post by its id
+		deletePost($post_id) 														: delete post
+		deleteAllPosts() 																: delete all post for user
+		loadAllPosts($last_post_id, $limit)  						: load posts, where post_id< given post_id and specific limit 
+		loadUserProfilePosts($last_post_id, $limit) 		: load posts, for current login user 
+		loadProfilePosts($last_post_id, $name, $limit)  : load posts, of a particular user
+	}
+	*/
 	class Post {
 		private $username;
 		private $conn;
