@@ -55,7 +55,7 @@
 				$str .= "<div class='alert alert-dark comment' style='width:80%;margin:10px;' id='" . $comment_id . "'>
 									<div class='media'>
 								    " . $user_profile_pic . "
-								    <div class='media-body' style='margin-left:5px;'>
+								    <div class='media-body pl-1'>
 								      <h6>" .$user_fullname . $delete . "<br><small class='text-muted'><em>" . $commented_time_in_text . "</em></small></h6>
 								    </div>
 								  </div>
