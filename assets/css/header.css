@@ -4,10 +4,6 @@ div {
 .form-group, .table{
   margin-bottom: 0px;
 }
-.button {
-  padding: 0px 4px;
-  margin-left: 5px;
-}
 .searchresult{
   max-width: 360px;
   max-height: 300px;

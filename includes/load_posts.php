@@ -51,7 +51,7 @@
 						}
 
 						if($user_from_obj->getUsername() == $user->getUsername()){
-							$delete = "<button id='" . $post_id . "' class='btn btn-danger btn-sm button float-right' onclick='deletePost(this)'><i class='fa fa-trash'></i></button>";
+							$delete = "<button id='" . $post_id . "' class='btn btn-danger btn-sm py-0 px-1 m-0 float-right' onclick='deletePost(this)'><i class='fa fa-trash'></i></button>";
 						} else {
 							$delete = "";
 						}
