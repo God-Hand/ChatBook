@@ -104,6 +104,12 @@
 					<div class="card-body">
 						<?php
 							$birthday = $user->getBirthday();
+							$phone_no = $user->getPhoneNo();
+							$gender = $user->getGender();
+							$city = $user->getCity();
+							$state = $user->getState();
+							$country = $user->getCountry();
+							$school  = $user->getSchool();
 						?>
 					</div>					
 				</div>
