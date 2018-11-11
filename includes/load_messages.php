@@ -5,7 +5,6 @@
 		require 'classes/Message.php';
 		require '../functions/timeframe_function.php';
 		require '../functions/text_filter.php';
-
 		$user = new User($conn, $_SESSION['username']);
 		$name = $_POST['name'];
 		$fullname = $_POST['fullname'];
