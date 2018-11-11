@@ -19,7 +19,7 @@
 										No Comments
 									</div>";
 		} elseif (mysqli_num_rows($data_query) == 0) {
-			$str .= "<input type='hidden' class='noMoreComments' value='true'><p class='text-muted' style='padding-left:10px;'> No more comments to show! </p>";
+			$str .= "<input type='hidden' class='noMoreComments' value='true'>";
 		} else {
 			while ($row = mysqli_fetch_array($data_query)) {
 				$comment_id = $row['comment_id'];
@@ -69,7 +69,7 @@
 								</div>";
 			}
 			if ($last_comment_id == $_POST['last_comment_id']){
-				$str .= "<input type='hidden' class='noMoreComments' value='true'><p class='text-muted' style='padding-left:10px;'> No more comments to show! </p>";
+				$str .= "<input type='hidden' class='noMoreComments' value='true'>";
 			} else {
 				$str .= "<input type='hidden' class='noMoreComments' value='false'>";
 			}

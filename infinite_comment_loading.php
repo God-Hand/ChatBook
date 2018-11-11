@@ -66,7 +66,6 @@
 				$('#loading').show();
 				$.post("includes/load_comments.php", {post_id : post_id, last_comment_id : last_comment_id}, function(data){
 					$('.comment_area').find('.noMoreComments').remove();
-					$('.comment_area').find('.noMoreCommentsText').remove();
 					$('#loading').hide();
 					$('.comment_area').append(data);
 				});
