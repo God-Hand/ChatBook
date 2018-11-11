@@ -187,6 +187,7 @@
             $(commentframeid.concat(data)).contents().find(comment.concat(obj.id)).fadeOut();
             var commentcountid = "commentcountid";
             document.getElementById(commentcountid.concat(data)).innerHTML = parseInt(document.getElementById(commentcountid.concat(data)).innerHTML) - 1;
+            $("#commentframe"+data).prop('contentWindow').loadComments();
           });
         }
       }

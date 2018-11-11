@@ -51,24 +51,34 @@
 </html>
 
 <script>
-	$(document).ready(function() {
-		$('#loading').show();
-		var post_id = '<?php echo $_REQUEST['post_id']; ?>';
-		$.post("includes/load_comments.php", {post_id : post_id, last_comment_id : 0}, function(data){
-			$('#loading').hide();
-			$('.comment_area').html(data);
-		});
-
-		$(window).scroll(function() {
+	var commentRequestResponse = true;
+	var post_id = '<?php echo $_REQUEST['post_id']; ?>';
+	function loadComments(){
+		if(commentRequestResponse){
 			var last_comment_id = $('.comment:last').attr('id');
 			var noMoreComments = $('.comment_area').find('.noMoreComments').val();
-			if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && noMoreComments == 'false') {
+			if (noMoreComments == 'false') {
 				$('#loading').show();
 				$.post("includes/load_comments.php", {post_id : post_id, last_comment_id : last_comment_id}, function(data){
 					$('.comment_area').find('.noMoreComments').remove();
 					$('#loading').hide();
 					$('.comment_area').append(data);
+					commentRequestResponse = true;
 				});
+			}
+		}
+	}
+	$(document).ready(function() {
+		$('#loading').show();
+		commentRequestResponse = false;
+		$.post("includes/load_comments.php", {post_id : post_id, last_comment_id : 0}, function(data){
+			$('#loading').hide();
+			$('.comment_area').html(data);
+			commentRequestResponse = true;
+		});
+		$(window).scroll(function() {
+			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+				loadComments();
 			}
 		});
 	});
@@ -77,13 +87,11 @@
 		if(obj.value == "0") {
 			obj.innerHTML = "<i class='fa fa-thumbs-down'></i>&nbspUnLike";
 			obj.value = '1';
-			var likecountid = "commentlikecount";
-			document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)+1;
+			$('#commentlikecount'+obj.id).html(parseInt($('#commentlikecount'+obj.id).html())+1);
 		} else {
 			obj.innerHTML = "<i class='fa fa-thumbs-up'></i>&nbspLike";
 			obj.value = '0';
-			var likecountid = "commentlikecount";
-			document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)-1;
+			$('#commentlikecount'+obj.id).html(parseInt($('#commentlikecount'+obj.id).html())-1);
 		}
 		$.post("includes/like_comment.php", {comment_id : obj.id, user_action : obj.value}, function(data){
 		});
