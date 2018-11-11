@@ -1,4 +1,26 @@
 <?php
+	/**
+	class Notification {
+		private $username;
+		private $conn;
+		// construct notification object for username to send notifications
+		public function __construct($conn, $username)
+		// return numbers of unread notifications
+		public function getUnreadNotificationsCount()
+		// return all notifications
+		public function getNotifications($last_id, $limit)
+		// send notification to user_to
+		public function sendNotification($user_to, $notification_body, $type, $link)
+		// delete notification
+		public function deleteNotification($id)
+		// delete notification
+		public function deleteNotifications($post_id)
+		// set all notifications as readed
+		public function readAllNotifications($first)
+		// delete all notifications
+		public function deleteAllNotifications()
+	}
+	*/
 	class Notification {
 		private $username;
 		private $conn;
