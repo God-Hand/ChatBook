@@ -10,6 +10,4 @@
   	$user->setBio($_POST['bio']);
   if(isset($_POST['email']) and $user->getEmail()!=$_POST['email'] and !empty($_POST['email']))
   	echo $user->changeEmail($_POST['email']);
-  else
-  	echo 'email not changed';
 ?>
