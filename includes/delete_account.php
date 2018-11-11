@@ -7,7 +7,6 @@
   require 'classes/CommentLike.php';
   require 'classes/FriendRequest.php';
   require 'classes/Message.php';
-
 	$user = new User($conn, $_SESSION['username']);
 	echo $user->closeAccount();
 	$post = new Post($conn, $user->getUsername());
