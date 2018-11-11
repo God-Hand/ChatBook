@@ -23,6 +23,7 @@
 </html>
 
 <script>
+	var notificationRequestResponse = true;
 	function DeleteNotification(obj){
 		$.post('includes/delete_notification.php', {id : obj.id}, function(data){
 			$('.notification#' + obj.id).fadeOut('slow');
@@ -32,9 +33,11 @@
 	function loadNotifications(){
 		var last_id = $('.notification:last').attr('id');
 		var noMoreNotifications = $('.container-fluid').find('#noMoreNotifications').val();
-		if (noMoreNotifications == 'false') {
+		if (noMoreNotifications == 'false' && notificationRequestResponse) {
 			$('#loading').show();
+			notificationRequestResponse = false;
 			$.post("includes/load_notifications.php", {last_id : last_id, limit : 5}, function(data){
+				notificationRequestResponse = true;
 				$('.container-fluid').find('#noMoreNotifications').remove();
 				$('#loading').hide();
 				$('.container-fluid').append(data);
@@ -43,7 +46,9 @@
 	}
 	$(document).ready(function() {
 		$('#loading').show();
+		notificationRequestResponse = false;
 		$.post("includes/load_notifications.php", {last_id : 0 , limit : 7}, function(data){
+			notificationRequestResponse = true;
 			$('#loading').hide();
 			$('.container-fluid').html(data);
 			var first = $('.notification:first').attr('id');
