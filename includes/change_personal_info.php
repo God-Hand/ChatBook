@@ -28,8 +28,7 @@
     $college = removeSpaces($_POST['college']);
     $college = secureText($conn, $college);
     $user->setCollege($college);
-  }
-  if( isset($_POST['birthday']) and !empty($_POST['birthday'])) {
+  } if( isset($_POST['birthday']) and !empty($_POST['birthday'])) {
     if (date("m/d/y",strtotime($_POST['birthday']) == $_POST['birthday'])) {
       $user->setBirthDay(date("m/d/y",strtotime($_POST['birthday'])));
       echo date("m/d/y",strtotime($_POST['birthday']));
