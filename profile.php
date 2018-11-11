@@ -102,6 +102,9 @@
 				</div>
 				<div class="card">
 					<div class="card-body">
+						<?php
+							$birthday = $user->getBirthday();
+						?>
 					</div>					
 				</div>
 			</div>
