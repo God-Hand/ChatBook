@@ -34,7 +34,7 @@
 										<div class='col-8'>
 											<div class='media'>
 											  " . $searched_user_profile_pic . "
-											  <div class='media-body'>
+											  <div class='media-body pl-1'>
 											    " . $searched_user_fullname . $mutual_friends . "
 											  </div>
 											</div>

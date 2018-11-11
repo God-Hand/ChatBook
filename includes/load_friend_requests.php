@@ -30,7 +30,7 @@
 			              <div class='card' id='id'>
 			                <div class='card-body media'>
 				                <a href='profile.php?profile_username=". $user_from ."' class='text-primary'><img src='" . $user_from_obj->getProfilePic() . "' alt='profile-image' class='padding-5-circle' style='width:60px;height:60px;'/>
-			                  <div class='media-body' style='margin-left:5px;'>
+			                  <div class='media-body pl-1'>
 			                    <h6>" . $user_from_obj->getFirstAndLastName() . "</h6></a><small class='text-muted'>
 			                    <em>" . $user->getMutualFriendsCount($user_from) . " mutual friends</em></small>
 			                  </div>
@@ -51,7 +51,7 @@
 			              <div class='card' id='id'>
 			                <div class='card-body media'>
 				                <a href='profile.php?profile_username=". $user_to ."' class='text-primary'><img src='" . $user_to_obj->getProfilePic() . "' alt='profile-image' class='padding-5-circle' style='width:60px;height:60px;'/>
-			                  <div class='media-body' style='margin-left:5px;'>
+			                  <div class='media-body pl-1'>
 			                    <h6>" . $user_to_obj->getFirstAndLastName() . "</h6></a><small class='text-muted'>
 			                    <em>" . $user->getMutualFriendsCount($user_to) . " mutual friends</em></small>
 			                  </div>

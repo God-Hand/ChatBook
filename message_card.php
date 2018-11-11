@@ -66,7 +66,7 @@
 		<div class="col-12 alert bg-primary text-white mb-0">
 			<div class="media">
 			  <img class="mr-1" src="assets/images/profile_pics/defaults/profile_pic.png" alt="Generic placeholder image">
-			  <div class="media-body">
+			  <div class="media-body pl-1">
 			    <div class="float-left resize-box">
 			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6>
 			  	</div>

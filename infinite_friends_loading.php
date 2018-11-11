@@ -41,7 +41,7 @@
 							    </div>
 									<div class='media friend-profile-media'>
 									  <img class='mr-1 padding-5-circle friend-profile-pic' src='" . $friend_profile_pic . "' alt='username'>
-									  <div class='media-body'>
+									  <div class='media-body pl-1'>
 									  	<div class='float-left resize-box'>
 									  		<h6 class='m-0 d-inline-block text-truncate text-white' style='max-width: inherit;'>" . $friend_fullname . "</h6><br/>
 									  		" . $profile_button . "

@@ -80,7 +80,7 @@
 					<div class='card shadow p-3 mb-2 bg-white rounded post' id='" . $post_id . "'>
 					  <div class='media'>
 					    " . $user_from_profile_pic . "
-					    <div class='media-body'>
+					    <div class='media-body pl-1'>
 					      <h6>" .$user_from_fullname . $user_to_fullname . $delete . "<br><small class='text-muted'><em>" . $posted_time_in_text . "</em></small></h6>
 					    </div>
 					  </div>
