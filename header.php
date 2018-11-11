@@ -202,7 +202,7 @@
 
   function resizeContent() {
     $('.resize-box').css({
-      "maxWidth": $('.resize-box').parent().width() - 50 + "px"
+      "maxWidth": $('.resize-box').parent().width() - 20 + "px"
     });
   }
 </script>
