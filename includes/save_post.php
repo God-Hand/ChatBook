@@ -1,11 +1,10 @@
 <?php
-  require '../config/config.php';
-  require 'classes/Post.php';
-  require 'classes/User.php';
-  require 'classes/Notification.php';
-  require '../functions/text_filter.php';
-  
   if((isset($_POST['imageLocation']) or isset($_POST['postBody']))){
+    require '../config/config.php';
+    require 'classes/Post.php';
+    require 'classes/User.php';
+    require 'classes/Notification.php';
+    require '../functions/text_filter.php';
     $post = new Post($conn, $_SESSION['username']);
     $notification = new Notification($conn, $_SESSION['username']);
     $user = new User($conn, $_SESSION['username']);
