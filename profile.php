@@ -131,18 +131,46 @@
 							// "<tr class='table-light'><td></td><td></td></tr>"
 							if( $birthday != '' || $gender != '' || $phone_no != ''){
 								if( $gender != ''){
-									$gender = "<div class='row text-dark'><div class='col-xs-6'>Gender </div><div class='col-xs-6'>- " . $gender . "</div></div>";
+									$gender = "<div class='row text-dark'><div class='col-6'>Gender </div><div class='col-6'>- " . $gender . "</div></div>";
 								}
 								if( $birthday != ''){
-									$birthday = "<div class='row text-dark'><div class='col-xs-6'>Birthday </div><div class='col-xs-6'>- " . $birthday . "</div></div>";
+									$birthday = "<div class='row text-dark'><div class='col-6'>Birthday </div><div class='col-6'>- " . date( 'd M Y', strtotime($birthday)) . "</div></div>";
 								}
 								if( $phone_no != ''){
-									$phone_no = "<div class='row text-dark'><div class='col-xs-6'>Phone No </div><div class='col-xs-6'>- " . $phone_no . "</div></div>";
+									$phone_no = "<div class='row text-dark'><div class='col-6'>Phone No </div><div class='col-6'>- " . $phone_no . "</div></div>";
 								}
 								if( $location != ''){
-									$location = "<div class='row text-dark'><div class='col-xs-6'>Address </div><div class='col-xs-6'>- " . $location . "</div></div>";
+									$location = "<div class='row text-dark'><div class='col-6'>Address </div><div class='col-6'>- " . $location . "</div></div>";
 								}
-								echo  $gender . $birthday . $phone_no . $location ;
+								echo  $gender . $birthday . $phone_no . $location . "<table class='table table-sm'>
+  <thead>
+    <tr>
+      <th scope='col'>#</th>
+      <th scope='col'>First</th>
+      <th scope='col'>Last</th>
+      <th scope='col'>Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope='row'>1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope='row'>2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope='row'>3</th>
+      <td colspan='2'>Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>";
 							}
 						?>
 					</div>					
