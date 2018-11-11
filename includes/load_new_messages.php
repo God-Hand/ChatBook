@@ -1,15 +1,13 @@
 <?php
-	if(isset($_POST['name'])){
+	if(isset($_POST['name']) and isset($_POST['fullname']) and isset($_POST['last_message_id'])){
 		require '../config/config.php';
-		require 'classes/User.php';
 		require 'classes/Message.php';
 		require '../functions/timeframe_function.php';
 		require '../functions/text_filter.php';
 
-		$user = new User($conn, $_SESSION['username']);
 		$name = $_POST['name'];
 		$fullname = $_POST['fullname'];
-		$message = new Message($conn, $user->getUsername());
+		$message = new Message($conn, $_SESSION['username']);
 		
 		$str = "";
 		$data_query = $message->getLatestMessages($_POST['name'], $_POST['last_message_id']);
@@ -21,7 +19,7 @@
 				$message_time = $row['time'];
 				$message_datetime_text = date("d-M-y h:iA", strtotime($message_time));
 
-				if( $row['user_from'] == $user->getUsername()){
+				if( $row['user_from'] == $_SESSION['username']){
 					$message_by = "You";
 					$str .= "<div class='row float-right ml-0 message' id='" . $message_id . "'>
 										<div class='col-12 alert bg-success text-white'>
