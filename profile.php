@@ -169,15 +169,13 @@
 				  <div class="tab-pane active" id="profile_post_box">
 				  	<div class="card shadow p-3 mb-4 bg-white rounded post_block">
 						  <div class="form-group">
-						    <textarea id="postBody" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="min-height: 100px;max-height: 200px;"></textarea>
+						    <textarea id="postBody" class="form-control border border-primary" rows="5" maxlength="60000" id="post" placeholder="Post Something here..." style="min-height:100px;max-height:200px;"></textarea>
 						    <div class="form-row">
 						      <div class="col">
-						        <input type="file" id="postImage"  class="form-control-file btn float-left pl-0" accept="image/*">
+						        <input type="file" id="postImage"  class="form-control-file btn float-left pl-0 pb-0" accept="image/*">
 						        <input type="hidden" id='userTo' value='<?php if($user->getUsername() != $profile_user->getUsername()){echo $profile_user->getUsername();}else{ echo '';} ?>'>
 						        <input type="hidden" id='imageLocation' value=''>
-						      </div>
-						      <div class="col">
-						        <button type="submit" class="btn btn-primary float-right mt-5" id='sendPostBtn'><i class="fa fa-pencil"></i>&nbsp;Post</button>
+						        <button type="submit" class="btn btn-primary float-right" id='sendPostBtn'><i class="fa fa-pencil"></i>&nbsp;Post</button>
 						      </div>
 						    </div>
 						  </div>
@@ -195,12 +193,9 @@
 				  <!---message tab for other user's not for profile_user--->
 				  <?php
 				  	if($user->getUsername() != $profile_user->getUsername()){
-				  		echo "<div class='tab-pane container-fluid fade' id='message_box'>
-									  	<iframe src='message_card.php?user_to=" . $profile_user->getUsername() . "' class='border border-default' style='height:514px;width:100%;'></iframe>
-									  </div>";
+				  		echo "<div class='tab-pane container-fluid fade' id='message_box'><iframe src='message_card.php?user_to=" . $profile_user->getUsername() . "' class='border border-default' style='height:514px;width:100%;'></iframe></div>";
 				  	} 
 				  ?>
-
 				</div>
 			</div>
 		</div>
@@ -208,7 +203,7 @@
 </body>
 </html>
 
-<!--- upload image model --->
+<!--- image upload model --->
 <div id="myUploadImageModel" z-index="-2" class="modal" role="dialog">
  <div class="modal-dialog modal-dialog-centered" role="document">
   <div class="modal-content">
