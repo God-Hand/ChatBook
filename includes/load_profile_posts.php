@@ -85,7 +85,7 @@
 					    </div>
 					  </div>
 					  " . $imagePath . "
-					  <div class='post-body'>
+					  <div class='px-1'>
 					  	<p>" . $post_body . "</p>
 					  </div>
 					  <div class='form-row' style='margin:-15px -5px;'>
