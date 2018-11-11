@@ -1,5 +1,5 @@
 <?php
-	if(isset($_POST['name']) and isset($_POST['fullname']) and isset($_POST['last_message_id'])){
+	if(isset($_POST['name']) and isset($_POST['fullname']) and isset($_POST['last_message_id']) and isset($_POST['limit'])){
 		require '../config/config.php';
 		require 'classes/User.php';
 		require 'classes/Message.php';
