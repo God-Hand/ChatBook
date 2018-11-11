@@ -177,7 +177,7 @@
 						        <input type="hidden" id='imageLocation' value=''>
 						      </div>
 						      <div class="col">
-						        <button type="submit" class="btn btn-primary float-right mt-5" id='sendPost'><i class="fa fa-pencil"></i>&nbsp;Post</button>
+						        <button type="submit" class="btn btn-primary float-right mt-5" id='sendPostBtn'><i class="fa fa-pencil"></i>&nbsp;Post</button>
 						      </div>
 						    </div>
 						  </div>
@@ -230,17 +230,34 @@
 </div>
 
 <script>
+	/*
+		var postRequestResponse : true if response get else false if post loading request is running
+		var profileUsername : have current username
+
+		deleteAllMessages() : delete messages
+		reload() : called to reload the page to default uri
+		loadPosts() : called whenever user delete post or scroll down
+		scrollDown(id) : used to lock scrollbar to scrolldown an id and than release scrollbar
+		deletePost(obj) : deletePost called by element which needs to be deleted and load new post after deleting
+
+		$(document).ready({ load first time 10 posts })
+		$(document).ready({ make corppie object to crop the uploaded image })
+		$('#sendPostBtn') { send post if either image or post_body are not empty }
+	*/
+	var postRequestResponse = true;
+	var profileUsername = '<?php echo $profile_user->getUsername(); ?>';
+	var profileUserFullname = '<?php echo $profile_user->getFirstAndLastName(); ?>';
 	function deleteAllMessages(){
 		bootbox.confirm({
-      message: "this will delete all messages by you to " + '<?php echo $profile_user->getFirstAndLastName(); ?>'+'.',
+      message: "this will delete all messages by you to " + profileUserFullname + '.',
       buttons: {
         confirm: { label: 'Yes', className: 'btn-success' },
         cancel: { label: 'No', className: 'btn-danger' }
       },
       callback: function (result) {
         if(result){
-          $.post("includes/delete_all_messages.php", {name : '<?php echo $profile_user->getUsername(); ?>'},function(data){
-						location.href = 'profile.php?profile_username=<?php echo $profile_user->getUsername(); ?>';
+          $.post("includes/delete_all_messages.php", {name : profileUsername},function(data){
+						location.href = 'profile.php?profile_username=' + profileUsername;
 					});
         }
       }
@@ -249,22 +266,23 @@
 	function reload(){
 		location.href = 'profile.php?profile_username=<?php echo $profile_user->getUsername(); ?>';
 	}
-
-	// called whenever user delete post or scroll down
   function loadPosts(){
-    var last_post_id = $('.post:last').attr('id');
-		var noMorePosts = $('.posts_area').find('.noMorePosts').val();
-		if ( noMorePosts == 'false') {
-			$('#loading').show();
-			$('.posts_area').find('.noMorePosts').remove(); 
-			$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
-				$('.posts_area').find('.noMorePostsText').remove();
-				$('#loading').hide();
-				$('.posts_area').append(data);
-			});
-		}
+  	if(postRequestResponse){
+  		postRequestResponse = false;
+  		var last_post_id = $('.post:last').attr('id');
+			var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+			if ( noMorePosts == 'false') {
+				$('#loading').show();
+				$('.posts_area').find('.noMorePosts').remove(); 
+				$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : profileUsername}, function(data){
+					$('.posts_area').find('.noMorePostsText').remove();
+					$('#loading').hide();
+					$('.posts_area').append(data);
+					postRequestResponse = true;
+				});
+			}
+  	}
   }
-
   function scrollDown(id){
     var myInterval = false;
     var found = true;
@@ -306,7 +324,6 @@
     }
     $(window).scroll(scrollHandler);
   }
-
   function deletePost(obj){
     bootbox.confirm({
       message: "Delete the post .Are you Sure?",
@@ -319,14 +336,12 @@
           $.post("includes/delete_post.php", {post_id : obj.id}, function(data){
             var element = '.post#';
             $(element.concat(obj.id)).fadeOut();
-            $('#totalpostsCounts').html(parseInt($('#totalpostsCounts').text())-1);
             loadPosts();
           });
         }
       }
     });
   }
-
 	$(document).ready(function() {
 		$('#loading').show();
 		$.post("includes/load_profile_posts.php", {last_post_id : 0, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
@@ -372,11 +387,10 @@
       })
     });
   });
-  // send data on save changes click
-  $('#sendPost').on('click', function(event){
-    if ($('#postBody').val().trim().length || $('#imageLocation').val()){
+  $('#sendPostBtn').click(function(event){
+    if($('#postBody').val().trim().length || $('#imageLocation').val()){
       $.post("includes/save_post.php", { userTo : $('#userTo').val(), postBody : $('#postBody').val(), imageLocation : $('#imageLocation').val()} , function(data) {
-          location.href = 'profile.php?profile_username=<?php echo $profile_user->getUsername(); ?>';
+          location.href = 'profile.php?profile_username=' + profileUsername;
       })
     }
   });
