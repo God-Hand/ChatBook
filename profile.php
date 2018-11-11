@@ -131,18 +131,18 @@
 							// "<tr class='table-light'><td></td><td></td></tr>"
 							if( $birthday != '' || $gender != '' || $phone_no != ''){
 								if( $gender != ''){
-									$gender = "<div class='row text-dark'><div class='col-6 '>Gender </div><p class='col-6 '>- " . $gender . "</p></div>";
+									$gender = "<div class='row text-dark'><div class='col-6 pr-0'>Gender </div><div class='col-6 px-0 float-left'>-" . $gender . "</div></div>";
 								}
 								if( $birthday != ''){
-									$birthday = "<div class='row text-dark'><div class='col-6 '>Birthday </div><p class='col-6 '>- " . date( 'd M Y', strtotime($birthday)) . "</p></div>";
+									$birthday = "<div class='row text-dark'><div class='col-6 pr-0'>Birthday </div><div class='col-6 px-0 float-left'>-" . date( 'd M Y', strtotime($birthday)) . "</div></div>";
 								}
 								if( $phone_no != ''){
-									$phone_no = "<div class='row text-dark'><div class='col-6 '>Phone No </div><p class='col-6 '>- " . $phone_no . "</p></div>";
+									$phone_no = "<div class='row text-dark'><div class='col-6 pr-0'>Phone No </div><div class='col-6 px-0 float-left'>-" . $phone_no . "</div></div>";
 								}
 								if( $location != ''){
-									$location = "<div class='row text-dark'><div class='col-6 '>Address </div><p class='col-6 '>- " . $location . "</p></div>";
+									$location = "<div class='row text-dark'><div class='col-6 pr-0'>Address </div><div class='col-6 px-0 float-left'>-" . $location . "</div></div>";
 								}
-								echo  $gender . $birthday . $phone_no . $location;
+								echo  "<div class='row'>Personal Info</div>" . $gender . $birthday . $phone_no . $location;
 							}
 						?>
 					</div>					
