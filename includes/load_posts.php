@@ -72,7 +72,7 @@
 
 
 						$str .= "
-						<div class='card shadow p-3 mb-2 bg-white rounded post' id='" . $post_id . "'>
+						<div class='card shadow p-3 mb-3 bg-white rounded post' id='" . $post_id . "'>
 						  <div class='media'>
 						    " . $user_from_profile_pic . "
 						    <div class='media-body pl-1'>
@@ -96,7 +96,7 @@
 						    </div>
 						  </div>
 						  <iframe class='commentframe' id='commentframe" . $post_id . "' src='" . $comment_frame_url . "' style='max-height:240px;'></iframe>
-						  <div class='input-group'>
+						  <div class='input-group mt-1'>
 						    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...'>
 						    <div class='input-group-append' maxlength='250'>
 						      <button id='" . $post_id . "' class='btn btn-primary sendComment" . $post_id . "' type='button' onclick='sendComment(this)'><i class='fa fa-paper-plane' aria-hidden='true'></i></button>
