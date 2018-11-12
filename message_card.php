@@ -88,6 +88,8 @@
 </body>
 </html>
 <script>
+	var messageNewRequestResponse = true;
+	var messageOldRequestResponse = true;
 	window.onresize = function() {
 	  $('.resize-box').css({
 	    "maxWidth": $('.resize-box').parent().width() - 10 + "px"
@@ -101,38 +103,49 @@
 	}
 	function deleteMessage(obj){
 		$.post("includes/delete_message.php", {message_id : obj.id},function(data){
-			var message = '.message#'+obj.id;
-			$(message).fadeOut('slow');
+			$('.message#'+obj.id).fadeOut('slow');
 		});
 	}
 	function loadOldMessages(){
-		var last_message_id = $('.message:first').attr('id');
-		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 10 }, function(data){
-			$('.container-fluid').find('#loadRow').remove();
-			if(data != "nothing"){
-				$('.container-fluid').prepend(data);
-			}
-		});
+		if (messageOldRequestResponse){
+			var last_message_id = $('.message:first').attr('id');
+			messageOldRequestResponse = false;
+			$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id, limit : 10 }, function(data){
+				$('.container-fluid').find('#loadRow').remove();
+				if(data != "nothing"){
+					$('.container-fluid').prepend(data);
+				}
+				messageOldRequestResponse = true;
+			});
+		}
 	}
 	
 	var objDiv = document.getElementById("message_area");
 	function loadNewMessages(){
-		var last_message_id = $('.message:last').attr('id');
-		$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
-			if( data != 'nothing'){
-				$('.container-fluid').append(data);
-				objDiv.scrollTop = objDiv.scrollHeight;
-			}
-		});
+		if (messageNewRequestResponse){
+			var last_message_id = $('.message:last').attr('id');
+			messageNewRequestResponse = false;
+			$.post("includes/load_new_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : last_message_id}, function(data){
+				if( data != 'nothing'){
+					$('.container-fluid').append(data);
+					objDiv.scrollTop = objDiv.scrollHeight;
+				}
+			});
+			messageNewRequestResponse = true;
+		}
 	}
 
 	$(document).ready(function(){
+		messageOldRequestResponse = false;
+		messageNewRequestResponse = false;
 		$.post("includes/load_messages.php", { name : '<?php echo $user_to_obj->getUsername(); ?>', fullname : '<?php echo $user_to_obj->getFirstAndLastName(); ?>', last_message_id : 0, limit : 10}, function(data){
 			if(data != "nothing"){
 				$('.container-fluid').find('.message:first').remove();
 				$('.container-fluid').append(data);
 				objDiv.scrollTop = objDiv.scrollHeight;
 			}
+			messageNewRequestResponse = true;
+			messageOldRequestResponse = true;
 		});
 
 		setInterval(loadNewMessages,1000);
