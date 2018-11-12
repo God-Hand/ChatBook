@@ -26,8 +26,8 @@
 				$last_comment_id = $comment_id;
 				$commented_by_user_obj = new User($conn, $row['commented_by']);
 				$user_details = $commented_by_user_obj->getUserLessInfo();
-				$user_fullname = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'>" . $user_details['first_name'] . " " . $user_details['last_name'] . "</a>";
-				$user_profile_pic = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary'> <img src='" . $user_details['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
+				$user_fullname = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary' target='_parent'>" . $user_details['first_name'] . " " . $user_details['last_name'] . "</a>";
+				$user_profile_pic = "<a href='profile.php?profile_username=" . $commented_by_user_obj->getUsername() . "' style='text-decoration: none;' class='text-primary' target='_parent'> <img src='" . $user_details['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
 				
 				$body = replaceURLToLink($row['body']);
 				$commented_time = $row['commented_time'];
