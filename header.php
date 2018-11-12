@@ -138,7 +138,6 @@
     var commentframeid = "commentframe";
     var element = document.getElementById(commentframeid.concat(obj.id));
     $('#commentframe'+obj.id).toggle();
-    $('#commentframe'+obj.id).height($('#commentframe'+obj.id).contents().height());
   }
   function likePost(obj) {
     if(obj.value == "0") {
