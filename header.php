@@ -137,12 +137,9 @@
   function openCommentFrame(obj) {
     var commentframeid = "commentframe";
     var element = document.getElementById(commentframeid.concat(obj.id));
-    if(element.style.display == "block") {
-      element.style.display = "none";
-    } else {
-      element.style.display = "block";
-      document.getElementById(commentframeid.concat(obj.id)).height = document.getElementById(commentframeid.concat(obj.id)).contentWindow.document.body.scrollHeight;
-    }
+    $()
+    $('#commentframe'+obj.id).toggle();
+    $('#commentframe'+obj.id).height($('#commentframe'+obj.id).contents().height());
   }
   function likePost(obj) {
     if(obj.value == "0") {
