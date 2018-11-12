@@ -79,9 +79,9 @@
 
   $(document).ready(function(){
     $("#newNotificationCount").load("includes/load_new_notifications_count.php");
-    setInterval(function(){$("#newNotificationCount").load('includes/load_new_notifications_count.php')}, 10000);
+    setInterval(function(){$("#newNotificationCount").load('includes/load_new_notifications_count.php')}, 2000);
     $("#friendRequestsCount").load("includes/load_friend_request_count.php");
-    setInterval(function(){$("#friendRequestsCount").load('includes/load_friend_request_count.php')}, 10000);
+    setInterval(function(){$("#friendRequestsCount").load('includes/load_friend_request_count.php')}, 2000);
   });
   $(document).on('click', '.addfriend', function (e) {
     e.preventDefault();
@@ -163,11 +163,8 @@
     var comment = "comment";
     var body = document.getElementById(comment.concat(obj.id)).value;
     $.post("includes/save_comment.php", {post_id : obj.id, comment_body : body}, function(data){
-      document.getElementById(comment.concat(obj.id)).value = '';
-      var commentcountid = "commentcountid";
-      document.getElementById(commentcountid.concat(obj.id)).innerHTML = data;
-      var commentframeid = "commentframe";
-      document.getElementById(commentframeid.concat(obj.id)).contentWindow.location.reload();
+      $('#commentcountid'+obj.id).html(data);
+      $('#commentframe'+obj.id)[0].contentWindow.location.reload(true);
     });
   }
 
