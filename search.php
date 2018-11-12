@@ -19,7 +19,7 @@
 	          <button id="searchUsersBtn" class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i></button>
 	        </div>
 	      </div><br/>
-	      <div class="searchedResult card"></div>
+	      <div class="searchedResult card mb-3"></div>
 			</div>
 		</div>
 	</div>
