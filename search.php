@@ -48,7 +48,7 @@
       if(data != ''){
         $('.searchedResult').html(data);
       } else {
-      	$('.searchedResult').html("<input type='hidden' id='noMoreComments' value='true'><div class='p-3 mb-2 bg-light text-muted' style='margin:10px'>No such name users found</div>");
+      	$('.searchedResult').html("<div class='p-3 m-2 bg-light text-muted'>No such name users found</div>");
       }
     });
   }
