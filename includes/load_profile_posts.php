@@ -74,7 +74,7 @@
 
 
 					$str .= "
-					<div class='card shadow p-3 mb-2 bg-white rounded post' id='" . $post_id . "'>
+					<div class='card shadow p-3 mb-3 bg-white rounded post' id='" . $post_id . "'>
 					  <div class='media'>
 					    " . $user_from_profile_pic . "
 					    <div class='media-body pl-1'>
