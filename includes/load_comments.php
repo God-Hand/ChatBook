@@ -59,7 +59,7 @@
 								      <h6>" .$user_fullname . $delete . "<br><small class='text-muted'><em>" . $commented_time_in_text . "</em></small></h6>
 								    </div>
 								  </div>
-								  <p class='comment_body m-0 px-1'><em>" . $body . "</em></p>
+								  <p class='comment_body m-0 px-1'>" . $body . "</p>
 								  <div class='form-row'>
 								    <div class='col'>
 								    	<p class='text-muted float-left m-0'>Like(<span id='commentlikecount" . $comment_id . "'>" . $comment_like_count . "</span>)</p>
