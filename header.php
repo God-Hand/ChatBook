@@ -160,6 +160,7 @@
     $.post("includes/save_comment.php", {post_id : obj.id, comment_body : body}, function(data){
       $('#commentcountid'+obj.id).html(data);
       $('#comment'+obj.id).val('');
+      $('#commentframe'+obj.id).hide();
       $('#commentframe'+obj.id)[0].contentWindow.location.reload(true);
     });
   }
