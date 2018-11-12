@@ -148,13 +148,11 @@
     if(obj.value == "0") {
       obj.innerHTML = "<i class='fa fa-thumbs-down'></i>&nbspUnLike";
       obj.value = '1';
-      var likecountid = "likecount";
-      document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)+1;
+      $('#likecount'+obj.id).html(parseInt($('#likecount'+obj.id).html())+1);
     } else {
       obj.innerHTML = "<i class='fa fa-thumbs-up'></i>&nbspLike";
       obj.value = '0';
-      var likecountid = "likecount";
-      document.getElementById(likecountid.concat(obj.id)).innerHTML = parseInt(document.getElementById(likecountid.concat(obj.id)).innerHTML)-1;
+      $('#likecount'+obj.id).html(parseInt($('#likecount'+obj.id).html())-1);
     }
     $.post("includes/like_post.php", {post_id : obj.id, user_action : obj.value}, function(data){
     });
