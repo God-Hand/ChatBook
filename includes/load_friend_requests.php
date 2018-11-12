@@ -9,10 +9,10 @@
 		$data_query = $request->getAllFriendRequests($_POST['last_request_id'],LIMIT);
 		$str = "";
 		if (mysqli_num_rows($data_query) == 0 and $_POST['last_request_id'] == 0) {
-			$str .= "<input type='hidden' id='noMoreRequests' value='true'><div class='card'><p class='text-muted p-3 m-2 bg-light'> 
+			$str .= "<input type='hidden' id='noMoreRequests' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> 
 									No Requests</p></div>";
 		} elseif (mysqli_num_rows($data_query) == 0) {
-			$str .= "<input type='hidden' id='noMoreRequests' value='true'><div class='card'><p class='text-muted p-3 m-2 bg-light'> No More Requests </p></div>";
+			$str .= "<input type='hidden' id='noMoreRequests' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No More Requests </p></div>";
 		} else {
 			while ($row = mysqli_fetch_array($data_query)) {
 				$request_id = $row['request_id'];
@@ -60,7 +60,7 @@
 				}
 			}
 			if ($last_request_id == $_POST['last_request_id']){
-				$str .= "<input type='hidden' id='noMoreRequests' value='true'><div class='card'><p class='text-muted p-3 m-2 bg-light'> No More Requests </p></div>";
+				$str .= "<input type='hidden' id='noMoreRequests' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No More Requests </p></div>";
 			} else {
 				$str .= "<input type='hidden' id='noMoreRequests' value='false'>";
 			}
