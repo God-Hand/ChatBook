@@ -137,7 +137,6 @@
   function openCommentFrame(obj) {
     var commentframeid = "commentframe";
     var element = document.getElementById(commentframeid.concat(obj.id));
-    $()
     $('#commentframe'+obj.id).toggle();
     $('#commentframe'+obj.id).height($('#commentframe'+obj.id).contents().height());
   }
@@ -155,10 +154,10 @@
     });
   }
   function sendComment(obj){
-    var comment = "comment";
-    var body = document.getElementById(comment.concat(obj.id)).value;
+    var body = $('#comment'+obj.id).val();
     $.post("includes/save_comment.php", {post_id : obj.id, comment_body : body}, function(data){
       $('#commentcountid'+obj.id).html(data);
+      $('#comment'+obj.id).val('');
       $('#commentframe'+obj.id)[0].contentWindow.location.reload(true);
     });
   }
@@ -174,11 +173,8 @@
       callback: function (result) {
         if(result){
           $.post("includes/delete_comment.php", {comment_id : obj.id}, function(data){
-            var commentframeid = "#commentframe";
-            var comment = '.comment#';
-            $(commentframeid.concat(data)).contents().find(comment.concat(obj.id)).fadeOut();
-            var commentcountid = "commentcountid";
-            document.getElementById(commentcountid.concat(data)).innerHTML = parseInt(document.getElementById(commentcountid.concat(data)).innerHTML) - 1;
+            $('#commentframe'+data).contents().find('.comment#'+obj.id).fadeOut();
+            $('#commentcountid'+data).html(parseInt($('#commentcountid'+data).html())-1);
             $("#commentframe"+data).prop('contentWindow').loadComments();
           });
         }
