@@ -97,7 +97,7 @@
 					      <button id='" . $post_id . "' class='btn btn-primary btn-sm float-left' onclick='openCommentFrame(this)'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
 					    </div>
 					  </div>
-					  <iframe class='commentframe' id='commentframe" . $post_id . "' src='" . $comment_frame_url . "'></iframe>
+					  <iframe class='commentframe' id='commentframe" . $post_id . "' src='" . $comment_frame_url . "' style='max-height:240px;'></iframe>
 					  <div class='input-group'>
 					    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...'>
 					    <div class='input-group-append' maxlength='250'>

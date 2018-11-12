@@ -35,6 +35,5 @@ a:hover{
 }
 .commentframe{
   border:none;
-  max-height:240px;
   display: none;
 }
