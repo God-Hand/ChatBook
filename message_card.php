@@ -118,7 +118,6 @@
 		var msg_body = $('#messageTyped').val();
 		$.post("includes/save_message.php", {body:msg_body, name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
 			$('#messageTyped').val('');
-			loadNewMessages();
 		});
 	}
 	function deleteMessage(obj){
