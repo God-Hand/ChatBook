@@ -44,12 +44,13 @@
 			var last_comment_id = $('.comment:last').attr('id');
 			var noMoreComments = $('.comment_area').find('.noMoreComments').val();
 			if (noMoreComments == 'false') {
+				commentRequestResponse = false;
 				$('#loading').show();
 				$.post("includes/load_comments.php", {post_id : post_id, last_comment_id : last_comment_id}, function(data){
+					commentRequestResponse = true;
 					$('.comment_area').find('.noMoreComments').remove();
 					$('#loading').hide();
 					$('.comment_area').append(data);
-					commentRequestResponse = true;
 				});
 			}
 		}
