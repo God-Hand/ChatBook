@@ -24,8 +24,8 @@
 
 				if ($user_to == $user->getUsername()){
 					$user_from_obj = new User($conn, $user_from);
-					$str .= "<div id='" . $request_id . "' class='p-3 col-12 request m-3 card'>
-		                <div class='card-body media'>
+					$str .= "<div id='" . $request_id . "' class='p-0 col-12 request mb-3 card'>
+		                <div class='card-body media p-3'>
 			                <a href='profile.php?profile_username=". $user_from ."' class='text-primary'><img src='" . $user_from_obj->getProfilePic() . "' alt='profile-image' class='padding-5-circle' style='width:60px;height:60px;'/>
 		                  <div class='media-body pl-1'>
 		                    <h6>" . $user_from_obj->getFirstAndLastName() . "</h6></a><small class='text-muted'>
@@ -43,8 +43,8 @@
 			            </div>";
 				} elseif ($user_from == $user->getUsername()) {
 					$user_to_obj = new User($conn, $user_to);
-					$str .= "<div id='" . $row['request_id'] . "' class='p-3 m-3 col-12 request card'>
-		                <div class='card-body media'>
+					$str .= "<div id='" . $row['request_id'] . "' class='p-0 mb-3 col-12 request card'>
+		                <div class='card-body media p-3'>
 			                <a href='profile.php?profile_username=". $user_to ."' class='text-primary'><img src='" . $user_to_obj->getProfilePic() . "' alt='profile-image' class='padding-5-circle' style='width:60px;height:60px;'/>
 		                  <div class='media-body pl-1'>
 		                    <h6>" . $user_to_obj->getFirstAndLastName() . "</h6></a><small class='text-muted'>
