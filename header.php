@@ -117,7 +117,7 @@
    $.post("includes/friend_request_response.php", {action:obj.value, name:obj.id, username:'<?php echo $user->getUsername(); ?>'}, function(data) {
    })
   }
-  
+
   function SearchUser(obj){
     var username = '<?php echo $user->getUsername(); ?>';
     $.post("includes/search.php", {name:obj.value, username: username, limit:5, requestby:1}, function(data) {
@@ -160,10 +160,12 @@
   function sendComment(obj){
     var body = $('#comment'+obj.id).val();
     $.post("includes/save_comment.php", {post_id : obj.id, comment_body : body}, function(data){
-      $('#commentcountid'+obj.id).html(data);
       $('#comment'+obj.id).val('');
       $('#commentframe'+obj.id).hide();
-      $('#commentframe'+obj.id)[0].contentWindow.location.reload(true);
+      if(data != ''){
+        $('#commentcountid'+obj.id).html(data);
+        $('#commentframe'+obj.id)[0].contentWindow.location.reload(true);
+      }
     });
   }
 
