@@ -22,12 +22,9 @@
 			$str = "";
 			$last_post_id = $_POST['last_post_id'];
 			if (mysqli_num_rows($data_query) == 0 and $_POST['last_post_id'] == 0) {
-				$str .= "<input type='hidden' id='noMorePosts' value='true'>
-									<div class='p-3 mb-2 bg-light text-muted' style='margin:10px'>
-										No Posts
-									</div>";
+				$str .= "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No Posts </p></div>";
 			} elseif (mysqli_num_rows($data_query) == 0) {
-				$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted px-3 bg-light'> No more posts to show! </p>";
+				$str .= "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No more posts to show! </p></div>";
 			} else {
 				while ($row = mysqli_fetch_array($data_query)) {
 					$post_id = $row['post_id'];
@@ -110,17 +107,14 @@
 					</div>"; //here that html code. which need to be displayed
 				}
 				if ($last_post_id == $_POST['last_post_id']){
-					$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted px-3 bg-light'> No more posts to show! </p>";
+					$str .= "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No more posts to show! </p></div>";
 				} else {
 					$str .= "<input type='hidden' class='noMorePosts' value='false'>";
 				}
 			}
 			echo $str;
 		} else {
-			echo "<input type='hidden' id='noMorePosts' value='true'>
-									<div class='p-3 mb-2 bg-light text-muted' style='margin:10px'>
-										No Posts
-									</div>";
+			echo "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No Posts </p></div>";
 		}
 	}
 ?>

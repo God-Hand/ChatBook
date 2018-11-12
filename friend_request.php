@@ -46,7 +46,6 @@
         $('#loading').show();
         $.post("includes/load_friend_requests.php", {last_request_id : last_request_id}, function(data){
           $('.friend_request_area').find('#noMoreRequests').remove();
-          $('.friend_request_area').find('#noMoreRequestsText').remove();
           $('#loading').hide();
           $('.friend_request_area').append(data);
         });
@@ -55,8 +54,7 @@
   });
 
   function deleteRequest(obj){
-    var element = '.request#';
-    $(element.concat(obj.id)).fadeOut();
+    $('.request#'+obj.id).fadeOut();
   }
   function acceptRequest(obj){
     $.post("includes/accept_friend_request.php",{ user_from : obj.value }, function(e){

@@ -18,12 +18,9 @@
 			$str = "";
 			$last_post_id = $_POST['last_post_id'];
 			if (mysqli_num_rows($data_query) == 0 and $_POST['last_post_id'] == 0) {
-				$str .= "<input type='hidden' id='noMorePosts' value='true'>
-									<div class='p-3 mb-2 bg-light text-muted' style='margin:10px'>
-										No Posts
-									</div>";
+				$str .= "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No Posts </p></div>";
 			} elseif (mysqli_num_rows($data_query) == 0) {
-				$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted px-3 bg-light'> No more posts to show! </p>";
+				$str .= "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No more posts to show! </p></div>";
 			} else {
 				while ($row = mysqli_fetch_array($data_query)) {
 					if ($row['user_from'] == $user->getUsername() or $row['user_to'] == $user->getUsername() or ($user->isFriend($row['user_from']) and ($row['user_to']=='' or $user->isFriend($row['user_to'])))) {
@@ -98,7 +95,7 @@
 						      <button id='" . $post_id . "' class='btn btn-primary btn-sm float-left' onclick='openCommentFrame(this)'><i class='fa fa-comment-o'></i>&nbsp;Comment</button>
 						    </div>
 						  </div>
-						  <iframe class='commentframe' id='commentframe" . $post_id . "' src='" . $comment_frame_url . "'></iframe>
+						  <iframe class='commentframe' id='commentframe" . $post_id . "' src='" . $comment_frame_url . "' style='max-height:240px;'></iframe>
 						  <div class='input-group mb-3' style='margin:5px 0px;'>
 						    <input id='comment" . $post_id . "' type='text' class='form-control border border-primary' placeholder='Comment...'>
 						    <div class='input-group-append' maxlength='250'>
@@ -109,17 +106,14 @@
 					}
 				}
 				if ($last_post_id == $_POST['last_post_id']){
-					$str .= "<input type='hidden' class='noMorePosts' value='true'><p class='text-muted px-3 bg-light'> No more posts to show! </p>";
+					$str .= "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No more posts to show! </p></div>";
 				} else {
 					$str .= "<input type='hidden' class='noMorePosts' value='false'>";
 				}
 			}
 			echo $str;
 		} else {
-			echo "<input type='hidden' id='noMorePosts' value='true'>
-									<div class='p-3 mb-2 bg-light text-muted' style='margin:10px'>
-										No Posts
-									</div>";
+			echo "<input type='hidden' class='noMorePosts' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No Posts </p></div>";
 		}	
 	}
 ?>
