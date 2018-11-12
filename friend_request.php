@@ -17,14 +17,12 @@
         <?php include("profile_card.php") ?>
       </div>
 			<div class="col-md-8">
-        <div class="card>">
-          <div class="container card">
-            <div class="row">
-              <div class="friend_request_area" style="width:100%;">
-              </div>
-              <br>
-              <img id="loading" src="assets/images/icons/loading.gif">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="friend_request_area" style="width:100%;">
             </div>
+            <br>
+            <img id="loading" src="assets/images/icons/loading.gif">
           </div>
         </div>
       </div>
