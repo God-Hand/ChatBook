@@ -79,7 +79,7 @@
 
   $(document).ready(function(){
     $("#newNotificationCount").load("includes/load_new_notifications_count.php");
-    setInterval(function(){$("#newNotificationCount").load('includes/load_new_notifications_count.php')}, 2000);
+    setInterval(function(){$("#newNotificationCount").load('includes/load_new_notifications_count.php')}, 10000);
     $("#friendRequestsCount").load("includes/load_friend_request_count.php");
     setInterval(function(){$("#friendRequestsCount").load('includes/load_friend_request_count.php')}, 2000);
   });
@@ -117,6 +117,7 @@
    $.post("includes/friend_request_response.php", {action:obj.value, name:obj.id, username:'<?php echo $user->getUsername(); ?>'}, function(data) {
    })
   }
+  
   function SearchUser(obj){
     var username = '<?php echo $user->getUsername(); ?>';
     $.post("includes/search.php", {name:obj.value, username: username, limit:5, requestby:1}, function(data) {
@@ -155,6 +156,7 @@
     $.post("includes/like_post.php", {post_id : obj.id, user_action : obj.value}, function(data){
     });
   }
+
   function sendComment(obj){
     var body = $('#comment'+obj.id).val();
     $.post("includes/save_comment.php", {post_id : obj.id, comment_body : body}, function(data){
@@ -165,7 +167,6 @@
     });
   }
 
-  
   function deleteComment(obj){
     bootbox.confirm({
       message: "Delete the comment .Are you Sure?",
