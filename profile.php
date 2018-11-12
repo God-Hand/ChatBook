@@ -269,10 +269,10 @@
 			$('#loading').show();
 			$('.posts_area').find('.noMorePosts').remove(); 
 			$.post("includes/load_profile_posts.php", {last_post_id : last_post_id, name : profileUsername}, function(data){
-				postRequestResponse = true;
 				$('.posts_area').find('.noMorePostsText').remove();
-				$('#loading').hide();
 				$('.posts_area').append(data);
+				$('#loading').hide();
+				postRequestResponse = true;
 			});
 		}
   }
@@ -339,9 +339,9 @@
 		$('#loading').show();
 		postRequestResponse = false;
 		$.post("includes/load_profile_posts.php", {last_post_id : 0, name : '<?php echo $profile_user->getUsername(); ?>'}, function(data){
-			postRequestResponse = true;
 			$('#loading').hide();
 			$('.posts_area').html(data);
+			postRequestResponse = true;
 			<?php if(isset($_REQUEST['post_id'])) { echo "scrollDown(" . $_REQUEST['post_id'] . ");";} ?>
 		});
 		$(window).scroll(function() {
