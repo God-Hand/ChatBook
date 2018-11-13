@@ -44,7 +44,7 @@
 ?>
 <script>
 	function SearchUsers(obj){
-    $.post("includes/search.php", {name:obj.value, limit:5, requestby:2}, function(data) {
+    $.post("includes/search.php", {name:obj.value, limit:10, requestby:2}, function(data) {
       $('.searchedResult').empty();
       if(data != ''){
         $('.searchedResult').html(data);

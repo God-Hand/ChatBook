@@ -34,7 +34,6 @@
 		removeFriend($friend_username) 							: remove username of user from friend's friend_array and vice-versa
 		getMutualFriendsCount($friend_username) 		: return numbers of mutual_friends
 		searchUsers($input_name, $limit) 						: search user where first_name and last_name like
-		userInfoArray() 														: return user details array
 		setFirstName($first_name) 									: set user first name
 		setLastName($last_name) 										: set user last name
 		setBio($bio) 																: set user bio
@@ -84,16 +83,11 @@
 		public function getCountry(){ return $this->user_details['country']; } 
 		public function getSchool(){ return $this->user_details['school']; } 
 		public function getCollege(){ return $this->user_details['college']; }
+		public function getFriendArrayText() { return $this->user_details['friend_array']; }
 
 		public function getUserLessInfo() {
 			$query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic, cover_pic FROM users WHERE username='$this->username'");
 			return mysqli_fetch_array($query);
-		}
-
-		public function getFriendArrayText() {
-			$query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE username='$this->username'");
-			$row = mysqli_fetch_array($query);
-			return $row['friend_array'];
 		}
 
 		public function getFriendArray() {
@@ -155,7 +149,7 @@
 			return $mutual_friends-2;
 		}
 
-		public function searchUsers($input_name, $limit) {
+		public function searchUsers($input_name, $last_username, $limit) {
 			$first_last_name = explode(" ", $input_name);
 			if(strpos($input_name, "_") == true) {
 				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username LIKE '%$input_name%' AND deactivate_account=0 LIMIT $limit");
@@ -165,11 +159,6 @@
 				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE (first_name LIKE '%$first_last_name[0]%' OR last_name LIKE '%$first_last_name[0]%') AND deactivate_account=0 LIMIT $limit");
 			}
 			return $query;
-		}
-
-		public function userInfoArray() {
-			$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username='$this->username'");
-			return mysqli_fetch_array($query);
 		}
 
 		public function setFirstName($first_name)	{
