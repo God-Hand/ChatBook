@@ -1,6 +1,9 @@
 <?php
 	require '../config/config.php';
 	require 'classes/FriendRequest.php';
+	if(!isset($_SESSION['username'])){
+		echo "<script>window.location = 'index.php';</script>";
+	}
 	$request = new FriendRequest($conn, $_SESSION['username']);
 	$count = $request->getFriendRequestsCount();
 	if($count > 99){
