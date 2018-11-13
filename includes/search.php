@@ -21,8 +21,8 @@
 			$data = $user->searchUsers($name,$_POST['limit']);
 			while ($row = mysqli_fetch_array($data)) {
 				$searched_user = $row['username'];
-				$searched_user_profile_pic = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary'> <img src='" . $row['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
-				$searched_user_fullname = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary'> <h6 class='text-primary'>" . $row['first_name'] . " " . $row['last_name'] . "</h6> </a>";
+				$searched_user_profile_pic = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary' target='_blank'> <img src='" . $row['profile_pic'] . "' alt='user_pic' class='align-self-start rounded-circle' style='width:40px;'> </a>";
+				$searched_user_fullname = "<a href='profile.php?profile_username=" . $searched_user . "' style='text-decoration: none;' class='text-primary' target='_blank'> <h6 class='text-primary'>" . $row['first_name'] . " " . $row['last_name'] . "</h6> </a>";
 
 				if ($user->getUsername() == $searched_user){
 					$mutual_friends = "";

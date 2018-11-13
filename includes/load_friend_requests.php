@@ -70,7 +70,7 @@
 											  	</div>
 											  </div>
 											</div>
-											<button id='" . $user_to . "' class='btn btn-warning btn-sm addfriend my-1' onclick='friend(this)' value='2' onmouseleave='friendAction(this)'>Cancel Request</button>
+											<button id='" . $user_to . "' class='btn btn-warning btn-sm addfriend mt-3' onclick='friend(this);friendAction(this);' value='2'>Cancel Request</button>
 										</div>
 									</div>";
 				}
