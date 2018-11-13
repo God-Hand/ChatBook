@@ -83,11 +83,16 @@
 		public function getCountry(){ return $this->user_details['country']; } 
 		public function getSchool(){ return $this->user_details['school']; } 
 		public function getCollege(){ return $this->user_details['college']; }
-		public function getFriendArrayText() { return $this->user_details['friend_array']; }
 
 		public function getUserLessInfo() {
 			$query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic, cover_pic FROM users WHERE username='$this->username'");
 			return mysqli_fetch_array($query);
+		}
+
+		public function getFriendArrayText() {
+			$query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE username='$this->username'");
+			$row = mysqli_fetch_array($query);
+			return $row['friend_array'];
 		}
 
 		public function getFriendArray() {
