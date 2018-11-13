@@ -12,7 +12,7 @@
 			<div class="col-md-4">
 				<?php include("profile_card.php"); ?>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-8 p-0">
 				<div class="container-fluid">
 				</div>
 	  		<img id="loading" src="assets/images/icons/loading.gif">
@@ -53,7 +53,7 @@
 			$('.container-fluid').html(data);
 			var first = $('.notification:first').attr('id');
 			$.post("includes/read_all_notifications.php", {first : first}, function(data){
-			})
+			});
 		});
 
 		$(window).scroll(function() {
@@ -63,5 +63,7 @@
 				loadNotifications();
 			}
 		});
+
+		$('#newNotificationCount').val('');
 	});
 </script>
