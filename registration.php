@@ -212,8 +212,10 @@
 			</div>
 		</div>
 	</div>
-	
-	<script type="text/javascript">
+  <?php include("footer.php"); ?>
+</body>
+</html>
+<script type="text/javascript">
 	$(function() {
 		$('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
@@ -230,6 +232,4 @@
 			e.preventDefault();
 		});
 	});
-	</script>
-</body>
-</html>
+</script>

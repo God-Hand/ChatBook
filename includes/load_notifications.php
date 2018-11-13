@@ -10,9 +10,9 @@
 		$last_id = $_POST['last_id'];
 		$data_query = $notification->getNotifications($last_id, $_POST['limit']);
 		if (mysqli_num_rows($data_query) == 0 and $_POST['last_id'] == 0) {
-				$str .= "<input type='hidden' id='noMoreNotifications' value='true'><div class='card'><p class='text-muted p-3 m-2 bg-light'> No Notifications </p></div>";
+				$str .= "<input type='hidden' id='noMoreNotifications' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No Notifications </p></div>";
 		} elseif (mysqli_num_rows($data_query) == 0) {
-			$str .= "<input type='hidden' id='noMoreNotifications' value='true'><div class='card'><p class='text-muted p-3 m-2 bg-light'> No more notifications to show! </p></div>";
+			$str .= "<input type='hidden' id='noMoreNotifications' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No more notifications to show! </p></div>";
 		} else {
 			while ($row = mysqli_fetch_array($data_query)) {
 				$id = $row['id'];
@@ -46,7 +46,7 @@
 								</div>";
 			}
 			if ($last_id == $_POST['last_id']){
-				$str .= "<input type='hidden' id='noMoreNotifications' value='true'><div class='card'><p class='text-muted p-3 m-2 bg-light'> No Notifications </p></div>";
+				$str .= "<input type='hidden' id='noMoreNotifications' value='true'><div class='card mb-3'><p class='text-muted p-3 m-2 bg-light'> No Notifications </p></div>";
 			} else {
 				$str .= "<input type='hidden' id='noMoreNotifications' value='false'>";
 			}
