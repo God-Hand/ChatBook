@@ -23,7 +23,8 @@
 		getSchool() 																: return school
 		getCollege() 																: return college
 		getUserLessInfo() 													: return first_name, last_name and profile_pic
-		getFriendArrayText() 												: return user's friend_array in text format
+		getFriendArrayText() 												: return user's friend_array in text format and fetch data from database each time to avoid 
+		wrong addfriend actions
 		getFriendArray() 														: return user's friend_array
 		getNumOfFriends() 													: return number of friends
 		isOnline() 																	: return weather user's is online or not

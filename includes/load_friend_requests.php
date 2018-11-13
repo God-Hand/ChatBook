@@ -43,10 +43,10 @@
 											</div>
 											<div class='row pt-3'>
 												<div class='col-6 pr-0'>
-			                      <button id='" . $request_id . "' class='btn btn-sm btn-success btn-block' value='" . $user_from . "' onclick='acceptRequest(this);deleteRequest(this)' value='1'>Accept</button>
+			                      <button id='" . $request_id . "' class='btn btn-sm btn-success btn-block' value='" . $user_from . "' onclick='acceptRequest(this);deleteRequest(this);loadRequests();' value='1'>Accept</button>
 		                    </div>
 		                    <div class='col-6'>
-		                      <button id='" . $request_id . "' class='btn btn-sm width-60 btn-danger btn-block' value='" . $user_from . "' onclick='rejectRequest(this);deleteRequest(this);'> Reject</button>
+		                      <button id='" . $request_id . "' class='btn btn-sm width-60 btn-danger btn-block' value='" . $user_from . "' onclick='rejectRequest(this);deleteRequest(this);loadRequests();'> Reject</button>
 		                    </div>
 											</div>
 										</div>

@@ -47,7 +47,7 @@
 <script>
   var friendRequestResponse = true;
   
-  function loadRequest(){
+  function loadRequests(){
     var last_request_id = $('.request:last').attr('id');
     var noMoreRequests = $('.friend_request_area').find('#noMoreRequests').val();
     if (friendRequestResponse && noMoreRequests == 'false') {
@@ -71,7 +71,7 @@
     });
     $(window).scroll(function() {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        loadRequest();
+        loadRequests();
       }
     });
 
