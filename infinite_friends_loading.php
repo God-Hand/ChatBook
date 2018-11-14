@@ -28,7 +28,11 @@
 			$friend_fullname = $friend_user->getFirstAndLastName();
 			$friend_profile_pic = $friend_user->getProfilePic();
 			$friend_cover_pic = $friend_user->getCoverPic();
-			$profile_button = "";
+			if($profile_user->getUsername() == $_SESSION['username']){
+				$friend_button = "<button id='" . $friend . "' class='btn-over-friend-img btn btn-sm btn-danger float-right addfriend' onclick='friend(this);friendAction(this);removeFriend(this);' value='0'>Remove Friend</button>";
+			} else {
+				$friend_button = "";
+			}
 			$str .= "<div class='col-md-6 friend' id='" . $friend . "'>
 								<div class='card profile-card shadow p-3 mb-4 bg-white rounded'>
 							    <div class='profile-card-img-block'>
@@ -36,7 +40,7 @@
 							      	" . $friend_bio . "
 							      </div>
 							      <img class='rounded cover-img' src='" . $friend_cover_pic . "' id='profilecoverimage'>
-							      <button id='" . $friend . "' class='btn-over-friend-img btn btn-sm btn-danger float-right addfriend' onclick='friend(this);friendAction(this);removeFriend(this);' value='0'>Remove Friend</button>
+							      " . $friend_button . "
 							    </div>
 									<div class='media friend-profile-media'>
 									  <img class='mr-1 padding-5-circle friend-profile-pic' src='" . $friend_profile_pic . "' alt='username'>

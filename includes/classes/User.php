@@ -155,7 +155,7 @@
 			return $mutual_friends-2;
 		}
 
-		public function searchUsers($input_name, $last_username, $limit) {
+		public function searchUsers($input_name, $limit) {
 			$first_last_name = explode(" ", $input_name);
 			if(strpos($input_name, "_") == true) {
 				$query = mysqli_query($this->conn, "SELECT * FROM users WHERE username LIKE '%$input_name%' AND deactivate_account=0 LIMIT $limit");
