@@ -26,6 +26,7 @@
     header("Location: registration.php");
   }
   $user = new User($conn, $user->getUsername());
+  $user->setOnline();
   $post = new Post($conn, $user->getUsername());
   $post_like = new PostLike($conn, $user->getUsername());
   $comment = new Comment($conn, $user->getUsername());
