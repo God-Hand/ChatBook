@@ -27,10 +27,10 @@
 		wrong addfriend actions
 		getFriendArray() 														: return user's friend_array
 		getNumOfFriends() 													: return number of friends
-		isOnline() 																	: return weather user's is online or not
-		isClosed() 																	: return weather user's account is closed or not
-		isFriend($friend_username) 									: return weather given username is user's friend or not
-		isUser($username) 													: return weather given username is a user or not
+		isOnline() 																	: return wheather user's is online or not
+		isClosed() 																	: return wheather user's account is closed or not
+		isFriend($friend_username) 									: return wheather given username is user's friend or not
+		isUser($username) 													: return wheather given username is a user or not
 		addFriend($friend_username) 								: add friend to user's friend_array and vice-versa
 		removeFriend($friend_username) 							: remove username of user from friend's friend_array and vice-versa
 		getMutualFriendsCount($friend_username) 		: return numbers of mutual_friends
@@ -51,7 +51,7 @@
 		setOnline()																	: set user online
 		setOffline()																: set user offline
 		closeAccount() 															: eactivate_account of that user
-		checkEmailIdExists($email)									: check email weather email already in use or not
+		checkEmailIdExists($email)									: check email wheather email already in use or not
 		changeEmail($email) 												: change email
 		changePassword($old_password, $new_password): change password
 		getNumOfPosts() 														: return number of posts by the user
@@ -106,9 +106,7 @@
 		public function getNumOfFriends() { return count($this->getFriendArray())-2; }
 
 		public function isOnline() {
-			$query = mysqli_query($this->conn, "SELECT is_online FROM users WHERE username='$this->username'");
-			$row = mysqli_fetch_array($query);
-			if($row['is_online'] == 0){ return false; }
+			if($this->user_details['is_online'] == 0){ return false; }
 			else { return true; }
 		}
 
