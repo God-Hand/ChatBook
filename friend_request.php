@@ -24,7 +24,7 @@
     right:10px;
   }
 </style>
-<body>
+<body onbeforeunload="countPage();">
 	<?php include("header.php"); ?>
 	<div role="main" class="container">
 		<div class="row">

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="assets/js/md5.js"></script>
 </head>
-<body>
+<body onbeforeunload="countPage();">
 	<?php include("header.php"); ?>
 	<div role="main" class="container">
 		<div class="row">

@@ -58,7 +58,7 @@
 	    transition: all 1s ease;
 	}
 </style>
-<body>
+<body onbeforeunload="countPage();">
 	<div role="main" class="container">
 		<div class="row">
 			<div class="col-md-4">
