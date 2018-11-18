@@ -12,9 +12,10 @@
 	$confirm_password = "";
 	$remember = "";
 	$error_array = array();
+	$_SESSION['tab_open'] = "login";
 
 	if (isset($_POST['reg_button'])){
-
+		$_SESSION['tab_open'] = "register";
 		$first_name = $register->trimTags($_POST['first_name']);
 		$last_name = $register->trimTags($_POST['last_name']);
 		$email = $register->trimTags($_POST['reg_email']);
@@ -51,6 +52,7 @@
 		}
 		if (empty($error_array) and $register->getRegister($first_name, $last_name, $email, $password)) {
 			array_push($error_array, "You're all set! Go ahead and login!");
+			$_SESSION['tab_open'] = "login";
 		}
 	}
 	if (isset($_POST['login_button'])) {
@@ -69,7 +71,7 @@
 	if(isset($_POST['user_email']) and isset($_POST['sendMail'])){
 		// code for check server side validation
 		if(strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) == 0){
-			$register->sendForgottenPasswordMailTo($_POST['user_email']);  
+			$register->sendForgottenPasswordMailTo($_POST['user_email']);
 		}
 	}
 ?>
@@ -183,7 +185,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="password" name="reg_password" tabindex="4"  minlength="8" maxlength="15" class="form-control" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
+										<input type="password" name="reg_password" tabindex="4"  minlength="8" maxlength="15" class="form-control" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=8 and <=15) characters" required>
 										<?php
 											if(in_array("Only allow [A-Za-z0-9_@]", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>Only allow [A-Za-z0-9_@]</span>";
@@ -194,7 +196,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="password" name="reg_confirm_password" tabindex="5"  minlength="8" maxlength="15" class="form-control" placeholder="Confirm Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
+										<input type="password" name="reg_confirm_password" tabindex="5"  minlength="8" maxlength="15" class="form-control" placeholder="Confirm Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=8 and <=15) characters" required>
 										<?php
 											if(in_array("passwords do not match", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>passwords do not match</span>";
@@ -209,6 +211,11 @@
 												<?php
 													if(in_array("You're all set! Go ahead and login!", $error_array)){
 														echo "<span class='text-success pl-1 pt-0'>You're all set! Go ahead and login!</span>";
+														echo "<script type='text/javascript'>
+																		$(document).ready(function(){
+																			showMessage('Account created successfully, check your email to verify this account.');
+																		});
+																	</script>";
 													}
 												?>
 											</div>
@@ -267,20 +274,34 @@
 <script type="text/javascript">
 	$(function() {
 		$('#login-form-link').click(function(e) {
-		$("#login-form").delay(100).fadeIn(100);
-		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
+			$("#login-form").delay(100).fadeIn(100);
+			$("#register-form").fadeOut(100);
+			$('#register-form-link').removeClass('active');
+			$(this).addClass('active');
 			e.preventDefault();
 		});
 		$('#register-form-link').click(function(e) {
-		$("#register-form").delay(100).fadeIn(100);
-		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
-		$(this).addClass('active');
+			$("#register-form").delay(100).fadeIn(100);
+			$("#login-form").fadeOut(100);
+			$('#login-form-link').removeClass('active');
+			$(this).addClass('active');
 			e.preventDefault();
 		});
 	});
+
+	$(document).ready(function(){
+		var openTab = 'register';
+		if(openTab.localeCompare('<?php echo $_SESSION['tab_open']; ?>') == 0){
+			$('#register-form-link').trigger('click');
+		}
+	});
+	function showMessage(message){
+		bootbox.alert({
+	    message: message,
+	    backdrop: true
+		});
+	}
+
 	$('#sendMailForm').submit(function(){
 		if($('#captchaCode').val().length === 6){	
 			$('#emailModel').modal('toggle');
