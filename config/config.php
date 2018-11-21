@@ -1,6 +1,7 @@
 <?php
 	ob_start();
 	session_start();
+	error_reporting(E_ALL & ~E_NOTICE)
 	$timezone = date_default_timezone_set("Asia/Kolkata");
 
 	const DB_HOSTNAME = "localhost";
