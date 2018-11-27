@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 04, 2018 at 12:08 PM
+-- Generation Time: Dec 08, 2018 at 07:08 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -38,7 +38,14 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `commented_by`, `body`, `commented_time`, `deleted`, `post_id`) VALUES
+(1, 'jitrendra_sharma1543819574', 'hi', '2018-12-05 12:37:13', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -69,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
   `accepted` tinyint(1) DEFAULT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `friend_requests`
@@ -78,7 +85,15 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
 INSERT INTO `friend_requests` (`request_id`, `user_from`, `user_to`, `request_time`, `accepted`, `deleted`) VALUES
 (1, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', '2018-12-03 12:19:01', NULL, 1),
 (2, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', '2018-12-03 13:57:29', NULL, 1),
-(3, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', '2018-12-03 13:57:31', 1, 1);
+(3, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', '2018-12-03 13:57:31', 1, 1),
+(4, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-05 12:39:27', NULL, 1),
+(5, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-06 07:06:39', NULL, 1),
+(6, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-06 07:06:41', NULL, 1),
+(7, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-06 07:06:42', NULL, 1),
+(8, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-06 07:06:42', NULL, 1),
+(9, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-06 07:06:42', NULL, 1),
+(10, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-06 07:06:43', NULL, 1),
+(11, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', '2018-12-06 07:06:45', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +110,15 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `user_from`, `user_to`, `message_body`, `time`, `deleted`) VALUES
+(1, 'jitrendra_sharma1543819574', 'deepak_singh1543819622', 'done', '2018-12-05 12:39:58', 0),
+(2, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', 'hi', '2018-12-06 07:07:40', 1);
 
 -- --------------------------------------------------------
 
@@ -134,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
@@ -143,7 +166,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
 INSERT INTO `posts` (`post_id`, `user_from`, `user_to`, `body`, `image`, `posted_time`, `deleted`) VALUES
 (1, 'deepak_singh1543819622', '', '', 'assets/images/post_pics/deepak_singh15438196221543819653.png', '2018-12-03 12:17:40', 1),
 (2, 'deepak_singh1543819622', '', 'See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg', 'assets/images/post_pics/deepak_singh15438196221543826815.png', '2018-12-03 14:17:14', 1),
-(3, 'deepak_singh1543819622', '', '', 'assets/images/post_pics/deepak_singh15438196221543832180.png', '2018-12-03 15:46:21', 1);
+(3, 'deepak_singh1543819622', '', '', 'assets/images/post_pics/deepak_singh15438196221543832180.png', '2018-12-03 15:46:21', 1),
+(4, 'jitrendra_sharma1543819574', '', 'see this', 'assets/images/post_pics/jitrendra_sharma15438195741543993596.png', '2018-12-05 12:36:42', 0);
 
 -- --------------------------------------------------------
 
@@ -159,6 +183,13 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   PRIMARY KEY (`username`,`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `post_likes`
+--
+
+INSERT INTO `post_likes` (`username`, `liked`, `post_id`) VALUES
+('jitrendra_sharma1543819574', 0, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -172,6 +203,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(60) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `verification_token` varchar(8) DEFAULT NULL,
+  `forgot_token` varchar(8) DEFAULT NULL,
   `signup_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `profile_pic` varchar(255) NOT NULL,
   `cover_pic` varchar(255) NOT NULL,
@@ -195,9 +228,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `cover_pic`, `deactivate_account`, `friend_array`, `phone_no`, `gender`, `birthday`, `city`, `state`, `country`, `school`, `college`, `bio`, `is_online`) VALUES
-('deepak', 'Singh', 'deepak_singh1543819622', 'deepak.singh_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-12-03 06:47:01', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'What i should tell someone else about me?', 0),
-('Jitendra', 'Sharma', 'jitrendra_sharma1543819574', 'jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-12-03 06:46:13', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`, `verification_token`, `forgot_token`, `signup_date`, `profile_pic`, `cover_pic`, `deactivate_account`, `friend_array`, `phone_no`, `gender`, `birthday`, `city`, `state`, `country`, `school`, `college`, `bio`, `is_online`) VALUES
+('Jitendra', 'Sharma', 'jitendra_sharma1544202659', 'jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, '6NZ8Fjht', '2018-12-07 17:10:58', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
