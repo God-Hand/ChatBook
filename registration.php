@@ -67,16 +67,9 @@
 
 	#forgot password send mail
 	if(isset($_POST['user_email']) and isset($_POST['sendMail'])){
-		if($register->sendForgottenPasswordMailTo($_POST['user_email'])){
-			echo "<script>bootbox.alert({
-				    	message: 'check your mail',
-    					size: 'small'
-						});</script>";
-		}else{
-			echo "<script>bootbox.alert({
-				    	message: 'try again!',
-    					size: 'small'
-						});</script>";
+		// code for check server side validation
+		if(strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) == 0){
+			$register->sendForgottenPasswordMailTo($_POST['user_email']);  
 		}
 	}
 ?>
@@ -239,13 +232,25 @@
     <div class="modal-header">
       <h4 class="modal-title">Enter your Email<button type="button" class="close" data-dismiss="modal" style="float: right;">&times;</button></h4>
     </div>
+    <form id="sendMailForm" action="registration.php" method="post" role="form">
     <div class="modal-body">
       <div class="text-center">
       	<div class="container-fluid">
       		<div class="row">
-      			<form action="registration.php" method="post" role="form">
-      				<div class="col-sm-2" style="float:left;"><label class="form-control" style="border:none;">Email</label></div>
-	        		<div class="col-sm-10"><input class="form-control" type="email" name="user_email" style="width:100%;" placeholder="Enter your email">
+    				<div class="col-sm-4" style="float:left;"><label class="form-control" style="border:none;">Email</label></div>
+        		<div class="col-sm-8">
+        			<input id="userEmail" class="form-control" type="email" name="user_email" style="width:100%;" placeholder="Enter your email" required>
+        		</div>
+	        </div>
+	        <div class="row">
+		        <div class="col-sm-4">
+		        	<label for='message'>Enter the Captcha:</label>
+		        </div>
+		        <div class="col-sm-8">
+		        	<img src="phpcaptcha/captcha.php?rand=<?php echo rand();?>" id='captchaimg' style="float:left;padding:10px 0px;"></br>
+		        	<input id="captchaCode" class="form-control" name="captcha_code" type="text" required></br>
+		        	Can't read the image? click <a href='javascript: refreshCaptcha();'>here</a> to refresh.
+		        </div>
 	        </div>
       	</div>
       </div>
@@ -276,4 +281,20 @@
 			e.preventDefault();
 		});
 	});
+	$('#sendMailForm').submit(function(){
+		if($('#captchaCode').val().length === 6){	
+			$('#emailModel').modal('toggle');
+			return true;
+		}else{
+			bootbox.alert({
+		    message: "Invalid length Captcha",
+		    size: 'small'
+			});
+			return false;
+		}
+	});
+	function refreshCaptcha(){
+		var img = document.images['captchaimg'];
+		img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.random()*1000;
+	}
 </script>

@@ -157,9 +157,10 @@
 			$email = $this->trimTags($email);
 			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 			$password = md5($password);
-			$query = mysqli_query($this->conn, "UPDATE users SET password='$password' AND forgot_token=NULL WHERE email='$email'");
-			if($query)
+			$query = mysqli_query($this->conn, "UPDATE users SET password='$password', forgot_token=NULL WHERE email='$email'");
+			if($query){
 				return true;
+			}
 			return false;
 		}
 

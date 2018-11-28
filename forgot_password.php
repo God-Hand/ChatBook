@@ -8,9 +8,7 @@
   	$_SESSION['email'] = $_REQUEST['email'];
   }else if(isset($_POST['new_password']) and isset($_POST['change_password'])){
   	if($register->changePassword($_SESSION['email'], $_POST['new_password'])){
-  		echo "<script>password changed</script>";
-  	}else{
-  		echo "<script>password not changed</script>";
+  		header("location: index.php");
   	}
   }else{
   	header("location: index.php");
