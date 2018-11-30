@@ -78,7 +78,7 @@
 			$mail->SMTPAuth = true;
 			$mail->Username = "jitendra.sharma_cs16@gla.ac.in";
 			$mail->Password = "9412278505";
-			$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'Chatbook');
+			$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'ChatBook');
 			$mail->addAddress($email, $this->username);
 			$mail->Subject = "ChatBook Account Verification";
 			$mail->Body = "<body bgcolor='#f9f9f9'>
@@ -112,7 +112,7 @@
 			$mail->SMTPAuth = true;
 			$mail->Username = "jitendra.sharma_cs16@gla.ac.in";
 			$mail->Password = "9412278505";
-			$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'Chatbook');
+			$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'ChatBook');
 			$mail->addAddress($email);
 			$mail->Subject = "Reset your ChatBook Account Password";
 			$mail->Body = "<body bgcolor='#f9f9f9'>
@@ -138,6 +138,29 @@
 			} else {
 				return false;
 			}
+		}
+
+		public function validateToken($email, $token){
+			$email = $this->trimTags($email);
+			$token = $this->trimTags($token);
+			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+			$query = mysqli_query($this->conn, "SELECT username FROM users WHERE email='$email' AND forgot_token='$token'");
+			if(mysqli_num_rows($query)==1){
+				$row = mysqli_fetch_array($query);
+				$this->username = $row['username'];
+				return true;
+			}
+			return false;
+		}
+
+		public function changePassword($email, $password){
+			$email = $this->trimTags($email);
+			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+			$password = md5($password);
+			$query = mysqli_query($this->conn, "UPDATE users SET password='$password' AND forgot_token=NULL WHERE email='$email'");
+			if($query)
+				return true;
+			return false;
 		}
 
 		public function getLogin($email, $password) {

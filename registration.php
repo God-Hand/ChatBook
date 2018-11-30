@@ -68,9 +68,15 @@
 	#forgot password send mail
 	if(isset($_POST['user_email']) and isset($_POST['sendMail'])){
 		if($register->sendForgottenPasswordMailTo($_POST['user_email'])){
-			echo "<script>bootbox.alert('Check your email to change password', function(){});</script>";
+			echo "<script>bootbox.alert({
+				    	message: 'check your mail',
+    					size: 'small'
+						});</script>";
 		}else{
-			echo "<script>bootbox.alert('There might be some issue. Try again!', function(){});</script>";
+			echo "<script>bootbox.alert({
+				    	message: 'try again!',
+    					size: 'small'
+						});</script>";
 		}
 	}
 ?>
@@ -116,7 +122,7 @@
 										?>" required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="login_password" tabindex="2" maxlength="15" class="form-control" data-toggle="tooltip" data-placement="top" title="Login Password" placeholder="Password" required>
+										<input type="password" name="login_password" tabindex="2"  minlength="8" maxlength="15" class="form-control" data-toggle="tooltip" data-placement="top" title="Login Password" placeholder="Password" required>
 										<?php
 											if(in_array("Email or password was incorrect", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>Email or password was incorrect</span>";
@@ -184,7 +190,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="password" name="reg_password" tabindex="4" maxlength="15" class="form-control" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
+										<input type="password" name="reg_password" tabindex="4"  minlength="8" maxlength="15" class="form-control" placeholder="Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
 										<?php
 											if(in_array("Only allow [A-Za-z0-9_@]", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>Only allow [A-Za-z0-9_@]</span>";
@@ -195,7 +201,7 @@
 									</div>
 
 									<div class="form-group">
-										<input type="password" name="reg_confirm_password" tabindex="5" maxlength="15" class="form-control" placeholder="Confirm Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
+										<input type="password" name="reg_confirm_password" tabindex="5"  minlength="8" maxlength="15" class="form-control" placeholder="Confirm Password" data-toggle="tooltip" data-placement="top" title="Password length must be (>=2 and <=25) characters" required>
 										<?php
 											if(in_array("passwords do not match", $error_array)){
 												echo "<span class='text-danger pl-1 pt-0'>passwords do not match</span>";
