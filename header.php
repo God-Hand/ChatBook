@@ -21,7 +21,15 @@
   require('config/config.php');
   if (isset($_SESSION['username'])){
     $user = new User($conn, $_SESSION['username']);
-    $_SESSION['page']+=1;
+    try{
+      if(isset($_SESSION['page'])){
+        $_SESSION['page']+=1;
+      }else{
+        $_SESSION['page']=1;
+      }
+    }catch(Exception $e){
+      $_SESSION['page']=1;
+    }
     echo "<script>console.log(" .$_SESSION['page']. ");</script>";
   } else {
     header("Location: registration.php");
