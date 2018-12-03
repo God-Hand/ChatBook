@@ -217,7 +217,7 @@
 		}
 
 		public function checkEmailIdExists($email) {
-			$query = mysqli_query($this->conn, "SELECT email FROM users WHERE email='$email' and deactivate_account=0");
+			$query = mysqli_query($this->conn, "SELECT email FROM users WHERE email='$email' and deactivate_account=0 AND verification_token=NULL");
 			if (mysqli_num_rows($query) == 1) {
 				return true;
 			} else { return false; }
