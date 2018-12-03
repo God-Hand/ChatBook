@@ -85,8 +85,8 @@
 					  	<p>" . $post_body . "</p>
 					  </div>
 					  " . $imagePath . "
-					  <div class='form-row' style='margin:-15px -5px;'>
-					    <div class='col'>
+					  <div class='form-row'>
+					    <div class='col' style='margin-bottom:-15px;'>
 					      <p class='text-muted float-left'>Like(<span id='likecount" . $post_id . "'>" . $post_like_count . "</span>)</p>
 					      <p class='text-muted float-right'>Comments(<span id='commentcountid" . $post_id . "'>" . $comment_count . "</span>)</p>
 					    </div>
