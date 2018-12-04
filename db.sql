@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 17, 2018 at 11:48 AM
+-- Generation Time: Dec 04, 2018 at 12:08 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,16 @@ CREATE TABLE IF NOT EXISTS `friend_requests` (
   `accepted` tinyint(1) DEFAULT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `friend_requests`
+--
+
+INSERT INTO `friend_requests` (`request_id`, `user_from`, `user_to`, `request_time`, `accepted`, `deleted`) VALUES
+(1, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', '2018-12-03 12:19:01', NULL, 1),
+(2, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', '2018-12-03 13:57:29', NULL, 1),
+(3, 'deepak_singh1543819622', 'jitrendra_sharma1543819574', '2018-12-03 13:57:31', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -86,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `viewed` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -125,7 +134,16 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `user_from`, `user_to`, `body`, `image`, `posted_time`, `deleted`) VALUES
+(1, 'deepak_singh1543819622', '', '', 'assets/images/post_pics/deepak_singh15438196221543819653.png', '2018-12-03 12:17:40', 1),
+(2, 'deepak_singh1543819622', '', 'See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg See jvdvdbf f f d fd rgfdg', 'assets/images/post_pics/deepak_singh15438196221543826815.png', '2018-12-03 14:17:14', 1),
+(3, 'deepak_singh1543819622', '', '', 'assets/images/post_pics/deepak_singh15438196221543832180.png', '2018-12-03 15:46:21', 1);
 
 -- --------------------------------------------------------
 
@@ -172,6 +190,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`username`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`first_name`, `last_name`, `username`, `email`, `password`, `signup_date`, `profile_pic`, `cover_pic`, `deactivate_account`, `friend_array`, `phone_no`, `gender`, `birthday`, `city`, `state`, `country`, `school`, `college`, `bio`, `is_online`) VALUES
+('deepak', 'Singh', 'deepak_singh1543819622', 'deepak.singh_cs16@gla.ac.in', '25f9e794323b453885f5181f1b624d0b', '2018-12-03 06:47:01', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'What i should tell someone else about me?', 0),
+('Jitendra', 'Sharma', 'jitrendra_sharma1543819574', 'jks9536097795@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2018-12-03 06:46:13', 'assets/images/profile_pics/defaults/profile_pic.png', 'assets/images/cover_pics/defaults/cover_pic.jpg', 0, ',', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
