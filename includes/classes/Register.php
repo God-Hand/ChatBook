@@ -33,7 +33,7 @@
 		}
 
 		public function checkEmailExists($email) {
-			$query = mysqli_query($this->conn, "SELECT email FROM users WHERE email='$email' AND deactivate_account=0 AND verification_token=NULL");
+			$query = mysqli_query($this->conn, "SELECT email FROM users WHERE email='$email' AND deactivate_account=0 AND verification_token IS NULL");
 			if (mysqli_num_rows($query) == 1) { return true; } else { return false; }
 		}
 
@@ -71,7 +71,7 @@
 		public function sendAccountVerificationMail($email, $token){
 			$mail = new PHPMailer;
 			$mail->isSMTP();
-			$mail->SMTPDebug = 2;
+			$mail->SMTPDebug = 0;
 			$mail->Host = 'smtp.gmail.com';
 			$mail->Port = 587;
 			$mail->SMTPSecure = 'tls';
@@ -89,8 +89,40 @@
 			$mail->isHTML(true);
 			if (!$mail->send()) {
 			  echo "Mailer Error: " . $mail->ErrorInfo;
-			} else {
-			  echo "Message sent!";
+			}
+		}
+
+		public function sendForgottenPasswordMailTo($email){
+			if($this->checkEmailExists($email)){
+				$token = $this->createToken();
+				$query = mysqli_query($this->conn, "UPDATE users SET forgot_token='$token' WHERE email='$email'");
+				$this->sendPasswordForgottenMail($email, $token);
+				return true;
+			}
+			return false;
+		}
+
+		public function sendPasswordForgottenMail($email, $token){
+			$mail = new PHPMailer;
+			$mail->isSMTP();
+			$mail->SMTPDebug = 0;
+			$mail->Host = 'smtp.gmail.com';
+			$mail->Port = 587;
+			$mail->SMTPSecure = 'tls';
+			$mail->SMTPAuth = true;
+			$mail->Username = "jitendra.sharma_cs16@gla.ac.in";
+			$mail->Password = "9412278505";
+			$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'Chatbook');
+			$mail->addAddress($email);
+			$mail->Subject = "Reset your ChatBook Account Password";
+			$mail->Body = "<body bgcolor='#f9f9f9'>
+											<h4 style='margin:0px;margin-bottom:10px;'>Reset Password</h4>
+											<p style='margin:0px;'>click the link below to reset your password</p>
+											<a href='" . $_SERVER['HTTP_HOST'] . "/forgot_password.php?email=" . $email . "&token=" . $token . "' target='_blank' style='text-decoration:none;'>" . $_SERVER['HTTP_HOST'] . "/forgot_password.php?email=" . $email . "&token=" . $token . "</a>
+										</body>";
+			$mail->isHTML(true);
+			if (!$mail->send()) {
+			  echo "Mailer Error: " . $mail->ErrorInfo;
 			}
 		}
 
@@ -98,6 +130,8 @@
 			$query = mysqli_query($this->conn, "SELECT username FROM users WHERE email='$email' AND deactivate_account=0 AND verification_token='$token'");
 			if(mysqli_num_rows($query)==1){
 				$row = mysqli_fetch_array($query);
+				$username = $row['username'];
+				$query = mysqli_query($this->conn, "UPDATE users SET deactivate_account=1 AND username<>'$username' WHERE email='$email'");
 				$query = mysqli_query($this->conn, "UPDATE users SET verification_token=NULL WHERE email='$email'");
 				$_SESSION['username'] = $row['username'];
 				return true;
@@ -109,7 +143,7 @@
 		public function getLogin($email, $password) {
 			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 			$password = md5($password);
-			$query = mysqli_query($this->conn, "SELECT * FROM users WHERE email='$email' AND password='$password' AND deactivate_account=0 AND verification_token=NULL");
+			$query = mysqli_query($this->conn, "SELECT * FROM users WHERE email='$email' AND password='$password' AND deactivate_account=0 AND verification_token IS NULL");
 			if (mysqli_num_rows($query) == 1) {
 				$row = mysqli_fetch_array($query);
 				$this->username = $row['username'];

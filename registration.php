@@ -12,7 +12,7 @@
 	$confirm_password = "";
 	$remember = "";
 	$error_array = array();
-	
+
 	if (isset($_POST['reg_button'])){
 
 		$first_name = $register->trimTags($_POST['first_name']);
@@ -64,6 +64,15 @@
 	if (isset($_SESSION['username'])){
 		header("Location: index.php");
 	}
+
+	#forgot password send mail
+	if(isset($_POST['user_email']) and isset($_POST['sendMail'])){
+		if($register->sendForgottenPasswordMailTo($_POST['user_email'])){
+			echo "<script>bootbox.alert('Check your email to change password', function(){});</script>";
+		}else{
+			echo "<script>bootbox.alert('There might be some issue. Try again!', function(){});</script>";
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +83,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/registration.css" rel="stylesheet">
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -124,7 +134,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="#" tabindex="4" class="forgot-password" data-toggle="tooltip" data-placement="top" title="This feature is not added now">Forgot Password?</a>
+													<button type="button" class="btn btn-dark btn-xs" data-toggle="modal" data-target="#emailModel">Forgot Password</button>
 												</div>
 											</div>
 										</div>
@@ -215,6 +225,34 @@
 	</div>
 </body>
 </html>
+
+<!--- email and captcha model --->
+<div id="emailModel" z-index="-2" class="modal" role="dialog">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Enter your Email<button type="button" class="close" data-dismiss="modal" style="float: right;">&times;</button></h4>
+    </div>
+    <div class="modal-body">
+      <div class="text-center">
+      	<div class="container-fluid">
+      		<div class="row">
+      			<form action="registration.php" method="post" role="form">
+      				<div class="col-sm-2" style="float:left;"><label class="form-control" style="border:none;">Email</label></div>
+	        		<div class="col-sm-10"><input class="form-control" type="email" name="user_email" style="width:100%;" placeholder="Enter your email">
+	        </div>
+      	</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <input type="submit" class="btn btn-success" value="Send Mail" name="sendMail">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+     </form>
+    </div>
+   </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 	$(function() {
 		$('#login-form-link').click(function(e) {
