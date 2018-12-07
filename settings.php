@@ -190,19 +190,19 @@
                         <label for="password" class="col-4 col-form-label">Password</label> 
                         <div class="col-8">
                           <input type="hidden" id="previouspassword" value='<?php echo $user->getPassword(); ?>'>
-                          <input id="password" name="password" maxlength="100" placeholder="Password" class="form-control here border" onkeyup="checkPassword(this)" type="password">
+                          <input id="password" name="password" minlength="8" maxlength="15" placeholder="Password" class="form-control here border" onkeyup="checkPassword(this)" type="password">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="newPassword" class="col-4 col-form-label">New Password</label> 
                         <div class="col-8">
-                          <input id="newPassword" name="newPassword" maxlength="100" placeholder="New Password" class="form-control here border"  onkeyup="checkPassword(this)" type="password">
+                          <input id="newPassword" name="newPassword" minlength="8" maxlength="15" placeholder="New Password" class="form-control here border"  onkeyup="checkPassword(this)" type="password">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="confirmPassword" class="col-4 col-form-label">Confirm Password</label> 
                         <div class="col-8">
-                          <input id="confirmPassword" name="confirmPassword" maxlength="100" placeholder="Confirm Password" class="form-control here border" onkeyup="matchPasswords(this)" type="password">
+                          <input id="confirmPassword" name="confirmPassword" minlength="8" maxlength="15" placeholder="Confirm Password" class="form-control here border" onkeyup="matchPasswords(this)" type="password">
                         </div>
                       </div>
                       <div class="form-group row">
