@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 11, 2018 at 10:57 AM
+-- Generation Time: Nov 17, 2018 at 11:48 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `viewed` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -168,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `school` varchar(255) DEFAULT NULL,
   `college` varchar(255) DEFAULT NULL,
   `bio` tinytext,
+  `is_online` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

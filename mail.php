@@ -10,7 +10,7 @@
 		$mail->SMTPSecure = 'tls';
 		$mail->SMTPAuth = true;
 		$mail->Username = "jitendra.sharma_cs16@gla.ac.in";
-		$mail->Password = "9412278505";
+		$mail->Password = "**********";
 		$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'Chatbook');
 		$mail->addAddress($_POST['email']), 'John Doe');
 		$mail->Subject = $_POST['subject'];
