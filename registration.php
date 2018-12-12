@@ -56,6 +56,7 @@
 	if (isset($_POST['login_button'])) {
 		if ($register->getLogin($_POST['login_email'], $_POST['login_password'])){
 			$_SESSION['username'] = $register->getUsername();
+			$_SESSION['page'] = 0;
 		} else {
 			array_push($error_array, "Email or password was incorrect");
 		}

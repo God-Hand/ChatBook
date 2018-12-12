@@ -20,8 +20,9 @@
   require('functions/text_filter.php');
   require('config/config.php');
   if (isset($_SESSION['username'])){
-    $user_logged_in = $_SESSION['username'];
     $user = new User($conn, $_SESSION['username']);
+    $_SESSION['page']+=1;
+    echo "<script>console.log(" .$_SESSION['page']. ");</script>";
   } else {
     header("Location: registration.php");
   }
@@ -195,10 +196,16 @@
         resizeContent();
     });
   });
-
   function resizeContent() {
     $('.resize-box').css({
       "maxWidth": $('.resize-box').parent().width() - 20 + "px"
+    });
+  }
+
+
+  function countPage() {
+    $.post("includes/close_session.php",{},function(data){
+      console.log(data);
     });
   }
 </script>
