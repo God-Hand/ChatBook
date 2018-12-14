@@ -76,9 +76,9 @@
 			$mail->Port = 587;
 			$mail->SMTPSecure = 'tls';
 			$mail->SMTPAuth = true;
-			$mail->Username = "jitendra.sharma_cs16@gla.ac.in";
+			$mail->Username = "your email id for sending mails";
 			$mail->Password = "your password";
-			$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'ChatBook');
+			$mail->setFrom('your email id for sending mails', 'ChatBook');
 			$mail->addAddress($email, $this->username);
 			$mail->Subject = "ChatBook Account Verification";
 			$mail->Body = "<body bgcolor='#f9f9f9'>
@@ -110,9 +110,9 @@
 			$mail->Port = 587;
 			$mail->SMTPSecure = 'tls';
 			$mail->SMTPAuth = true;
-			$mail->Username = "jitendra.sharma_cs16@gla.ac.in";
+			$mail->Username = "your email id for sending mails";
 			$mail->Password = "your password";
-			$mail->setFrom('jitendra.sharma_cs16@gla.ac.in', 'ChatBook');
+			$mail->setFrom('your email id for sending mails', 'ChatBook');
 			$mail->addAddress($email);
 			$mail->Subject = "Reset your ChatBook Account Password";
 			$mail->Body = "<body bgcolor='#f9f9f9'>
