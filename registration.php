@@ -298,6 +298,7 @@
 	function showMessage(message){
 		bootbox.alert({
 	    message: message,
+	    small : true,
 	    backdrop: true
 		});
 	}
