@@ -48,6 +48,8 @@
 		setCollege($college) 												: set user college
 		uploadCoverPic($filepath) 									: upload cover_pic of user
 		uploadProfilePic($filepath) 								: upload profile_pic of user
+		setOnline()																	: set user online
+		setOffline()																: set user offline
 		closeAccount() 															: eactivate_account of that user
 		checkEmailIdExists($email)									: check email weather email already in use or not
 		changeEmail($email) 												: change email
@@ -102,6 +104,13 @@
 		}
 
 		public function getNumOfFriends() { return count($this->getFriendArray())-2; }
+
+		public function isOnline() {
+			$query = mysqli_query($this->conn, "SELECT is_online FROM users WHERE username='$this->username'");
+			$row = mysqli_fetch_array($query);
+			if($row['is_online'] == 0){ return false; }
+			else { return true; }
+		}
 
 		public function isClosed() {
 			$query = mysqli_query($this->conn, "SELECT deactivate_account FROM users WHERE username='$this->username'");
@@ -193,6 +202,10 @@
 		 	$query = mysqli_query($this->conn, "UPDATE users SET cover_pic='$filepath' WHERE username='$this->username'"); }
 		public function uploadProfilePic($filepath) {
 		 	$query = mysqli_query($this->conn, "UPDATE users SET profile_pic='$filepath' WHERE username='$this->username'"); }
+		public function setOnline(){
+		 	$query = mysqli_query($this->conn, "UPDATE users SET is_online=1 WHERE username='$this->username'"); }
+		public function setOffline(){
+		 	$query = mysqli_query($this->conn, "UPDATE users SET is_online=0 WHERE username='$this->username'"); }
 
 		public function closeAccount() {
 			$query = mysqli_query($this->conn, "UPDATE users SET deactivate_account=1 WHERE username='$this->username'");

@@ -54,11 +54,10 @@
 			min-width:60%;
 		}
 		a, a:active{
-			text-decoration: none;
 			color:#fff;
 		}
 		a:hover{
-			color:#f1f1f1;
+			color:#e9e9e9;
 		}
 	</style>
 </head>
@@ -68,7 +67,8 @@
 			  <img class="mr-1" src="assets/images/profile_pics/defaults/profile_pic.png" alt="Generic placeholder image">
 			  <div class="media-body pl-1">
 			    <div class="float-left resize-box">
-			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6>
+			  		<h6 class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php echo $user_to_obj->getFirstAndLastName(); ?></h6><br/>
+			  		<p id="online"class="m-0 d-inline-block text-truncate" style="max-width: inherit;"><?php if($user_to_obj->isOnline()){ echo "Online";} else { echo ""; } ?></p>
 			  	</div>
 			  	<div>
 			  		<button class="p-1 btn btn-sm btn-danger float-right" onclick="parent.deleteAllMessages()"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -88,6 +88,7 @@
 </body>
 </html>
 <script>
+	var interval=false;
 	var messageNewRequestResponse = true;
 	var messageOldRequestResponse = true;
 	window.onresize = function() {
@@ -95,10 +96,29 @@
 	    "maxWidth": $('.resize-box').parent().width() - 10 + "px"
 	  });
 	}
+	function isOnline(){
+		$.post("includes/is_online.php",{ name : '<?php echo $user_to_obj->getUsername(); ?>' },function(data){
+			if(data=="1"){
+				$('#online').html("Online");
+				$('#online').fadeIn();
+				if(!interval){
+					interval = setInterval(loadNewMessages,2000);
+				}
+			} else {
+				$('#online').fadeOut();
+				$('#online').html('');
+				if(interval){
+					clearInterval(interval);
+					interval=false;
+				}
+			}
+		})
+	}
 	function sendMessage(){
 		var msg_body = $('#messageTyped').val();
 		$.post("includes/save_message.php", {body:msg_body, name : '<?php echo $user_to_obj->getUsername(); ?>'},function(data){
 			$('#messageTyped').val('');
+			loadNewMessages();
 		});
 	}
 	function deleteMessage(obj){
@@ -119,7 +139,6 @@
 			});
 		}
 	}
-	
 	var objDiv = document.getElementById("message_area");
 	function loadNewMessages(){
 		if (messageNewRequestResponse){
@@ -134,7 +153,6 @@
 			messageNewRequestResponse = true;
 		}
 	}
-
 	$(document).ready(function(){
 		messageOldRequestResponse = false;
 		messageNewRequestResponse = false;
@@ -147,7 +165,6 @@
 			messageNewRequestResponse = true;
 			messageOldRequestResponse = true;
 		});
-
-		setInterval(loadNewMessages,1000);
+		setInterval(isOnline, 10000);
 	});
 </script>
