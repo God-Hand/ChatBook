@@ -81,10 +81,10 @@
 					      <h6>" .$user_from_fullname . $user_to_fullname . $delete . "<br><small class='text-muted'><em>" . $posted_time_in_text . "</em></small></h6>
 					    </div>
 					  </div>
-					  " . $imagePath . "
-					  <div class='px-1'>
+					  <div class='px-1 my-1'>
 					  	<p>" . $post_body . "</p>
 					  </div>
+					  " . $imagePath . "
 					  <div class='form-row' style='margin:-15px -5px;'>
 					    <div class='col'>
 					      <p class='text-muted float-left'>Like(<span id='likecount" . $post_id . "'>" . $post_like_count . "</span>)</p>
