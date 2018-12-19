@@ -4,6 +4,7 @@
 		require 'classes/Message.php';
 		require '../functions/timeframe_function.php';
 		require '../functions/text_filter.php';
+		require 'session_isalive.php';
 
 		$name = $_POST['name'];
 		$fullname = $_POST['fullname'];
