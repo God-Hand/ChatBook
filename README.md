@@ -35,4 +35,8 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
 
 - Profile Page
 
-![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/profile page.PNG)
+![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/profile$20page.PNG)
+
+- Messaging Page
+
+![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/message%20box%20at%2090%25.PNG)
