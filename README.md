@@ -22,10 +22,13 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
 
 ## Data Flow Diagrams
 #### Level-0
- https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-0%20dfd.png
+ ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-0%20dfd.png)
 
 #### Level-1
- https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-1%20dfd.png
+ ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-1%20dfd.png)
+
+## Sequence Diagram
+ ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-1%20dfd.png)
 
 ## User Interfaces
 - Register Page
