@@ -19,3 +19,10 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
 - The user should have a valid email address in order to register into ChatBook.
 - Central server of the system must be able to handle all the incoming requests simultaneously.
 - The user has basic knowledge of computers and internet.
+
+## User Interfaces
+- Register Page
+![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/Register.PNG)
+
+- Register Page
+![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/Login.PNG)
