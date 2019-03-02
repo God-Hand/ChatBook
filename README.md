@@ -22,7 +22,17 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
 
 ## User Interfaces
 - Register Page
+
 ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/Register.PNG)
 
-- Register Page
+- Login Page
+
 ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/Login.PNG)
+
+- Home Page
+
+![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/desktop.PNG)
+
+- Profile Page
+
+![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/profile page.PNG)
