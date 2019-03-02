@@ -20,6 +20,13 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
 - Central server of the system must be able to handle all the incoming requests simultaneously.
 - The user has basic knowledge of computers and internet.
 
+## Data Flow Diagrams
+#### Level-0
+ https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-0%20dfd.png
+
+#### Level-1
+ https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-1%20dfd.png
+
 ## User Interfaces
 - Register Page
 
@@ -35,7 +42,7 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
 
 - Profile Page
 
-![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/profile$20page.PNG)
+![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/profile%20page.PNG)
 
 - Messaging Page
 
