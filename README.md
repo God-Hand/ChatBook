@@ -28,7 +28,7 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
  ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-1%20dfd.png)
 
 ## Sequence Diagram
- ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/level-1%20dfd.png)
+ ![alt text](https://github.com/God-Hand/ChatBook/blob/master/documents/Images/New%20Open%20Me%20First%20-%20Getting%20Started.png)
 
 ## User Interfaces
 - Register Page
