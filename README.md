@@ -1,1 +1,2 @@
 # ChatBook
+ChatBook is a free online social networking website which allows users to connect with their friends and family. It gives a global platform for users around the world to connect with each other. Users can also share posts and engage in Message conversations. This is an independent product and will be the first release of the product.
