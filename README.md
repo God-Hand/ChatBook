@@ -12,3 +12,10 @@ User can register to the ChatBook and login whenever he wishes to do so. User ca
 - Recommended memory: 2 GB for Windows platforms, 1 GB for Linux
 - Recommended disk space: 1024 MB
 - Required Applications: WAMP (Windows, Apache, MySQL, PHP)
+
+## Assumptions and Dependencies
+- There will be availability of Internet via 3G, 4G or Wi-Fi.
+- The user of the site will be acquainted with Basic English language.
+- The user should have a valid email address in order to register into ChatBook.
+- Central server of the system must be able to handle all the incoming requests simultaneously.
+- The user has basic knowledge of computers and internet.
